@@ -1,0 +1,18 @@
+.nav_admin {border-top:1px solid #ddd; position:relative; height:47px; box-sizing:border-box; text-align:center;background:#353c43; height:52px; padding:0 50px;z-index:10000;}
+.nav_admin li {list-style:none;}
+/*.nav_admin:before {content:""; position:absolute; left:0; bottom:-1px; width:100%; height:1px; background:transparent url('../images/skin/black_10.png') left top repeat; z-index:1}*/
+.nav_admin:before {content:""; position:absolute; left:0; bottom:-1px; width:100%; height:1px; background:transparent left top repeat; z-index:1}
+.nav_adminLayoutFix {height:47px; }
+
+/* ●●●네비(공통) */
+/*.nav_admin {background:#353c43; height:52px; padding:0 50px;z-index:10000;}*/
+.nav_adminAdmin_box {min-width:1500px}
+
+.nav_adminAdmin_box:before {content:""; position:absolute; right:0; right:1px\0; top:0; width:1px; height:100%; background:#53595f;}
+.nav_adminAdmin_box ul {display:table-row;}
+.nav_adminAdmin_box li {list-style:none;display:inline-block;text-align:center; border-left:1px solid #53595f; background:#353c43;box-sizing:border-box;width:150px;}
+.nav_adminAdmin_box li:last-child {border-right:1px solid #53595f;}
+
+.nav_adminAdmin_boxBtn {display:block; font-size:15px; letter-spacing:-1px; font-weight:600; color:#fff; height:50px;line-height:49px; line-height:48px\0;}
+.nav_adminAdmin_boxHit {background:#72777c;}
+.nav_adminAdmin_boxHitBtn {color:#ebebeb;}
