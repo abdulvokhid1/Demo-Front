@@ -104,8 +104,6 @@ const adverstingReq = ({ Component, pageProps }: AppProps) => {
               </tr>
             </thead>
             <tbody>
-
-
               <tr>
                 <td colSpan={10} height="40">내용이 없습니다.</td>
               </tr>
@@ -148,8 +146,6 @@ const adverstingReq = ({ Component, pageProps }: AppProps) => {
           {/* <!-- // 페이지네이트 --> */}
 
         </div>
-
-
         <div style={{ height: '30' }}></div>
 
       </div>
