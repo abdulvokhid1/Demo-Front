@@ -1,0 +1,27 @@
+/* 2단메뉴 보일때 */
+.container{background:url(/images/aside_bg.gif) repeat-y;/*z-index:20; position:relative; */min-height:100%;overflow:visible;margin:-45px 0 -36px 0;}
+.container:after{clear:both; display:block; height:0; content:''; visibility:hidden}
+
+.container .content_section {float:left; z-index:10; width:100%; margin:45px 0 0 -185px;}
+.container .content_section .content_section_fix {margin:0 0 0 185px; height:100%; width:auto; overflow-y:visible;zoom:1;}
+
+
+
+/* 1단 메뉴만 나오게 - 단일 메뉴 */
+.container_only {background:url(/images/aside_bg_only.gif) repeat-y; /*z-index:20; position:relative; */min-height:100%; overflow:visible; margin:-45px 0 -36px 0; }
+.container_only:after{clear:both; display:block; height:0; content:''; visibility:hidden}
+
+.container_only .content_section {float:left; position:relative; z-index:10; width:100%; margin:45px 0 0 -185px;}
+.container_only .content_section .content_section_fix {margin:0 0 0 185px; height:100%; width:auto; overflow-y:visible;zoom:1;}
+
+
+
+
+/* 2단메뉴 안보일때 */
+.container_hide {background:url(/images/aside_bg_hide.gif) repeat-y; z-index:20; position:relative; min-height:100%; overflow:visible; margin:-45px 0 -36px 0; zoom:1}
+.container_hide:after{clear:both; display:block; height:0; content:''; visibility:hidden}
+
+.container_hide .content_section {float:left; position:relative; z-index:10; width:100%; margin:45px 0 0 -185px; zoom:1}
+.container_hide .content_section .content_section_fix {margin:0 0 0 0px; height:100%; width:auto; overflow-y:visible;zoom:1;}
+
+.container_hide .aside_second {visibility:hidden;}
