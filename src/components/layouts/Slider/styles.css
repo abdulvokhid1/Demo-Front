@@ -1,0 +1,21 @@
+.aside_second {position:relative; width:185px; float:left; z-index:30; padding:45px 0 35px 0; overflow:hidden;}
+.aside_second > a {width:164px; display:inline-block; padding:10px 10px;}
+.aside_second > span {width:164px; display:inline-block; padding:10px 10px;font-weight:bold;border-bottom:1px solid #375a7d; background:#ffffff;color:#000;clear:both;}
+.aside_second > span > span {float:right;display:inline-block;color:#666;}
+
+.aside_second .menu {color:#000; border-bottom:1px solid #bac0c6; }
+.aside_second .menu:hover {background:#c3d1df;}
+.aside_second .menu_on {color:#fff; font-weight:bold; border-bottom:1px solid #375a7d; background:#6f96bd;}
+
+
+
+/* 자주찾는메뉴 2013-05-10 ---------------------------------------------------------------- */
+.aside_second .favorite_menu {overflow:hidden; margin:0 auto; width:164px;}
+/* 2015-01-23 스프라이트이미지삭제 */
+.aside_second .favorite_menu .title {display:inline-block; background: transparent url('/images/btn_favorite.png') 0 0 no-repeat; width:164px; height:29px; margin-top:30px;}
+.aside_second .favorite_menu .title:hover { background: transparent url('/images/btn_favorite.png') 0 -29px no-repeat; }
+
+.aside_second .favorite_menu .box {background:#f4f4f4;}
+.aside_second .favorite_menu .box .fmenu {display:inline-block; width:140px; font-size:13px; color:#666; border-top:1px solid #e0e0e0; padding:7px 10px; letter-spacing:-1px;}
+.aside_second .favorite_menu .box .fmenu:hover {color:#ff0000;}
+.aside_second .favorite_menu .box a:first-child {border:none;}
