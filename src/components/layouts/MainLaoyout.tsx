@@ -1,16 +1,18 @@
-// import './styles.css'
+import './styles.css'
 import HeadElement from '@/components/layouts/Header'
+import FooterElement from "@/components/layouts/Footer";
 import Slider from '@/components/layouts/Slider'
 import Head from 'next/head'
-import { Layout } from 'antd'
+import {Layout} from 'antd'
 import Navbar from "@/components/layouts/Navbar";
+
 type MainLayoutProps = {
     children: JSX.Element | JSX.Element[]
 }
-const MainLayout = ({ children }: MainLayoutProps) => {
+const MainLayout = ({children}: MainLayoutProps) => {
 
     return (
-        <Layout>
+        <div className="wrap">
             <Head>
                 <title>Rudemy</title>
             </Head>
@@ -22,9 +24,10 @@ const MainLayout = ({ children }: MainLayoutProps) => {
                     <Slider/>
                 </div>
             </div>
-        </Layout>
+            <FooterElement/>
+        </div>
 
-)
+    )
 }
 
 export default MainLayout
