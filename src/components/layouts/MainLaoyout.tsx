@@ -5,9 +5,10 @@ import Slider from '@/components/layouts/Slider'
 import Head from 'next/head'
 import {Layout} from 'antd'
 import Navbar from "@/components/layouts/Navbar";
+import {ReactElement} from "react";
 
 type MainLayoutProps = {
-    children: JSX.Element | JSX.Element[]
+    children: ReactElement | ReactElement[]
 }
 const MainLayout = ({children}: MainLayoutProps) => {
 
@@ -24,6 +25,7 @@ const MainLayout = ({children}: MainLayoutProps) => {
                     <Slider/>
                 </div>
             </div>
+            {/*<div>{children}</div>*/}
             <FooterElement/>
         </div>
 
