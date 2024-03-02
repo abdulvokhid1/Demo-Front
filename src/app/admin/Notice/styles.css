@@ -1,8 +1,11 @@
+
 /* 2단메뉴 열기/닫기 2013-04-04 ---------------------------------------------------------------- */
 .content_section .open_close {position:absolute; margin-top:13px;cursor:pointer;}
 /* 2015-01-23 스프라이트이미지삭제 */
 .content_section .open_close .btn_close {background: transparent url('/images/btn_menuopen.gif') 0 0 no-repeat; width:9px; height:36px; display:inline-block;}
 .content_section .open_close .btn_open {background: transparent url('/images/btn_menuopen.gif') -9px 0 no-repeat; width:9px; height:36px; display:none;}
+
+
 
 /* 페이지 큰타이틀 ------------------------------------- */
 .content_section .title_area {background:#fff; border-bottom:1px solid #bac0c6; padding:15px 30px; overflow:hidden;}
@@ -44,6 +47,9 @@
 .content_section .main_box_area .last_TB td:first-child {background:#ededed; text-align:center;}
 .content_section .main_box_area .last_TB td b {color:#009cff; font-family:tahoma; font-size:13px;}
 .content_section .main_box_area .last_TB td .hit {color:#ff8a00;}
+
+
+
 
 .content_section .main_box_area_wide {width:100%; margin-bottom:20px; overflow:hidden;}
 
@@ -117,6 +123,7 @@
 .content_section .select {border:1px solid #c1c1c1; padding:3px; color:#666;}
 .content_section .form_box_area .form_TB td select {border:1px solid #c1c1c1; padding:3px; color:#333;}
 
+
 .content_section .mobileName {border:1px solid #c1c1c1; float:left;height:28px; margin-right:10px;line-height:28px; padding:0 5px; color:#8f959a; FONT-FAMILY: verdana; font-weight: bold; font-size: 14px;}
 .content_section .mobileName_st {border:1px solid #c1c1c1; float:left;height:28px; margin-right:10px;line-height:28px; padding:0 5px; color:#43464f; FONT-FAMILY: verdana; font-weight: bold; font-size: 14px;}
 
@@ -143,6 +150,8 @@
 .content_section .list_TB .left {text-align:left; padding-left:5px; }
 .content_section .list_TB .none td {padding:5px; vertical-align:middle; text-align:center; border:0px solid #000;}
 
+
+
 .content_section .listb_TB {width:100%; border-top:2px solid #000; background:#fff;}
 .content_section .listb_TB td {padding:5px; height:25px;border-left:1px solid #c6c6c6; border-bottom:1px solid #c6c6c6; vertical-align:top; text-align:center;}
 .content_section .listb_TB td:first-child {border-left:0;border-right:0;}
@@ -150,6 +159,8 @@
 
 .content_section .listb_TB .left {text-align:left; padding-left:5px; }
 .content_section .listb_TB .none td {padding:5px; vertical-align:top; text-align:center; border:0px solid #000;}
+
+
 
 
 .content_section .listb_TB70 {width:83%; border-top:2px solid #000; background:#fff;float:left;}
@@ -262,3 +273,4 @@
 
 .content_section .sms_send .btn_send {margin:10px 11px 0 25px;}
 .content_section .sms_send .btn_send input {border:none; width:100%; background: transparent url(/images/adm_pack.png) -420px -620px no-repeat; height:36px;}
+
