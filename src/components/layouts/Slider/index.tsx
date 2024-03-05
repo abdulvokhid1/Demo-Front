@@ -1,4 +1,4 @@
-import './styles.css'
+// import './styles.css'
 import Link from 'next/link'
 
 const Slider = () => {
