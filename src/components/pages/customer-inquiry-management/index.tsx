@@ -1,5 +1,5 @@
 'use client';
-import './styles.css'
+
 import Link from 'next/link'
 import HeadElement from '@/components/layouts/Header'
 import FooterElement from "@/components/layouts/Footer";
