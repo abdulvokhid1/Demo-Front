@@ -1,4 +1,4 @@
-import './styles.css'
+// import './styles.css'
 import HeadElement from '@/components/layouts/Header'
 import FooterElement from "@/components/layouts/Footer";
 import Slider from '@/components/layouts/Slider'
