@@ -9,7 +9,7 @@ import Slider from '@/components/layouts/Slider'
 import Head from 'next/head'
 import {Layout} from 'antd'
 import Navbar from "@/components/layouts/Navbar";
-import {useEffect, useState} from "react";
+import {useEffect, useState} from 'react';
 
 const Dashboard = () => {
 const [sliderVisible, setSliderVisible] = useState(true)
