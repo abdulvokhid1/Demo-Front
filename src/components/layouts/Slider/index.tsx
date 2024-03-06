@@ -1,36 +1,47 @@
 // import './styles.css'
 import Link from 'next/link'
+import {useState} from "react";
 
 const Slider = () => {
+    const [selectedKey, setSelectedKey] = useState(0)
+    const itemClickedHandler = (item: number) => {
+        setSelectedKey(item);
+    }
     return (
         <div className="aside_second">
             <span>고객문의 관리<span>〓</span></span>
-            <a href="_shop_product_talk.list.php" className="menu" title="상품문의 관리"
-               style={{display: 'block'}}>상품문의 관리</a>
-            <a href="_shop_request.list.php"
-               className="menu" title="고객문의 관리"
-               style={{display: 'block'}}>고객문의 관리</a>
-            <a href="_shop_request_partner.list.php" className="menu" title="제휴/광고문의 관리" style={{display: 'block'}}>제휴/광고문의
-                관리</a>
-            <a href="_bbs.post_qna.list.php" className="menu" title="일대일문의 게시판" style={{display: 'block'}}>일대일문의
-                게시판</a>
+            <Link key={6} href="/admin/dashboard" className={selectedKey==6? "menu_on": "menu"} title="상품문의 관리" style={{display: 'block'}}
+                  onClick={()=> itemClickedHandler(6)}>상품문의 관리</Link>
+            <Link key={1} href="/admin/dashboard" className={selectedKey==1? "menu_on": "menu"} title="고객문의 관리" style={{display: 'block'}}
+                  onClick={()=> itemClickedHandler(1)}>고객문의 관리</Link>
+            <Link key={2} href="/admin/dashboard" className={selectedKey==2? "menu_on": "menu"} title="제휴/광고문의 관리" style={{display: 'block'}}
+                  onClick={()=> itemClickedHandler(2)}> 제휴/광고문의 관리</Link>
+            <Link key={3} href="/admin/dashboard" className={selectedKey==3? "menu_on": "menu"} title="일대일문의 게시판" style={{display: 'block'}}
+                  onClick={()=> itemClickedHandler(3)}>일대일문의 게시판</Link>
             <span>게시판 통합관리<span>〓</span></span>
-            <a href="_bbs.post_notice.list.php" className="menu" title="공지사항 게시판" style={{display: 'block'}}>공지사항
-                게시판</a>
-            <a href="_bbs.comment_mng.list.php" className="menu" title="댓글 통합관리" style={{display: 'block'}}>댓글 통합관리</a>
+            <Link key={4} href="/admin/dashboard" className={selectedKey==4? "menu_on": "menu"} title="공지사항 게시판" style={{display: 'block'}}
+                  onClick={()=> itemClickedHandler(4)}>공지사항 게시판</Link>
+            <Link key={5} href="/admin/dashboard" className={selectedKey==5? "menu_on": "menu"} title="댓글 통합관리" style={{display: 'block'}}
+                  onClick={()=> itemClickedHandler(5)}>댓글 통합관리</Link>
             <span>기본관리<span>〓</span></span>
-            <a href="_main_bonus_dashboard.php" className="menu_on" title="관리자 메인" style={{display: 'block'}}>관리자 메인</a>
-            <a href="_entershop.entershop.form.php" className="menu" title="관리자 정보수정" style={{display: 'block'}}>관리자
-                정보수정</a>
-            <a href="_entershop.admin.form.php" className="menu" title="서브관리자 정보수정" style={{display: 'none'}}>서브관리자
-                정보수정</a>
-            <a href="_cardsys.sms.list.php" className="menu" title="문자충전관리" style={{display: 'block'}}>문자충전관리</a>
-            <a href="_popup.list.php" className="menu" title="팝업관리" style={{display: 'block'}}>팝업관리</a>
-            <a href="_config.agree.form.php" className="menu" title="약관 및 정책설정" style={{display: 'block'}}>약관 및 정책설정</a>
-            <a href="_normalpage.list.php" className="menu" title="일반페이지 관리" style={{display: 'block'}}>일반페이지 관리</a>
-            <a href="_admin.list.php" className="menu" title="서브관리자 관리" style={{display: 'none'}}>서브관리자 관리</a>
+            <Link key={0} href="/admin/dashboard" className={selectedKey==0? "menu_on": "menu"} title="관리자 메인" style={{display: 'block'}}
+                onClick={()=> itemClickedHandler(0)}>관리자 메인</Link>
+            <Link key={7} href="/admin/dashboard" className={selectedKey==7? "menu_on": "menu"} title="관리자 정보수정" style={{display: 'block'}}
+                  onClick={()=> itemClickedHandler(7)}>관리자 정보수정</Link>
+            <Link key={8} href="/admin/dashboard" className={selectedKey==8? "menu_on": "menu"} title="서브관리자 정보수정" style={{display: 'none'}}
+                  onClick={()=> itemClickedHandler(8)}>서브관리자 정보수정</Link>
+            <Link key={9} href="/admin/dashboard" className={selectedKey==9? "menu_on": "menu"} title="문자충전관리" style={{display: 'block'}}
+                  onClick={()=> itemClickedHandler(9)}>문자충전관리</Link>
+            <Link key={10} href="/admin/dashboard" className={selectedKey==10? "menu_on": "menu"} title="팝업관리" style={{display: 'block'}}
+                  onClick={()=> itemClickedHandler(10)}>팝업관리</Link>
+            <Link key={11} href="/admin/dashboard" className={selectedKey==11? "menu_on": "menu"} title="약관 및 정책설정" style={{display: 'block'}}
+                  onClick={()=> itemClickedHandler(11)}>약관 및 정책설정</Link>
+            <Link key={11} href="/admin/dashboard" className={selectedKey==12? "menu_on": "menu"} title="일반페이지 관리" style={{display: 'block'}}
+                  onClick={()=> itemClickedHandler(12)}>일반페이지 관리</Link>
+            <Link href="/admin/dashboard" className={selectedKey==13? "menu_on": "menu"} title="서브관리자 관리" style={{display: 'none'}}
+                  onClick={()=> itemClickedHandler(13)}>서브관리자 관리</Link>
             <div className="favorite_menu">
-                <a className="title" title="즐겨찾는메뉴설정" href="_favmenu.form.php"></a>
+                <Link className="title" title="즐겨찾는메뉴설정" href="_favmenu.form.php"></Link>
                 <div className="box">
 
 

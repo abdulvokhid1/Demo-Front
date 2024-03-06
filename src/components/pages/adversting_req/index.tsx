@@ -1,6 +1,6 @@
 'use client';
 // import '@/app/jquery-ui.min.css'
-import './styles.css'
+// import './styles.css'
 
 import Link from 'next/link'
 import HeadElement from '@/components/layouts/Header'

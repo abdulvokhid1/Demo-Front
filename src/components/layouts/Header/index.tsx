@@ -1,5 +1,3 @@
-import './styles.css'
-import Link from 'next/link'
 
 const HeaderElement = () => {
     return (

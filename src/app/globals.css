@@ -115,32 +115,32 @@ textarea::textarea-placeholder {color:#ff0000}
 
 
 /* 헤더 ---------------------------------------------------------------- */
-#header{clear:both; position:relative; width:100%; height:45px; z-index:25; background:#43464f; overflow:hidden;}
+.header{clear:both; position:relative; width:100%; height:45px; z-index:25; background:#43464f; overflow:hidden;}
 
-#header .logo {display:block; height:45px; width:265px; float:left; overflow:hidden; line-height:45px; color:#fff;}
-#header .logo .name {color:#fff; font-weight:bold; font-size:2EM; letter-spacing:-2px; margin-left:5px;}
-#header .logo .en {color:#999; font-weight:bold; font-size:10px; font-family:tahoma; margin-left:5px;}
+.header .logo {display:block; height:45px; width:265px; float:left; overflow:hidden; line-height:45px; color:#fff;}
+.header .logo .name {color:#fff; font-weight:bold; font-size:2EM; letter-spacing:-2px; margin-left:5px;}
+.header .logo .en {color:#999; font-weight:bold; font-size:10px; font-family:tahoma; margin-left:5px;}
 
-#header .title {float:left; padding:10px 0 0 20px;}
+.header .title {float:left; padding:10px 0 0 20px;}
 
-#header .today {background: transparent url('/images/today.png') left top no-repeat; width:140px; height:30px; float:left; margin:7px 0 0 20px; position:relative;}
-#header .today .year {position:absolute; font-family:tahoma; font-size:13px; font-weight:bold; color:#999; margin:9px 0 0 53px;}
-#header .today .month {position:absolute; font-family:tahoma; font-size:13px; font-weight:bold; color:#333; margin:9px 0 0 90px;}
-#header .today .day {position:absolute; font-family:tahoma; font-size:13px; font-weight:bold; color:#333; margin:9px 0 0 114px;}
+.header .today {background: transparent url('/images/today.png') left top no-repeat; width:140px; height:30px; float:left; margin:7px 0 0 20px; position:relative;}
+.header .today .year {position:absolute; font-family:tahoma; font-size:13px; font-weight:bold; color:#999; margin:9px 0 0 53px;}
+.header .today .month {position:absolute; font-family:tahoma; font-size:13px; font-weight:bold; color:#333; margin:9px 0 0 90px;}
+.header .today .day {position:absolute; font-family:tahoma; font-size:13px; font-weight:bold; color:#333; margin:9px 0 0 114px;}
 
-#header .btn {float:right; margin:10px 15px 0 0;}
+.header .btn {float:right; margin:10px 15px 0 0;}
 /* 2015-01-23 스프라이트이미지삭제 */
-#header .btn .btn_home {background: transparent url('/images/btn_top_home.gif') 0 0 no-repeat; width:88px; height:23px; display:inline-block; float:left;}
-#header .btn .btn_logout {background: transparent url('/images/btn_top_logout.gif') 0 0 no-repeat; width:88px; height:23px; display:inline-block; border:none; float:left; cursor:pointer;}
+.header .btn .btn_home {background: transparent url('/images/btn_top_home.gif') 0 0 no-repeat; width:88px; height:23px; display:inline-block; float:left;}
+.header .btn .btn_logout {background: transparent url('/images/btn_top_logout.gif') 0 0 no-repeat; width:88px; height:23px; display:inline-block; border:none; float:left; cursor:pointer;}
 
 
 /* 컨텐츠내용 ---------------------------------------------------------------- */
 
 /* 2단메뉴 보일때 */
-@media (min-width: 1400px)
-.container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
-  max-width: 1920px;
-}
+@media (min-width: 1400px){
+  .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+    max-width: 1920px;
+  }}
 
 .container{background:url('/images/aside_bg.gif') repeat-y; /*z-index:20; position:relative; */min-height:100%; overflow:visible; margin:-45px 0 -36px 0; }
 .container:after{clear:both; display:block; height:0; content:''; visibility:hidden}
@@ -542,11 +542,11 @@ textarea::textarea-placeholder {color:#ff0000}
 
 
 /* 하단 ---------------------------------------------------------------- */
-#footer{z-index:10; position:relative; width:100%; height:35px; border-top:1px solid #262b35;background:#e4e4e4; border-top:1px solid #c1c1c1; clear:both;}
-#footer .copyright {margin:15px 0 0 10px;}
-#footer .gotop {position:absolute; right:0; top:0; margin:6px 10px 0 0 ;}
+.footer{z-index:10; position:relative; width:100%; height:35px; border-top:1px solid #262b35;background:#e4e4e4; border-top:1px solid #c1c1c1; clear:both;}
+.footer .copyright {margin:15px 0 0 10px;}
+.footer .gotop {position:absolute; right:0; top:0; margin:6px 10px 0 0 ;}
 /* 2015-01-23 스프라이트이미지삭제 */
-#footer .gotop .btn_gotop {background:transparent url('/images/btn_gotop.gif') 0 0 no-repeat; display:inline-block; width:75px; height:23px;}
+.footer .gotop .btn_gotop {background:transparent url('/images/btn_gotop.gif') 0 0 no-repeat; display:inline-block; width:75px; height:23px;}
 
 
 
@@ -2077,4 +2077,7 @@ tr.tr_check, tr.tr_radio { cursor: pointer; }
 }
 @-webkit-keyframes spin2 {
   to { -webkit-transform: rotate(-360deg); }
+}
+.text-align {
+  text-align: right !important;
 }
