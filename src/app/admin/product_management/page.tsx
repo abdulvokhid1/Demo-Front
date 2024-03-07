@@ -3,7 +3,7 @@ import { Slider } from 'antd';
 import './styles.css'
 import type { AppProps } from "next/app";
 
-const ProductManagement = ({ Component, pageProps }: AppProps) => {
+const ProductManagement = () => {
 return (
 <div className="content_section">
     <div className="content_section_fix" style={{ background: '#fff' }}>

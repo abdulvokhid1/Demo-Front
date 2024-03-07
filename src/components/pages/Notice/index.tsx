@@ -15,7 +15,8 @@ return(
 		<Slider />
 		<div className="content_section">
 			<div className="content_section_fix" style={{background:'#fff'}}>
-				<div className="open_close"><span className="btn_close" id="open_close_btn_close" title="메뉴닫기"
+				<div className="open_close">
+					<span className="btn_close" id="open_close_btn_close" title="메뉴닫기"
 						style={{display: sliderVisible ? "block" : "none"}} onClick={sliderToggle}></span>
 					<span className="btn_open" id="open_close_btn_open" title="메뉴열기"
 						style={{display: !sliderVisible ? "block" : "none"}} onClick={sliderToggle}></span></div>
@@ -173,7 +174,7 @@ return(
 										title="처음"><span className="icon ic_first"></span></a></span><span className="btn"><span
 										className="no"><span className="icon ic_prev"></span></span><a href=" ?pass_menu=&amp;&amp;listpg=0"
 										className="ok" title="이전"><span className="icon ic_prev"></span></a></span></span><span
-								className="number"><a href="#none" onclick="return false;" className="hit">1</a></span><span
+								className="number"><a href="#none" onClick={() => {return false}} className="hit">1</a></span><span
 								className="nextprev"><span className="btn"><span className="no"><span
 											className="icon ic_next"></span></span><a href=" ?pass_menu=&amp;&amp;listpg=2" className="ok"
 										title="다음"><span className="icon ic_next"></span></a></span><span className="btn"><span
