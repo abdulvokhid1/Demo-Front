@@ -1,9 +1,8 @@
 'use client'
 import Slider from '@/components/layouts/Slider';
-import Password from 'antd/es/input/Password';
 import { useEffect, useState } from "react";
 
-const mdinfo = () => {
+const Mdinfo = () => {
 	const [sliderVisible, setSliderVisible] = useState(true)
 	useEffect(() => {
 		console.log('sliderVisible: ', sliderVisible)
@@ -13,7 +12,8 @@ const mdinfo = () => {
 	}
 
 	return (
-
+		<div className={sliderVisible ? "container" : "container_hide" } id="depth2_leftmenu" style={{background: "#f0f0f0"}}>
+		<Slider />
 		<div className="content_section">
 			<div className="content_section_fix" style={{ background: '#fff' }}>
 				<div className="open_close">
@@ -897,6 +897,7 @@ alert('선택된 텍스트를 복사하세요.');
 																																		<div style={{height:'30px'}}></div>
 																																	</div>
 																																	</div>
-																																	
+																																	</div>
 																																)
 }
+export default Mdinfo;
