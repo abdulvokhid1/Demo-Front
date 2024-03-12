@@ -1,9 +1,41 @@
+'use client'
 import dynamic from 'next/dynamic'
+import { useRecoilValue } from "recoil";
+import { userState } from "@/services/recoil/user";
+import { useEffect } from "react";
+import PAGE_ROUTES from "@/utils/constants/routes";
+import { useRouter } from "next/navigation";
+import { jwtDecode } from 'jwt-decode'
 
-const View = dynamic(() => import('@/components/pages/dashboard'), { ssr: false })
-
+const View = dynamic(() => import('@/components/pages/dashboard'), {ssr: false})
 const Page = () => {
-    return <View  />
+    const userStateData = useRecoilValue(userState)
+    const router = useRouter()
+    // const refreshToken = localStorage.getItem('refreshToken')
+    useEffect(() => {
+        let accessToken = localStorage.getItem('accessToken')
+        if (!accessToken || accessToken == '') {
+            router.replace(PAGE_ROUTES.AUTH.LOGIN)
+        } else {
+            const decodedToken: any = jwtDecode(accessToken)
+            if (decodedToken.exp * 1000 < new Date().getTime()) {
+                router.replace(PAGE_ROUTES.AUTH.LOGIN)
+            }
+        }
+        console.log(userStateData);
+    }, [router])
+
+
+    // if (!accessToken || accessToken === '') {
+    //     const decodedToken: any = jwtDecode(accessToken)
+    //     if (decodedToken.exp * 1000 < new Date().getTime()) {
+    //
+    //     }
+    // if (userStateData.email === '') {
+    //     return (<div/>)
+    // }
+    return (<View/>)
+
 }
 
 export default Page

@@ -1,59 +1,33 @@
 'use client'
-import 'bootstrap/dist/css/bootstrap.css'
-import '../globals.css'
-import MainLayout from '@/components/layouts/MainLaoyout'
-import type {AppProps} from "next/app";
-import Head from "next/head";
-import HeadElement from "@/components/layouts/Header";
-import Navbar from "@/components/layouts/Navbar";
-import Slider from "@/components/layouts/Slider";
-import FooterElement from "@/components/layouts/Footer";
-import {Layout} from "antd";
 import type {Metadata} from "next";
-import {useEffect, useState} from "react";
+import {Inter} from "next/font/google";
+import {RecoilRoot} from 'recoil'
+
+import 'bootstrap/dist/css/bootstrap.css'
+import "../globals.css";
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
+import {useState} from "react";
+
+const inter = Inter({subsets: ["latin"]});
 
 // export const metadata: Metadata = {
 //     title: "관리자 페이지",
 //     description: "관리자 페이지",
 // };
-export default function AdminLayout({
-                                        children, // will be a page or nested layout
-                                    }: {
-    children: React.ReactNode
-}) {
-    useEffect(() => {
-        import('bootstrap');
-    }, []);
+
+export default function RootLayout({
+                                       children,
+                                   }: Readonly<{
+    children: React.ReactNode;
+}>) {
+    const [queryClient] = useState(new QueryClient())
     return (
-        <html lang="en">
-        <Head>
-            <title>Rudemy</title>
-            {/*<link*/}
-            {/*    rel="stylesheet"*/}
-            {/*    href="/css/jquery-ui.min.css"*/}
-            {/*/>*/}
-        </Head>
-        <body style={{minWidth: '1260px'}}>
-        <div className="adm_loading_wrap">
-            <div className="adm_loading_box">
-                <div className="loading"></div>
-                <div className="iconimg"></div>
-            </div>
-        </div>
-        <div className="wrap" style={{background: '#fff'}}>
-            <HeadElement/>
-            <Navbar/>
-            <div className="container" id="depth2_leftmenu" style={{background: "#f0f0f0"}}>
-                {/*    <div className="container" id="depth2_leftmenu" style={{background: "#f0f0f0"}}>*/}
-                {/*        <Slider/>*/}
-                {/*        {children}*/}
-                {/*    </div>*/}
-                {/*</div>*/}
+
+        <QueryClientProvider client={queryClient}>
+            <RecoilRoot>
                 {children}
-                <FooterElement/>
-            </div>
-        </div>
-        </body>
-        </html>
-    )
+            </RecoilRoot>
+        </QueryClientProvider>
+
+    );
 }

@@ -1,17 +1,24 @@
 'use client'
-import Image from "next/image";
-import styles from "./page.module.css";
+import { useRouter } from 'next/navigation'
 import {useEffect} from "react";
-import {useRouter} from "next/navigation";
 
-
-export default function Home() {
+const Controller = () => {
+  // const userStateData = useRecoilValue(userState)
   const router = useRouter()
-  useEffect(() => {
-    router.push('/admin/dashboard')
-  }, [router])
-  return (
-    <div/>
 
-  );
+  // useEffect(() => {
+  //   userStateData.email === ''
+  //       ? router.push(PAGE_ROUTES.AUTH.LOGIN)
+  //       : router.push(PAGE_ROUTES.DASHBOARD)
+  // }, [router])
+
+  return (
+
+      <div>
+        {/*<Loading />*/}
+      </div>
+
+  )
 }
+
+export default Controller

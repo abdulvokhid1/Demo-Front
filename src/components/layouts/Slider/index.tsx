@@ -36,7 +36,7 @@ const Slider = () => {
                   onClick={()=> itemClickedHandler(10)}>팝업관리</Link>
             <Link key={11} href="/admin/general/dashboard" className={selectedKey==11? "menu_on": "menu"} title="약관 및 정책설정" style={{display: 'block'}}
                   onClick={()=> itemClickedHandler(11)}>약관 및 정책설정</Link>
-            <Link key={11} href="/admin/general/dashboard" className={selectedKey==12? "menu_on": "menu"} title="일반페이지 관리" style={{display: 'block'}}
+            <Link key={12} href="/admin/general/dashboard" className={selectedKey==12? "menu_on": "menu"} title="일반페이지 관리" style={{display: 'block'}}
                   onClick={()=> itemClickedHandler(12)}>일반페이지 관리</Link>
             <Link href="/admin/general/dashboard" className={selectedKey==13? "menu_on": "menu"} title="서브관리자 관리" style={{display: 'none'}}
                   onClick={()=> itemClickedHandler(13)}>서브관리자 관리</Link>

@@ -1,16 +1,26 @@
 'use client'
-import MainLayout from '@/components/layouts/MainLaoyout'
-import type {AppProps} from "next/app";
-import {useRouter} from "next/navigation";
-import {useEffect} from "react";
-const Admin = () => {
-    const router = useRouter()
-    useEffect(() => {
-        router.push('/admin/general')
-    }, [router])
-    return (
-        <div/>
+import { userState } from '@/services/recoil/user'
+// import Loading from '@/storybook/Loading'
+import { useRouter } from 'next/navigation'
+import React, { useEffect } from 'react'
+import { useRecoilValue } from 'recoil'
+import PAGE_ROUTES from 'src/utils/constants/routes'
 
-    );
+const Controller = () => {
+    const userStateData = useRecoilValue(userState)
+    const router = useRouter()
+
+    useEffect(() => {
+        userStateData.email === ''
+            ? router.push(PAGE_ROUTES.AUTH.LOGIN)
+            : router.push(PAGE_ROUTES.DASHBOARD)
+    }, [router])
+
+    return (
+        <div>
+            {/*<Loading />*/}
+        </div>
+    )
 }
-export default Admin;
+
+export default Controller
