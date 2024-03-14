@@ -137,9 +137,10 @@ textarea::textarea-placeholder {color:#ff0000}
 /* 컨텐츠내용 ---------------------------------------------------------------- */
 
 /* 2단메뉴 보일때 */
-@media (min-width: 1400px)
+@media (min-width: 1400px){
 .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
-  max-width: 1920px;
+max-width: 1920px;
+}
 }
 
 .container{background:url('/images/aside_bg.gif') repeat-y; /*z-index:20; position:relative; */min-height:100%; overflow:visible; margin:-45px 0 -36px 0; }
