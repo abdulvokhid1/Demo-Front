@@ -1,7 +1,7 @@
 // import './styles.css'
 import HeadElement from '@/components/layouts/Header'
 import FooterElement from "@/components/layouts/Footer";
-import Slider from '@/components/layouts/Slider'
+import Slider from '@/components/layouts/Slider/general'
 import Head from 'next/head'
 import {Layout} from 'antd'
 import Navbar from "@/components/layouts/Navbar";

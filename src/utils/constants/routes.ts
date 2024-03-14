@@ -3,10 +3,16 @@ const PAGE_ROUTES = {
     LOGIN: '/admin/login',
     FORGOT_PASSWORD: '/forgot-password',
   },
-  DASHBOARD: '/admin/general/dashboard',
+  GENERAL: {
+    DASHBOARD: '/admin/general/dashboard',
+  },
   BLOGS: '/admin/blog',
   CLASSROOMS: '/admin/classrooms',
-  USERS: '/admin/users',
+  USERS: {
+    INDEX: '/admin/users',
+    USER_MANAGEMENT: '/admin/users/member_management',
+    USER_REGISTRATION: '/admin/users/registration'
+  },
   COURSES: '/admin/courses',
   LESSONS: '/admin/lessons',
   CATEGORY: '/admin/categories',

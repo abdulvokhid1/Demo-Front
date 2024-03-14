@@ -39,7 +39,7 @@ const Login = () => {
                     })
 
                     //Move page
-                    await router.push(PAGE_ROUTES.DASHBOARD)
+                    await router.push(PAGE_ROUTES.GENERAL.DASHBOARD)
                 } else {
                     messageApi.open({
                         type: 'error',

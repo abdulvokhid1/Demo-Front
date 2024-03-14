@@ -16,7 +16,7 @@ import {useEffect, useState} from "react";
 //     title: "관리자 페이지",
 //     description: "관리자 페이지",
 // };
-export default function UserLayout({
+export default function AdminLayout({
                                         children, // will be a page or nested layout
                                     }: {
     children: React.ReactNode

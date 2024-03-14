@@ -13,7 +13,7 @@ const Controller = () => {
     useEffect(() => {
         userStateData.email === ''
             ? router.push(PAGE_ROUTES.AUTH.LOGIN)
-            : router.push(PAGE_ROUTES.DASHBOARD)
+            : router.push(PAGE_ROUTES.GENERAL.DASHBOARD)
     }, [router])
 
     return (

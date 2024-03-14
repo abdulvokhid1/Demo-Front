@@ -7,7 +7,7 @@ import PAGE_ROUTES from "@/utils/constants/routes";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from 'jwt-decode'
 
-const View = dynamic(() => import('@/components/pages/dashboard'), {ssr: false})
+const View = dynamic(() => import('src/components/pages/general/dashboard'), {ssr: false})
 const Page = () => {
     const userStateData = useRecoilValue(userState)
     const router = useRouter()

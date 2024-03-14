@@ -4,14 +4,14 @@ import type {AppProps} from "next/app";
 import {useRouter} from "next/navigation";
 import {useEffect} from "react";
 import PAGE_ROUTES from "@/utils/constants/routes";
-const AdminGeneral = () => {
+const AdminUser = () => {
     const router = useRouter()
     useEffect(() => {
-        router.push(PAGE_ROUTES.GENERAL.DASHBOARD)
+        router.push(PAGE_ROUTES.USERS.USER_MANAGEMENT)
     }, [router])
     return (
         <div/>
 
     );
 }
-export default AdminGeneral;
+export default AdminUser;
