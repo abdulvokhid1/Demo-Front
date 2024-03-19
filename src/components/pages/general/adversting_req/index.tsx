@@ -91,9 +91,7 @@ const AdvertingReq = () => {
         </div>
 
         {/* <!-- // 검색영역 --> */}
-
-
-
+        
         {/* <!-- 리스트영역 --> */}
         <div className="content_section_inner">
 

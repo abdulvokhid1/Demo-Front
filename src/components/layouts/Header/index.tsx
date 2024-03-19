@@ -12,19 +12,13 @@ const HeaderElement = () => {
                 <span className="year">2024</span>
                 <span className="month">02</span>
                 <span className="day">29</span>
-
             </div>
-
 
             <div style={{position: 'absolute', marginLeft: '500px', marginTop: '8px'}}>
-
             </div>
 
-
             <div className="btn">
-
                 <a href={'/admin'} onClick={() => {localStorage.setItem('accessToken', "")}} className="btn_logout" title="로그아웃"></a>
-
             </div>
         </div>
     )
