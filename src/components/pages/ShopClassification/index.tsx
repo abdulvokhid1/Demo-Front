@@ -16,7 +16,8 @@ const ShopClassification= () => {
 <div className="content_section">
                 <div className="content_section_fix" style={{background:'#fff'}}>
 
-                  <div className="open_close"><span className="btn_close" id="open_close_btn_close" title="메뉴닫기"></span><span className="btn_open" id="open_close_btn_open" title="메뉴열기"></span></div>
+                  <div className="open_close"><span className="btn_close" id="open_close_btn_close" title="메뉴닫기"style={{display: sliderVisible ? "block" : "none"}} onClick={sliderToggle}></span>
+                  <span className="btn_open" id="open_close_btn_open" title="메뉴열기"style={{display: !sliderVisible ? "block" : "none"}} onClick={sliderToggle}></span></div>
                    
                   {/* <!-- 페이지타이틀 --> */}
                   <div className="title_area">

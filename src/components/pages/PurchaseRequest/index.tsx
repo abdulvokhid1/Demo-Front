@@ -1,5 +1,5 @@
 'use client'
-import Slider  from '@/components/layouts/Slider';
+import Slider  from '@/components/layouts/Slider/Sales';
 import { useEffect, useState } from 'react';
 const PurchaseRequest = () => {
     const [sliderVisible, setSliderVisible] = useState(true)

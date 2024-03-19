@@ -1,5 +1,5 @@
 'use client'
-import Slider  from '@/components/layouts/Slider';
+import Slider  from '@/components/layouts/Slider/Shop';
 import { useEffect, useState } from 'react';
 const PopularItem = () => {
     const [sliderVisible, setSliderVisible] = useState(true)
@@ -17,8 +17,8 @@ const PopularItem = () => {
                <div className="content_section">
                 <div className="content_section_fix" style={{background:'#fff'}}>
 
-                  <div className="open_close"><span className="btn_close" id="open_close_btn_close" title="메뉴닫기"></span>
-                  <span className="btn_open" id="open_close_btn_open" title="메뉴열기"></span></div>
+                  <div className="open_close"><span className="btn_close" id="open_close_btn_close" title="메뉴닫기"style={{display: sliderVisible ? "block" : "none"}} onClick={sliderToggle}></span>
+                  <span className="btn_open" id="open_close_btn_open" title="메뉴열기"style={{display: !sliderVisible ? "block" : "none"}} onClick={sliderToggle}></span></div>
                          
                   {/* <!-- 페이지타이틀 --> */}
                   <div className="title_area">
@@ -153,7 +153,8 @@ function handleStateChange() {
 								<th scope="col" className="colorset">판매일<br/>종료일</th>								
 							</tr>
 						</thead> 
-						<tbody> 
+						
+	<tbody> 
 {/* 상품진열시작점 */}
 			<tr>
 			<td><input type='checkbox' name='chk_pcode[]' value='177' className='className_pcode'/></td>
