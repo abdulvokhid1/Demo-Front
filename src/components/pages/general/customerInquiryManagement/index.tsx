@@ -31,8 +31,7 @@ const CustomerInquiryManagement = () => {
                 </div>
                 <div className="title_area">
                     <span className="icon"></span>
-                    <span className="title">s
-											고객문의 관리
+                    <span className="title">고객문의 관리
 					</span>
                     <span className="location">홈 &gt; 기본관리 &gt; 고객문의 관리</span>
                 </div>

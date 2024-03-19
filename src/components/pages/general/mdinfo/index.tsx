@@ -1,5 +1,5 @@
 'use client'
-import Slider from '@/components/layouts/Slider';
+import Slider from '@/components/layouts/Slider/general';
 import { useEffect, useState } from "react";
 
 const Mdinfo = () => {
@@ -22,7 +22,7 @@ const Mdinfo = () => {
 
 				{/* <!-- 페이지타이틀 --> */}
 				<div className="title_area">
-					<span className="icon"></span>SS
+					<span className="icon"></span>
 					<span className="title">
 						관리자 정보수정
 					</span>

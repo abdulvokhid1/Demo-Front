@@ -1,5 +1,5 @@
 'use client'
-import Slider  from '@/components/layouts/Slider';
+import Slider  from '@/components/layouts/Slider/general';
 import { useEffect, useState } from 'react';
 // import './styles.css';
 const PageManager = () => {
@@ -93,7 +93,7 @@ return(
 				<td>2014-04-28</td>
 				<td>
 					<div className='btn_line_up_center'>
-						<span className='shop_btn_pack'><a type="button" className='small white' href='/?pn=service.page.view&pageid=company' target='_blank'>바로가기</a></span>
+						<span className='shop_btn_pack'><a type="button" className='small white' href='/public?pn=service.page.view&pageid=company' target='_blank'>바로가기</a></span>
 						<span className='shop_btn_pack'><span className='blank_3'></span></span>
 						<span className='shop_btn_pack'><input type="button" value='수정' className='input_small white' onClick={()=>{}}/></span>
 						<span className='shop_btn_pack'><span className='blank_3'></span></span>
@@ -110,7 +110,7 @@ return(
 				<td>2014-04-28</td>
 				<td>
 					<div className='btn_line_up_center'>
-						<span className='shop_btn_pack'><a type="button" className='small white' href='/?pn=service.page.view&pageid=mobile' target='_blank'>바로가기</a></span>
+						<span className='shop_btn_pack'><a type="button" className='small white' href='/public?pn=service.page.view&pageid=mobile' target='_blank'>바로가기</a></span>
 						<span className='shop_btn_pack'><span className='blank_3'></span></span>
 						<span className='shop_btn_pack'>
                             <input type="button" value='수정' className='input_small white' onClick={()=>{}}/></span>
@@ -129,7 +129,7 @@ return(
 				<td>2023-04-05</td>
 				<td>
 					<div className='btn_line_up_center'>
-						<span className='shop_btn_pack'><a type="button" className='small white' href='/?pn=service.page.view&pageid=email_agree' target='_blank'>바로가기</a></span>
+						<span className='shop_btn_pack'><a type="button" className='small white' href='/public?pn=service.page.view&pageid=email_agree' target='_blank'>바로가기</a></span>
 						<span className='shop_btn_pack'><span className='blank_3'></span></span>
 						<span className='shop_btn_pack'>
                             <input type="button" value='수정' className='input_small white' onClick={()=>{}}/></span>
@@ -148,7 +148,7 @@ return(
 				<td>2023-04-05</td>
 				<td>
 					<div className='btn_line_up_center'>
-						<span className='shop_btn_pack'><a type="button" className='small white' href='/?pn=service.page.view&pageid=subscription' target='_blank'>바로가기</a></span>
+						<span className='shop_btn_pack'><a type="button" className='small white' href='/public?pn=service.page.view&pageid=subscription' target='_blank'>바로가기</a></span>
 						<span className='shop_btn_pack'><span className='blank_3'></span></span>
 						<span className='shop_btn_pack'>
                             <input type="button" value='수정' className='input_small white' onClick={()=>{}}/></span>
@@ -167,7 +167,7 @@ return(
 				<td>2023-04-05</td>
 				<td>
 					<div className='btn_line_up_center'>
-						<span className='shop_btn_pack'><a type="button" className='small white' href='/?pn=service.page.view&pageid=personal_low_001' target='_blank'>바로가기</a></span>
+						<span className='shop_btn_pack'><a type="button" className='small white' href='/public?pn=service.page.view&pageid=personal_low_001' target='_blank'>바로가기</a></span>
 						<span className='shop_btn_pack'><span className='blank_3'></span></span>
 						<span className='shop_btn_pack'>
                             <input type="button" value='수정' className='input_small white' onClick={()=>{}}/></span>
