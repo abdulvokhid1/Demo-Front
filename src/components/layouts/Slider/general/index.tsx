@@ -1,9 +1,12 @@
 // import './styles.css'
 import Link from 'next/link'
-import {useState} from "react";
+import { generalSelectedKey } from '@/services/recoil/selectedKey'
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 const Slider = () => {
-    const [selectedKey, setSelectedKey] = useState(0)
+    const selectedKey = useRecoilValue(generalSelectedKey)
+    const setSelectedKey = useSetRecoilState(generalSelectedKey)
+    // const [selectedKey, setSelectedKey] = useState(0)
     const itemClickedHandler = (item: number) => {
         setSelectedKey(item);
     }

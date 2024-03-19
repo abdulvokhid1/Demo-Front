@@ -9,7 +9,7 @@ import Navbar from "@/components/layouts/Navbar";
 import {useState, useEffect} from "react";
 
 
-const customerInquiryManagement = () => {
+const CustomerInquiryManagement = () => {
     const [sliderVisible, setSliderVisible] = useState(true)
     useEffect(() => {
         console.log('sliderVisible: ', sliderVisible)
@@ -171,4 +171,4 @@ const customerInquiryManagement = () => {
     )
 }
 
-export default customerInquiryManagement;
+export default CustomerInquiryManagement;

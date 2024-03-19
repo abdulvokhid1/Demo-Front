@@ -13,7 +13,7 @@ const CategoryManagement = () => {
     return(
         <div className={sliderVisible ? "container" : "container_hide" } id="depth2_leftmenu" 
         style={{background: "#f0f0f0"}}>
-    <Slider/>>
+    <Slider/>
 
 <div className="content_section">
                 <div className="content_section_fix" style={{background:'#fff'}}>
@@ -33,11 +33,7 @@ const CategoryManagement = () => {
     
 <iframe src="inc.bonus_auto.php" width={0} height={0} frameBorder={0} style={{display:'none'}}></iframe>
 
-{/* <!--<iframe src="inc.bonus_auto_test.php" width=100% height=100px frameborder=0></iframe>--> */}
-
 <div className="common_ajax_proc"></div>
-
-<script type='text/javascript' src='_category_shop.js'></script>
 
 <form name='PUBLIC_FORM' method='post'>
 <input type='hidden' name='chk_list2' value=''/>
@@ -77,9 +73,9 @@ const CategoryManagement = () => {
 							</thead> 
 							<tbody> 
 								<tr>
-									<td className="conts"><iframe name='list1'  src='_category_shop.pro.php?depth=1' width='100%' height='400' style={{textAlign:'center'}}  marginWidth={0} marginHeight={0} scrolling='no'  frameBorder='0' style={{border:'2px solid #c1c1c1'}}></iframe></td>
-									<td className="conts"><iframe name='list2'  src='' width='100%' height='400' style={{textAlign:'center'}}  marginWidth={0} marginHeight={0} scrolling='no'  frameBorder='0' style={{border:'2px solid #c1c1c1'}}></iframe></td>
-									<td className="conts"><iframe name='list3'  src='' width='100%' height='400' style={{textAlign:'center'}}  marginWidth={0} marginHeight={0} scrolling='no'  frameBorder='0' style={{border:'2px solid #c1c1c1'}}></iframe></td>
+									<td className="conts"><iframe name='list1'  src='_category_shop.pro.php?depth=1' width='100%' height='400' style={{textAlign:'center', border:'2px solid #c1c1c1'}}  marginWidth={0} marginHeight={0} scrolling='no'  frameBorder='0'></iframe></td>
+									<td className="conts"><iframe name='list2'  src='' width='100%' height='400' style={{textAlign:'center', border:'2px solid #c1c1c1'}}  marginWidth={0} marginHeight={0} scrolling='no'  frameBorder='0'></iframe></td>
+									<td className="conts"><iframe name='list3'  src='' width='100%' height='400' style={{textAlign:'center', border:'2px solid #c1c1c1'}}  marginWidth={0} marginHeight={0} scrolling='no'  frameBorder='0'></iframe></td>
 								</tr>
 							</tbody> 
 						</table>

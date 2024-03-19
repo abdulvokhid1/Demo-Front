@@ -11,7 +11,7 @@ import { Layout } from 'antd'
 import Navbar from "@/components/layouts/Navbar";
 import { useEffect, useState } from "react";
 
-const inquiryboard = () => {
+const InquiryBoard = () => {
     const [sliderVisible, setSliderVisible] = useState(true)
     useEffect(() => {
         console.log('sliderVisible: ', sliderVisible)
@@ -193,4 +193,4 @@ const inquiryboard = () => {
         </div>
     )}
 
-export default inquiryboard
+export default InquiryBoard
