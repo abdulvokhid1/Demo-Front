@@ -32,12 +32,8 @@ const Slider = () => {
             <div className="favorite_menu">
                 <a className="title" title="즐겨찾는메뉴설정" href="_favmenu.form.php"></a>
                 <div className="box">
-
-
                 </div>
             </div>
-
-
         </div>
     )
 }

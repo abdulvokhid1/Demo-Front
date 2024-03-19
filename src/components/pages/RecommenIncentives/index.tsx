@@ -1,5 +1,5 @@
 'use client'
-import Slider  from '@/components/layouts/Slider';
+import Slider  from '@/components/layouts/Slider/Calc';
 import { useEffect, useState } from 'react';
 const RecommenIncentives = () => {
     const [sliderVisible, setSliderVisible] = useState(true)
@@ -18,7 +18,8 @@ const RecommenIncentives = () => {
                <div className ="content_section">
                 <div className ="content_section_fix" style={{background:'#fff'}}>
 
-                  <div className ="open_close"><span className ="btn_close" id="open_close_btn_close" title="메뉴닫기"></span><span className ="btn_open" id="open_close_btn_open" title="메뉴열기"></span></div>
+                  <div className ="open_close"><span className ="btn_close" id="open_close_btn_close" title="메뉴닫기"style={{display: sliderVisible ? "block" : "none"}} onClick={sliderToggle}></span>
+                  <span className="btn_open" id="open_close_btn_open" title="메뉴열기"style={{display: !sliderVisible ? "block" : "none"}} onClick={sliderToggle}></span></div>
           
                   {/* <!-- 페이지타이틀 --> */}
                   <div className ="title_area">
@@ -96,8 +97,8 @@ const RecommenIncentives = () => {
 					  <input type="radio" name='restoretype' id="restoretype2" value="result" onClick={()=>{}} />
 					  <label htmlFor='restoretype2' style={{height:'18px'}}>발생내역</label>
 					  &nbsp;
-					
 					</td>
+
 					<td className ="article search_id" style={{display:'none'}}>아이디</td>
 					<td className ="conts search_id" style={{display:'none'}}>
 	
@@ -130,8 +131,6 @@ const RecommenIncentives = () => {
 
 	<table className ="list_TB" summary="리스트기본">
 		<thead>
-
-
 			<tr>
 				<td colSpan={10} className ="new_order_data_sum">
 										<div className ="inner_sum_box">
@@ -168,10 +167,8 @@ const RecommenIncentives = () => {
 
 			{/* <!-- 리스트영역 --> */}
 			<div className ="content_section_inner">
-
 				<table className ="list_TB" summary="리스트기본">
 					<thead>
-
 						<tr style={{height:'50px align: center'}}>
 							<th scope="col" className ="colorset">번호</th>
 							<th scope="col" className ="colorset">(일마감)</th>
@@ -227,7 +224,7 @@ const RecommenIncentives = () => {
 </form>
 </table>
 
-	<form name='fboardlist' method='pos'>
+	<form name='fboardlist' method='post'>
 	<input type='hidden' name='q1'	value="code="/>
 	<input type='hidden' name='page'	value="1"/>
 
@@ -239,6 +236,18 @@ const RecommenIncentives = () => {
 	{/* <!--엑셀다운 추가 --> */}
 				{/* <!-- 리스트영역 --> */}
 				<div className ="content_section_inner">
+				<div className ="top_btn_area">
+			{/* <!--<span className ="shop_btn_pack"><a href="./calcu/calcu_bonus2_xls.php?code=" className ="small white" />엑셀다운로드</a></span>--> */}
+			<span className ="shop_btn_pack pay_drapt" ><a onClick={()=>{}} className ="large red" >정산완료</a></span>
+			<span className ="shop_btn_pack pay_drapt" ><span className ="blank_3"></span></span>
+			<span className ="shop_btn_pack pay_drapt" ><span className ="blank_3"></span></span>
+			<span className ="shop_btn_pack"><a href="javascript:select_send('excel_center');" className ="large white" title="선택엑셀저장" >선택엑셀저장</a></span>
+{/* <!--
+			<span className ="shop_btn_pack"><span className ="blank_3"></span></span>
+			<span className ="shop_btn_pack"><span className ="blank_3"></span></span>
+			<span className ="shop_btn_pack"><a onclick="btn_check('cancel_select')" className ="small white" />선택 마감취소</a></span>
+--> */}
+		</div>
 					<table className ="list_TB" summary="리스트기본">
 						<thead>
 							<tr  style={{height:'50px align: center'}}>
@@ -263,19 +272,6 @@ const RecommenIncentives = () => {
                    
 		<tr><td height={50} colSpan={20} align='center' >내역이 없습니다.</td></tr>
 	 
-		<div className ="top_btn_area">
-			{/* <!--<span className ="shop_btn_pack"><a href="./calcu/calcu_bonus2_xls.php?code=" className ="small white" />엑셀다운로드</a></span>--> */}
-			<span className ="shop_btn_pack pay_drapt" ><a onClick={()=>{}} className ="large red" >정산완료</a></span>
-			<span className ="shop_btn_pack pay_drapt" ><span className ="blank_3"></span></span>
-			<span className ="shop_btn_pack pay_drapt" ><span className ="blank_3"></span></span>
-			<span className ="shop_btn_pack"><a href="javascript:select_send('excel_center');" className ="large white" title="선택엑셀저장" >선택엑셀저장</a></span>
-{/* <!--
-			<span className ="shop_btn_pack"><span className ="blank_3"></span></span>
-			<span className ="shop_btn_pack"><span className ="blank_3"></span></span>
-			<span className ="shop_btn_pack"><a onclick="btn_check('cancel_select')" className ="small white" />선택 마감취소</a></span>
---> */}
-		</div>
-						
 						<tfoot>
 							<tr>
 								<td colSpan={20} style={{height:'20px'}}>
@@ -288,9 +284,7 @@ const RecommenIncentives = () => {
 											<li className ="txt">정산 총 합계</li>
 											<li><span className ="sum">합계</span><span className ="value">0 </span></li>
 											<li><span className ="sum">세금공제</span><span className ="value">0 </span></li>
-
 											<li><span className ="sum">실수령액</span><span className ="value">0 </span></li>
-
 										</ul>
 									</div>
 								</td>
