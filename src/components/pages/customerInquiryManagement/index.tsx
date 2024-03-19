@@ -1,9 +1,4 @@
-'use client';
-<<<<<<<< HEAD:src/components/pages/general/customer-inquiry-management/index.tsx
-// import './styles.css'
-========
-
->>>>>>>> MeeRyeong:src/components/pages/customerInquiryManagement/index.tsx
+'use client'
 import Link from 'next/link'
 import HeadElement from '@/components/layouts/Header'
 import FooterElement from "@/components/layouts/Footer";
@@ -11,7 +6,8 @@ import Slider from '@/components/layouts/Slider/general'
 import Head from 'next/head'
 import {Layout} from 'antd'
 import Navbar from "@/components/layouts/Navbar";
-import { useEffect, useState } from 'react';
+import {useState, useEffect} from "react";
+
 
 const customerInquiryManagement = () => {
     const [sliderVisible, setSliderVisible] = useState(true)
