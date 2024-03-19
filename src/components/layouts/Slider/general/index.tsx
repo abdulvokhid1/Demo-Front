@@ -19,7 +19,7 @@ const Slider = () => {
             <Link key={3} href="/admin/general/dashboard" className={selectedKey==3? "menu_on": "menu"} title="일대일문의 게시판" style={{display: 'block'}}
                   onClick={()=> itemClickedHandler(3)}>일대일문의 게시판</Link>
             <span>게시판 통합관리<span>〓</span></span>
-            <Link key={4} href="/admin/general/dashboard" className={selectedKey==4? "menu_on": "menu"} title="공지사항 게시판" style={{display: 'block'}}
+            <Link key={4} href="/admin/general/notice" className={selectedKey==4? "menu_on": "menu"} title="공지사항 게시판" style={{display: 'block'}}
                   onClick={()=> itemClickedHandler(4)}>공지사항 게시판</Link>
             <Link key={5} href="/admin/general/dashboard" className={selectedKey==5? "menu_on": "menu"} title="댓글 통합관리" style={{display: 'block'}}
                   onClick={()=> itemClickedHandler(5)}>댓글 통합관리</Link>
