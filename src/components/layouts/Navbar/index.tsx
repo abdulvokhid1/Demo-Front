@@ -27,6 +27,8 @@ const NavElement = () => {
                                             className="btn">주문관리</a></li>
                         <li className=""><a href="http://thesen.moinus.kr/myAdmin/_banner.list.php"
                                             className="btn">디자인관리</a></li>
+                        <li className=""><a href="http://thesen.moinus.kr/myAdmin/_banner.list.php"
+                                            className="btn">로그분석</a></li>
                     </ul>
                 </div>
             </div>
