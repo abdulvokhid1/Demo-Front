@@ -26,7 +26,7 @@ const Slider = () => {
             <span>기본관리<span>〓</span></span>
             <Link key={0} href="/admin/general/dashboard" className={selectedKey==0? "menu_on": "menu"} title="관리자 메인" style={{display: 'block'}}
                 onClick={()=> itemClickedHandler(0)}>관리자 메인</Link>
-            <Link key={7} href="/admin/general/dashboard" className={selectedKey==7? "menu_on": "menu"} title="관리자 정보수정" style={{display: 'block'}}
+            <Link key={7} href="/admin/general/mdinfo" className={selectedKey==7? "menu_on": "menu"} title="관리자 정보수정" style={{display: 'block'}}
                   onClick={()=> itemClickedHandler(7)}>관리자 정보수정</Link>
             <Link key={8} href="/admin/general/dashboard" className={selectedKey==8? "menu_on": "menu"} title="서브관리자 정보수정" style={{display: 'none'}}
                   onClick={()=> itemClickedHandler(8)}>서브관리자 정보수정</Link>

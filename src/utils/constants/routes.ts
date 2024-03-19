@@ -11,8 +11,13 @@ const PAGE_ROUTES = {
   USERS: {
     INDEX: '/admin/users',
     USER_MANAGEMENT: '/admin/users/member_management',
-    USER_REGISTRATION: '/admin/users/registration'
+    USER_REGISTRATION: '/admin/users/registration',
   },
+  SALES_MANAGEMENT: {
+    SALES_REGISTRATION_MANAGER: '/admin/sales_management/sales_registration_manager',
+  },
+ 
+
   COURSES: '/admin/courses',
   LESSONS: '/admin/lessons',
   CATEGORY: '/admin/categories',

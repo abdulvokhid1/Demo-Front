@@ -29,7 +29,7 @@ const NavElement = () => {
                             </Link>
                         </li>
                         <li className={selectedKey == 2 ? "hit" : ""}>
-                            <Link href="http://thesen.moinus.kr/myAdmin/_entershop.entry_revenues_list.php"
+                            <Link href={PAGE_ROUTES.SALES_MANAGEMENT.SALES_REGISTRATION_MANAGER}
                                   className="btn"
                                   onClick={() => itemClickedHandler(2)}>가맹점관리
                             </Link>
