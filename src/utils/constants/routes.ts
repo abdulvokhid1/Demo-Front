@@ -16,17 +16,22 @@ const PAGE_ROUTES = {
   },
   BLOGS: '/admin/blog',
   CLASSROOMS: '/admin/classrooms',
+
   USERS: {
     INDEX: '/admin/users',
     USER_MANAGEMENT: '/admin/users/member_management',
     USER_REGISTRATION: '/admin/users/registration',
   },
-  SALES_MANAGEMENT: {
-    SALES_REGISTRATION_MANAGER: '/admin/sales_management/sales_registration_manager',
+  SALES: {
+    // SALES_MANAGEMENT: '/admin/sales_management/',
+     SALE_REGISTRATION: '/admin/sales_management/sales_registration_manager',
   },
- CALC_MANAGE:{
- 
- },
+  CALC:{
+   DAILY_CALC:'/admin/CalcManage/daily_calc',
+  },
+  SHOP:{ 
+  SHOP_MANAGEMENT:'/admin/shop_manager/shopproduct_management'
+  },
 
   COURSES: '/admin/courses',
   LESSONS: '/admin/lessons',

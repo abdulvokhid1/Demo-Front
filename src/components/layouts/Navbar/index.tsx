@@ -37,14 +37,12 @@ const NavElement = () => {
                             </Link>
                         </li>
                         <li className={selectedKey == 2 ? "hit" : ""}>
-                            <Link href={PAGE_ROUTES.SALES_MANAGEMENT.SALES_REGISTRATION_MANAGER}
-                                  className="btn"
+                            <Link href={PAGE_ROUTES.SALES.SALE_REGISTRATION} className="btn"
                                   onClick={() => itemClickedHandler(2)}>매출관리
                             </Link>
                         </li>
                         <li className={selectedKey == 3 ? "hit" : ""}>
-                            <Link href="http://thesen.moinus.kr/myAdmin/_entershop.bonus_no_grade_entry.php"
-                                  className="btn"
+                            <Link href={PAGE_ROUTES.CALC.DAILY_CALC} className="btn"
                                   onClick={() => itemClickedHandler(3)}>전산관리
                             </Link>
                         </li>
@@ -55,8 +53,8 @@ const NavElement = () => {
                             </Link>
                         </li>
                         <li className={selectedKey == 5 ? "hit" : ""}>
-                            <Link href="http://thesen.moinus.kr/myAdmin/_product_main.list.php" className="btn"
-                                  onClick={() => itemClickedHandler(5)}>상품관리
+                            <Link href={PAGE_ROUTES.SHOP.SHOP_MANAGEMENT} className="btn"
+                                  onClick={() => itemClickedHandler(5)}>쇼핑몰
                             </Link>
                         </li>
                         <li className={selectedKey == 6 ? "hit" : ""}>
