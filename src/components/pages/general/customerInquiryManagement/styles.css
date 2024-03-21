@@ -1,11 +1,131 @@
+/* 2단메뉴 보일때 */
+.container {
+    background: url('/images/aside_bg.gif') repeat-y; /*z-index:20; position:relative; */
+    min-height: 100%;
+    overflow: visible;
+    margin: -45px 0 -36px 0;
+}
+
+.container:after {
+    clear: both;
+    display: block;
+    height: 0;
+    content: '';
+    visibility: hidden
+}
+
+.container .content_section {
+    float: left;
+    z-index: 10;
+    width: 100%;
+    margin: 45px 0 0 -185px;
+}
+
+.container .content_section .content_section_fix {
+    margin: 0 0 0 185px;
+    height: 100%;
+    width: auto;
+    overflow-y: visible;
+    zoom: 1;
+}
+
+
+/* 1단 메뉴만 나오게 - 단일 메뉴 */
+.container_only {
+    background: url('/images/aside_bg_only.gif') repeat-y; /*z-index:20; position:relative; */
+    min-height: 100%;
+    overflow: visible;
+    margin: -45px 0 -36px 0;
+}
+
+.container_only:after {
+    clear: both;
+    display: block;
+    height: 0;
+    content: '';
+    visibility: hidden
+}
+
+.container_only .content_section {
+    float: left;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    margin: 45px 0 0 -185px;
+}
+
+.container_only .content_section .content_section_fix {
+    margin: 0 0 0 185px;
+    height: 100%;
+    width: auto;
+    overflow-y: visible;
+    zoom: 1;
+}
+
+
+/* 2단메뉴 안보일때 */
+.container_hide {
+    background: url('/images/aside_bg_hide.gif') repeat-y;
+    z-index: 20;
+    position: relative;
+    min-height: 100%;
+    overflow: visible;
+    margin: -45px 0 -36px 0;
+    zoom: 1
+}
+
+.container_hide:after {
+    clear: both;
+    display: block;
+    height: 0;
+    content: '';
+    visibility: hidden
+}
+
+.container_hide .content_section {
+    float: left;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    margin: 45px 0 0 -185px;
+    zoom: 1
+}
+
+.container_hide .content_section .content_section_fix {
+    margin: 0 0 0 0px;
+    height: 100%;
+    width: auto;
+    overflow-y: visible;
+    zoom: 1;
+}
+
+.container_hide .aside_second {
+    visibility: hidden;
+}
+
+.input_style {
+    width: 100px;
+    background-image: url('/images/icons/icon-32.png') !important;
+    background-position: calc(99% - 5px) 50% !important;
+    background-size: 16px 16px !important;
+    background-repeat: no-repeat !important;
+    transition: background-position 0s ease 0s, background-size 0s ease 0s !important;
+    cursor: default;
+}
+
+.select_style {
+    background-image: url('/images/icons/icon-32.png') !important;
+    background-position: calc(99% - 3px) 50% !important;
+    background-size: 16px 16px !important;
+    background-repeat: no-repeat !important;
+    transition: background-position 0s ease 0s, background-size 0s ease 0s !important;
+}
 
 /* 2단메뉴 열기/닫기 2013-04-04 ---------------------------------------------------------------- */
 .content_section .open_close {position:absolute; margin-top:13px;cursor:pointer;}
 /* 2015-01-23 스프라이트이미지삭제 */
 .content_section .open_close .btn_close {background: transparent url('/images/btn_menuopen.gif') 0 0 no-repeat; width:9px; height:36px; display:inline-block;}
 .content_section .open_close .btn_open {background: transparent url('/images/btn_menuopen.gif') -9px 0 no-repeat; width:9px; height:36px; display:none;}
-
-
 
 /* 페이지 큰타이틀 ------------------------------------- */
 .content_section .title_area {background:#fff; border-bottom:1px solid #bac0c6; padding:15px 30px; overflow:hidden;}
@@ -26,7 +146,7 @@
 
 /* 페이지 큰타이틀 ------------------------------------- 
 .content_section .title_area {background:#fff; border-bottom:1px solid #bac0c6; padding:15px 30px; overflow:hidden;}
-.content_section .title_area .icon {background: transparent url(/images/adm_pack.png) -420px -160px no-repeat; width:20px; height:26px; display:inline-block; float:left; margin:3px 10px 0 0;}
+.content_section .title_area .icon {background: transparent url('/images/adm_pack.png') -420px -160px no-repeat; width:20px; height:26px; display:inline-block; float:left; margin:3px 10px 0 0;}
 .content_section .title_area .title {color:#000; font-size:25px; float:left;}
 .content_section .title_area .location {float:right; font-size:13px; color:#b3b3b3;}
 */
@@ -67,7 +187,7 @@
 .bar_num {z-index:100;display:none;position:absolute; background:#000; height:17px; line-height:17px; font-family:tahoma; color:#fff; font-size:13px; padding:0 5px; left:0; top:0;}
 
 /* 메인그래프 2013-07-30 */
-.content_section .main_total_graph {width:975px; height:180px; margin:20px 20px 20px 0px; overflow:hidden; border:2px solid #c1c1c1; background:#fff url(/images/graph_bg.gif) left top repeat-x; position:relative; } 
+.content_section .main_total_graph {width:975px; height:180px; margin:20px 20px 20px 0px; overflow:hidden; border:2px solid #c1c1c1; background:#fff url('/images/graph_bg.gif') left top repeat-x; position:relative; }
 
 .content_section .main_total_graph .article {margin-right:15px; height:34px; overflow:hidden; float:right;}
 .content_section .main_total_graph .article li {float:left; color:#333; margin-top:10px; font-size:13px; margin-left:20px;}
@@ -100,8 +220,8 @@
 .content_section .form_box_area .form_TB td {border-bottom:1px solid #e1e1e1; vertical-align:middle; line-height:18px; }
 .content_section .form_box_area .form_TB .article {padding:2px 10px; background:#f1f1f1; color:#000; font-size:13px;}
 .content_section .form_box_area .form_TB .conts {padding:5px 10px;}
-.content_section .form_box_area .form_TB .conts .star {display:block; background:transparent url(/images/default_shop/defalut_shop_pack.png) -610px -60px no-repeat; display:inline-block; width:57px; height:10px; }
-.content_section .form_box_area .form_TB .conts .star_color {background:transparent url(/images/default_shop/defalut_shop_pack.png) -610px -80px no-repeat; display:inline-block; width:57px; height:10px; float:left;}
+.content_section .form_box_area .form_TB .conts .star {display:block; background:transparent url('/images/default_shop/defalut_shop_pack.png') -610px -60px no-repeat; display:inline-block; width:57px; height:10px; }
+.content_section .form_box_area .form_TB .conts .star_color {background:transparent url('/images/default_shop/defalut_shop_pack.png') -610px -80px no-repeat; display:inline-block; width:57px; height:10px; float:left;}
 
 /* 2015-01-23 스프라이트이미지삭제 */
 .content_section .form_box_area .form_TB .ic_ess {background: transparent url('/images/bullet_ess.png') 0 0 no-repeat; width:12px; height:10px; display:inline-block; margin-left:5px;}
@@ -183,38 +303,6 @@
 .content_section .listb_TB30 .none td {padding:5px; vertical-align:top; text-align:center; border:0px solid #000;}
 
 
-
-/* 페이지네이트 ----------------------------- 2015-01-23 스프라이트이미지삭제 */
-/*
-.content_section .list_paginate {text-align:center; overflow:hidden; margin:20px 0 40px 0;}
-
-.content_section .list_paginate .btn {display:inline-block; padding:0 5px;}
-.content_section .list_paginate .btn a,
-.content_section .list_paginate .btn span {background:transparent url('/images/paginate.gif') no-repeat; display:inline-block;}
-
-.content_section .list_paginate .btn .first {background-position:0 0; width:29px; height:30px;}
-.content_section .list_paginate .btn .first:hover {background-position:-118px 0; width:29px; height:30px;}
-.content_section .list_paginate .btn .first_none {background-position:-236px 0; width:29px; height:30px;}
-
-.content_section .list_paginate .btn .prev {background-position:-29px 0; width:30px; height:30px;}
-.content_section .list_paginate .btn .prev:hover {background-position:-147px 0; width:30px; height:30px;}
-.content_section .list_paginate .btn .prev_none {background-position:-265px 0; width:30px; height:30px;}
-
-.content_section .list_paginate .btn .next {background-position:-59px 0; width:30px; height:30px;}
-.content_section .list_paginate .btn .next:hover {background-position:-177px 0; width:30px; height:30px;}
-.content_section .list_paginate .btn .next_none {background-position:-295px 0; width:30px; height:30px;}
-
-.content_section .list_paginate .btn .last {background-position:-89px 0; width:29px; height:30px;}
-.content_section .list_paginate .btn .last:hover {background-position:-207px 0; width:29px; height:30px;} 
-.content_section .list_paginate .btn .last_none {background-position:-325px 0; width:29px; height:30px;}
-
-
-.content_section .list_paginate .number {display:inline-block; vertical-align:top; }
-.content_section .list_paginate .number a {line-height:29px; color:#333; font-family:tahoma; font-size:14px; font-weight:bold; padding:0 10px; border-left:1px solid #e2e4ea; display:inline-block}
-.content_section .list_paginate .number a:hover {color:#ff0000;}
-.content_section .list_paginate .number a:first-child {border:none;}
-.content_section .list_paginate .number .hit {color:#ff3a00;}
-*/
 .lineup { display: inline-block; }
 .list_paginate .btn span { display: inline-block;; }
 .content_section .list_paginate {text-align:center; padding:30px 0 10px 0; overflow:hidden; position:relative; clear:both}
@@ -244,22 +332,22 @@
 
 /* SMS 발송 ---------------------------------------------------------------- 2013-08-03 수정 */
 .content_section .sms_sv_area {margin:40px 0 40px 40px; overflow:hidden;}
-.content_section .sms_mobile {float:left; margin:0 30px 0 0;width:234px; height:420px; background: transparent url(/images/sms_mobile.png) left top no-repeat; position:relative;}
+.content_section .sms_mobile {float:left; margin:0 30px 0 0;width:234px; height:420px; background: transparent url('/images/sms_mobile.png') left top no-repeat; position:relative;}
 .content_section .sms_mobile .message {width:200px; height:210px; margin:68px 0 0 17px;}
 .content_section .sms_mobile .message textarea {width:170px; height:180px; padding:10px 15px;  background:none; border:none; overflow-x:hidden; overflow-y:auto; line-height:20px; color:#000; font-size:14px; font-weight:bold;}
 .content_section .sms_mobile .byte {text-align:center; color:#ff0000; font-family:tahoma; font-size:13px; margin-top:5px;}
 .content_section .sms_mobile .from {text-align:center; margin-top:42px;}
 .content_section .sms_mobile .from input {font-family:tahoma; text-align:center; padding:5px; width:150px; background:none; border:none; letter-spacing:1px; color:#000;}
 
-.content_section .sms_send {float:left; width:284px; height:420px;  background: transparent url(/images/sms_send.png) left top no-repeat; position:relative;}
+.content_section .sms_send {float:left; width:284px; height:420px;  background: transparent url('/images/sms_send.png') left top no-repeat; position:relative;}
 
 .content_section .sms_send .add_to {margin:46px 11px 0 25px}
 .content_section .sms_send .add_to .phone_num {background:#fff; padding:10px; text-align:center;}
-.content_section .sms_send .add_to .phone_num input {width:65px; height:25px; line-height:25px; color:#000; font-family:tahoma; font-size:13px; text-align:center; background: transparent url(/images/adm_pack.png) -420px -400px no-repeat; border:none;}
+.content_section .sms_send .add_to .phone_num input {width:65px; height:25px; line-height:25px; color:#000; font-family:tahoma; font-size:13px; text-align:center; background: transparent url('/images/adm_pack.png') -420px -400px no-repeat; border:none;}
 .content_section .sms_send .add_to .btn_add {width:100%; background:#44474a; border:none; color:#fff; font-size:13px; font-family:dotum; letter-spacing:-1px; height:25px; line-height:25px;}
 
 .content_section .sms_send .add_list {margin:10px 11px 0 25px; background:#fff; padding:10px; overflow:hidden;}
-.content_section .sms_send .add_list .list_bg {background: transparent url(/images/adm_pack.png) -420px -440px no-repeat; overflow:hidden;}
+.content_section .sms_send .add_list .list_bg {background: transparent url('/images/adm_pack.png') -420px -440px no-repeat; overflow:hidden;}
 .content_section .sms_send .add_list .list_bg select {border:0; background:transparent; width:100%; height:95px; overflow-y:auto; font-family:dotum; color:#000;}
 .content_section .sms_send .add_list .btn_area {overflow:hidden; margin-top:5px;}
 .content_section .sms_send .add_list .btn_area input {float:left; width:80px; background:#8c8f93; border:none; color:#fff; font-size:13px; font-family:dotum; letter-spacing:-1px; height:20px; line-height:20px; }
@@ -272,5 +360,8 @@
 .content_section .sms_send .reserve .date select {color:#000; font-family:tahoma; margin:0 2px; width:55px; border:1px solid #ccc;}
 
 .content_section .sms_send .btn_send {margin:10px 11px 0 25px;}
-.content_section .sms_send .btn_send input {border:none; width:100%; background: transparent url(/images/adm_pack.png) -420px -620px no-repeat; height:36px;}
-
+.content_section .sms_send .btn_send input {
+    border:none; width:100%;
+    background: transparent url('/images/adm_pack.png') -420px -620px no-repeat;
+    height:36px;
+}

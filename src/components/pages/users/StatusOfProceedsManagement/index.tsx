@@ -132,7 +132,7 @@ return (
            <div className="form_box_area">
 
 <table border={0} cellPadding={0} cellSpacing={0} width='100%'style={{borderCollapse:'collapse'}}>
-<tr height='40' align='left'> 
+<tr style={{height:40, alignItems:'left'}}>
     <td style={{padding:'5px'}}>
         
         {/* ※ 페이 합계 :  <b><font color="e16007">0</font></b>원&nbsp;&nbsp;<font color='999999'>|</font>&nbsp;&nbsp; */}

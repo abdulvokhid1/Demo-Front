@@ -1,15 +1,23 @@
 'use client'
 // import './styles.css'
 import Link from 'next/link'
-import { navSelectedKey } from '@/services/recoil/nav'
+import { navSelectedKey, generalSelectedKey, userSelectedKey } from '@/services/recoil/selectedKey'
 import PAGE_ROUTES from "@/utils/constants/routes";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
 const NavElement = () => {
     const selectedKey = useRecoilValue(navSelectedKey)
     const setSelectedKey = useSetRecoilState(navSelectedKey)
+    const resetGeneralSelectedKey = useResetRecoilState(generalSelectedKey);
+    const resetUserSelectedKey = useResetRecoilState(userSelectedKey);
+
     // const [selectedKey, setSelectedKey] = useState(0)
+    const resetSelectedKey = () => {
+        resetGeneralSelectedKey();
+        resetUserSelectedKey()
+    }
     const itemClickedHandler = (item: number) => {
+        resetSelectedKey();
         setSelectedKey(item);
         console.log('item:' + item)
     }
@@ -21,7 +29,7 @@ const NavElement = () => {
                         <li className={selectedKey == 0 ? "hit" : ""}>
                             <Link href={PAGE_ROUTES.GENERAL.DASHBOARD} className="btn"
                                   onClick={() => itemClickedHandler(0)}> 기본관리
-                            </Link>ㄴ
+                            </Link>
                         </li>
                         <li className={selectedKey == 1 ? "hit" : ""}>
                             <Link href={PAGE_ROUTES.USERS.USER_MANAGEMENT} className="btn"

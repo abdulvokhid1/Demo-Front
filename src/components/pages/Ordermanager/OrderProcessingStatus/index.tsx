@@ -122,7 +122,7 @@ const OrderProcessingStatus = () => {
 				</tr>
 					<tr>
 					<td className="conts" colSpan={6}>
-					<div className='guide_text'><span className='ic_blue'></span><span className='blue'><b>주문정보를 삭제할 경우 상품 재고량과 회원이 사용한 적립금이 환원되지 않습니다.</b></span></div>									<div className='guide_text'><span className='ic_blue'></span><span className='blue'>상품의 재고량과 회원이 사용한 적립금이 환원되기를 바란다면 반드시 <b><font color='red'>주문취소로 처리 하셨다가 삭제</font></b>하시기 바랍니다.</span></div>									<div className='guide_text'><span className='ic_blue'></span><span className='blue'><b>회원주문</b>인 경우 <b>주문번호가 볼드체(굵은글씨)로 표시</b> 됩니다.</span></div>									<div className='guide_text'><span className='ic_blue'></span><span className='blue'>주문내역에 대한 <b>엑셀파일</b>은 검색조건에 맞는 내역만 저장됩니다.</span></div>								</td>
+					<div className='guide_text'><span className='ic_blue'></span><span className='blue'><b>주문정보를 삭제할 경우 상품 재고량과 회원이 사용한 적립금이 환원되지 않습니다.</b></span></div>									<div className='guide_text'><span className='ic_blue'></span><span className='blue' style={{color:'red'}}>상품의 재고량과 회원이 사용한 적립금이 환원되기를 바란다면 반드시 <b>주문취소로 처리 하셨다가 삭제</b>하시기 바랍니다.</span></div>									<div className='guide_text'><span className='ic_blue'></span><span className='blue'><b>회원주문</b>인 경우 <b>주문번호가 볼드체(굵은글씨)로 표시</b> 됩니다.</span></div>									<div className='guide_text'><span className='ic_blue'></span><span className='blue'>주문내역에 대한 <b>엑셀파일</b>은 검색조건에 맞는 내역만 저장됩니다.</span></div>								</td>
 						</tr>
 						</tbody> 
 					</table>
