@@ -16,7 +16,9 @@ const PAGE_ROUTES = {
   SALES_MANAGEMENT: {
     SALES_REGISTRATION_MANAGER: '/admin/sales_management/sales_registration_manager',
   },
+ CALC_MANAGE:{
  
+ },
 
   COURSES: '/admin/courses',
   LESSONS: '/admin/lessons',

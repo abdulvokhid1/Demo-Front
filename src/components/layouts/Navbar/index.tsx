@@ -21,7 +21,7 @@ const NavElement = () => {
                         <li className={selectedKey == 0 ? "hit" : ""}>
                             <Link href={PAGE_ROUTES.GENERAL.DASHBOARD} className="btn"
                                   onClick={() => itemClickedHandler(0)}> 기본관리
-                            </Link>
+                            </Link>ㄴ
                         </li>
                         <li className={selectedKey == 1 ? "hit" : ""}>
                             <Link href={PAGE_ROUTES.USERS.USER_MANAGEMENT} className="btn"
@@ -31,7 +31,7 @@ const NavElement = () => {
                         <li className={selectedKey == 2 ? "hit" : ""}>
                             <Link href={PAGE_ROUTES.SALES_MANAGEMENT.SALES_REGISTRATION_MANAGER}
                                   className="btn"
-                                  onClick={() => itemClickedHandler(2)}>가맹점관리
+                                  onClick={() => itemClickedHandler(2)}>매출관리
                             </Link>
                         </li>
                         <li className={selectedKey == 3 ? "hit" : ""}>
