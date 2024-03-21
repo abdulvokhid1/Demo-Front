@@ -52,32 +52,7 @@ const NavElement = () => {
                                   onClick={() => itemClickedHandler(4)}>조직도관리
                             </Link>
                         </li>
-                        <li className={selectedKey == 5 ? "hit" : ""}>
-                            <Link href={PAGE_ROUTES.SHOP.SHOP_MANAGEMENT} className="btn"
-                                  onClick={() => itemClickedHandler(5)}>쇼핑몰
-                            </Link>
-                        </li>
-                        <li className={selectedKey == 6 ? "hit" : ""}>
-                            <Link href="http://thesen.moinus.kr/myAdmin/_entershop.bonus_no_total_exchange.php"
-                                  className="btn"
-                                  onClick={() => itemClickedHandler(6)}>통계관리
-                            </Link>
-                        </li>
-                        <li className={selectedKey == 7 ? "hit" : ""}>
-                            <Link href="http://thesen.moinus.kr/myAdmin/_order.list.php?odcode=today" className="btn"
-                                  onClick={() => itemClickedHandler(7)}>주문관리
-                            </Link>
-                        </li>
-                        <li className={selectedKey == 8 ? "hit" : ""}>
-                            <Link href="http://thesen.moinus.kr/myAdmin/_banner.list.php" className="btn"
-                                  onClick={() => itemClickedHandler(8)}>디자인관리
-                            </Link>
-                        </li>
-                        <li className={selectedKey == 9 ? "hit" : ""}>
-                            <Link href="http://thesen.moinus.kr/myAdmin/_banner.list.php" className="btn"
-                                  onClick={() => itemClickedHandler(8)}>로그분석
-                            </Link>
-                        </li>
+                                               
                     </ul>
                 </div>
             </div>
