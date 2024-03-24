@@ -1,5 +1,5 @@
 'use client'
-import Slider from '@/components/layouts/Slider/Design';
+import Slider from '@/components/layouts/Slider/Shop';
 import { useEffect, useState } from "react";
 
 const TopMenu = () => {

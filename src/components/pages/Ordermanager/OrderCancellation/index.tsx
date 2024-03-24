@@ -2,7 +2,7 @@
 import Slider from '@/components/layouts/Slider/Order';
 import { useEffect, useState } from "react";
 
-const OrderCanellation = () => {
+const OrderCancellation = () => {
 	const [sliderVisible, setSliderVisible] = useState(true)
 	useEffect(() => {
 		console.log('sliderVisible: ', sliderVisible)
@@ -134,4 +134,4 @@ const OrderCanellation = () => {
         </div>
         </div>
      )}
-     export default OrderCanellation;
+     export default OrderCancellation;

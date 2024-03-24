@@ -1,5 +1,5 @@
 'use client'
-import Slider  from '@/components/layouts/Slider';
+import Slider  from '@/components/layouts/Slider/users';
 import { useEffect, useState } from 'react';
 const OtherPreferences = () => {
     const [sliderVisible, setSliderVisible] = useState(true)

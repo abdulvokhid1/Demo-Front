@@ -1,5 +1,5 @@
 'use client'
-import Slider from '@/components/layouts/Slider';
+import Slider from '@/components/layouts/Slider/general';
 import button from 'antd/es/button';
 import { useEffect, useState } from 'react';
 const Policy = () => {

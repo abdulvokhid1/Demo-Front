@@ -1,5 +1,5 @@
 'use client'
-import Slider  from '@/components/layouts/Slider';
+import Slider  from '@/components/layouts/Slider/Shop';
 import { useEffect, useState } from 'react';
 const ShopClassification= () => {
     const [sliderVisible, setSliderVisible] = useState(true)
@@ -12,7 +12,7 @@ const ShopClassification= () => {
     return(
         <div className={sliderVisible ? "container" : "container_hide" } id="depth2_leftmenu" 
         style={{background: "#f0f0f0"}}>
-
+				<Slider/>
 <div className="content_section">
                 <div className="content_section_fix" style={{background:'#fff'}}>
 

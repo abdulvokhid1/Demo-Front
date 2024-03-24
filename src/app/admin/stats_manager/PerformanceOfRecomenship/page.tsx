@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-const View = dynamic(() => import('@/components/pages/users/PerformanceOfRecomenship'), { ssr: false })
+const View = dynamic(() => import('@/components/pages/StatsManager/PerformanceOfRecomenship'), { ssr: false })
 
 const Page = () => {
     return <View  />

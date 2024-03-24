@@ -1,7 +1,7 @@
 'use client'
 import Slider  from '@/components/layouts/Slider/Stats';
 import { useEffect, useState } from 'react';
-const PerformanceOfRecomenship = () => {
+const Performance_of_recomenship = () => {
     const [sliderVisible, setSliderVisible] = useState(true)
     useEffect(() => {
     console.log('sliderVisible: ', sliderVisible)
@@ -321,4 +321,4 @@ function chk_gonumber(val) {
 </div>	
           
  )}
-    export default PerformanceOfRecomenship;
+    export default Performance_of_recomenship;

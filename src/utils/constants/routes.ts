@@ -17,7 +17,6 @@ const PAGE_ROUTES = {
   },
   SALES_MANAGEMENT: {
     SALES_REGISTRATION_MANAGER: '/admin/sales_management/sales_registration_manager',
-    SALES_REGIGSTRATION:'/admin/sales_management/sales_registration_manager/sale_registration',
   },
   CALC:{
     CALC_MANAGEMENT: '/admin/calc_manage/daily_calc',
@@ -32,10 +31,10 @@ const PAGE_ROUTES = {
   ORDER_MANAGEMENT:'/admin/order_manager/orders_of_today',
  },
 DESIGN:{
-  DESIGN_MANAGEMENT:'admin/design_manager/top_menu',
+  DESIGN_MANAGEMENT:'/admin/design_manager/shop_banner',
 },
 LOG:{
-  LOG_MANAGEMENT:'admin/log/daily_connection',
+  LOG_MANAGEMENT:'/admin/log/daily_connection',
 },
 
   COURSES: '/admin/courses',
