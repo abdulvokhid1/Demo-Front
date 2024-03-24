@@ -1,3 +1,5 @@
+import { calc } from "antd/es/theme/internal"
+
 const PAGE_ROUTES = {
   AUTH: {
     LOGIN: '/admin/login',
@@ -5,33 +7,36 @@ const PAGE_ROUTES = {
   },
   GENERAL: {
     DASHBOARD: '/admin/general/dashboard',
-    CUSTOMER_INQUIRY_MANAGEMENT: '/admin/general/customerInquiryManagement',
-    ADVERTISING_REQUEST: '/admin/general/adversting_req',
-    INQUIRY_BOARD: '/admin/general/inquiryboard',
-    NOTICE: '/admin/general/notice',
-    MANAGER_INFO_EDIT: '/admin/general/mdinfo',
-    POPUP: '/admin/general/pop',
-    POLICY: '/admin/general/policy',
-    PAGE_MANAGEMENT: '/admin/general/page_management',
   },
   BLOGS: '/admin/blog',
   CLASSROOMS: '/admin/classrooms',
-
   USERS: {
     INDEX: '/admin/users',
     USER_MANAGEMENT: '/admin/users/member_management',
     USER_REGISTRATION: '/admin/users/registration',
   },
-  SALES: {
-    // SALES_MANAGEMENT: '/admin/sales_management/',
-     SALE_REGISTRATION: '/admin/sales_management/sales_registration_manager',
+  SALES_MANAGEMENT: {
+    SALES_REGISTRATION_MANAGER: '/admin/sales_management/sales_registration_manager',
+    SALES_REGIGSTRATION:'/admin/sales_management/sales_registration_manager/sale_registration',
   },
   CALC:{
-   DAILY_CALC:'/admin/CalcManage/daily_calc',
+    CALC_MANAGEMENT: '/admin/calc_manage/daily_calc',
   },
-  SHOP:{ 
-  SHOP_MANAGEMENT:'/admin/shop_manager/shopproduct_management'
-  },
+ SHOP:{
+  SHOP_PRODUCT_MANAGEMENT:'/admin/shop_manager/shop_product_management',
+ },
+ STAT:{
+  STAT_MANAGEMENT:'/admin/stats_manager/total_settlement_details',
+ },
+ ORDER:{
+  ORDER_MANAGEMENT:'/admin/order_manager/orders_of_today',
+ },
+DESIGN:{
+  DESIGN_MANAGEMENT:'admin/design_manager/top_menu',
+},
+LOG:{
+  LOG_MANAGEMENT:'admin/log/daily_connection',
+},
 
   COURSES: '/admin/courses',
   LESSONS: '/admin/lessons',

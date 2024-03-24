@@ -16,8 +16,7 @@ const inter = Inter({subsets: ["latin"]});
 // };
 
 export default function RootLayout({
-                                       children,
-                                   }: Readonly<{
+        children,}: Readonly<{
     children: React.ReactNode;
 }>) {
     const [queryClient] = useState(new QueryClient())
