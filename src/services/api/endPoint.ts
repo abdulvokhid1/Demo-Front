@@ -1,11 +1,18 @@
 export const API_ENDPOINTS = {
   AUTH: {
+    REGISTRATION:'/api/v1/auth/register',
     LOGIN: '/api/v1/auth/login',
     SIGNUP_BY_USERNAME: '/api/v1/user/username',
     ME: '/api/v1/auth/me',
     UPDATE_PROFILE: '/api/v1/auth/update-profile',
     CHANGE_PASSWORD: '/api/v1/auth/change-password',
   },
+
+  SALESLEVEL: {
+    LIST: '/api/v1/sales_level/list',
+    REGISTRATION: '/api/v1/sales_level/update'
+  },
+  
   BLOG: {
     CREATE_BLOG: '/api/v1/blog',
     GET_LIST: '/api/v1/blog/list',
