@@ -1,6 +1,6 @@
 'use client'
 import Slider from '@/components/layouts/Slider/Sales';
-import SALESLEVEL_API from '@/services/api/saleslevel';
+import SALEREGISTER_API from '@/services/api/saleregister';
 import PAGE_ROUTES from '@/utils/constants/routes';
 import { useMutation } from '@tanstack/react-query';
 import { message } from 'antd';
@@ -18,7 +18,7 @@ const SalesRegistrationManager = () => {
 
 	const {isPending, mutate, isSuccess, isError} = useMutation(
         {
-            mutationFn: SALESLEVEL_API.updateSalesLevel,
+            mutationFn: SALEREGISTER_API.updateSaleRegister,
             onSuccess: async (values: any) => {
                 console.log('success')
             },
@@ -35,52 +35,37 @@ const SalesRegistrationManager = () => {
 
 	const onSubmit = async (formData: FormData) => {
 
+        const id = formData.get('id');
+        const sale_date = formData.get('sale_date');
+		const income_option = formData.get('new ')
+        const sale_type = formData.get('sale_type');
+		const income_option_amount = formData.get('mb_entry_option');
+        const meno = formData.get('meno')
+        const income_option_select_amount = formData.get('select_amount');
+        const sale_amount = formData.get('sale_amount');
+        const sale_pv = formData.get('sale_pv');
+        const income_option_appstatus = formData.get('appstatus');
+        const income_option_daily_pay = formData.get('daily_pay');
+        const sale_id = formData.get('sale_id');
+        const select_ex_date = formData.get('select_ex_date');
 
-        const email = formData.get('email');
-        const password = formData.get('passwd');
-        const role = formData.get('m2_code1');
-        const income_option = formData.get('guja_entry_yn')
-        const income_option_select = formData.get('mb_entry_option');
-        const mobilephone_number = formData.get('htel');
-        const name = formData.get('name');
-        const phone_number = formData.get('tel');
-        const zip1 = formData.get('zip1');
-        const zip2 = formData.get('zip2');
-        const address = formData.get('address');
-        const address1 = formData.get('address1');
-        const address_doro = formData.get('address_doro')
-        const zonecode = formData.get('zonecode');
-        const option_center = formData.get('_option_center')
-        const recomid = formData.get('recomid')
-        const sponid = formData.get('sponid')
-        const return_bank = formData.get('return_bank')
-        const return_account = formData.get('return_account')
-        const return_name = formData.get('return_name')
-
-
+		
         const params = {
-            name: name? name.toString() : '',
-            email: email ? email.toString() : '',
-            password: password ? password.toString() : '',
-            role: role? role.toString(): 'user',
-            income_option:income_option === 'Y'? 1 : 0,
-            income_option_select: Number(income_option_select) || 0,
-            mobilephone_number: mobilephone_number?.toString() || '',
-            phone_number: phone_number?.toString() || '',
-            zip1: zip1?.toString() || '',
-            zip2: zip2?.toString() || '',
-            address: address?.toString() || '',
-            address1: address?.toString() || '',
-            addressdoro: address_doro?.toString() || '',
-            zonecode: zonecode?.toString() || '',
-            option_center: option_center?.toString() || '',
-            recomid: recomid?.toString() || '',
-            sponid: sponid?.toString() || '',
-            return_bank: return_bank?.toString() || '',
-            return_account: return_account?.toString() || '',
-            return_name: return_name?.toString() || ''
+            name: id? id.toString() : '',
+            sale_date: sale_date ? sale_date.toString() : '',
+			income_option:income_option === 'Y'? 1 : 0,
+			sale_type: sale_type? sale_type.toString(): '',
+			income_option_amount: Number(income_option_amount) || 0,
+            meno: meno? meno.toString() : '',
+            income_option_select_amount: income_option_select_amount?.toString() || '',
+			sale_amount: sale_amount?.toString() || '',
+			sale_pv: sale_pv?.toString() || '',
+			income_option_appstatus: income_option_appstatus?.toString || '',
+			income_option_daily_pay: income_option_daily_pay?.toString || '',
+			sale_id: sale_id?.toString || '',
+			select_ex_date:select_ex_date?.toString || '',
         }
-        console.log(params)
+        // console.log(params)
         mutate(params);
 
         // Handle response if necessary
@@ -102,7 +87,7 @@ return (
                   <div className="title_area">
                     <span className="icon"></span>
                     <span className="title">
-					매출등록 관리					
+					매출등록 관리
 					</span>
                     <span className="location">홈 &gt; 가맹점관리 &gt; 매출등록 관리</span>
                   </div>

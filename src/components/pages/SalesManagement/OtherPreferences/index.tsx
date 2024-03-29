@@ -1,15 +1,62 @@
 'use client'
 import Slider  from '@/components/layouts/Slider/users';
+import SETUP_FEE_API from '@/services/api/setup_fee';
+import PAGE_ROUTES from '@/utils/constants/routes';
+import { useMutation } from '@tanstack/react-query';
+import { message } from 'antd';
 import { useEffect, useState } from 'react';
 const OtherPreferences = () => {
     const [sliderVisible, setSliderVisible] = useState(true)
+    const [messageApi, contextHolder] = message.useMessage()
     useEffect(() => {
     console.log('sliderVisible: ', sliderVisible)
     }, [sliderVisible]);
     const sliderToggle = () => {
     setSliderVisible(!sliderVisible);
     }
+    const {isPending, mutate, isSuccess, isError} = useMutation(
+      {
+          mutationFn: SETUP_FEE_API.updateSetup_fee,
+          onSuccess: async (values: any) => {
+              console.log('success')
+          },
+
+          onError: (error: any) => {
+              const errorType = error.response.data.errors[0]
+              messageApi.open({
+                  type: 'error',
+                  content: 't(`errorMessages.${errorType}`)',
+              })
+          },
+      }
+  )
+
+const onSubmit = async (formData: FormData) => {
+
+      const id = formData.get('id');
+      const income_option_select_fee = formData.get('select_fee');
+       const tax = formData.get('tax ')
+      const withdrawal_fee = formData.get('withdrawal_fee');
+       const transfer_fee = formData.get('transfer_fee');
+      const other_savefee = formData.get('other_savefee')
+     
   
+      const params = {
+          name: id? id.toString() : '',
+          income_option_select_fee:income_option_select_fee === 'Y'? 1 : 0,
+          tax: tax? tax.toString(): '',
+          withdrawal_fee: Number(withdrawal_fee) || 0,
+          transfer_fee: Number(transfer_fee) || 0,
+          other_savefee: Number(other_savefee) || 0,
+       }
+      console.log(params)
+      mutate(params);
+
+      // Handle response if necessary
+      // const data = await response.json()
+      // ...
+  }
+
     return(
         <div className={sliderVisible ? "container" : "container_hide" } id="depth2_leftmenu" 
         style={{background: "#f0f0f0"}}>
@@ -39,7 +86,7 @@ const OtherPreferences = () => {
 .colorset {font-weight:bold}
 </style> */}
 
-<form name='fregiform' method='post' onSubmit={()=>{}} >
+<form name='fregiform' method='post' action={onSubmit} >
 <input type='hidden' name='mode' value='w'/>
 {/* <!--<input type='hidden' name='pass_master' value=''>--> */}
 

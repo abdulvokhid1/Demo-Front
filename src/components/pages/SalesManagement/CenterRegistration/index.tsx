@@ -1,14 +1,59 @@
 'use client'
 import Slider  from '@/components/layouts/Slider/Sales';
+import CENTER_API from '@/services/api/center';
+import PAGE_ROUTES from '@/utils/constants/routes';
+import { useMutation } from '@tanstack/react-query';
+import { message } from 'antd';
 import { useEffect, useState } from 'react';
 const CenterRegistration = () => {
 const [sliderVisible, setSliderVisible] = useState(true)
+const [messageApi, contextHolder] = message.useMessage()
 useEffect(() => {
 console.log('sliderVisible: ', sliderVisible)
 }, [sliderVisible]);
 const sliderToggle = () => {
 setSliderVisible(!sliderVisible);
 }
+
+const {isPending, mutate, isSuccess, isError} = useMutation(
+	{
+		mutationFn: CENTER_API.updateCenter,
+		onSuccess: async (values: any) => {
+			console.log('success')
+		},
+
+		onError: (error: any) => {
+			const errorType = error.response.data.errors[0]
+			messageApi.open({
+				type: 'error',
+				content: 't(`errorMessages.${errorType}`)',
+			})
+		},
+	}
+)
+
+const onSubmit = async (formData: FormData) => {
+
+	const id = formData.get('id');
+	const linkedId = formData.get('sales_id');
+	const center_name = formData.get('name')
+	const center_owner = formData.get('owner_name');
+	
+	
+	const params = {
+		name: id? id.toString() : '',
+		linkedId: linkedId ? linkedId.toString() : '',
+		center_name:center_name ?.toString(),
+		center_owner: center_owner? center_owner.toString(): '',
+	}
+	console.log(params)
+	mutate(params);
+
+	// Handle response if necessary
+	// const data = await response.json()
+	// ...
+}
+
 return(
     <div className={sliderVisible ? "container" : "container_hide" } id="depth2_leftmenu" style={{background: "#f0f0f0"}}>
 		<Slider />
@@ -36,7 +81,7 @@ return(
 
 <div className="common_ajax_proc"></div>
 
-	<form name='fsearch' method="post">
+	<form name='fsearch' method="post" action={onSubmit}>
 	<input type='hidden' name='code' value=""/>
 		<input type='hidden' name='mode' value="search"/>
 

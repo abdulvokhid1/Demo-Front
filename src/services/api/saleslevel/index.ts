@@ -1,7 +1,6 @@
 import axiosClient from '../axiosClient'
-import { ChangePasswordTypes, UpdateUserProfileForm } from '../collection'
 import { API_ENDPOINTS } from '../endPoint'
-import { authLoginTypeProps, saleslevelRegistrationProps, signUpUsernameTypeProps } from './type'
+import {saleslevelRegistrationProps } from './type'
 
 const SALESLEVEL_API = {
   list: () => axiosClient.get(API_ENDPOINTS.SALESLEVEL.LIST),

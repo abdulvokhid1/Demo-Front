@@ -12,6 +12,21 @@ export const API_ENDPOINTS = {
     LIST: '/api/v1/sales_level/list',
     REGISTRATION: '/api/v1/sales_level/update'
   },
+
+  CENTER: {
+    LIST: '/api/v1/center/list',
+    REGISTRATION: '/api/v1/center/update'
+  },
+  
+  SETUP_FEE: {
+    LIST: '/api/v1/setup_fee/list',
+    REGISTRATION: '/api/v1/setup_fee/update'
+  },
+
+  SALEREGISTER: {
+    LIST: '/api/v1/saleregister/list',
+    REGISTRATION: '/api/v1/saleregister/update'
+  },
   
   BLOG: {
     CREATE_BLOG: '/api/v1/blog',
