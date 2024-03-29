@@ -15,9 +15,7 @@ const inter = Inter({subsets: ["latin"]});
 //     description: "관리자 페이지",
 // };
 
-export default function RootLayout({
-                                       children,
-                                   }: Readonly<{
+export default function RootLayout({children,}: Readonly<{
     children: React.ReactNode;
 }>) {
     const [queryClient] = useState(new QueryClient())

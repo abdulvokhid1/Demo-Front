@@ -6,16 +6,42 @@ import HeadElement from '@/components/layouts/Header'
 import FooterElement from "@/components/layouts/Footer";
 import Slider from '@/components/layouts/Slider/users'
 import Head from 'next/head'
-import { Layout } from 'antd'
+import { Layout, message } from 'antd'
 import Navbar from "@/components/layouts/Navbar";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import PAGE_ROUTES from "@/utils/constants/routes";
+import { useMutation } from "@tanstack/react-query";
+import AUTH_API from "@/services/api/auth";
+import USER_API from "@/services/api/users";
 
 const UserManagement = () => {
+    const [messageApi, contextHolder] = message.useMessage()
     const [sliderVisible, setSliderVisible] = useState(true)
     const [isSelectedHover, setIsSelectedHover] = useState(false)
     const [isSelectedClicked, setIsSelectedClicked] = useState(false)
+    const [userListState, setUserListState] = useState([])
+    const {isPending, mutate, isSuccess, isError} = useMutation(
+        {
+            mutationFn: USER_API.getList,
+            onSuccess: async (values: any) => {
+                setUserListState(values);
+                console.log(userListState)
+            },
+
+            onError: (error: any) => {
+                const errorType = error.response.data.errors[0]
+                messageApi.open({
+                    type: 'error',
+                    content: 't(`errorMessages.${errorType}`)',
+                })
+            },
+        }
+    )
+    useEffect(() => {
+        mutate();
+    }, [userListState]);
+
     useEffect(() => {
         console.log('sliderVisible: ', sliderVisible)
     }, [sliderVisible]);

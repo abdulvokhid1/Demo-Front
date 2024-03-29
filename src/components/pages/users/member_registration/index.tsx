@@ -6,15 +6,40 @@ import HeadElement from '@/components/layouts/Header'
 import FooterElement from "@/components/layouts/Footer";
 import Slider from '@/components/layouts/Slider/users'
 import Head from 'next/head'
-import { Layout } from 'antd'
+import { Layout, message } from 'antd'
 import Navbar from "@/components/layouts/Navbar";
-import { useEffect, useState } from "react";
+import { useEffect, useState, FormEvent } from "react";
 import Image from "next/image";
+import { useMutation } from "@tanstack/react-query";
+import AUTH_API from "@/services/api/auth";
+import PAGE_ROUTES from "@/utils/constants/routes";
+import { useRouter } from "next/navigation";
 
 const UserManagement = () => {
+    const router = useRouter()
     const [sliderVisible, setSliderVisible] = useState(true)
     const [isSelectedHover, setIsSelectedHover] = useState(false)
     const [isSelectedClicked, setIsSelectedClicked] = useState(false)
+    const [messageApi, contextHolder] = message.useMessage()
+    const [emailState, setEmailState] = useState('');
+    const [nameState, setNameState] = useState('');
+    const [formData, setFormData] = useState()
+    const {isPending, mutate, isSuccess, isError} = useMutation(
+        {
+            mutationFn: AUTH_API.register,
+            onSuccess: async (values: any) => {
+                console.log('success')
+            },
+
+            onError: (error: any) => {
+                const errorType = error.response.data.errors[0]
+                messageApi.open({
+                    type: 'error',
+                    content: 't(`errorMessages.${errorType}`)',
+                })
+            },
+        }
+    )
     useEffect(() => {
         console.log('sliderVisible: ', sliderVisible)
     }, [sliderVisible]);
@@ -26,6 +51,69 @@ const UserManagement = () => {
     }
     const selectionClickedHandler = (isClicked: boolean) => {
         setIsSelectedClicked(isClicked);
+    }
+
+    // const handleInputChange = (
+    //     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    // ) => {
+    //     setFormData({
+    //         ...formData,
+    //         [event.target.name]: event.target.value,
+    //     });
+    // };
+    const onSubmit = async (formData: FormData) => {
+
+
+        const email = formData.get('email');
+        const password = formData.get('passwd');
+        const role = formData.get('m2_code1');
+        const income_option = formData.get('guja_entry_yn')
+        const income_option_select = formData.get('mb_entry_option');
+        const mobilephone_number = formData.get('htel');
+        const name = formData.get('name');
+        const phone_number = formData.get('tel');
+        const zip1 = formData.get('zip1');
+        const zip2 = formData.get('zip2');
+        const address = formData.get('address');
+        const address1 = formData.get('address1');
+        const address_doro = formData.get('address_doro')
+        const zonecode = formData.get('zonecode');
+        const option_center = formData.get('_option_center')
+        const recomid = formData.get('recomid')
+        const sponid = formData.get('sponid')
+        const return_bank = formData.get('return_bank')
+        const return_account = formData.get('return_account')
+        const return_name = formData.get('return_name')
+
+
+        const params = {
+            name: name? name.toString() : '',
+            email: email ? email.toString() : '',
+            password: password ? password.toString() : '',
+            role: role? role.toString(): 'user',
+            income_option:income_option === 'Y'? 1 : 0,
+            income_option_select: Number(income_option_select) || 0,
+            mobilephone_number: mobilephone_number?.toString() || '',
+            phone_number: phone_number?.toString() || '',
+            zip1: zip1?.toString() || '',
+            zip2: zip2?.toString() || '',
+            address: address?.toString() || '',
+            address1: address?.toString() || '',
+            addressdoro: address_doro?.toString() || '',
+            zonecode: zonecode?.toString() || '',
+            option_center: option_center?.toString() || '',
+            recomid: recomid?.toString() || '',
+            sponid: sponid?.toString() || '',
+            return_bank: return_bank?.toString() || '',
+            return_account: return_account?.toString() || '',
+            return_name: return_name?.toString() || ''
+        }
+        console.log(params)
+        mutate(params);
+
+        // Handle response if necessary
+        // const data = await response.json()
+        // ...
     }
     return (
         // <div className={sliderVisible ? "container" : "container_hide"} id="depth2_leftmenu"
@@ -58,21 +146,22 @@ const UserManagement = () => {
                     </div>
 
 
-                    <iframe src="inc.bonus_auto.php" width={0} height={0} frameBorder={0}
-                            style={{display: 'none'}}></iframe>
+                    {/*<iframe src="inc.bonus_auto.php" width={0} height={0} frameBorder={0}*/}
+                    {/*        style={{display: 'none'}}></iframe>*/}
 
                     <div className="common_ajax_proc"></div>
 
 
-                    <form name="frm" method="post" action="_entershop.member_all.pro.php" encType='multipart/form-data'>
+                    <form name="frm" method="post" action={onSubmit} encType='multipart/form-data'>
+                    {/*<form onSubmit={onSubmit}>*/}
                         <input type="hidden" name="_mode" value='add'/>
-                        <input type="hidden" name="serialnum" value=''/>
-                        <input type="hidden" name="_PVSC" value=""/>
+                        <input type="hidden" name="serialnum" />
+                        <input type="hidden" name="_PVSC" />
 
                         <input type="hidden" name="csrf_token" value="af61f42c0ece9ea42ed3f6bbec3b9d28"/>
 
 
-                        <input type="hidden" name="app_mode" value=""/>
+                        <input type="hidden" name="app_mode" />
 
                         <div className="sub_title"><span className="icon"></span><span
                             className="title">회원정보 상세내역</span></div>
@@ -105,19 +194,19 @@ const UserManagement = () => {
                                         <select name='m2_code1' onChange={() => {
                                         }}
                                                 className='select'>
-                                            <option value=''>-레벨선택-</option>
+                                            <option >-레벨선택-</option>
                                             <option value='20' selected>회원</option>
                                         </select>
 
 
                                         <span id="avatar_id" style={{display: 'none'}}>
                                             &nbsp;&nbsp;&nbsp;&nbsp;
-                                            [연결 아이디] : <input type="text" name="avatar_id" value=''
+                                            [연결 아이디] : <input type="text" name="avatar_id" 
                                                               size={15} className="input_text"
                                                               style={{color: '#808080', backgroundColor: '#f0f0f0'}}
                                                               onFocus={() => {
                                                               }} tabIndex={-1} readOnly/>
-	[성명] : <input type="text" name="avatar_name" value='' size={15} className="input_text"
+	[성명] : <input type="text" name="avatar_name"  size={15} className="input_text"
                   style={{color: '#808080', backgroundColor: '#f0f0f0'}} onFocus={() => {
                                         }} tabIndex={-1} readOnly/>
                                         </span>
@@ -160,9 +249,9 @@ const UserManagement = () => {
                                         <select name='mb_entry_option' id="mb_entry_option"
                                                 onChange={() => {
                                                 }}>
-                                            <option value="33000^33000">33,000</option>
-                                            <option value="330000^330000">330,000</option>
-                                            <option value="3300000^3300000">3,300,000</option>
+                                            <option value={0}>33,000</option>
+                                            <option value={1}>330,000</option>
+                                            <option value={2}>3,300,000</option>
                                         </select>
 
                                         <input type="hidden" name="gross_sale_price"
@@ -182,7 +271,7 @@ const UserManagement = () => {
                                     <td className="article">휴대폰번호<span className='ic_ess'
                                                                        title='필수'></span></td>
                                     <td className="conts">
-                                        <input type="text" name='htel' value='' size={20} maxLength={11}
+                                        <input type="text" name='htel'  size={20} maxLength={11}
                                                className='input_text' onBlur={() => {
                                         }}/>
                                         <span id='searchphoneidHTML'></span>
@@ -200,7 +289,7 @@ const UserManagement = () => {
                                     <td className="conts">
 
 
-                                        <input type="text" name="passwd" value='' size={20}
+                                        <input type="password" name="passwd"  size={20}
                                                className="input_text"/>
 
 
@@ -213,12 +302,12 @@ const UserManagement = () => {
 
                                 <tr>
                                     <td className="article">이름(회원명)</td>
-                                    <td className="conts"><input type="text" name="name" value=''
-                                                                 size={30} className="input_text"
-                                                                 onKeyUp={() => {
-                                                                 }}
-                                                                 onBlur={() => {
-                                                                 }}/>
+                                    <td className="conts">
+                                        <input
+                                            type="text"
+                                            name="name"
+                                             size={30} className="input_text"
+                                        />
                                         &nbsp;<span id='searchnameHTML'></span>
                                         <span id="msg_name" className="msg_name"></span>
 
@@ -228,16 +317,22 @@ const UserManagement = () => {
 
                                 <tr>
                                     <td className="article">E-mail</td>
-                                    <td className="conts"><input type="text" name="email" value=''
-                                                                 size={30} className="input_text"/></td>
+                                    <td className="conts">
+                                        <input
+                                            className="input_text"
+                                            type="text"
+                                            name="email"
+                                        />
+                                    </td>
                                 </tr>
 
                                 <tr>
                                     <td className="article">전화번호</td>
-                                    <td className="conts"><input type="text" name="tel" value=''
-                                                                 size={20} className="input_text"/>
-                                        <div className='guide_text'><span
-                                            className='ic_blue'></span><span className='blue'>하이푼(-)을 포함하시기 바랍니다.</span>
+                                    <td className="conts">
+                                        <input type="text" name="tel"  size={20} className="input_text"/>
+                                        <div className='guide_text'>
+                                            <span className='ic_blue'></span>
+                                            <span className='blue'>하이푼(-)을 포함하시기 바랍니다.</span>
                                         </div>
                                     </td>
                                 </tr>
@@ -245,9 +340,9 @@ const UserManagement = () => {
                                 <tr>
                                     <td className="article">우편번호</td>
                                     <td className="conts">
-                                        <input type="text" name="zip1" id="_post1" value=''
+                                        <input type="text" name="zip1" id="_post1" 
                                                size={5} className="input_text"/>-
-                                        <input type="text" name="zip2" id="_post2" value=''
+                                        <input type="text" name="zip2" id="_post2" 
                                                size={5} className="input_text"/>
 
                                         <span className="shop_btn_pack" style={{float: 'none'}}>&nbsp;<a
@@ -260,14 +355,14 @@ const UserManagement = () => {
                                 <tr>
                                     <td className="article">주소</td>
                                     <td className="conts">
-                                        기본주소 : <input type="text" name="address" id="_addr1" value=''
+                                        기본주소 : <input type="text" name="address" id="_addr1" 
                                                       size={50} className="input_text"/><br/>
-                                        상세주소 : <input type="text" name="address1" id="_addr2" value=''
+                                        상세주소 : <input type="text" name="address1" id="_addr2" 
                                                       size={50} className="input_text"/><br/>
                                         도로명주소 : <input type="text" name="address_doro" id="_addr_doro"
-                                                       value='' size={70} className="input_text"/>
+                                                        size={70} className="input_text"/>
                                         <br/>새 우편번호 : <input type="text" name="zonecode" id="_zonecode"
-                                                             value="" size={10} className="input_text"/>
+                                                              size={10} className="input_text"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -276,7 +371,7 @@ const UserManagement = () => {
                                         <select name='_option_center' id="_option_center"
                                                 className='add_option add_option_chk'
                                                 style={{width: '200px'}}>
-                                            <option value="">선택</option>
+                                            <option >선택</option>
                                         </select>
 
                                         <div className='guide_text'><span
@@ -338,19 +433,19 @@ const UserManagement = () => {
                                 <tr>
                                     <td className="article">은행명</td>
                                     <td className="conts"><input type="text" name="return_bank"
-                                                                 value='' size={20}
+                                                                  size={20}
                                                                  className="input_text"/></td>
                                 </tr>
                                 <tr>
                                     <td className="article">계좌번호</td>
                                     <td className="conts"><input type="text" name="return_account"
-                                                                 value='' size={40}
+                                                                  size={40}
                                                                  className="input_text"/></td>
                                 </tr>
                                 <tr>
                                     <td className="article">예금주</td>
                                     <td className="conts"><input type="text" name="return_name"
-                                                                 value='' size={20}
+                                                                  size={20}
                                                                  className="input_text"/></td>
                                 </tr>
                                 </tbody>

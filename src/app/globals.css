@@ -1,6 +1,14 @@
 /* 소스를 넘길 때는 webfont 폴더를 꼭 복사하시고 경로 변경 하세요.*/
 /* IE 9 이하버전에서는 font-weight: 800(extrabold)이 반영되지 않음. */
 
+:root {
+  --tree-line-height: 20px;
+  --tree-line-width: 1px;
+  --tree-line-color: white;
+  --tree-line-border-radius: 5px;
+  --tree-node-line-style: solid;
+  --tree-node-padding: 5px;
+}
 @font-face {
   font-family: "NanumGothic";
   font-style: normal;

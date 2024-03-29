@@ -385,7 +385,7 @@ return (
 								<br/>&nbsp;유료배송비(착불) : &nbsp;<input type="text" className="input_text number_style" name="del_collect" size={10} style={{textAlign:'right'}} disabled value=""/>원
 							</div>
 							<div id="del_type_condition" style={{display:'none'}}>
-								<br/>&nbsp;배송비 : &nbsp;<input type="text" className="input_text number_style" name="del_condition" size={10} style={{textAlign:'right'}} disabled value=""/>원 배송비를 부과하며 주문금액이 
+								<br/>&nbsp;배송비 : &nbsp;<input type="text" className="input_text number_style" name="del_condition" size={10} style={{textAlign:'right'}} disabled value=""/>원 배송비를 부과하며 주문금액이
 								<input type="text" className="input_text number_style" name="del_condition_price" size={10} style={{textAlign:'right'}} disabled value=""/>원 이상이면 무료배송 처리됩니다
 							</div>
 							<div id="del_type_normal" style={{display:'none'}}>

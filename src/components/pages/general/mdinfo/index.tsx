@@ -203,7 +203,7 @@ function new_post_view(){
 								
 									주소 : <input type='text' name="address" id="_addr_map" value='' size=85 className="input_text">
 									<div style="margin: 5px 0;">
-									X좌표 : <input type="text" name="com_mapx" id="com_mapx" className="input_text" size="25" value="">&nbsp;&nbsp;&nbsp;				
+									X좌표 : <input type="text" name="com_mapx" id="com_mapx" className="input_text" size="25" value="">&nbsp;&nbsp;&nbsp;
 									Y좌표 : <input type="text" name="com_mapy" id="com_mapy" className="input_text" size="25" value="">
 									</div>
 									<div className='guide_text'><span className='ic_blue'></span><span className='blue'>주소를 등록하시고 저장을 하시면 지도를 확인할 수 있습니다 (사용자페이지 업체정보 아래 표시됨).</span></div>									<div className='guide_text'><span className='ic_blue'></span><span className='blue'>주소 등록시 좌표는 자동으로 등록되며, 지도위치를 변경하시려면 X, Y 좌표를 삭제하신 후 주소 변경 후 수정하시면 됩니다.</span></div>									<div className='guide_text'><span className='ic_blue'></span><span className='blue'>주소 등록시 주변 경관을 설명하는 문구(OO주유소 근처, 교차로 부근 등)를 입력할 경우 좌표 검색이 되지 않을 수 있으니 주의하시기 바랍니다.</span></div>									<div className='guide_text'><span className='ic_blue'></span><span className='blue'>좌표를 입력하면 지도가 표시됩니다. 세밀한 조정을 원하시면 빨간 마커를 드래그하여 원하는 위치에 놓으시면 됩니다.</span></div>								</td>

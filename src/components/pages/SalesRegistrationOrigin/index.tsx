@@ -46,7 +46,7 @@ return (
 
 							<tr>
 								<td className="article">기간</td>
-								<td className="conts"><input type='text' name='pass_redRegidate' className='input_text' value=""/> 
+								<td className="conts"><input type='text' name='pass_redRegidate' className='input_text' value=""/>
                                 ~ <input type='text' name='pass_redRegidate2' className='input_text' value=""/></td>
 								<td className="article">주문번호</td>
 								<td className="conts"><input type='text' name='pass_ordernum' className='input_text' value=""/></td>

@@ -14,6 +14,10 @@ const PAGE_ROUTES = {
     POLICY: '/admin/general/policy',
     PAGE_MANAGEMENT: '/admin/general/page_management',
   },
+  ORGANIZATION_TREE: {
+    SPONSOR: '/admin/organization_tree/sponsor',
+    RECOMMENDATION: '/admin/organization_tree/RECOMMENDATION',
+  },
   BLOGS: '/admin/blog',
   CLASSROOMS: '/admin/classrooms',
   USERS: {

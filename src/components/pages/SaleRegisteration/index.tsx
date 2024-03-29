@@ -144,7 +144,7 @@ return (
 
 									<tr className="entry_volume">
 										<td className="article">매출 BV<span className='ic_ess' title='필수'></span></td>
-										<td className="conts"><input type='text' name='gross_sale_price' id='gross_sale_price' size={3} className='input_text' value=""/>  BV										
+										<td className="conts"><input type='text' name='gross_sale_price' id='gross_sale_price' size={3} className='input_text' value=""/>  BV
 
 			<input type='hidden' name="temp_pprice" value=""/>
 			<input type='hidden' name="temp_gross_sale_price" value=""/>

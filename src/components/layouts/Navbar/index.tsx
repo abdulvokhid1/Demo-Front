@@ -49,7 +49,7 @@ const NavElement = () => {
                             </Link>
                         </li>
                         <li className={selectedKey == 4 ? "hit" : ""}>
-                            <Link href="http://thesen.moinus.kr/myAdmin/_cardsys.sub_tree_sponid_frame.php"
+                            <Link href={PAGE_ROUTES.ORGANIZATION_TREE.SPONSOR}
                                   className="btn"
                                   onClick={() => itemClickedHandler(4)}>조직도관리
                             </Link>

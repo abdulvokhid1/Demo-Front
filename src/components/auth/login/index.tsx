@@ -66,9 +66,10 @@ const Login = () => {
 
         const email = formData.get('email');
         const password = formData.get('password');
-        const rawFormData  = {email: email, password: password}
+        const rawFormData  = {email: email ? email.toString() : '', password: password ? password.toString() : ''}
         console.log(JSON.stringify(rawFormData))
-        mutate({email: email ? email.toString() : '', password: password ? password.toString() : ''});
+        // mutate({email: email ? email.toString() : '', password: password ? password.toString() : ''});
+        mutate(rawFormData)
 
 
     }
