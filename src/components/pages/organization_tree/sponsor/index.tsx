@@ -60,7 +60,8 @@ const Sponsor = () => {
                     <div className="common_ajax_proc"></div>
 
 
-                    <div style={{
+                    <div
+                        style={{
                         display: 'flex',
                         overflow: 'hidden',
                         height: '100vh',
@@ -70,7 +71,8 @@ const Sponsor = () => {
                         width: '100%',
                         backfaceVisibility: 'hidden',
                         willChange: 'overflow',
-                    }}>
+                    }}
+                    >
                     
 
 
@@ -144,7 +146,7 @@ const Sponsor = () => {
                                                     <option value="2000045"> - 2000045</option>
                                                 </select>
                                                 <span className="custom-combobox">
-                                                    <input title="" className="custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left ui-autocomplete-input" autoComplete="off"/>
+                                                    <input title="" className="custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left ui-autocomplete-input" style={{width:'80%'}} autoComplete="off"/>
                                                     <a tabIndex={-1} title="모두보기" className="ui-button ui-widget ui-state-default ui-button-icon-only custom-combobox-toggle ui-corner-right" role="button">
                                                         <span className="ui-button-icon-primary ui-icon ui-icon-triangle-1-s"></span>
                                                         <span className="ui-button-text"></span>
@@ -211,12 +213,12 @@ const Sponsor = () => {
                         <span
                             style={{color:'#fff',background:'#cccccc',padding:'5px',fontSize:'12px', borderRadius:'6px', marginRight:'5px'}}>4스타</span>
                         <span
-                            style={{color:'#fff',background:'#cccccc',padding:'5px',fontSize:'12px', borderRadius:'6px', marginRight:'5px'}}>5스타</span>
+                            style={{color:'#fff',background:'#acccdc',padding:'5px',fontSize:'12px', borderRadius:'6px', marginRight:'5px'}}>5스타</span>
 
                     </div>
 
 
-                    <div id="wrap_ctree">
+                    <div id="wrap_ctree" style={{overflow: 'auto',height: 'auto',padding: '.5rem', flex: 1}}>
                         <article className="container_ctree">
                             <div className="inner">
                                 <div className="orgchart ui-draggable ui-draggable-handle">

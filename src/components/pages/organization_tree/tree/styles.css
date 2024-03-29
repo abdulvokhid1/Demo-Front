@@ -73,8 +73,6 @@
     position: relative;
     padding: 18px 0 0;
     margin: 0 5px;
-    /*border: 0*/
-;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -85,10 +83,6 @@
 
     box-sizing: border-box;
     display: inline-block;
-    position: relative;
-    margin: 0;
-    padding: 3px;
-    border: 2px dashed transparent;
     text-align: center;
     transition: transform 0.3s, opacity 0.3s;
 }
@@ -102,15 +96,14 @@
     text-align: center;
     /*font-size: 0.75rem;*/
     font-weight: bold;
-    height: 20px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    background-color: rgba(217, 83, 79, 0.8);
+    background-color: rgba(0, 0, 0, 0.01);
     color: #212121;
     border-radius: 4px 4px 0 0;
     cursor: pointer;
-    ine-height: 85%;
+    line-height: 85%;
 }
 .styleNode .title .symbol {
     float: left;
