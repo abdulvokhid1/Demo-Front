@@ -18,7 +18,7 @@ export type signUpUsernameTypeProps = {
   address1: string
   addressdoro: string
   zonecode: string
-  option_center: string
+  centerId?: number
   recomid: string
   sponid: string
   return_bank: string

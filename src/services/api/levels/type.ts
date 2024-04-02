@@ -1,7 +1,7 @@
 
-export type CenterTypeProps = {
-  id: string
-  name: string
+export type LevelTypeProps = {
+  id: number
+  title: string
   description?: string
   createdAt?: string
   updatedAt?: string

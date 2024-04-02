@@ -11,3 +11,8 @@ export type CreateUserTypeProps = {
   role: string
   phoneNumber: string
 }
+
+export type QueryType = {
+  page?: number
+  limit?: number
+}

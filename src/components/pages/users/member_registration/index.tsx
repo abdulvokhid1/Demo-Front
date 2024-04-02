@@ -14,6 +14,11 @@ import { useMutation } from "@tanstack/react-query";
 import AUTH_API from "@/services/api/auth";
 import PAGE_ROUTES from "@/utils/constants/routes";
 import { useRouter } from "next/navigation";
+import CENTER_API from "@/services/api/centers";
+import { CenterTypeProps } from "@/services/api/centers/type";
+import { LevelTypeProps } from "@/services/api/levels/type";
+import LEVEL_API from "@/services/api/levels";
+import moment from "moment-timezone";
 
 const UserManagement = () => {
     const router = useRouter()
@@ -24,11 +29,43 @@ const UserManagement = () => {
     const [emailState, setEmailState] = useState('');
     const [nameState, setNameState] = useState('');
     const [formData, setFormData] = useState()
-    const {isPending, mutate, isSuccess, isError} = useMutation(
+    const [centers, setCenters] = useState<CenterTypeProps[]>([])
+    const [levels, setLevels] = useState<LevelTypeProps[]>([])
+
+    const {mutate: mutateLevel} = useMutation(
+        {mutationFn: LEVEL_API.getList,
+            onSuccess: async (values:any) =>{
+                setLevels(values);
+                console.log(JSON.stringify(levels))
+            },
+            onError: (error: any) => {
+                const errorType = error.response.data.errors[0]
+                messageApi.open({
+                    type: 'error',
+                    content: 't(`errorMessages.${errorType}`)',
+                })
+            }
+        },
+    )
+    const {mutate: mutateCenter} = useMutation({
+        mutationFn: CENTER_API.getList,
+        onSuccess: async (values: any)=> {
+            setCenters(values);
+        },
+        onError: async (error: any) => {
+            const errorType = error.response.data.errors[0]
+            messageApi.open({
+                type: 'error',
+                content: 't(`errorMessages.${errorType}`)',
+            })
+        }
+    })
+    const {isPending, mutate:mutateRegister, isSuccess, isError} = useMutation(
         {
             mutationFn: AUTH_API.register,
             onSuccess: async (values: any) => {
                 console.log('success')
+                router.replace(PAGE_ROUTES.USERS.USER_MANAGEMENT)
             },
 
             onError: (error: any) => {
@@ -43,6 +80,12 @@ const UserManagement = () => {
     useEffect(() => {
         console.log('sliderVisible: ', sliderVisible)
     }, [sliderVisible]);
+    useEffect(() => {
+        mutateCenter();
+    }, [centers, mutateCenter]);
+    useEffect(() => {
+        mutateLevel();
+    }, [levels, mutateLevel]);
     const sliderToggleHandler = () => {
         setSliderVisible(!sliderVisible);
     }
@@ -68,6 +111,7 @@ const UserManagement = () => {
         const password = formData.get('passwd');
         const role = formData.get('m2_code1');
         const income_option = formData.get('guja_entry_yn')
+        const level = formData.get('m2_code1')
         const income_option_select = formData.get('mb_entry_option');
         const mobilephone_number = formData.get('htel');
         const name = formData.get('name');
@@ -92,6 +136,7 @@ const UserManagement = () => {
             password: password ? password.toString() : '',
             role: role? role.toString(): 'user',
             income_option:income_option === 'Y'? 1 : 0,
+            level:level,
             income_option_select: Number(income_option_select) || 0,
             mobilephone_number: mobilephone_number?.toString() || '',
             phone_number: phone_number?.toString() || '',
@@ -101,7 +146,7 @@ const UserManagement = () => {
             address1: address?.toString() || '',
             addressdoro: address_doro?.toString() || '',
             zonecode: zonecode?.toString() || '',
-            option_center: option_center?.toString() || '',
+            centerId: Number(option_center) || 0,
             recomid: recomid?.toString() || '',
             sponid: sponid?.toString() || '',
             return_bank: return_bank?.toString() || '',
@@ -109,7 +154,7 @@ const UserManagement = () => {
             return_name: return_name?.toString() || ''
         }
         console.log(params)
-        mutate(params);
+        mutateRegister(params);
 
         // Handle response if necessary
         // const data = await response.json()
@@ -179,7 +224,7 @@ const UserManagement = () => {
                                                                      title='필수'></span></td>
                                     <td className="conts"><input type="text" name="signdate"
                                                                  className="input_text"
-                                                                 value="2024-03-14"
+                                                                 value={moment(new Date()).format('YYYY-MM-DD')}
                                                                  onChange={() => {
                                                                  }}/></td>
                                 </tr>
@@ -194,8 +239,13 @@ const UserManagement = () => {
                                         <select name='m2_code1' onChange={() => {
                                         }}
                                                 className='select'>
-                                            <option >-레벨선택-</option>
-                                            <option value='20' selected>회원</option>
+                                            <option key={0}>-레벨선택-</option>
+                                            {/*<option value={0} selected>회원</option>*/}
+                                            {levels.length && levels.map((item) => {
+                                                return (
+                                                    <option key={item.id} value={item.id}>{item.title}</option>
+                                                )
+                                            })}
                                         </select>
 
 
@@ -371,7 +421,12 @@ const UserManagement = () => {
                                         <select name='_option_center' id="_option_center"
                                                 className='add_option add_option_chk'
                                                 style={{width: '200px'}}>
-                                            <option >선택</option>
+                                            <option key={0} value={0}>선택</option>
+                                            {centers.length && (centers.map((item, index) => {
+                                                return (<option key={item.id} value={item.id}>{item.name}</option>)
+                                                })
+                                            )}
+
                                         </select>
 
                                         <div className='guide_text'><span

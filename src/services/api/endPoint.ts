@@ -46,6 +46,14 @@ export const API_ENDPOINTS = {
     DELETE: '/api/v1/category',
   },
 
+  CENTERS: {
+    GET_LIST: '/api/v1/center/list',
+  },
+
+  LEVELS: {
+    GET_LIST: '/api/v1/level/list',
+  },
+  
   USERS: {
     GET_LIST: '/api/v1/user/list',
     DELETE: '/api/v1/user',

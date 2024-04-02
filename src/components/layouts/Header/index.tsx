@@ -1,7 +1,9 @@
 import PAGE_ROUTES from "@/utils/constants/routes";
 import AUTH_API from "@/services/api/auth";
+import moment from "moment-timezone";
 
 const HeaderElement = () => {
+    const now = new Date();
     return (
         <div className="header" style={{background: '#eaeaea'}}>
             <a href={'/admin'} className="logo" style={{color: '#353c43'}}>
@@ -9,9 +11,9 @@ const HeaderElement = () => {
                 <span className="en" style={{color: '#353c43'}}>Admin</span>
             </a>
             <div className="today">
-                <span className="year">2024</span>
-                <span className="month">02</span>
-                <span className="day">29</span>
+                <span className="year">{moment(now).format('YYYY')}</span>
+                <span className="month">{moment(now).format('MM')}</span>
+                <span className="day">{moment(now).format('DD')}</span>
             </div>
 
             <div style={{position: 'absolute', marginLeft: '500px', marginTop: '8px'}}>

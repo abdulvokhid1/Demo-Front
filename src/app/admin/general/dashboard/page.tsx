@@ -14,13 +14,20 @@ const Page = () => {
     // const refreshToken = localStorage.getItem('refreshToken')
     useEffect(() => {
         let accessToken = localStorage.getItem('accessToken')
-        if (!accessToken || accessToken == '') {
+        if (!accessToken || accessToken === 'undefined' || accessToken == '') {
             router.replace(PAGE_ROUTES.AUTH.LOGIN)
         } else {
-            const decodedToken: any = jwtDecode(accessToken)
-            if (decodedToken.exp * 1000 < new Date().getTime()) {
+            try {
+                const decodedToken: any = jwtDecode(accessToken)
+                if (decodedToken.exp * 1000 < new Date().getTime()) {
+                    router.replace(PAGE_ROUTES.AUTH.LOGIN)
+                }
+            }
+            catch (e) {
                 router.replace(PAGE_ROUTES.AUTH.LOGIN)
             }
+
+
         }
         console.log(userStateData);
     }, [router])

@@ -27,7 +27,7 @@ const Login = () => {
             onSuccess: async (values: any) => {
                 if (values.data.user.role === 'admin') {
                     localStorage.setItem('accessToken', values.data.accessToken)
-                    localStorage.setItem('refreshToken', values.data.refreshToken)
+                    // localStorage.setItem('refreshToken', values.data.refreshToken)
 
                     setUserData({
                         avatar: '',
@@ -50,10 +50,11 @@ const Login = () => {
 
             onError: (error: any) => {
                 const errorType = error.response.data.errors[0]
-                messageApi.open({
-                    type: 'error',
-                    content: 't(`errorMessages.${errorType}`)',
-                })
+                console.log(error)
+                // messageApi.open({
+                //     type: 'error',
+                //     content: 't(`errorMessages.${errorType}`)',
+                // })
             },
         }
     )
@@ -75,7 +76,7 @@ const Login = () => {
     }
     async function onSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
-
+        localStorage.removeItem('accessToken');
         const formData = new FormData(event.currentTarget)
         console.log(JSON.stringify(formData));
         const response = await fetch('http://localhost:3001/api/v1/auth/login', {

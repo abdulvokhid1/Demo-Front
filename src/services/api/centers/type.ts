@@ -1,13 +1,9 @@
-export type AssignRoleTypeProps = {
-  userId: string
-  role: string
-}
 
-export type CreateUserTypeProps = {
-  firstName: string
-  lastName: string
-  email: string
-  password: string
-  role: string
-  phoneNumber: string
+export type CenterTypeProps = {
+  id: string
+  name: string
+  url?: string
+  description?: string
+  createdAt?: string
+  updatedAt?: string
 }

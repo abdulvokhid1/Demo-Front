@@ -6,13 +6,13 @@ import {
   FilterTypeProps,
 } from '../collection'
 import { API_ENDPOINTS } from '../endPoint'
-import { AssignRoleTypeProps, CreateUserTypeProps } from './type'
+import { AssignRoleTypeProps, CreateUserTypeProps, QueryType } from './type'
 
 const USER_API = {
   // getList: (params: FilterTypeProps) =>
     // axiosClient.post(API_ENDPOINTS.USERS.GET_LIST, params),
-  getList: () =>
-    axiosClient.get(API_ENDPOINTS.USERS.GET_LIST),
+  getList: (params: QueryType) =>
+    axiosClient.post(API_ENDPOINTS.USERS.GET_LIST, params),
   deleteUser: (userId: string) =>
     axiosClient.delete(`${API_ENDPOINTS.USERS.DELETE}/${userId}`),
   assignRole: (params: AssignRoleTypeProps) =>
