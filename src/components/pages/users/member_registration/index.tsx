@@ -14,14 +14,12 @@ import { useMutation } from "@tanstack/react-query";
 import AUTH_API from "@/services/api/auth";
 import PAGE_ROUTES from "@/utils/constants/routes";
 import { useRouter } from "next/navigation";
-<<<<<<< HEAD
+
 import CENTER_API from "@/services/api/centers";
 import { CenterTypeProps } from "@/services/api/centers/type";
 import { LevelTypeProps } from "@/services/api/levels/type";
 import LEVEL_API from "@/services/api/levels";
 import moment from "moment-timezone";
-=======
->>>>>>> MeeRyeong
 
 const UserManagement = () => {
     const router = useRouter()
@@ -32,7 +30,6 @@ const UserManagement = () => {
     const [emailState, setEmailState] = useState('');
     const [nameState, setNameState] = useState('');
     const [formData, setFormData] = useState()
-<<<<<<< HEAD
     const [centers, setCenters] = useState<CenterTypeProps[]>([])
     const [levels, setLevels] = useState<LevelTypeProps[]>([])
 
@@ -65,17 +62,11 @@ const UserManagement = () => {
         }
     })
     const {isPending, mutate:mutateRegister, isSuccess, isError} = useMutation(
-=======
-    const {isPending, mutate, isSuccess, isError} = useMutation(
->>>>>>> MeeRyeong
         {
             mutationFn: AUTH_API.register,
             onSuccess: async (values: any) => {
                 console.log('success')
-<<<<<<< HEAD
                 router.replace(PAGE_ROUTES.USERS.USER_MANAGEMENT)
-=======
->>>>>>> MeeRyeong
             },
 
             onError: (error: any) => {
@@ -121,10 +112,7 @@ const UserManagement = () => {
         const password = formData.get('passwd');
         const role = formData.get('m2_code1');
         const income_option = formData.get('guja_entry_yn')
-<<<<<<< HEAD
         const level = formData.get('m2_code1')
-=======
->>>>>>> MeeRyeong
         const income_option_select = formData.get('mb_entry_option');
         const mobilephone_number = formData.get('htel');
         const name = formData.get('name');
@@ -149,10 +137,7 @@ const UserManagement = () => {
             password: password ? password.toString() : '',
             role: role? role.toString(): 'user',
             income_option:income_option === 'Y'? 1 : 0,
-<<<<<<< HEAD
             level:level,
-=======
->>>>>>> MeeRyeong
             income_option_select: Number(income_option_select) || 0,
             mobilephone_number: mobilephone_number?.toString() || '',
             phone_number: phone_number?.toString() || '',
@@ -162,11 +147,7 @@ const UserManagement = () => {
             address1: address?.toString() || '',
             addressdoro: address_doro?.toString() || '',
             zonecode: zonecode?.toString() || '',
-<<<<<<< HEAD
             centerId: Number(option_center) || 0,
-=======
-            option_center: option_center?.toString() || '',
->>>>>>> MeeRyeong
             recomid: recomid?.toString() || '',
             sponid: sponid?.toString() || '',
             return_bank: return_bank?.toString() || '',
@@ -174,11 +155,7 @@ const UserManagement = () => {
             return_name: return_name?.toString() || ''
         }
         console.log(params)
-<<<<<<< HEAD
         mutateRegister(params);
-=======
-        mutate(params);
->>>>>>> MeeRyeong
 
         // Handle response if necessary
         // const data = await response.json()
@@ -263,7 +240,6 @@ const UserManagement = () => {
                                         <select name='m2_code1' onChange={() => {
                                         }}
                                                 className='select'>
-<<<<<<< HEAD
                                             <option key={0}>-레벨선택-</option>
                                             {/*<option value={0} selected>회원</option>*/}
                                             {levels.length && levels.map((item) => {
@@ -271,10 +247,6 @@ const UserManagement = () => {
                                                     <option key={item.id} value={item.id}>{item.title}</option>
                                                 )
                                             })}
-=======
-                                            <option >-레벨선택-</option>
-                                            <option value='20' selected>회원</option>
->>>>>>> MeeRyeong
                                         </select>
 
 
@@ -450,16 +422,11 @@ const UserManagement = () => {
                                         <select name='_option_center' id="_option_center"
                                                 className='add_option add_option_chk'
                                                 style={{width: '200px'}}>
-<<<<<<< HEAD
                                             <option key={0} value={0}>선택</option>
                                             {centers.length && (centers.map((item, index) => {
                                                 return (<option key={item.id} value={item.id}>{item.name}</option>)
                                                 })
                                             )}
-
-=======
-                                            <option >선택</option>
->>>>>>> MeeRyeong
                                         </select>
 
                                         <div className='guide_text'><span

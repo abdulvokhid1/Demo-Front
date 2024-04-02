@@ -41,9 +41,9 @@ const onSubmit = async (formData: FormData) => {
 	
 	
 	const params = {
-		name: id? id.toString() : '',
-		linkedId: linkedId ? linkedId.toString() : '',
-		center_name:center_name ?.toString(),
+		id: Number(id),
+		// linkedId: linkedId ? linkedId.toString() : '',
+		center_name:center_name ?.toString() || '',
 		center_owner: center_owner? center_owner.toString(): '',
 	}
 	console.log(params)

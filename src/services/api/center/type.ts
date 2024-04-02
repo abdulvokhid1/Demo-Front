@@ -2,10 +2,10 @@ export type centerRegistrationProps = {
 
   id: number
 
-  linkedId: string;
+  // linkedId: string;
  
-  center_name: number;
+  center_name: string;
  
-  center_owner: number;
+  center_owner: string;
  
 }

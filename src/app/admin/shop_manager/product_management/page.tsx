@@ -1,6 +1,6 @@
 'use client'
 import { Slider } from 'antd';
-import './styles.css'
+// import './styles.css'
 import type { AppProps } from "next/app";
 
 const ProductManagement = () => {

@@ -505,7 +505,7 @@ const UserManagement = () => {
                                                             <input type="checkbox" name="chk_id[]" value='2000044'
                                                                    className="class_id"/>
                                                         </td>
-                                                        <td>44</td>
+                                                        <td>{index+1}</td>
                                                         <td>
                                                             <a href='_entershop.member.form.php?_mode=modify&app_mode=popup&serialnum=55'
                                                                onClick={() => {

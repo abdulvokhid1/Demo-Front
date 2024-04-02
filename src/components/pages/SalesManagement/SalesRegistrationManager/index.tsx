@@ -66,7 +66,7 @@ const SalesRegistrationManager = () => {
 			select_ex_date:select_ex_date?.toString || '',
         }
         // console.log(params)
-        mutate(params);
+        // mutate(params);
 
         // Handle response if necessary
         // const data = await response.json()
