@@ -1,10 +1,21 @@
 'use client'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faArrowAltCircleLeft, faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons'
+
+import ReactPaginate from 'react-paginate';
 import Slider from '@/components/layouts/Slider/Sales';
+import Head from 'next/head'
 import SALEREGISTER_API from '@/services/api/saleregister';
 import PAGE_ROUTES from '@/utils/constants/routes';
 import { useMutation } from '@tanstack/react-query';
-import { message } from 'antd';
+import { Layout, message } from 'antd'
+import Navbar from "@/components/layouts/Navbar";
+import Image from "next/image";
+import { getFullTime } from "@/utils/helper";
 import { useEffect, useState } from 'react';
+import { CreatedAtType, UserInfo } from './types/type';
+import { LevelTypeProps } from '@/services/api/levels/type';
+
 
 const SalesRegistrationManager = () => {
     const [sliderVisible, setSliderVisible] = useState(true)
@@ -15,8 +26,20 @@ const SalesRegistrationManager = () => {
 	const sliderToggle = () => {
 		setSliderVisible(!sliderVisible);
 	}
-
-	const {isPending, mutate, isSuccess, isError} = useMutation(
+	const [isSelectedHover, setIsSelectedHover] = useState(false)
+    const [isSelectedClicked, setIsSelectedClicked] = useState(false)
+    const [userListState, setUserListState] = useState<UserInfo[]>([])
+    const [createdAt, setCreatedAt] = useState<CreatedAtType>({})
+    const [levels, setLevels] = useState<LevelTypeProps[]>([])
+    const [memberId, setMemberId] = useState<string>()
+    const [centerId, setCenterId] = useState<number>(0)
+    const [email, setEmail] = useState<string>()
+    const [bankAccount, setBankAccount] = useState<string>()
+    const [mobilephone, setMobilePhone] = useState<string>()
+    const [currentPage, setCurrentPage] = useState<number>(1)
+    const [totalUsers, setTotalUsers] = useState<number>(0)
+    const [perPage, setPerPage] = useState<number>(2)
+	const {mutate: mutateLevel} = useMutation(
         {
             mutationFn: SALEREGISTER_API.updateSaleRegister,
             onSuccess: async (values: any) => {
@@ -32,7 +55,30 @@ const SalesRegistrationManager = () => {
             },
         }
     )
+	useEffect(() => {
+        mutate({Page: currentPage, limit: perPage});
+    }, []);
+    useEffect(() => {
+        mutateLevel();
+    }, []);
 
+    useEffect(() => {
+        console.log('sliderVisible: ', sliderVisible)
+    }, [sliderVisible]);
+    const sliderToggleHandler = () => {
+        setSliderVisible(!sliderVisible);
+    }
+    const selectionHoverHandler = (isHover: boolean) => {
+        setIsSelectedHover(isHover);
+    }
+    const selectionClickedHandler = (isClicked: boolean) => {
+        setIsSelectedClicked(isClicked);
+    }
+
+    const pagginationHandler = (selectedItem: { selected: number }) => {
+        const page = selectedItem ? selectedItem.selected+1 : 0;
+        mutate({page: page, limit: perPage})
+    
 	const onSubmit = async (formData: FormData) => {
 
         const id = formData.get('id');
@@ -66,12 +112,12 @@ const SalesRegistrationManager = () => {
 			select_ex_date:select_ex_date?.toString || '',
         }
         // console.log(params)
-        // mutate(params);
+        mutate(params);
 
         // Handle response if necessary
         // const data = await response.json()
-        // ...
-    }
+    
+    
 
 return (
     <div className={sliderVisible ? "container" : "container_hide" } id="depth2_leftmenu" style={{background: "#f0f0f0"}}>
@@ -98,7 +144,7 @@ return (
 
 <div className="common_ajax_proc"></div>
 
-<form name='searchfrm' method='post' action={onSubmit}>
+<form name='searchfrm' method='post' action={onsubmit}>
             <input type='hidden' name='mode' value='search' />
             <input type='hidden' name='app_mode' value=" " />
 
@@ -196,9 +242,6 @@ return (
 <input type='hidden' name='_search_que' value="IHdoZXJlIDEg"/>
 
 
-				{/* <!-- 리스트영역 --> */}
-				<div className="content_section_inner">
-
 					{/* <!-- 리스트 제어버튼영역 //--> */}
 					<div className="ctl_btn_area">
 
@@ -241,11 +284,23 @@ return (
 					</table>
 
 					{/* <!-- 페이지네이트 --> */}
-					<div className="list_paginate">			
-							<span className='lineup'><span className='nextprev'><span className='btn'><span className='no'><span className='icon ic_first'></span></span><a href={' ?&listpg=&listpg=1'} className='ok' title='처음' ><span className='icon ic_first'></span></a></span><span className='btn'><span className='no'><span className='icon ic_prev'></span></span><a href=' ?&listpg=&listpg=0' className='ok' title='이전' ><span className='icon ic_prev'></span></a></span></span><span className='number'><a href='#none' onClick={()=>{return false}} className='hit'>1</a></span><span className='nextprev'><span className='btn'><span className='no'><span className='icon ic_next'></span></span><a href={' ?&listpg=&listpg=2'} className='ok' title='다음' ><span className='icon ic_next'></span></a></span><span className='btn'><span className='no'><span className='icon ic_last'></span></span><a href={' ?&listpg=&listpg=0'} className='ok' title='끝' ><span className='icon ic_last'></span></a></span></span></span>					</div>
-					{/* <!-- // 페이지네이트 --> */}
+					<div style={{display:'flex', alignItems:'center', justifyContent:'center' ,margin:'0 auto'}}>
+                        <ReactPaginate
+                            previousLabel={<FontAwesomeIcon icon={faArrowAltCircleLeft}/>}
+                            nextLabel={<FontAwesomeIcon icon={faArrowAltCircleRight}/>}
+                            breakLabel={'...'}
+                            breakClassName={'break-me'}
+                            activeClassName={'active'}
+                            containerClassName={'pagination'}
+                            // subContainerClassName={'pages pagination'}
 
-			</div>
+                            initialPage={currentPage-1}
+                            pageCount={Math.ceil(totalUsers/ perPage)}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={pagginationHandler}
+                        />
+                        </div>
 </form>
 
 				<div style={{height:'30px'}}></div>
@@ -255,5 +310,6 @@ return (
 </div>
 
 )}
-
-export default SalesRegistrationManager;
+	
+	}
+export default SalesRegistrationManager; 

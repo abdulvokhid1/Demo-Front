@@ -27,6 +27,10 @@ export const API_ENDPOINTS = {
     LIST: '/api/v1/saleregister/list',
     REGISTRATION: '/api/v1/saleregister/update'
   },
+  PRODUCTMANAGE: {
+    GET_LIST: '/api/v1/product_manage/list',
+    REGISTRATION: '/api/v1/product_manage/update'
+  },
   
   BLOG: {
     CREATE_BLOG: '/api/v1/blog',

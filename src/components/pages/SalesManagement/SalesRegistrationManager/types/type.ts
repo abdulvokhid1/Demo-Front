@@ -40,8 +40,3 @@ export type CreatedAtType = {
     from?: string;
     to?: string;
 }
-
-export type ProductType = {
-    from?: string;
-    to?: string;
-}

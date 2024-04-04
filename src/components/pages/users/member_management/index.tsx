@@ -123,18 +123,11 @@ const UserManagement = () => {
 
                     <form name='fsearch' method="post">
                         <input type='hidden' name='code' value=""/>
-
-
                         <input type="hidden" name="app_mode" value=""/>
-
                         <input type="hidden" name="pass_recomid" value=""/>
                         <input type="hidden" name="mb2_depscode" value=""/>
                         <input type="hidden" name="depslevel" value=""/>
-
-
                         <input type="hidden" name='mode' value="search"/>
-
-
                         <div className="form_box_area">
                             <table className="form_TB" summary="검색항목">
                                 <colgroup>
@@ -648,12 +641,8 @@ const UserManagement = () => {
 
                         </div>
 
-
                         <div className="form_box_area" style={{border: '0px'}}>
-
                             <table width="100%" border={0} cellSpacing={0} cellPadding={0}>
-
-
                                 <tr>
                                     <td align='left' style={{paddingTop: '3px'}}>
                                         <table border={0} cellSpacing={0} cellPadding={0}>
@@ -662,19 +651,13 @@ const UserManagement = () => {
                                                 <td style={{paddingTop: '2px'}}>&nbsp;
                                                     <div className="top_btn_area">
                                                     </div>
-
                                                 </td>
                                             </tr>
-
-
                                         </table>
                                     </td>
                                 </tr>
                             </table>
-
-
                         </div>
-
                         {/*        <div className="list_paginate">*/}
                         {/*            <span className="lineup">*/}
                         {/*                <span className="nextprev">*/}

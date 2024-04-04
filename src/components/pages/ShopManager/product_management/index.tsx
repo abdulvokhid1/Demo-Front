@@ -1,24 +1,97 @@
 'use client';
-// import '@/app/jquery-ui.min.css'
-// import './styles.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faArrowAltCircleLeft, faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons'
 
+import ReactPaginate from 'react-paginate';
+import { CreatedAtType, ProductType, UserInfo } from "@/components/pages/users/types/type";
 import Link from 'next/link'
 import HeadElement from '@/components/layouts/Header'
 import FooterElement from "@/components/layouts/Footer";
 import Slider from '@/components/layouts/Slider/general'
 import Head from 'next/head'
-import {Layout} from 'antd'
+import {Layout, message } from 'antd'
 import Navbar from "@/components/layouts/Navbar";
+import PAGE_ROUTES from "@/utils/constants/routes";
 import {useEffect, useState} from "react";
+import { useMutation } from '@tanstack/react-query';
+import ProductManage_API from '@/services/api/productmd';
+import { userState } from '@/services/recoil/user';
 
 const Dashboard = () => {
-const [sliderVisible, setSliderVisible] = useState(true)
-useEffect(() => {
-console.log('sliderVisible: ', sliderVisible)
-}, [sliderVisible]);
-const sliderToggle = () => {
-setSliderVisible(!sliderVisible);
-}
+    const [messageApi, contextHolder] = message.useMessage()
+    const [sliderVisible, setSliderVisible] = useState(true)
+    const [isSelectedHover, setIsSelectedHover] = useState(false)
+    const [isSelectedClicked, setIsSelectedClicked] = useState(false)
+    const [userListState, setUserListState] = useState<UserInfo[]>([])
+    const [createdAt, setCreatedAt] = useState<CreatedAtType>({})
+    const [memberId, setMemberId] = useState<string>()
+    const [centerId, setCenterId] = useState<number>(0)
+    const [email, setEmail] = useState<string>()
+    const [bankAccount, setBankAccount] = useState<string>()
+    const [mobilephone, setMobilePhone] = useState<string>()
+    const [currentPage, setCurrentPage] = useState<number>(1)
+    const [totalUsers, setTotalUsers] = useState<number>(0)
+    const [perPage, setPerPage] = useState<number>(2)
+    const [product, setproduct] = useState<ProductType>()
+    const {mutate: mutateProduct} = useMutation(
+        {
+            mutationFn: ProductManage_API.getList,
+            onSuccess: async (values: any) => {
+                setproduct(values);
+                console.log(JSON.stringify(product))
+            },
+            onError: (error: any) => {
+                const errorType = error.response.data.errors[0]
+                messageApi.open({
+                    type: 'error',
+                    content: 't(`errorMessages.${errorType}`)',
+                })
+            }
+        },
+    )
+    const {isPending, mutate, isSuccess, isError} = useMutation(
+        {
+            mutationFn: ProductManage_API.getList,
+            onSuccess: async (values: any) => {
+                setUserListState(values.users);
+                setTotalUsers(values.total);
+                console.log(JSON.stringify(userListState))
+            },
+
+            onError: (error: any) => {
+                const errorType = error.response.data.errors[0]
+                messageApi.open({
+                    type: 'error',
+                    content: 't(`errorMessages.${errorType}`)',
+                })
+            },
+        }
+    )
+    useEffect(() => {
+        mutate({page: currentPage, limit: perPage});
+    }, []);
+    useEffect(() => {
+        mutateProduct();
+    }, []);
+
+    useEffect(() => {
+        console.log('sliderVisible: ', sliderVisible)
+    }, [sliderVisible]);
+    const sliderToggleHandler = () => {
+        setSliderVisible(!sliderVisible);
+    }
+    const selectionHoverHandler = (isHover: boolean) => {
+        setIsSelectedHover(isHover);
+    }
+    const selectionClickedHandler = (isClicked: boolean) => {
+        setIsSelectedClicked(isClicked);
+    }
+
+    const pagginationHandler = (selectedItem: { selected: number }) => {
+        const page = selectedItem ? selectedItem.selected+1 : 0;
+        mutate({page: page, limit: perPage})
+    }
+
 return (
 <div className={sliderVisible ? "container" : "container_hide" } id="depth2_leftmenu" 
     style={{background: "#f0f0f0"}}>
@@ -159,6 +232,24 @@ return (
                           <a href=" ?pass_menu=&amp;&amp;listpg=2" className="ok" title="다음"><span className="icon ic_next"></span></a></span>
                           <span className="btn"><span className="no"><span className="icon ic_last"></span></span><a href=" ?pass_menu=&amp;&amp;listpg=0" className="ok" title="끝"><span className="icon ic_last"></span></a></span></span></span>	</div>
 {/* <!-- // 페이지네이트 --&gt; */}
+<div style={{display:'flex', alignItems:'center', justifyContent:'center' ,margin:'0 auto'}}>
+                        <ReactPaginate
+                            previousLabel={<FontAwesomeIcon icon={faArrowAltCircleLeft}/>}
+                            nextLabel={<FontAwesomeIcon icon={faArrowAltCircleRight}/>}
+                            breakLabel={'...'}
+                            breakClassName={'break-me'}
+                            activeClassName={'active'}
+                            containerClassName={'pagination'}
+                            // subContainerClassName={'pages pagination'}
+
+                            initialPage={currentPage-1}
+                            pageCount={Math.ceil(totalUsers/ perPage)}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={pagginationHandler}
+                        />
+                        </div>
+
 
 <div style={{height:30}}></div>
 
