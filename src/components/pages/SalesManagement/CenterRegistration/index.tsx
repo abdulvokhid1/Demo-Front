@@ -39,7 +39,6 @@ const onSubmit = async (formData: FormData) => {
 	const center_name = formData.get('name')
 	const center_owner = formData.get('owner_name');
 	
-	
 	const params = {
 		id: Number(id),
 		// linkedId: linkedId ? linkedId.toString() : '',

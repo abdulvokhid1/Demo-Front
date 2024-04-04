@@ -68,12 +68,9 @@ const Dashboard = () => {
         }
     )
     useEffect(() => {
-        mutate({page: currentPage, limit: perPage});
+        mutateProduct({page: currentPage, limit: perPage});
     }, []);
-    useEffect(() => {
-        mutateProduct();
-    }, []);
-
+  
     useEffect(() => {
         console.log('sliderVisible: ', sliderVisible)
     }, [sliderVisible]);

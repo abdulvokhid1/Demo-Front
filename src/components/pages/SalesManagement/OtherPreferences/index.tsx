@@ -35,11 +35,11 @@ const onSubmit = async (formData: FormData) => {
 
       const id = formData.get('id');
       const income_option_select_fee = formData.get('select_fee');
-      const tax = formData.get('tax ')
+      const tax = formData.get('tax ');
       const withdrawal_fee = formData.get('withdrawal_fee');
       const transfer_fee = formData.get('transfer_fee');
-      const other_savefee = formData.get('other_savefee')
-
+      const other_savefee = formData.get('other_savefee');
+      const select_fee = formData.get('select_fee');
 
       const params = {
           id: Number(id),
@@ -48,6 +48,7 @@ const onSubmit = async (formData: FormData) => {
           withdrawal_fee: Number(withdrawal_fee) || 0,
           transfer_fee: Number(transfer_fee) || 0,
           other_savefee: Number(other_savefee) || 0,
+          select_fee: Number(select_fee) || 0,
        }
       console.log(params)
       mutate(params);

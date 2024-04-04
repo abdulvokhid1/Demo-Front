@@ -43,7 +43,7 @@ const LevelManagement = () => {
     select_ex_date:select_ex_date?.toString || '',
       }
       console.log(params)
-      // mutate(params);
+      mutate(params);
 
       // Handle response if necessary
       // const data = await response.json()
@@ -76,7 +76,9 @@ const LevelManagement = () => {
 {/* <!--<iframe src="inc.bonus_auto_test.php" width=100% height=100px frameborder=0></iframe>--> */}
 
 <div className="common_ajax_proc"></div>
-	
+<form name='fsearch' method="post" action={onSubmit}>
+
+  </form>
 </div>
 </div>
 </div>

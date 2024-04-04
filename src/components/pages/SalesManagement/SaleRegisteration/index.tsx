@@ -11,9 +11,8 @@ const SaleRegisteration = () => {
 		setSliderVisible(!sliderVisible);
 	}
 return (
-    <div className={sliderVisible ? "container" : "container_hide" } id="depth2_leftmenu" style={{background: "#f0f0f0"}}>
+	    <div className={sliderVisible ? "container" : "container_hide" } id="depth2_leftmenu" style={{background: "#f0f0f0"}}>
 		<Slider />
-
         <div className="content_section">
             
                 <div className="content_section_fix" style={{background:'#fff'}}>
@@ -25,7 +24,7 @@ return (
                   <div className="title_area">
                     <span className="icon"></span>
                     <span className="title">
-											매출등록 관리					
+					매출등록 관리					
 					</span>
                     <span className="location">홈 &gt; 가맹점관리 &gt; 매출등록 관리</span>
                   </div>
@@ -35,7 +34,6 @@ return (
 {/* <!--<iframe src="inc.bonus_auto_test.php" width=100% height=100px frameborder=0></iframe>--> */}
 
 <div className="common_ajax_proc"></div>
-
 
  <form name='frm' method='post' action='_entershop.entry_revenues_pro.php' encType='multipart/form-data' >
 <input type='hidden' name='_mode' value='add'/>
@@ -60,7 +58,7 @@ return (
 										<td className="conts"><input type='text' name='redRegidate' className='input_text' value="2024-03-17" onChange={()=>{'coin_type_calc()'}} /></td>
 									</tr>
 									<tr>
-										
+									
 									<td className="article">매출구분<span className='ic_ess' title='필수'></span></td>
 				
 										<td className="conts"><span className='multi' ><label htmlFor='chk_buy01'>
@@ -110,8 +108,7 @@ return (
                             <input type="'button'" id="pcnt_calc" className="input_small gray" style={{cursor: 'pointer'}} value={'자동계산'}/>&nbsp;
 							<input type='hidden' id='set_pprice' name='set_pprice' value=''/>
 							<input type='hidden' id='set_pprice_pv' name='set_pprice_pv' value=''/>
-						
-						                           
+	                     
 						
 						
 						<label><input type="checkbox" name="prod_chk_free" value="Y"/> 인정 매출시 체크</label>
@@ -150,18 +147,15 @@ return (
 			<input type='hidden' name="temp_gross_sale_price" value=""/>
 			<input type='hidden' name="multi_pv" value=""/>
 			<input type='hidden' name="multi_real_pv" value=""/>
-
 			&nbsp;&nbsp;&nbsp;<span className="shop_state_pack"><span className="lightgray" style={{width:'30px'}}>수량</span></span> &nbsp;
             <input type='text' name='multi_cnt' id='multi_cnt' size={3} className='input_text' value="1" style={{width:'35px'}} onKeyUp={()=>{"multi_calc2()"}}/> 
             <span className='shop_btn_pack' style={{float:'none'}}>
-                
+               
                 <input type="'button'" id="multi_calc" onClick={()=>{"multi_calc2()"}} className="input_small gray" style={{cursor: 'pointer'}} value="자동계산"/></span>&nbsp;
 			
 										</td>
 									</tr>
-    
-	
-									<tr>
+    							<tr>
 										<td className="article">승인상태<span className='ic_ess' title='필수'></span></td>
 										<td className="conts"><span className='multi' ><label htmlFor='pstatusY'>
                                             <input type='radio' id='pstatusY' name='pstatus' value='Y'  className='relation_auto_mode' checked /> 승인</label></span>&nbsp;&nbsp;&nbsp;<span className='multi' ><label htmlFor='pstatusN'>
@@ -182,12 +176,7 @@ return (
 											</td>						
 									</table>
 									</div>
-									
-											 
-						
-						
-							
-							
+												
 
 					<div className="form_box_area">
 						<table className="form_TB" summary="검색항목">
@@ -223,8 +212,7 @@ return (
                         </div>
 						</div>
 						</form>
-						
-						
+	
 					   
 				<div style={{height:'30px'}}></div>
             </div>

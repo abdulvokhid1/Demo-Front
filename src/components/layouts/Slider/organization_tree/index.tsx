@@ -13,11 +13,11 @@ const Slider = () => {
     }
     return (
         <div className="aside_second">
-                 <span >마감정산 <span>〓</span></span>
+                 <span >조직도 <span>〓</span></span>
             <Link key={6} href={Routes.ORGANIZATION_TREE.SPONSOR} className={selectedKey==0? "menu_on": "menu"} title="후원조직도" style={{display: 'block'}}
-                  onClick={()=> itemClickedHandler(6)}>상품문의 관리</Link>
+                  onClick={()=> itemClickedHandler(6)}>추천 조직도</Link>
             <Link key={1} href={Routes.ORGANIZATION_TREE.RECOMMENDATION} className={selectedKey==1? "menu_on": "menu"} title="추천조직도" style={{display: 'block'}}
-                  onClick={()=> itemClickedHandler(1)}>고객문의 관리</Link>
+                  onClick={()=> itemClickedHandler(1)}>후원 조직도</Link>
             
             <div className="favorite_menu">
                 <a className="title" title="즐겨찾는메뉴설정" href="_favmenu.form.php"></a>

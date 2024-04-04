@@ -52,15 +52,14 @@ const Sponsor = () => {
                     <div className="title_area">
                         <span className="icon"></span>
                         <span className="title">
-											후원조직도
+						후원조직도
 					</span>
                         <span className="location">홈 &gt; 조직도관리 &gt; 후원조직도</span>
                     </div>
 
                     <div className="common_ajax_proc"></div>
 
-
-                    <div
+                   <div
                         style={{
                         display: 'flex',
                         overflow: 'hidden',
@@ -73,10 +72,7 @@ const Sponsor = () => {
                         willChange: 'overflow',
                     }}
                     >
-                    
-
-
-                    <div className="content_section_inner" style={{position:'fixed', right:'0px', zIndex:10000}}>
+                     <div className="content_section_inner" style={{position:'fixed', right:'0px', zIndex:10000}}>
                         <div className="main_box_area_wide">
 
                             <form name="searchfrm_member" method="post" action="/myAdmin/_cardsys.sub_tree_sponid.php">
