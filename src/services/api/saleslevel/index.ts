@@ -1,10 +1,10 @@
 import axiosClient from '../axiosClient'
 import { API_ENDPOINTS } from '../endPoint'
-import {saleslevelRegistrationProps } from './type'
+import {saleslevelProps } from './type'
 
 const SALESLEVEL_API = {
   list: () => axiosClient.get(API_ENDPOINTS.SALESLEVEL.LIST),
-  updateSalesLevel: (params: saleslevelRegistrationProps) =>
+  updateSalesLevel: (params: saleslevelProps) =>
     axiosClient.post(API_ENDPOINTS.SALESLEVEL.REGISTRATION, params),
 }
 

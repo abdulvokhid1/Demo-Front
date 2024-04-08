@@ -88,7 +88,7 @@ const UserManagement = () => {
         setIsSelectedClicked(isClicked);
     }
 
-    const pagginationHandler = (selectedItem: { selected: number }) => {
+    const paginationHandler = (selectedItem: { selected: number }) => {
         const page = selectedItem ? selectedItem.selected+1 : 0;
         mutate({page: page, limit: perPage})
     }
@@ -716,7 +716,7 @@ const UserManagement = () => {
                             pageCount={Math.ceil(totalUsers/ perPage)}
                             marginPagesDisplayed={2}
                             pageRangeDisplayed={5}
-                            onPageChange={pagginationHandler}
+                            onPageChange={paginationHandler}
                         />
                         </div>
 

@@ -31,6 +31,11 @@ export const API_ENDPOINTS = {
     GET_LIST: '/api/v1/product_manage/list',
     REGISTRATION: '/api/v1/product_manage/update'
   },
+
+  AddCategory: {
+    GET_LIST: '/api/v1/addcategory/list',
+    REGISTRATION: '/api/v1/addcategory/update'
+  },
   
   BLOG: {
     CREATE_BLOG: '/api/v1/blog',

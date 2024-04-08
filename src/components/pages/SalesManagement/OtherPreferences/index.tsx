@@ -53,10 +53,7 @@ const onSubmit = async (formData: FormData) => {
       console.log(params)
       mutate(params);
 
-      // Handle response if necessary
-      // const data = await response.json()
-      // ...
-  }
+     }
 
     return(
         <div className={sliderVisible ? "container" : "container_hide" } id="depth2_leftmenu" 

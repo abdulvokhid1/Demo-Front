@@ -35,14 +35,13 @@ const {isPending, mutate, isSuccess, isError} = useMutation(
 const onSubmit = async (formData: FormData) => {
 
 	const id = formData.get('id');
-	const linkedId = formData.get('sales_id');
+	
 	const center_name = formData.get('name')
 	const center_owner = formData.get('owner_name');
 	
 	const params = {
 		id: Number(id),
-		// linkedId: linkedId ? linkedId.toString() : '',
-		center_name:center_name ?.toString() || '',
+	    center_name:center_name ?.toString() || '',
 		center_owner: center_owner? center_owner.toString(): '',
 	}
 	console.log(params)

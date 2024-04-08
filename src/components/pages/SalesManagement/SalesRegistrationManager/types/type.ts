@@ -40,3 +40,4 @@ export type CreatedAtType = {
     from?: string;
     to?: string;
 }
+

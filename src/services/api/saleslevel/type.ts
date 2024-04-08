@@ -1,5 +1,5 @@
 
-export type saleslevelRegistrationProps = {
+export type saleslevelProps = {
   id: number
   level: number;
 
@@ -7,13 +7,13 @@ export type saleslevelRegistrationProps = {
  
   purchase_amount: number;
  
-  amount_limit: number;
+  amount_limit: string;
  
-  purchase_pv: number;
+  purchase_pv: string;
  
   discount_rate: number;
 
-  guanli_fee: number;
+  guanli_fee: string;
 
   minimum_purchase: number;
  
