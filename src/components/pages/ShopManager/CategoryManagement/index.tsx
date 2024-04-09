@@ -1,5 +1,6 @@
 'use client'
 import Slider  from '@/components/layouts/Slider/Shop';
+import PAGE_ROUTES from '@/utils/constants/routes';
 import { useEffect, useState } from 'react';
 const CategoryManagement = () => {
     const [sliderVisible, setSliderVisible] = useState(true)
@@ -56,30 +57,36 @@ const CategoryManagement = () => {
 										<div className='btn_line_up_center'>
 											<span className='shop_btn_pack'>1차 카테고리</span>
 											<span className='shop_btn_pack'><span className='blank_3'></span></span>
-											<span className='shop_btn_pack'><input type='button' name='' className='input_small blue' value='추가' onClick={()=>{}}/></span>
+											<span className='shop_btn_pack'><input type='button' name='' className='input_small blue' value='추가' onClick={()=>{
+												window.open(PAGE_ROUTES.SHOP.CATEGORY_REGISTRATION, '카테고리 추가', 'height: 80px, width: 100px')
+											}}/></span>
 										</div>
 									</th>
 									<th scope="col" className="colorset">
 										<div className='btn_line_up_center'>
 											<span className='shop_btn_pack'>2차 카테고리</span>
 											<span className='shop_btn_pack'><span className='blank_3'></span></span>
-											<span className='shop_btn_pack'><input type='button' name='' className='input_small blue' value='추가' onClick={()=>{}}/></span>
+											<span className='shop_btn_pack'><input type='button' name='' className='input_small blue' value='추가' onClick={()=>{
+												window.open(PAGE_ROUTES.SHOP.CATEGORY_REGISTRATION)
+											}}/></span>
 										</div>
 									</th>
 									<th scope="col" className="colorset">
 										<div className='btn_line_up_center'>
 											<span className='shop_btn_pack'>3차 카테고리</span>
 											<span className='shop_btn_pack'><span className='blank_3'></span></span>
-											<span className='shop_btn_pack'><input type='button' name='' className='input_small blue' value='추가' onClick={()=>{}}/></span>
+											<span className='shop_btn_pack'><input type='button' name='' className='input_small blue' value='추가' onClick={()=>{
+												window.open(PAGE_ROUTES.SHOP.CATEGORY_REGISTRATION)
+											}}/></span>
 										</div>
 									</th>
 								</tr>
 							</thead> 
 							<tbody> 
 								<tr>
-									<td className="conts"><iframe name='list1'  src='_category_shop.pro.php?depth=1' width='100%' height='400' style={{textAlign:'center'}}  marginWidth={0} marginHeight={0} scrolling='no'  frameBorder='0' style={{border:'2px solid #c1c1c1'}}></iframe></td>
-									<td className="conts"><iframe name='list2'  src='' width='100%' height='400' style={{textAlign:'center'}}  marginWidth={0} marginHeight={0} scrolling='no'  frameBorder='0' style={{border:'2px solid #c1c1c1'}}></iframe></td>
-									<td className="conts"><iframe name='list3'  src='' width='100%' height='400' style={{textAlign:'center'}}  marginWidth={0} marginHeight={0} scrolling='no'  frameBorder='0' style={{border:'2px solid #c1c1c1'}}></iframe></td>
+									<td className="conts"><iframe name='list1'  src='_category_shop.pro.php?depth=1' width='100%' height='400' style={{textAlign:'center',border:'2px solid #c1c1c1'}}></iframe></td>
+									<td className="conts"><iframe name='list2'  src='' width='100%' height='400' style={{textAlign:'center',border:'2px solid #c1c1c1'}} ></iframe></td>
+									<td className="conts"><iframe name='list3'  src='' width='100%' height='400' style={{textAlign:'center',border:'2px solid #c1c1c1'}} ></iframe></td>
 								</tr>
 							</tbody> 
 						</table>

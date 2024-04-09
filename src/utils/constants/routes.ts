@@ -28,6 +28,7 @@ const PAGE_ROUTES = {
   },
  SHOP:{
   SHOP_PRODUCT_MANAGEMENT:'/admin/shop_manager/shop_product_management',
+  CATEGORY_REGISTRATION: '/admin/shop_manager/add_category'
  },
  STAT:{
   STAT_MANAGEMENT:'/admin/stats_manager/total_settlement_details',
