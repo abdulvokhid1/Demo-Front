@@ -7,7 +7,7 @@ const HeaderElement = () => {
     return (
         <div className="header" style={{background: '#eaeaea'}}>
             <a href={'/admin'} className="logo" style={{color: '#353c43'}}>
-                <span className="name" style={{color: '#353c43'}}>더센2</span>
+                <span className="name" style={{color: '#353c43'}}>Shopping Money</span>
                 <span className="en" style={{color: '#353c43'}}>Admin</span>
             </a>
             <div className="today">
@@ -16,7 +16,7 @@ const HeaderElement = () => {
                 <span className="day">{moment(now).format('DD')}</span>
             </div>
 
-            <div style={{position: 'absolute', marginLeft: '500px', marginTop: '8px'}}>
+            <div style={{position: 'absolute', left: '2200px', marginTop: '8px'}}>
             </div>
 
             <div className="btn">

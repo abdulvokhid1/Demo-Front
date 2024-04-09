@@ -381,7 +381,7 @@ const UserManagement = () => {
                                     ※ 페이 합계 : <span style={{color: '#e16007', fontWeight: 'bold'}}>0&nbsp;BV</span>
                                     <span style={{color: '999999'}}>&nbsp;|&nbsp;</span>
                                     전체 : <span
-                                    style={{color: '#4C64AB', fontWeight: 'bold'}}>{userListState.length}</span> 건 조회
+                                    style={{color: '#4C64AB', fontWeight: 'bold'}}>{userListState?.length | 0}</span> 건 조회
                                 </td>
                             </tr>
 
