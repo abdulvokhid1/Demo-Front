@@ -1,6 +1,7 @@
 'use client';
 // import './styles.css'
 
+import './global.d'
 import Link from 'next/link'
 import HeadElement from '@/components/layouts/Header'
 import FooterElement from "@/components/layouts/Footer";
@@ -8,7 +9,7 @@ import Slider from '@/components/layouts/Slider/users'
 import Head from 'next/head'
 import { Layout, message } from 'antd'
 import Navbar from "@/components/layouts/Navbar";
-import { useEffect, useState, FormEvent } from "react";
+import { useEffect, useState, FormEvent, useRef } from "react";
 import Image from "next/image";
 import { useMutation } from "@tanstack/react-query";
 import AUTH_API from "@/services/api/auth";
@@ -20,6 +21,12 @@ import { CenterTypeProps } from "@/services/api/centers/type";
 import { LevelTypeProps } from "@/services/api/levels/type";
 import LEVEL_API from "@/services/api/levels";
 import moment from "moment-timezone";
+import USER_API from "@/services/api/users";
+import { userListState } from "@/services/recoil/user";
+import DaumPostcodeData = globalThis.DaumPostcodeData;
+
+const id = "daum-postcode"; // script가 이미 rending 되어 있는지 확인하기 위한 ID
+const src = "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
 
 const UserManagement = () => {
     const router = useRouter()
@@ -30,8 +37,38 @@ const UserManagement = () => {
     const [emailState, setEmailState] = useState('');
     const [nameState, setNameState] = useState('');
     const [formData, setFormData] = useState()
+    const [recomId, setRecomId] = useState<number>(0)
     const [centers, setCenters] = useState<CenterTypeProps[]>([])
     const [levels, setLevels] = useState<LevelTypeProps[]>([])
+    const [addressDetail, setAddressDetail] = useState<DaumPostcodeData>()
+
+
+    /*** Daum Address Popup search ***/
+    const postcodeRef = useRef<HTMLDivElement | null>(null);
+
+    const loadLayout = () => {
+        window.daum.postcode.load(() => {
+            const postcode = new window.daum.Postcode({
+                oncomplete: function (data) {
+                    setAddressDetail(data)
+                    console.log(data);
+                }
+            });
+            postcode.open();
+        });
+    };
+
+    useEffect(() => {
+        const isAlready = document.getElementById(id);
+
+        if (!isAlready) {
+            const script = document.createElement("script");
+            script.src = src;
+            script.id = id;
+            document.body.append(script);
+        }
+    }, []);
+
 
     const {mutate: mutateLevel} = useMutation(
         {mutationFn: LEVEL_API.getList,
@@ -51,7 +88,7 @@ const UserManagement = () => {
     const {mutate: mutateCenter} = useMutation({
         mutationFn: CENTER_API.getList,
         onSuccess: async (values: any)=> {
-            setCenters(values);
+            setCenters(values.centers);
         },
         onError: async (error: any) => {
             const errorType = error.response.data.errors[0]
@@ -82,11 +119,11 @@ const UserManagement = () => {
         console.log('sliderVisible: ', sliderVisible)
     }, [sliderVisible]);
     useEffect(() => {
-        mutateCenter();
-    }, [centers, mutateCenter]);
+        mutateCenter({page: 0, limit: 0});
+    }, []);
     useEffect(() => {
         mutateLevel();
-    }, [levels, mutateLevel]);
+    }, []);
     const sliderToggleHandler = () => {
         setSliderVisible(!sliderVisible);
     }
@@ -391,15 +428,16 @@ const UserManagement = () => {
                                 <tr>
                                     <td className="article">우편번호</td>
                                     <td className="conts">
-                                        <input type="text" name="zip1" id="_post1" 
-                                               size={5} className="input_text"/>-
-                                        <input type="text" name="zip2" id="_post2" 
-                                               size={5} className="input_text"/>
+                                        <input type="text" name="zip1" id="_post1" size={5} className="input_text" value={addressDetail?.zonecode.toString().substring(0,2)}/>-
+                                        <input type="text" name="zip2" id="_post2" size={5} className="input_text" value={addressDetail?.zonecode.toString().substring(2)}/>
 
-                                        <span className="shop_btn_pack" style={{float: 'none'}}>&nbsp;<a
-                                            href="#none" onClick={() => {
-                                        }}
-                                            className='small gray'>우편번호검색</a></span>
+                                        <span className="shop_btn_pack" style={{float: 'none'}}>&nbsp;
+                                            <a href="#none"
+                                               onClick={loadLayout}
+                                               className='small gray'>우편번호검색
+                                            </a>
+                                            <div ref={postcodeRef}></div>
+                                        </span>
 
                                     </td>
                                 </tr>
@@ -407,13 +445,10 @@ const UserManagement = () => {
                                     <td className="article">주소</td>
                                     <td className="conts">
                                         기본주소 : <input type="text" name="address" id="_addr1" 
-                                                      size={50} className="input_text"/><br/>
-                                        상세주소 : <input type="text" name="address1" id="_addr2" 
-                                                      size={50} className="input_text"/><br/>
-                                        도로명주소 : <input type="text" name="address_doro" id="_addr_doro"
-                                                        size={70} className="input_text"/>
-                                        <br/>새 우편번호 : <input type="text" name="zonecode" id="_zonecode"
-                                                              size={10} className="input_text"/>
+                                                      size={50} className="input_text" value={addressDetail?.jibunAddress}/><br/>
+                                        상세주소 : <input type="text" name="address1" id="_addr2" size={50} className="input_text"/><br/>
+                                        도로명주소 : <input type="text" name="address_doro" id="_addr_doro" size={70} className="input_text" value={addressDetail?.roadAddress}/>
+                                        {/*<br/>새 우편번호 : <input type="text" name="zonecode" id="_zonecode" size={10} className="input_text"/>*/}
                                     </td>
                                 </tr>
                                 <tr>
@@ -439,14 +474,20 @@ const UserManagement = () => {
                                 <tr>
                                     <td className="article">추천인 아이디</td>
                                     <td className="conts">
-                                        <input type="text" name="recomid" value='superadmin' size={30}
+                                        <input type="hidden" id='recomid_hidden' name="recomid" size={30}
+                                               className="input_text"
+                                               onChange={(e) => {
+                                                   setRecomId(Number(e.target.value))
+                                               }}/>
+                                        <input type="text" id='recomid_display' name="recomid_display" size={30}
                                                className="input_text"
                                                style={{color: '#808080', backgroundColor: '#f0f0f0'}}
-                                               onFocus={() => {
-                                               }} tabIndex={-1} readOnly/>
+                                               value={recomId}
+                                               tabIndex={-1} readOnly/>
 
                                         <span className='shop_btn_pack' style={{float: 'none'}}>&nbsp;
                                             <a onClick={() => {
+                                                window.open(PAGE_ROUTES.USERS.USER_LOOKUP, '천천인 검색 페이지', 'height=600px, width=900px')
                                             }} className='small blue'>추천인 검색
                                             </a>
                                         </span>
@@ -518,12 +559,11 @@ const UserManagement = () => {
                                     className='blank_3'></span></span>
 
 
-                                <span className='shop_btn_pack btn_input_gray'><input type='button'
-                                                                                      name=''
-                                                                                      className='input_large'
-                                                                                      value='목록'
-                                                                                      onClick={() => {
-                                                                                      }}/>
+                                <span className='shop_btn_pack btn_input_gray'>
+                                    <input type='button' name='' className='input_large' value='목록'
+                                           onClick={() => {
+                                               router.replace(PAGE_ROUTES.USERS.USER_MANAGEMENT)
+                                           }}/>
   </span>
 
 

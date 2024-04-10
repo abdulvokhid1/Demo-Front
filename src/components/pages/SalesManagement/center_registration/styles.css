@@ -1,0 +1,16 @@
+ul,ol,li,td,dl,dt,dd {list-style:none; margin:0; padding:0;}
+
+/* 리스트 탭메뉴 ------------------------------------------------------- */
+.category_tab_nav {overflow:hidden; margin:5px 0; border-top:1px solid #e1e1e1;position:relative;}
+.category_tab_nav
+li {float:left; text-align:center; width:10%;border-bottom:1px solid #e1e1e1;}
+.category_tab_nav li:last-child {borderright:1px solid #e1e1e1;}
+
+.category_tab_nav
+a {borderright:1px solid #e1e1e1; display:block; height:36px; line-height:36px; color:#545454; font-size:11px; font-weight:bold; background: transparent url('/pages/skin/N1/img/line_bg.gif') left top repeat-y;background: #ffffff}
+
+.category_tab_nav
+.st {borderright:1px solid #e1e1e1; display:block; height:36px; line-height:36px; color:#545454; font-size:11px; font-weight:bold; background: transparent url('/pages/skin/N1/img/line_bg.gif') left top repeat-y;background: #ff0000;color:#ffffff}
+
+
+/*.category_tab_nav a:hover {background:#efefef; color:#ff0000;}*/

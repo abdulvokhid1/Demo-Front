@@ -16,16 +16,18 @@ export type UserInfo = {
     recomid?: string;
     sponid?: string;
     center: Center;
-    level: Level;
+    Level: Level;
 }
 
 export type Center = {
     id?: number;
     name?: string;
+    owner?: UserInfo
     description?: string;
     createdAt?: string;
     updatedAt?: string;
     url?: string;
+    User?: UserInfo[]
 }
 
 export type Level ={

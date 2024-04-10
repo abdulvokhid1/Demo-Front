@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faArrowAltCircleLeft, faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons'
 
 import ReactPaginate from 'react-paginate';
-import { CreatedAtType, UserInfo } from "@/components/pages/users/types/type";
+import { CreatedAtType, UserInfo } from "@/utils/types/type";
 import Slider from '@/components/layouts/Slider/users'
 import Head from 'next/head'
 import { Layout, message } from 'antd'
@@ -494,7 +494,7 @@ const UserManagement = () => {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {userListState.length > 0 && (
+                                {userListState?.length > 0 && (
                                     userListState.map((item, index) => {
                                             return (
                                                 <>
@@ -515,7 +515,7 @@ const UserManagement = () => {
                                                         </td>
 
 
-                                                        <td>{item.level?.title ? item.level.title : ''}</td>
+                                                        <td>{item.Level?.title ? item.Level.title : ''}</td>
                                                         <td>
                                                             0&nbsp;BV
                                                             <span className="shop_btn_pack" style={{float: 'right'}}>

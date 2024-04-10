@@ -13,6 +13,9 @@ export type CreateUserTypeProps = {
 }
 
 export type QueryType = {
+  memberId?: string
+  name?: string
+  level?: number
   page?: number
   limit?: number
 }

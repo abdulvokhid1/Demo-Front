@@ -9,3 +9,9 @@ export type centerRegistrationProps = {
   center_owner: string;
  
 }
+
+export type QueryType = {
+  page?: number
+  limit?: number
+  name?: string
+}

@@ -18,10 +18,13 @@ const PAGE_ROUTES = {
     INDEX: '/admin/users',
     USER_MANAGEMENT: '/admin/users/member_management',
     USER_REGISTRATION: '/admin/users/registration',
+    USER_LOOKUP: '/admin/users/member_lookup_popup',
   },
   SALES_MANAGEMENT: {
     SALES_REGISTRATION_MANAGER: '/admin/sales_management/sales_registration_manager',
     SALES_REGISTRATION: '/admin/sales_management/sale_registration',
+    CENTER_MANAGEMENT: '/admin/sales_management/center_management',
+    CENTER_REGISTRATION: '/admin/sales_management/center_registration',
   },
   CALC:{
     CALC_MANAGEMENT: '/admin/calc_manage/daily_calc',
