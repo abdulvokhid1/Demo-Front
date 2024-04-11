@@ -45,3 +45,12 @@ export type ProductType = {
     from?: string;
     to?: string;
 }
+
+export type Order = {
+    id?: number;
+    name?: string;
+    description?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    url?: string;
+}
