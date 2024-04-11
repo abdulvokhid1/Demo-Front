@@ -66,9 +66,9 @@ return(
                   <div className="title_area">
                     <span className="icon"></span>
                     <span className="title">
-						센터등록 관리
+						대리점등록 관리
 					</span>
-                    <span className="location">홈 &gt; 가맹점관리 &gt; 센터등록 관리</span>
+                    <span className="location">홈 &gt; 가맹점관리 &gt; 대리점등록 관리</span>
                   </div>
                   {/* <!-- // 페이지타이틀 --> */}
 				 
@@ -160,7 +160,7 @@ return(
 						<div className="btn_line_up_center">
 							<span className="shop_btn_pack btn_input_blue"><input type="submit" className="input_medium" title="검색" value="검색"/></span>
 								<span className="shop_btn_pack"><span className="blank_3"></span></span>
-								<span className="shop_btn_pack"><a href="_entershop.center_form.php?_mode=add" className="medium red" title="업체등록" >센터등록</a></span>
+								<span className="shop_btn_pack"><a href="_entershop.center_form.php?_mode=add" className="medium red" title="업체등록" >대리점등록</a></span>
 						</div>
 					</div>
 
@@ -170,7 +170,7 @@ return(
 					<div className="top_btn_area">
 						<div className="btn_line_up_center">
 								<span className="shop_btn_pack"><span className="blank_3"></span></span>
-								<span className="shop_btn_pack"><a href="_entershop.center_form.php?_mode=add" className="medium red" title="업체등록" >센터등록</a></span>
+								<span className="shop_btn_pack"><a href="_entershop.center_form.php?_mode=add" className="medium red" title="업체등록" >대리점등록</a></span>
 						</div>
 	     			</div>
 					
@@ -198,7 +198,7 @@ return(
 								<th scope="col" className="colorset"><input type='checkbox' name='chkall' value="1" onClick={()=>{}}/></th>
 								<th scope="col" className="colorset">NO</th>
 								{/* <!--<th scope="col" className="colorset"><a href='/myAdmin/_entershop.center_list.php?code=&page=&filed=id&orderby=asc'><u>회원명</u></th>--> */}
-								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.center_list.php?code=&page=&filed=in_compay&orderby=asc'/><u>센터명</u></th>
+								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.center_list.php?code=&page=&filed=in_compay&orderby=asc'/><u>대리점명</u></th>
 								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.center_list.php?code=&page=&filed=in_name&orderby=asc'/><u>대표자</u></th>
 								<th scope="col" className="colorset"><u>소속회원수</u></th>
 								<th scope="col" className="colorset"><u>누적PV</u></th>

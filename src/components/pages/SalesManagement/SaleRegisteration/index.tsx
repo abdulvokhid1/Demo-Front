@@ -80,7 +80,8 @@ return (
 
 									<tr>
 										<td className="article">매출유형<span className='ic_ess' title='필수'></span></td>
-										<td className="conts"><span className='multi' ><label htmlFor='entry_modevolume'>
+										<td className="conts"><span className='multi' >
+										<label htmlFor='entry_modevolume'>
                                         <input type='radio' id='entry_modevolume' name='entry_mode' value='volume'  className='entry_mode' checked /> 일반매출</label></span>&nbsp;&nbsp;&nbsp;
 										</td>
 									</tr>
@@ -123,11 +124,10 @@ return (
 										
 
 			    <select name='chk_ent' id='chk_ent' onChange={()=>{}}>
-				<option  value='1200000^1000000'>120만원(1000코인)</option><option  value='3600000^3000000'>360만원(3000코인)</option>
-				<option  value='12000000^10000000'>1200만원(10000코인)</option><option  value='36000000^30000000'>3600만원(30000코인)</option></select>
+				<option  value='110000'>&nbsp; 11 만원</option></select>&nbsp;
 			     <label><input type="checkbox" name="chk_free" value="Y"/> 인정 매출시 체크</label>
 
-				<div className='guide_text'><span className='ic_blue'></span><span className='blue'>인정 매출일때 일부 수당지급에서 제외</span></div>
+				{/* <div className='guide_text'><span className='ic_blue'></span><span className='blue'>인정 매출일때 일부 수당지급에서 제외</span></div> */}
 									</tr>
 
 									<tr className="entry_volume">
@@ -135,11 +135,12 @@ return (
 										<td className="conts">
 										{/* <!--<input type='text' name='pprice' id='pprice' size={3}0 className='input_text' value="">--> */}
 										<input type='text' name='pprice' id='pprice' size={3} className='input_text' value="0"/>
-										원<div className='guide_text'><span className='ic_blue'></span><span className='blue'>매출선택 없을시에 매출 BV (+)10% 매출금액 계산</span></div></td>
+										원
+									</td>
 									
 									</tr>
 
-									<tr className="entry_volume">
+									{/* <tr className="entry_volume">
 										<td className="article">매출 BV<span className='ic_ess' title='필수'></span></td>
 										<td className="conts"><input type='text' name='gross_sale_price' id='gross_sale_price' size={3} className='input_text' value=""/>  BV
 
@@ -154,7 +155,7 @@ return (
                 <input type="'button'" id="multi_calc" onClick={()=>{"multi_calc2()"}} className="input_small gray" style={{cursor: 'pointer'}} value="자동계산"/></span>&nbsp;
 			
 										</td>
-									</tr>
+									</tr> */}
     							<tr>
 										<td className="article">승인상태<span className='ic_ess' title='필수'></span></td>
 										<td className="conts"><span className='multi' ><label htmlFor='pstatusY'>
@@ -170,38 +171,12 @@ return (
 									<tr>
 										<td className="article">매출등록 아이디<span className='ic_ess' title='필수'></span></td>
 										<td className="conts">
-										<span className="shop_btn_pack"><a href="#none" onClick={()=>{"member_search()"}} className="small blue" title="유저검색" >유저검색</a></span>
+										<span className="shop_btn_pack"><a href="#none" onClick={()=>{"member_search()"}} className="small blue" title="유저검색" >유저검색</a></span><br/>
 												<textarea name="pointIDArray" id="pointIDArray" className="input_text" style={{width:'100%',height:'100px'}} readOnly ></textarea><div className='guide_text'><span className='ic_blue'></span><span className='blue'>유저검색 버튼을 눌러서 매출등록 아이디를 추가해주세요.</span></div>																					</td>
 									</tr>
 											</td>						
 									</table>
 									</div>
-												
-
-					<div className="form_box_area">
-						<table className="form_TB" summary="검색항목">
-								<colgroup>
-									<col width="200px"/>
-                                    {/* <!-- 마지막값은수정안함 --> */}
-                                    <col width="*"/>
-								</colgroup>
-								<tbody>
-									<tr>
-										<td className="article">계약기간</td>
-										<td className="conts">
-										<select name='coin_period' id='coin_period'>
-											<option value=''>만기일선택</option>
-											<option value='3' >3개월(60회)</option>
-											<option value='6' >6개월(120회)</option>
-											<option value='9' >9개월(180회)</option>
-											<option value='12' >12개월(240회)</option>
-										</select>
-										</td>
-									</tr>
-				                 </tbody> 
-							</table>
-					</div>
-					
 
 					<div className='bottom_btn_area'>
 						<div className='btn_line_up_center'>

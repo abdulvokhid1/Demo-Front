@@ -1,6 +1,5 @@
 'use client'
-
-const bonuslist = () =>{
+const bonus_list = () =>{
 
 return(
       <>
@@ -110,7 +109,12 @@ return(
 
     <div id="pg_loading" style={{margin:'20px 10px'}}>
         <div className="cm_order_form">
-         <input aria-colspan={0} aria-rowcounts="" name="_memo" className="textarea_design" style={{textAlign:'center',background:'#fff',border:'1px solid #aaa' ,width:'100%',height:'40px'}}></input>
+         <input
+         aria-colspan={0} 
+         aria-rowcounts={0}
+         name="memo"
+         className="textarea_design"
+         style={{textAlign:'center', background:'#fff' ,border: '1px solid', backgroundColor:' #aaa', width:'100%',height:'40px'}}></input>
     </div>
 
         <div className="cm_bottom_button">
@@ -121,8 +125,7 @@ return(
         
     </div>
     {/* <!-- // 가운데정렬버튼 --> */}
-<div className="cm_member_title">
-    <strong></strong>입금내역	</div>
+<div className="cm_member_title"> <strong>입금내역</strong>	</div>
 
 {/* <!--
 <div className="cm_mypage_tab">
@@ -176,4 +179,4 @@ return(
         
  )}
 
-export default bonuslist;
+export default bonus_list;

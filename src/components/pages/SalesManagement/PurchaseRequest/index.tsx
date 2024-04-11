@@ -25,7 +25,7 @@ const PurchaseRequest = () => {
                   <div className="title_area">
                     <span className="icon"></span>
                     <span className="title">
-											입금신청 관리					
+											구매신청 관리					
 					</span>
                     <span className="location">홈 &gt; 가맹점관리 &gt; 입금신청 관리</span>
                   </div>
@@ -86,7 +86,7 @@ const PurchaseRequest = () => {
 								<td className="conts"><input type='text' name='pass_pointID' className='input_text' value=""/></td>
 								<td className="article">성명</td>
 								<td className="conts"><input type='text' name='pass_name' className='input_text' value=""/></td>
-								<td className="article">소속센터</td>
+								<td className="article">소속대리점</td>
 								<td className="conts">
 
     <select name='assign_center' id="assign_center" className='add_option add_option_chk' style={{width:'200px'}}>
@@ -142,7 +142,7 @@ const PurchaseRequest = () => {
 								<th scope="col" className="colorset">NO</th>
 								<th scope="col" className="colorset"><a href='/myAdmin/_calcu.ad_saving.list.php?code=&page=&filed=orderno&orderby=asc'><u>아이디</u></a></th>
 								<th scope="col" className="colorset"><a href='/myAdmin/_calcu.ad_saving.list.php?code=&page=&filed=odrkey&orderby=asc'><u>회원명</u></a></th>
-								<th scope="col" className="colorset">소속센터</th>
+								<th scope="col" className="colorset">소속대리점</th>
 								<th scope="col" className="colorset"><a href='/myAdmin/_calcu.ad_saving.list.php?code=&page=&filed=wr_pay_method&orderby=asc'><u>결제수단</u></a></th>
 								<th scope="col" className="colorset"><a href='/myAdmin/_calcu.ad_saving.list.php?code=&page=&filed=wr_wdate&orderby=asc'><u>신청 패키지</u></a></th>
 								<th scope="col" className="colorset"><a href='/myAdmin/_calcu.ad_saving.list.php?code=&page=&filed=wr_wdate&orderby=asc'><u>수수료</u></a></th>

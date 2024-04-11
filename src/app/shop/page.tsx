@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 import PAGE_ROUTES from 'src/utils/constants/routes'
+import ClientHeader from '@/components/layouts/ClientHeader'
+
 const ShopGeneral = () => {
     const userStateData = useRecoilValue(userState)
     const router = useRouter()
@@ -17,7 +19,7 @@ const ShopGeneral = () => {
 
     return (
         <div>
-            {/*<Loading />*/}
+            <ClientHeader/>
         </div>
     )
 }

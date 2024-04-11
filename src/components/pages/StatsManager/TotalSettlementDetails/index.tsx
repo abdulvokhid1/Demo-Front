@@ -242,18 +242,18 @@ return(
 			<li className="hit">
 				<a href="?p_type=year&sh_year=2024&sh_month=03&sh_day=14&viewtype=1&search_ptype=year&stx=&sfl=&bonus_status=&ragi=1" className="tab">전체</a>
 			</li>
-			<li className="">
+			{/* <li className="">
 				<a href="?tab_menu_bname=배당보너스&p_type=year&sh_year=2024&sh_month=03&sh_day=14&search_ptype=year&viewtype=1&stx=&sfl=&bonus_status=&ragi=1" className="tab">배당보너스</a>
-			</li>
-			<li className="">
+			</li> */}
+			{/* <li className="">
 				<a href="?tab_menu_bname=매칭보너스&p_type=year&sh_year=2024&sh_month=03&sh_day=14&search_ptype=year&viewtype=1&stx=&sfl=&bonus_status=&ragi=1" className="tab">매칭보너스</a>
-			</li>
+			</li> */}
 			<li className="">
-				<a href="?tab_menu_bname=직급보너스&p_type=year&sh_year=2024&sh_month=03&sh_day=14&search_ptype=year&viewtype=1&stx=&sfl=&bonus_status=&ragi=1" className="tab">직급보너스</a>
+				<a href="?tab_menu_bname=직급보너스&p_type=year&sh_year=2024&sh_month=03&sh_day=14&search_ptype=year&viewtype=1&stx=&sfl=&bonus_status=&ragi=1" className="tab">대리점 보너스</a>
 			</li>
-			<li className="">
+			{/* <li className="">
 				<a href="?tab_menu_bname=만기보너스&p_type=year&sh_year=2024&sh_month=03&sh_day=14&search_ptype=year&viewtype=1&stx=&sfl=&bonus_status=&ragi=1" className="tab">만기보너스</a>
-			</li>
+			</li> */}
 		</ul>
                
 	</div>
@@ -294,9 +294,13 @@ return(
 								<th scope="col" className="colorset">No</th>
 								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_total_exchange.php?code=&page=&filed=b.name&orderby=asc'><u>회원명</u></a></th>
 								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_total_exchange.php?code=&page=&filed=member_id&orderby=asc'><u>아이디</u></a></th>
-								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_total_exchange.php?code=&page=&filed=b.memgrade&orderby=asc'><u>레벨</u></a></th>
-<th scope='col' className='colorset'><a href='/myAdmin/_entershop.bonus_no_total_exchange.php?code=&page=&filed=total&orderby=asc'><u>배당보너스</u></a></th><th scope='col' className='colorset'>
-    <a href='/myAdmin/_entershop.bonus_no_total_exchange.php?code=&page=&filed=total&orderby=asc'><u>매칭보너스</u></a></th><th scope='col' className='colorset'><a href='/myAdmin/_entershop.bonus_no_total_exchange.php?code=&page=&filed=total&orderby=asc'><u>직급보너스</u></a></th><th scope='col' className='colorset'><a href='/myAdmin/_entershop.bonus_no_total_exchange.php?code=&page=&filed=total&orderby=asc'><u>만기보너스</u></a></th>					
+								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_total_exchange.php?code=&page=&filed=b.memgrade&orderby=asc'><u>회원구분</u></a></th>
+<th scope='col' className='colorset'><a href='/myAdmin/_entershop.bonus_no_total_exchange.php?code=&page=&filed=total&orderby=asc'>
+	{/* <u>배당보너스</u></a></th><th scope='col' className='colorset'> */}
+    {/* <a href='/myAdmin/_entershop.bonus_no_total_exchange.php?code=&page=&filed=total&orderby=asc'> */}
+		{/* <u>매칭보너스</u></a></th><th scope='col' className='colorset'><a href='/myAdmin/_entershop.bonus_no_total_exchange.php?code=&page=&filed=total&orderby=asc'> */}
+			<u>대리점 보너스</u></a></th><th scope='col' className='colorset'><a href='/myAdmin/_entershop.bonus_no_total_exchange.php?code=&page=&filed=total&orderby=asc'>
+				</a></th>					
 								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_total_exchange.php?code=&page=&filed=total&orderby=asc'><u>발생금액</u></a></th>		
 								{/* <!--<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_total_exchange.php?code=&page=&filed=total&orderby=asc'><u>입금계좌 은행</th>	--> */}
 								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_total_exchange.php?code=&page=&filed=total&orderby=asc'><u>세금공제</u></a></th>

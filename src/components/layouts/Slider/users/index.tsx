@@ -11,7 +11,7 @@ const Slider = () => {
             <a href="StatusOfProceedsManagement" className="menu" title="수익금 현황관리" style={{display: 'block'}}>수익금 현황관리</a>
             <a href="ProceedsOfChanges" className="menu" title="수익금 변동내역" style={{display: 'block'}}>수익금 변동내역</a>
             <a href="RecommenderChangeLog" className="menu" title="추천인 변경로그" style={{display: 'block'}}>추천인 변경로그</a>
-            <a href="SponsorChangeLog" className="menu" title="후원인 변경로그" style={{display: 'block'}}>후원인 변경로그</a>
+            {/* <a href="SponsorChangeLog" className="menu" title="후원인 변경로그" style={{display: 'block'}}>후원인 변경로그</a> */}
             
             <div className="favorite_menu">
                 <a className="title" title="즐겨찾는메뉴설정" href="_favmenu.form.php"></a>

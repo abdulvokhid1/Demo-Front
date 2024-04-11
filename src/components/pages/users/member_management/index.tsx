@@ -150,7 +150,7 @@ const UserManagement = () => {
                                                value="" className="input_text"/>
 
                                     </td>
-                                    <td className="article">가입날짜</td>
+                                    <td className="article">가입날짜</td> 
                                     <td className="conts" colSpan={3}>
                                         <div className="btn_line_up_left">
                                             <input type="text" name="j_sdate"
@@ -163,64 +163,64 @@ const UserManagement = () => {
                                                    id="time_end"/>
                                         </div>
                                         <div className="btn_line_up_left">
-                                                <span className="shop_btn_pack"><button type="button"
+                                                <span className="shop_btn_pack"> &nbsp; <button type="button"
                                                                                         className='input_small gray'
                                                                                         onClick={() => {
                                                                                         }}
                                                                                         style={{cursor: 'pointer'}}>어제</button>
                                                                 </span>
-                                            <span className="shop_btn_pack"><button type="button"
+                                            <span className="shop_btn_pack">&nbsp;<button type="button"
                                                                                     className='input_small gray'
                                                                                     onClick={() => {
                                                                                     }}
                                                                                     style={{cursor: 'pointer'}}>이번주</button>
                                                     </span>
-                                            <span className="shop_btn_pack"><button type="button"
+                                            <span className="shop_btn_pack">&nbsp;<button type="button"
                                                                                     className='input_small gray'
                                                                                     onClick={() => {
                                                                                     }}
                                                                                     style={{cursor: 'pointer'}}>7일간</button>
                                                     </span>
-                                            <span className="shop_btn_pack"><button type="button"
+                                            <span className="shop_btn_pack">&nbsp;<button type="button"
                                                                                     className='input_small gray'
                                                                                     onClick={() => {
                                                                                     }}
                                                                                     style={{cursor: 'pointer'}}>지난달</button>
                                                     </span>
-                                            <span className="shop_btn_pack"><button type="button"
+                                            <span className="shop_btn_pack">&nbsp;<button type="button"
                                                                                     className='input_small gray'
                                                                                     onClick={() => {
                                                                                     }}
                                                                                     style={{cursor: 'pointer'}}>이번달</button>
                                                     </span>
-                                            <span className="shop_btn_pack"><button type="button"
+                                            <span className="shop_btn_pack">&nbsp;<button type="button"
                                                                                     className='input_small gray'
                                                                                     onClick={() => {
                                                                                     }}
                                                                                     style={{cursor: 'pointer'}}>30일간</button>
                                                     </span>
-                                            <span className="shop_btn_pack"><button type="button"
+                                            <span className="shop_btn_pack">&nbsp;<button type="button"
                                                                                     className='input_small gray'
                                                                                     onClick={() => {
                                                                                     }}
                                                                                     style={{cursor: 'pointer'}}>60일간</button>
                                                 </span>
-                                            <span className="shop_btn_pack"><button type="button"
+                                            <span className="shop_btn_pack">&nbsp;<button type="button"
                                                                                     className='input_small gray'
                                                                                     onClick={() => {
                                                                                     }}
                                                                                     style={{cursor: 'pointer'}}>90일간</button></span>
                                         </div>
                                     </td>
-                                    <td className="article">구좌보기선택</td>
+                                    {/* <td className="article">구좌보기선택</td>
                                     <td className="conts">
                                         <input type="radio" name='avatar_search_sel' id="avatar_search_sel" value=""
                                                checked={true}/>
-                                        <label style={{height: '18px'}}>전체</label>
+                                        <label style={{height: '18px'}}>전체</label>&nbsp;
                                         <input type="radio" name='avatar_search_sel' id="avatar_search_sel"
                                                value="only"/>
                                         <label style={{height: '18px'}}>대표구좌</label>
-                                    </td>
+                                    </td> */}
                                 </tr>
                                 <tr>
                                     <td className="article">업체레벨</td>
@@ -378,7 +378,7 @@ const UserManagement = () => {
                                style={{borderCollapse: 'collapse'}}>
                             <tr style={{height: '40px', alignItems: 'left'}}>
                                 <td style={{padding: '5px'}}>
-                                    ※ 페이 합계 : <span style={{color: '#e16007', fontWeight: 'bold'}}>0&nbsp;BV</span>
+                                    ※ 캐시 합계 : <span style={{color: '#e16007', fontWeight: 'bold'}}>0&nbsp;CASH</span>
                                     <span style={{color: '999999'}}>&nbsp;|&nbsp;</span>
                                     전체 : <span
                                     style={{color: '#4C64AB', fontWeight: 'bold'}}>{userListState?.length | 0}</span> 건 조회
@@ -432,7 +432,7 @@ const UserManagement = () => {
 
 
                                     <th scope="col" className="colorset"><a
-                                        href='/myAdmin/_entershop.member_all.list.php?code=&page=&filed=memgrade&orderby=asc'><u>레벨</u></a>
+                                        href='/myAdmin/_entershop.member_all.list.php?code=&page=&filed=memgrade&orderby=asc'><u>회원구분</u></a>
                                     </th>
 
 
@@ -443,7 +443,7 @@ const UserManagement = () => {
                                         href='/myAdmin/_entershop.member_all.list.php?code=&page=&filed=mb_card_point&orderby=asc'><u>확정매출</u></a>
                                     </th>
                                     <th scope="col" className="colorset"><a
-                                        href='/myAdmin/_entershop.member_all.list.php?code=&page=&filed=mb_card_point&orderby=asc'><u>페이</u></a>
+                                        href='/myAdmin/_entershop.member_all.list.php?code=&page=&filed=mb_card_point&orderby=asc'><u>캐시</u></a>
                                     </th>
 
 
@@ -455,9 +455,9 @@ const UserManagement = () => {
                                     </th>
 
 
-                                    <th scope="col" className="colorset"><a
+                                    {/* <th scope="col" className="colorset"><a
                                         href='/myAdmin/_entershop.member_all.list.php?code=&page=&filed=partner_code&orderby=asc'><u>후원인</u></a>
-                                    </th>
+                                    </th> */}
 
                                     <th scope="col" className="colorset"><a
                                         href='/myAdmin/_entershop.member_all.list.php?code=&page=&filed=signdate&orderby=asc'><u>가입일</u></a>
@@ -510,7 +510,7 @@ const UserManagement = () => {
 
                                                         <td>{item.level?.title ? item.level.title : ''}</td>
                                                         <td>
-                                                            0&nbsp;BV
+                                                            0&nbsp;CASH
                                                             <span className="shop_btn_pack" style={{float: 'right'}}>
                                             <a href='_entershop.entry_revenues_list.php?pass_sdate=&pass_edate=&pass_pointID=2000044&app_mode=popup&mb2_depscode=001001001001001001001001001001001002003003&depslevel=20'
                                                onClick={() => {
@@ -520,7 +520,7 @@ const UserManagement = () => {
                                                         </td>
 
                                                         <td>
-                                                            0&nbsp;BV
+                                                            0&nbsp;원
                                                         </td>
 
 
@@ -559,23 +559,23 @@ const UserManagement = () => {
                                                         </td>
 
 
-                                                        <td width="110px"><span>{item.sponid}</span>
+                                                        {/* <td width="110px"><span>{item.sponid}</span> */}
 
-                                                            <a href='_entershop.member_all.list.php?_mode=modify&app_mode=popup&mb3_depscode=001002001001001001001001001001001002001002002002001001001001'
+                                                            {/* <a href='_entershop.member_all.list.php?_mode=modify&app_mode=popup&mb3_depscode=001002001001001001001001001001001002001002002002001001001001'
                                                                onClick={() => {
                                                                }}
                                                                style={{float: 'right'}}>
                                                                 <img
                                                                     src='/images/m_btn.gif'
-                                                                    style={{marginTop: '1px', marginLeft: '2px'}}/></a>
+                                                                    style={{marginTop: '1px', marginLeft: '2px'}}/></a> */}
 
 
-                                                            <a href='_cardsys.sub_tree_sponid.php?_mode=modify&app_mode=popup&tree_memid=2000044'
+                                                            {/* <a href='_cardsys.sub_tree_sponid.php?_mode=modify&app_mode=popup&tree_memid=2000044'
                                                                onClick={() => {
                                                                }}
                                                                style={{float: 'right'}}><img
-                                                                src='/images/sponid_icon.png'/></a>
-                                                        </td>
+                                                                src='/images/sponid_icon.png'/></a> */}
+                                                        {/* </td> */}
 
 
                                                         <td>{getFullTime(item.createdAt || '')}</td>

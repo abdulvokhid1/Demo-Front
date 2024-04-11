@@ -25,7 +25,7 @@ const LevelManagement = () => {
                    style={{display: !sliderVisible ? "block" : "none"}} onClick={sliderToggle}></span></div>
 
 {/* <!-- 페이지타이틀 --> */}
-                  <div className="title_area">
+                  <div className="title_area"style={{background:'#eaf8f5'}}>
                     <span className="icon"></span>
                     <span className="title">회원 레벨관리</span>
                     <span className="location">홈 &gt; 매출관리 &gt; 매출 레벨관리</span>
@@ -79,7 +79,7 @@ const LevelManagement = () => {
     <th>레벨</th>
     <th>직급명</th>
     <th>구분</th>
-    <th>매출  BV</th>
+    <th>매출 CASH</th>
     <th>매출단위</th>
     <th>매출표시</th>
     <th>관리비</th>

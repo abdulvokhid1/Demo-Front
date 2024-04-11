@@ -1,15 +1,29 @@
 'use client'
 import Slider from '@/components/layouts/Slider/Sales';
+import PAGE_ROUTES from "@/utils/constants/routes";
+import { faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
+import ReactPaginate from 'react-paginate';
 
 const SalesRegistrationManager = () => {
+	const [currentPage, setCurrentPage] = useState<number>(1)
+	const [perPage, setPerPage] = useState<number>(2)
+    const [totalUsers, setTotalUsers] = useState<number>(0)
     const [sliderVisible, setSliderVisible] = useState(true)
+	
+
 	useEffect(() => {
 		console.log('sliderVisible: ', sliderVisible)
 	}, [sliderVisible]);
 	const sliderToggle = () => {
 		setSliderVisible(!sliderVisible);
 	}
+
+	const paginationHandler = (selectedItem: { selected: number }) => {
+        const page = selectedItem ? selectedItem.selected+1 : 0;
+        // mutate({page: page, limit: perPage})
+    }
 return (
     <div className={sliderVisible ? "container" : "container_hide" } id="depth2_leftmenu" style={{background: "#f0f0f0"}}>
 		<Slider />
@@ -73,7 +87,7 @@ return (
 								<td className="conts"><input type='text' name='pass_pointID' className='input_text' value=""/></td>
 								<td className="article">성명</td>
 								<td className="conts"><input type='text' name='pass_name' className='input_text' value=""/></td>
-								<td className="article">소속센터</td>
+								<td className="article">소속대리점</td>
 								<td className="conts">
 
         <select name='assign_center' id="assign_center" className='add_option add_option_chk' style={{width:'200px'}}>
@@ -168,18 +182,33 @@ return (
 								<th scope="col" className="colorset">확정매출</th>
 								<th scope="col" className="colorset">상태</th>
 								<th scope="col" className="colorset">등록일</th>
-								<th scope="col" className="colorset">만기일</th>
+								{/* <th scope="col" className="colorset">만기일</th> */}
 								<th scope="col" className="colorset">수당</th>
 								<th scope="col" className="colorset">관리</th>
 							</tr>
 						</thead> 
 						<tbody> 
-<tr><td colSpan={15} height='40'>내용이 없습니다.</td></tr>	</tbody> 
+<tr><td colSpan={20} height='40'>내용이 없습니다.</td></tr>	</tbody> 
 					</table>
 
 					{/* <!-- 페이지네이트 --> */}
-					<div className="list_paginate">			
-							<span className='lineup'><span className='nextprev'><span className='btn'><span className='no'><span className='icon ic_first'></span></span><a href={' ?&listpg=&listpg=1'} className='ok' title='처음' ><span className='icon ic_first'></span></a></span><span className='btn'><span className='no'><span className='icon ic_prev'></span></span><a href=' ?&listpg=&listpg=0' className='ok' title='이전' ><span className='icon ic_prev'></span></a></span></span><span className='number'><a href='#none' onClick={()=>{return false}} className='hit'>1</a></span><span className='nextprev'><span className='btn'><span className='no'><span className='icon ic_next'></span></span><a href={' ?&listpg=&listpg=2'} className='ok' title='다음' ><span className='icon ic_next'></span></a></span><span className='btn'><span className='no'><span className='icon ic_last'></span></span><a href={' ?&listpg=&listpg=0'} className='ok' title='끝' ><span className='icon ic_last'></span></a></span></span></span>					</div>
+					<div style={{display:'flex', alignItems:'center', justifyContent:'center' ,margin:'0 auto'}}>
+                        <ReactPaginate
+                            previousLabel={<FontAwesomeIcon icon={faArrowAltCircleLeft}/>}
+                            nextLabel={<FontAwesomeIcon icon={faArrowAltCircleRight}/>}
+                            breakLabel={'...'}
+                            breakClassName={'break-me'}
+                            activeClassName={'active'}
+                            containerClassName={'pagination'}
+                            // subContainerClassName={'pages pagination'}
+
+                            initialPage={currentPage-1}
+                            pageCount={Math.ceil(totalUsers/ perPage)}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={paginationHandler}
+                        />
+                        </div>
 					{/* <!-- // 페이지네이트 --> */}
 
 			</div>

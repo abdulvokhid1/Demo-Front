@@ -24,8 +24,8 @@ const PAGE_ROUTES = {
     SALES_REGISTRATION: '/admin/sales_management/sale_registration',
   },
   CALC:{
-    CALC_MANAGEMENT: '/admin/calc_manage/daily_calc',
-  },
+    CALC_MANAGEMENT: '/admin/calc_manage/position_calc',
+   },
  SHOP:{
   SHOP_PRODUCT_MANAGEMENT:'/admin/shop_manager/shop_product_management',
   CATEGORY_REGISTRATION: '/admin/shop_manager/add_category'

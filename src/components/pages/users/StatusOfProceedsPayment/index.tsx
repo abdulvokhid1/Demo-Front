@@ -97,8 +97,8 @@ return(
 								<th scope="col" className="colorset">아이디</th>
 								<th scope="col" className="colorset">성명</th>
 								<th scope="col" className="colorset">적립/변경 사유</th>
-								<th scope="col" className="colorset">지급페이</th>
-								<th scope="col" className="colorset">차감페이</th>
+								<th scope="col" className="colorset">지급캐시</th>
+								<th scope="col" className="colorset">차감캐시</th>
 								<th scope="col" className="colorset">처리후잔액</th>
 								<th scope="col" className="colorset">상태</th>
 								<th scope="col" className="colorset">등록일</th>

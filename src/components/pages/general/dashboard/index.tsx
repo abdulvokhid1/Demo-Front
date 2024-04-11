@@ -209,10 +209,10 @@ const Dashboard = () => {
                                                         <div className="col-8">
                                                             <div className="media-body text-right">
                                                                 <p className=" font-weight-medium"
-                                                                   style={{color: '#f46a6a', fontWeight: 'bold'}}>총
+                                                                   style={{color: '#f46a6a', fontWeight: 'bold'}}>당일 총
                                                                     매출</p>
                                                                 <h4 className="mb-0"
-                                                                    style={{width: '180px'}}>0&nbsp;BV</h4>
+                                                                    style={{width: '180px'}}>0&nbsp;원</h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -242,10 +242,10 @@ const Dashboard = () => {
                                                             <div className="media-body text-right">
                                                                 <p className=" font-weight-medium"
                                                                    style={{color: '#f1b44c', fontWeight: 'bold'}}>
-                                                                    보유 페이
+                                                                    보유 캐시
                                                                 </p>
                                                                 <h4 className="mb-0" style={{width: '180px'}}>
-                                                                    0&nbsp;BV
+                                                                    0&nbsp;Cash
                                                                 </h4>
                                                             </div>
                                                         </div>
@@ -280,10 +280,10 @@ const Dashboard = () => {
                                                             <div className="media-body text-right">
                                                                 <p className=" font-weight-medium"
                                                                    style={{color: '#34c38f', fontWeight: 'bold'}}>
-                                                                    총 누적
+                                                                    총 누적 매출
                                                                 </p>
                                                                 <h4 className="mb-0"
-                                                                    style={{width: '180px'}}>0&nbsp;BV</h4>
+                                                                    style={{width: '180px'}}>0&nbsp;원</h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -315,10 +315,10 @@ const Dashboard = () => {
                                                             <div className="media-body text-right">
                                                                 <p className=" font-weight-medium"
                                                                    style={{color: '#9a55e6', fontWeight: 'bold'}}>
-                                                                    총 출금
+                                                                    총 출금 금액
                                                                 </p>
                                                                 <h4 className="mb-0"
-                                                                    style={{width: '180px'}}>0&nbsp;BV </h4>
+                                                                    style={{width: '180px'}}>0&nbsp;원 </h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -328,7 +328,7 @@ const Dashboard = () => {
                                         </div>
                                     </div>
                                 </div>
-
+<br/><br/>
 
                                 <div className="">
                                     <div className="">
@@ -366,7 +366,7 @@ const Dashboard = () => {
                                             </thead>
                                             <tbody>
                                             <tr>
-                                                <td>매출일마감</td>
+                                                <td>매출 일마감</td>
 
                                                 <td style={{textAlign: 'center'}}>
                                                     -
@@ -429,7 +429,7 @@ const Dashboard = () => {
 
 
                                             <tr>
-                                                <td>직급일마감</td>
+                                                <td>대리점 일마감</td>
                                                 <td style={{textAlign: 'center'}}>
                                                     -
                                                 </td>
@@ -471,9 +471,8 @@ const Dashboard = () => {
                                                 </td>
                                             </tr>
 
-                                            <tr>
+                                            {/* <tr>
                                                 <td>배당보너스</td>
-
                                                 <td style={{textAlign: 'center'}}>
                                                     -
                                                 </td>
@@ -571,11 +570,11 @@ const Dashboard = () => {
                                                 </td>
 
 
-                                            </tr>
+                                            </tr> */}
 
 
                                             <tr>
-                                                <td>직급보너스</td>
+                                                <td>대리점 보너스</td>
 
                                                 <td style={{textAlign: 'center'}}>
                                                     -
@@ -631,7 +630,7 @@ const Dashboard = () => {
                                                 </td>
                                             </tr>
 
-
+{/* 
                                             <tr>
                                                 <td>만기보너스</td>
 
@@ -676,7 +675,7 @@ const Dashboard = () => {
                                                 <td style={{textAlign: 'center'}}>
                                                     -
                                                 </td>
-                                            </tr>
+                                            </tr> */}
                                             =
                                             </tbody>
                                         </table>
@@ -715,7 +714,7 @@ const Dashboard = () => {
                                                  margin: '0px',
                                                  padding: '20px'
                                              }}>
-                                            <div className="col-12">
+                                            {/* <div className="col-12">
                                                 <b>&nbsp;&nbsp;배당보너스</b>
                                                 <div className="row">
                                                     <div className="col-4">
@@ -734,10 +733,10 @@ const Dashboard = () => {
                                                         <p className="text-muted mb-0 pr-2">0</p>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> */}
 
 
-                                            <div className="col-12">
+                                            {/* <div className="col-12">
                                                 <b>&nbsp;&nbsp;매칭보너스</b>
                                                 <div className="row">
                                                     <div className="col-4">
@@ -755,7 +754,7 @@ const Dashboard = () => {
                                                         <p className="text-muted mb-0 pr-2">0</p>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> */}
 
 
                                             <div className="col-12">
@@ -772,14 +771,14 @@ const Dashboard = () => {
                                                         </div>
                                                     </div>
                                                     <div className="col-8 text-right">
-                                                        <h5 className="font-size-15 pr-2 mt-2 ">직급보너스</h5>
+                                                        <h5 className="font-size-15 pr-2 mt-2 ">당일 대리점 보너스</h5>
                                                         <p className="text-muted mb-0 pr-2">0</p>
                                                     </div>
                                                 </div>
                                             </div>
 
 
-                                            <div className="col-12">
+                                            {/* <div className="col-12">
                                                 <b>&nbsp;&nbsp;만기보너스</b>
 
                                                 <div className="row">
@@ -799,7 +798,7 @@ const Dashboard = () => {
                                                     </div>
                                                 </div>
                                             </div>
-
+ */}
 
                                         </div>
 
@@ -813,7 +812,7 @@ const Dashboard = () => {
                                                  padding: '20px',
                                                  borderLeft: '1px solid #fff'
                                              }}>
-                                            <div className="col-12">
+                                            {/* <div className="col-12">
                                                 <b>&nbsp;&nbsp;배당보너스</b>
                                                 <div className="row">
                                                     <div className="col-4">
@@ -852,11 +851,11 @@ const Dashboard = () => {
                                                         <p className="text-muted mb-0 pr-2">0</p>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> */}
 
 
                                             <div className="col-12">
-                                                <b>&nbsp;&nbsp;직급보너스</b>
+                                                <b>&nbsp;&nbsp;대리점 보너스</b>
 
                                                 <div className="row">
                                                     <div className="col-4">
@@ -870,14 +869,14 @@ const Dashboard = () => {
                                                         </div>
                                                     </div>
                                                     <div className="col-8 text-right">
-                                                        <h5 className="font-size-15 pr-2 mt-2 ">직급보너스</h5>
+                                                        <h5 className="font-size-15 pr-2 mt-2 ">대리점 누적 보너스</h5>
                                                         <p className="text-muted mb-0 pr-2">0</p>
                                                     </div>
                                                 </div>
                                             </div>
 
 
-                                            <div className="col-12">
+                                            {/* <div className="col-12">
                                                 <b>&nbsp;&nbsp;만기보너스</b>
 
                                                 <div className="row">
@@ -896,7 +895,7 @@ const Dashboard = () => {
                                                         <p className="text-muted mb-0 pr-2">0</p>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> */}
 
 
                                         </div>
