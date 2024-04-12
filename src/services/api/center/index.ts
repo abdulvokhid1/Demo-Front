@@ -7,6 +7,8 @@ import { QueryType } from './type';
 const CENTER_API = {
   getList: (params: QueryType) =>
       axiosClient.post(API_ENDPOINTS.CENTER.LIST, params),
+  createCenter: (params: centerRegistrationProps) =>
+      axiosClient.post(API_ENDPOINTS.CENTER.REGISTRATION, params),
   updateCenter: (params: centerRegistrationProps) =>
     axiosClient.post(API_ENDPOINTS.CENTER.REGISTRATION, params),
 }

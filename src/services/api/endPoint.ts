@@ -15,7 +15,8 @@ export const API_ENDPOINTS = {
 
   CENTER: {
     LIST: '/api/v1/center/list',
-    REGISTRATION: '/api/v1/center/update'
+    REGISTRATION: '/api/v1/center/create',
+    UPDATE: '/api/v1/center/update',
   },
   
   SETUP_FEE: {

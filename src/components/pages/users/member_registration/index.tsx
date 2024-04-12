@@ -159,9 +159,9 @@ const UserManagement = () => {
         const address = formData.get('address');
         const address1 = formData.get('address1');
         const address_doro = formData.get('address_doro')
-        const zonecode = formData.get('zonecode');
+        // const zonecode = formData.get('zonecode');
         const option_center = formData.get('_option_center')
-        const recomid = formData.get('recomid')
+        const recomid = formData.get('recomid_hidden')
         const sponid = formData.get('sponid')
         const return_bank = formData.get('return_bank')
         const return_account = formData.get('return_account')
@@ -183,7 +183,7 @@ const UserManagement = () => {
             address: address?.toString() || '',
             address1: address?.toString() || '',
             addressdoro: address_doro?.toString() || '',
-            zonecode: zonecode?.toString() || '',
+            zonecode: (zip1?.toString() || '') + (zip2?.toString() || ''),
             centerId: Number(option_center) || 0,
             recomid: recomid?.toString() || '',
             sponid: sponid?.toString() || '',
@@ -445,7 +445,7 @@ const UserManagement = () => {
                                     <td className="article">주소</td>
                                     <td className="conts">
                                         기본주소 : <input type="text" name="address" id="_addr1" 
-                                                      size={50} className="input_text" value={addressDetail?.jibunAddress}/><br/>
+                                                      size={50} className="input_text" value={addressDetail?.address}/><br/>
                                         상세주소 : <input type="text" name="address1" id="_addr2" size={50} className="input_text"/><br/>
                                         도로명주소 : <input type="text" name="address_doro" id="_addr_doro" size={70} className="input_text" value={addressDetail?.roadAddress}/>
                                         {/*<br/>새 우편번호 : <input type="text" name="zonecode" id="_zonecode" size={10} className="input_text"/>*/}
@@ -474,15 +474,15 @@ const UserManagement = () => {
                                 <tr>
                                     <td className="article">추천인 아이디</td>
                                     <td className="conts">
-                                        <input type="hidden" id='recomid_hidden' name="recomid" size={30}
+                                        <input type="hidden" id='recomid_hidden' name="recomid_hidden" size={30}
                                                className="input_text"
                                                onChange={(e) => {
-                                                   setRecomId(Number(e.target.value))
+                                                   // setRecomId(Number(e.target.value))
                                                }}/>
                                         <input type="text" id='recomid_display' name="recomid_display" size={30}
                                                className="input_text"
                                                style={{color: '#808080', backgroundColor: '#f0f0f0'}}
-                                               value={recomId}
+                                               // value={recomId}
                                                tabIndex={-1} readOnly/>
 
                                         <span className='shop_btn_pack' style={{float: 'none'}}>&nbsp;

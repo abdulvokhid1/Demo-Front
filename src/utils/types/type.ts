@@ -13,7 +13,8 @@ export type UserInfo = {
     address?: string;
     address1?: string;
     addressdoro?: string;
-    recomid?: string;
+    recom?: UserInfo;
+    subs?: UserInfo[];
     sponid?: string;
     center: Center;
     Level: Level;

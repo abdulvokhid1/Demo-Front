@@ -17,8 +17,10 @@ import USER_API from "@/services/api/users";
 import { getFullTime } from "@/utils/helper";
 import LEVEL_API from "@/services/api/levels";
 import { LevelTypeProps } from "@/services/api/levels/type";
+import { useRouter } from "next/navigation";
 
 const UserManagement = () => {
+    const router = useRouter()
     const [messageApi, contextHolder] = message.useMessage()
     const [sliderVisible, setSliderVisible] = useState(true)
     const [isSelectedHover, setIsSelectedHover] = useState(false)
@@ -60,11 +62,14 @@ const UserManagement = () => {
             },
 
             onError: (error: any) => {
-                const errorType = error.response.data.errors[0]
-                messageApi.open({
-                    type: 'error',
-                    content: 't(`errorMessages.${errorType}`)',
-                })
+                // const errorType = error.response.data.errors[0]
+                if (error.response.status === 401) {
+                    router.push(PAGE_ROUTES.AUTH.LOGIN);
+                }
+                // messageApi.open({
+                //     type: 'error',
+                //     content: 't(`errorMessages.${errorType}`)',
+                // })
             },
         }
     )
@@ -391,14 +396,8 @@ const UserManagement = () => {
                                     style={{color: '#4C64AB', fontWeight: 'bold'}}>{userListState.length}</span> 건 조회
                                 </td>
                             </tr>
-
-
                         </table>
-
-
                     </div>
-
-
                     <form name="fboardlist" method="post">
 
                         <input type="hidden" name="_mode" value=""/>
@@ -547,7 +546,7 @@ const UserManagement = () => {
                                                         </td>
 
 
-                                                        <td width="110px"><span>{item.recomid}</span>
+                                                        <td width="110px"><span>{item.recom?.id}</span>
                                                             <a href="_entershop.member_all.list.php?_mode=modify&app_mode=popup&mb2_depscode=001001001001001001001001001001001002003003"
                                                                onClick={() => {
                                                                }} style={{float: 'right'}}>

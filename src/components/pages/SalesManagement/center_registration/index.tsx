@@ -10,8 +10,11 @@ import React, { useEffect, useState } from 'react';
 import centers from "@/services/api/centers";
 import { getFullTime } from "@/utils/helper";
 import USER_API from "@/services/api/users";
+import noop  from "noop-ts";
+import { useRouter } from "next/navigation";
 
 const CenterRegistration = () => {
+    const router = useRouter();
     const [sliderVisible, setSliderVisible] = useState(true)
     const [isSelectedHover, setIsSelectedHover] = useState(false)
     const [isSelectedClicked, setIsSelectedClicked] = useState(false)
@@ -21,6 +24,8 @@ const CenterRegistration = () => {
     const [totalCenters, setTotalCenters] = useState<number>(0)
     // const [perPage, setPerPage] = useState<number>(0)
     const [userListState, setUserListState] = useState<UserInfo[]>([])
+    const [subUser1State, setSubUser1State] = useState<string>('')
+    const [subUser2State, setSubUser2State] = useState<string>('')
     const [totalUsers, setTotalUsers] = useState<number>(0)
 
 
@@ -34,11 +39,35 @@ const CenterRegistration = () => {
             },
 
             onError: (error: any) => {
-                const errorType = error.response.data.errors[0]
-                messageApi.open({
-                    type: 'error',
-                    content: 't(`errorMessages.${errorType}`)',
-                })
+                // const errorType = error.response.data.errors[0]
+                // messageApi.open({
+                //     type: 'error',
+                //     content: 't(`errorMessages.${errorType}`)',
+                // })
+                if (error.response.status === 401) {
+                    router.push(PAGE_ROUTES.AUTH.LOGIN);
+                }
+            },
+        }
+    )
+
+    const {mutate: mutateCenterRegistration} = useMutation(
+        {
+            mutationFn: CENTER_API.createCenter,
+            onSuccess: async (values: any) => {
+                console.log(JSON.stringify(values))
+                router.push(PAGE_ROUTES.SALES_MANAGEMENT.CENTER_MANAGEMENT)
+            },
+
+            onError: (error: any) => {
+                // const errorType = error.response.data.errors[0]
+                // messageApi.open({
+                //     type: 'error',
+                //     content: 't(`errorMessages.${errorType}`)',
+                // })
+                if (error.response.status === 401) {
+                    router.push(PAGE_ROUTES.AUTH.LOGIN);
+                }
             },
         }
     )
@@ -134,7 +163,7 @@ const CenterRegistration = () => {
                                 <tr id="new_member_use5">
                                     <td className="article">대리점명</td>
                                     <td className="conts">
-                                        <input type="text" name="in_compay" value="" size={30} className="input_text"/>
+                                        <input type="text" name="in_compay" size={30} className="input_text"/>
                                     </td>
                                 </tr>
                                 <tr id="new_member_use1">
@@ -144,7 +173,11 @@ const CenterRegistration = () => {
                                     <td className="conts">
                                         <span id="id_view"></span>
                                         <span id="id_form">
-											<select name="id">
+											<select name="id" onChange={(e) => {
+                                                const recomUser = userListState.filter((item: any) => item.id == e.target.value)[0];
+                                                recomUser.subs?.length? setSubUser1State(recomUser.subs[0].name || '') : setSubUser1State('');
+                                                recomUser.subs?.length &&  recomUser.subs.length > 1 ? setSubUser2State(recomUser.subs[1].name || '') : setSubUser2State('')
+                                            }}>
                                                 <option value="">-선택-</option>
                                                 {userListState?.length > 0 && (
                                                     userListState.map((item: any, index) => {
@@ -173,9 +206,13 @@ const CenterRegistration = () => {
                                 <tr id="new_member_use5">
                                     <td className="article">하위추천회원</td>
                                     <td className="conts">
-                                        <input type="text" name="in_compay" value="" size={30} className="input_text"/>
+                                        <input type="text" name="in_compay" size={30} className="input_text"
+                                               value={subUser1State}
+                                        />
                                         &nbsp;&nbsp;
-                                        <input type="text" name="in_compay" value="" size={30} className="input_text"/>
+                                        <input type="text" name="in_compay" size={30} className="input_text"
+                                               value={subUser2State}
+                                        />
                                     </td>
                                 </tr>
                                 {/*<tr id="new_member_use5">*/}
