@@ -58,7 +58,7 @@ const CategoryManagement = () => {
 											<span className='shop_btn_pack'>1차 카테고리</span>
 											<span className='shop_btn_pack'><span className='blank_3'></span></span>
 											<span className='shop_btn_pack'><input type='button' name='' className='input_small blue' value='추가' onClick={()=>{
-												window.open(PAGE_ROUTES.SHOP.CATEGORY_REGISTRATION, '카테고리 추가', 'height: 80px, width: 100px')
+												window.open(PAGE_ROUTES.SHOP.CATEGORY_REGISTRATION, '카테고리 추가','height=600px, width=900px')
 											}}/></span>
 										</div>
 									</th>

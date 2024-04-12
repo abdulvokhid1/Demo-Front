@@ -2,7 +2,8 @@
 
 const addCategory =()=>{
 return(
-    
+    <html>
+		<body>
     <div className="content_section">
 			
             <form name='PUBLIC_FORM' method='post' action={()=>{}}  encType='multipart/form-data'>
@@ -12,7 +13,7 @@ return(
             <input type='hidden' name='icon_img' value='5' />
           
     {/* // <!-- 검색영역 --> */}
-	<div className='form_box_area'>s
+	<div className='form_box_area'>
 		<table className='form_TB' summary='검색항목'>
 			<colgroup><col width='100px'/><col width='*'/></colgroup>
 			<tbody> 
@@ -59,6 +60,8 @@ return(
        
    
  </div>
+ </body>
+ </html>
 
 
 )}
