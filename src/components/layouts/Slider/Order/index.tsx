@@ -4,7 +4,7 @@ import Link from 'next/link'
 const Slider = () => {
     return (
         <div className="aside_second">
-                 <span >배송주문 관리 <span>〓</span></span>
+                 <span style={{backgroundColor: '#eaf8f5 '}}>배송주문 관리 <span>〓</span></span>
             <a href="orders_of_today" className="menu" title="데일리 정산" style={{display: 'block'}}>오늘 접수된 주문</a>
             <a href="OrderConfirm" className="menu" title="판매 인센티브" style={{display: 'block'}}>1단계 주문확인</a>
             <a href="DirectPay" className="menu" title="판매 인센티브" style={{display: 'block'}}>1단계 주문확인(무통장)</a>

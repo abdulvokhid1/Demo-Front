@@ -36,7 +36,7 @@ return(
     
 		<tr>
 			<td className='article'>아이콘 이미지</td>
-			<td className='conts'><div style={{}}><img src='' id='img_cateimg' style={{ maxWidth:'300px', marginBottom:'5px', display:'none'}}/></div>
+			<td className='conts'><div style={{}}><img src='' id='img_cateimg' style={{ maxWidth:'300px', marginBottom:'10px', display:'none'}}/></div>
             <input type='file' name='cateimg' size={20} className='input_text'/></td>
 		</tr>
 	

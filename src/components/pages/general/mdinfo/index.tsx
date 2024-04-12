@@ -1,9 +1,44 @@
 'use client'
+import '../../../pages/users/member_registration/global.d'
 import Slider from '@/components/layouts/Slider/general';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import DaumPostcodeData = globalThis.DaumPostcodeData;
+
+
+const id = "daum-postcode"; // script가 이미 rending 되어 있는지 확인하기 위한 ID
+const src = "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
 
 const Mdinfo = () => {
 	const [sliderVisible, setSliderVisible] = useState(true)
+	const [addressDetail, setAddressDetail] = useState<DaumPostcodeData>()
+
+
+	 /*** Daum Address Popup search ***/
+	 const postcodeRef = useRef<HTMLDivElement | null>(null);
+
+	 const loadLayout = () => {
+		 window.daum.postcode.load(() => {
+			 const postcode = new window.daum.Postcode({
+				 oncomplete: function (data) {
+					 setAddressDetail(data)
+					 console.log(data);
+				 }
+			 });
+			 postcode.open();
+		 });
+	 };
+
+	 useEffect(() => {
+        const isAlready = document.getElementById(id);
+
+        if (!isAlready) {
+            const script = document.createElement("script");
+            script.src = src;
+            script.id = id;
+            document.body.append(script);
+        }
+    }, []);
+
 	useEffect(() => {
 		console.log('sliderVisible: ', sliderVisible)
 	}, [sliderVisible]);
@@ -52,8 +87,6 @@ const Mdinfo = () => {
 
 					</div>
 				</div>
-
-
 
 				<form name="frm" method="post" action="_config.agree.pro.php" encType={'multipart:form-data'} >
 					<input type='hidden' name="mode" value='modify' />
@@ -166,25 +199,29 @@ function new_post_view(){
 								<tr>
 									<td className="article">우편번호</td>
 									<td className="conts">
-										<input type='text' name="zip1" id="_post1" value='' size={5} className="input_text" />-
-										<input type='text' name="zip2" id="_post2" value='' size={5} className="input_text" />
-										<span className="shop_btn_pack" style={{ float: 'none' }}>&nbsp;<a href="#none" onClick={() => { return false }} className='small gray'>우편번호검색</a></span>
+										<input type='text' name="zip1" id="_post1" size={5} className="input_text" value={addressDetail?.zonecode.toString().substring(0,2)}/>-
+										<input type='text' name="zip2" id="_post2" size={5} className="input_text" value={addressDetail?.zonecode.toString().substring(2)}/>
+										<span className="shop_btn_pack" style={{ float: 'none' }}>&nbsp;
+										<a href="#none" 
+										onClick={loadLayout} 
+										className='small gray'>우편번호검색
+										</a>
+										<div ref={postcodeRef}></div>
+										</span>
 									</td>
 								</tr>
 
 								<tr>
 									<td className="article">주소</td>
 									<td className="conts">
-										기본주소 : <input type='text' name="address" id="_addr1" value='' size={50} className="input_text" /><br/>
-										상세주소 : <input type='text' name="address1" id="_addr2" value='' size={50} className="input_text" /><br/><br/>
-										도로명주소 : <input type='text' name="address_doro" id="_addr_doro" value='' size={70} className="input_text" />
-										새 우편번호 : <input type="text" name="zonecode" id="_zonecode" value="" size={10} className="input_text" />
+										기본주소 : <input type='text' name="address" id="_addr1"  size={50} className="input_text"  value={addressDetail?.address}/><br/>
+										상세주소 : <input type='text' name="address1" id="_addr2" size={50} className="input_text" /><br/><br/>
+										도로명주소 : <input type='text' name="address_doro" id="_addr_doro" size={70} className="input_text" value={addressDetail?.roadAddress}/>
+										{/* 새 우편번호 : <input type="text" name="zonecode" id="_zonecode" value="" size={10} className="input_text" /> */}
 									</td>
 								</tr>
-
 									</tbody>
 								</table>
-
 							</div>
 
 							{/* <!--
@@ -516,7 +553,7 @@ alert('선택된 텍스트를 복사하세요.');
 																	<td className="conts">
 																		<div style={{ }}>
 																			<img src='' id='img_myoffice_img' style={{ maxWidth: '300px', marginBottom: '5px', display: 'none' }} /></div>
-																		<div><input type='file' name='myoffice_img' size={20} className='input_text n2b16548968afb5806f588912cbec7109_file' /></div>
+																		<div><input type='file'  name='myoffice_img' size={50} className='input_text n2b16548968afb5806f588912cbec7109_file' /></div>
 																		{/* <script>
 		$(function(){
 

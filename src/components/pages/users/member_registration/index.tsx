@@ -444,8 +444,7 @@ const UserManagement = () => {
                                 <tr>
                                     <td className="article">주소</td>
                                     <td className="conts">
-                                        기본주소 : <input type="text" name="address" id="_addr1" 
-                                                      size={50} className="input_text" value={addressDetail?.address}/><br/>
+                                        기본주소 : <input type="text" name="address" id="_addr1" size={50} className="input_text" value={addressDetail?.address}/><br/>
                                         상세주소 : <input type="text" name="address1" id="_addr2" size={50} className="input_text"/><br/>
                                         도로명주소 : <input type="text" name="address_doro" id="_addr_doro" size={70} className="input_text" value={addressDetail?.roadAddress}/>
                                         {/*<br/>새 우편번호 : <input type="text" name="zonecode" id="_zonecode" size={10} className="input_text"/>*/}

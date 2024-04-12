@@ -123,7 +123,7 @@ textarea::textarea-placeholder {color:#ff0000}
 
 
 /* 헤더 ---------------------------------------------------------------- */
-.header{clear:both; position:relative; width:100%; height:45px; z-index:25; background:#43464f; overflow:hidden;}
+.header{clear:both; position:relative; width:100%; height:45px; z-index:25; background:#9dd4bf; overflow:hidden;}
 
 .header .logo {display:block; height:45px; width:265px; float:left; overflow:hidden; line-height:45px; color:#fff;}
 .header .logo .name {color:#fff; font-weight:bold; font-size:2EM; letter-spacing:-2px; margin-left:5px;}
@@ -255,8 +255,8 @@ textarea::textarea-placeholder {color:#ff0000}
 .aside_second > span > span {float:right;display:inline-block;color:#666;}
 
 .aside_second .menu {color:#000; border-bottom:1px solid #bac0c6; }
-.aside_second .menu:hover {background:#c3d1df;}
-.aside_second .menu_on {color:#fff; font-weight:bold; border-bottom:1px solid #375a7d; background:#6f96bd;}
+.aside_second .menu:hover {background:#eaf8f5;}
+.aside_second .menu_on {color:#eaf8f5; font-weight:bold; border-bottom:1px solid #375a7d; background:#6f96bd;}
 
 
 
@@ -267,7 +267,7 @@ textarea::textarea-placeholder {color:#ff0000}
 .aside_second .favorite_menu .title:hover { background: transparent url('/images/btn_favorite.png') 0 -29px no-repeat; }
 
 .aside_second .favorite_menu .box {background:#f4f4f4;}
-.aside_second .favorite_menu .box .fmenu {display:inline-block; width:140px; font-size:13px; color:#666; border-top:1px solid #e0e0e0; padding:7px 10px; letter-spacing:-1px;}
+.aside_second .favorite_menu .box .fmenu {display:inline-block; width:140px; font-size:13px; color:#eaf8f5; border-top:1px solid #e0e0e0; padding:7px 10px; letter-spacing:-1px;}
 .aside_second .favorite_menu .box .fmenu:hover {color:#ff0000;}
 .aside_second .favorite_menu .box a:first-child {border:none;}
 
