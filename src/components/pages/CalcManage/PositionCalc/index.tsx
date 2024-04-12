@@ -1,5 +1,5 @@
 'use client'
-import Slider  from '@/components/layouts/Slider/users';
+import Slider  from '@/components/layouts/Slider/Calc';
 import { useEffect, useState } from 'react';
 const PositionCalc = () => {
     const [sliderVisible, setSliderVisible] = useState(true)

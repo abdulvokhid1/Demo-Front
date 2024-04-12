@@ -82,7 +82,7 @@ return(
 								<td className="conts"><input type='text' name='pass_pointID' className='input_text' value=""/></td>
 								<td className="article">성명</td>
 								<td className="conts"><input type='text' name='pass_name' className='input_text' value=""/></td>
-								<td className="article">소속센터</td>
+								<td className="article">소속대리점</td>
 								<td className="conts">
     <select name='assign_center' id="assign_center" className='add_option add_option_chk' style={{width:'200px'}}>
     <option value="">선택</option>
@@ -146,7 +146,7 @@ return(
 								<th scope="col" className="colorset">아이디</th>
 								<th scope="col" className="colorset">회원명</th>
 								<th scope="col" className="colorset">등급</th>
-								<th scope="col" className="colorset">소속센터</th>
+								<th scope="col" className="colorset">소속대리점</th>
 								<th scope="col" className="colorset">출금구분</th>
 								<th scope="col" className="colorset">출금요청금액</th>
 								<th scope="col" className="colorset">수수료</th>

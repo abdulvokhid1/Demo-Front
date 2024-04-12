@@ -35,27 +35,25 @@ const onSubmit = async (formData: FormData) => {
 
       const id = formData.get('id');
       const income_option_select_fee = formData.get('select_fee');
-       const tax = formData.get('tax ')
+      const tax = formData.get('tax ');
       const withdrawal_fee = formData.get('withdrawal_fee');
-       const transfer_fee = formData.get('transfer_fee');
-      const other_savefee = formData.get('other_savefee')
-     
-  
+      const transfer_fee = formData.get('transfer_fee');
+      const other_savefee = formData.get('other_savefee');
+      const select_fee = formData.get('select_fee');
+
       const params = {
-          name: id? id.toString() : '',
-          income_option_select_fee:income_option_select_fee === 'Y'? 1 : 0,
-          tax: tax? tax.toString(): '',
+          id: Number(id),
+          income_option_select_fee:Number(income_option_select_fee) || 0,
+          tax: Number(tax) || 0,
           withdrawal_fee: Number(withdrawal_fee) || 0,
           transfer_fee: Number(transfer_fee) || 0,
           other_savefee: Number(other_savefee) || 0,
+          select_fee: Number(select_fee) || 0,
        }
       console.log(params)
-      // mutate(params);
+      mutate(params);
 
-      // Handle response if necessary
-      // const data = await response.json()
-      // ...
-  }
+     }
 
     return(
         <div className={sliderVisible ? "container" : "container_hide" } id="depth2_leftmenu" 

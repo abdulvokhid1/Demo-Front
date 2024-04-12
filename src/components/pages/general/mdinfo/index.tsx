@@ -91,7 +91,7 @@ const Mdinfo = () => {
 								</tr>
 								<tr>
 									<td className="article">업체명<span className="ic_ess" title="필수"></span></td>
-									<td className="conts"><input type='text' name="cName" value='더센2' size={30} className="input_text" /></td>
+									<td className="conts"><input type='text' name="cName" value='쇼핑머니' size={30} className="input_text" /></td>
 								</tr>
 								<tr>
 									<td className="article">사업자번호 (주민번호)</td>
@@ -214,62 +214,7 @@ function new_post_view(){
 
 --> */}
 
-							<div className="sub_title"><span className="icon"></span><span className="title">지갑주소</span></div>
-							<div className="form_box_area">
-								<table className="form_TB" summary="검색항목">
-									<colgroup>
-										<col width="200px" /><col width="*" />
-									</colgroup>
-									<tbody>
-
-										<tr>
-											<td className="article">코드페이 월렛 아이디</td>
-											<td className="conts"><input type='text' name="codepay_wid" value=' ' size={60} className="input_text" /></td>
-										</tr>
-
-										<tr>
-											<td className="article">코드페이 api key</td>
-											<td className="conts"><input type='text' name="codepay_apikey" value=' ' className="input_text" style={{ width: '100%' }} /></td>
-										</tr>
-
-										<tr>
-											<td className="article">코드페이 송금키</td>
-											<td className="conts"><input type='text' name="codepay_remitkey" value=' ' size={60} className="input_text" /></td>
-										</tr>
-
-										<tr>
-											<td className="article">지갑주소</td>
-											<td className="conts">
-												<div className='guide_text'>
-													<span className='ic_blue'></span>
-													<span className='blue'>입금받으실 지갑주소를 입력하세요.</span>
-												</div>
-									
-											{/* <!-- bxslide --> */}
-												<link rel="stylesheet" href="/include/js/jquery.bxslider/jquery.bxslider.css" type="text/css" />
-												{/* <script src="/include/js/jquery.bxslider/jquery.bxslider.js"></script> */}
-												{/* <link href="/myAdmin/css/dash/bootstrap.css?v=1668010764" id="bootstrap-style" rel="stylesheet" type="text/css"/> */}
-
-													{/* <script type="text/javascript" src="/pages_unique03/js/clipboard.min.js"></script> */}
-
-													
-													<div className="token_tid">
-														<input type='hidden' name='ip_way' value="1" />
-														네트워크 선택 : <select name='token_name' id='token_name' className='select_design add_option add_option_chk' style={{ width: '91%', height: '30px' }}>
-															<option value='CODEPAY'>코드페이 간편주소</option>
-														</select>
-														<br /><br />
-
-														지갑주소 입력 : <input type="text" name="coin_token" className="input_text" value="" placeholder="지갑주소를 복사해서 붙여넣기하세요" style={{ width: '90%', height: '30px' }}/>
-															<br/><br/>
-
-																태그그룹 입력 : <input type="text" name="tag_group_name" className="input_text" value="" placeholder="코드페이 태그 그룹명을 입력하세요" style={{width:'90%',height:'30px'}} />
-
-																<br/><br/>
-																	<a href="#none" className="btn_add_button" onClick={() => { return false }} style={{ cursor: 'pointer' }}>
-																		<img src="/pages_unique03/images/main/menu_icon_add_blue.png" alt="" /><span>지갑주소 추가</span>
-																	</a>
-
+							
 	{/* <script type="text/javascript">
   // submit 최종 폼체크
   //function fbuyform_submit(f) {
@@ -377,25 +322,14 @@ function new_post_view(){
   	}
   }
   </script> */}
-																	<div style={{ clear: 'both', height: '30px' }}></div>
-
-																	{/* <!--<div className="cm_mypage_tab">--> */}
-																	{/* <!--<a onclick="list_tab('transfer');" className="tab_transfer hit"  style="width:100%;text-align:center">&nbsp;</a>--> */}
-																	{/* <!--<a onclick="list_tab('return');" className="tab_return" style="width:50%;text-align:center">이체내역</a>--> */}
-																	{/* <!--</div>--> */}
-																	{/* <!-- 마이리스트 --> */}
+																
 																	<div className="cm_bonus_list3 list_transfer">
-																		{/* <!-- 내용없을경우 모두공통 --> */}
-																		<div className="cm_no_conts">
-																			<div className="no_icon"></div>
-																			<div className="gtxt">내역이 없습니다.</div>
+																		
 																	</div>
-																		{/* <!-- // 내용없을경우 모두공통 --> */}
-																	</div>
-																	{/* <!-- .cm_mypage_list --> */}
+																	
 																	<div className="cm_paginate" style={{ display: 'none' }}>
 																		<span className='lineup'><span className='nextprev'><span className='btn'><span className='no'><span className='icon ic_first'></span></span><a href=' ?&listpg=1' className='ok' title='처음' ><span className='icon ic_first'></span></a></span><span className='btn'><span className='no'><span className='icon ic_prev'></span></span><a href=' ?&listpg=0' className='ok' title='이전' ><span className='icon ic_prev'></span></a></span></span><span className='number'><a href='#none' onClick={()=> {return false}} className='hit'>1</a></span><span className='nextprev'><span className='btn'><span className='no'><span className='icon ic_next'></span></span><a href=' ?&listpg=2' className='ok' title='다음' ><span className='icon ic_next'></span></a></span><span className='btn'><span className='no'><span className='icon ic_last'></span></span><a href=' ?&listpg=0' className='ok' title='끝' ><span className='icon ic_last'></span></a></span></span></span>  </div>
-																	{/* <script>
+{/* <script>
 
 function wallet_insert_submit() {
 
@@ -485,7 +419,7 @@ function wallet_delete_submit(idx) {
 
   </script> */}
 
-																	<div style={{ clear: 'both', height: '30px' }}></div>
+																	
 
 																	{/* <script type='text/javascript'>
 
@@ -562,14 +496,6 @@ alert('선택된 텍스트를 복사하세요.');
 
 </script> */}
 
-																</div>
-																<div style={{ clear: 'both', height: '30px' }}></div>
-
-																</td>
-															</tr>
-															</tbody>
-														</table>
-													</div>
 
 													{/* <!-- 내부 서브타이틀 --> */}
 													<div className="sub_title"><span className="icon"></span><span className="title">마이오피스 정보</span></div>
@@ -885,10 +811,10 @@ alert('선택된 텍스트를 복사하세요.');
 																																						<td className="article">보너스 비율</td>
 																																						{/* <!--<td className="conts"><input type='text' name="daily_per_set" value='' size={30} className="input_text"></td>--> */}
 
-																																						<td className="conts">배당보너스<input type='text' name="bonus1_per_set" value='1' size={30} className="input_text" /></td>
-																																						<td className="conts">매칭보너스<input type='text' name="bonus2_per_set" value='100' size={30} className="input_text" /></td>
-																																						<td className="conts">직급보너스<input type='text' name="bonus3_per_set" value='10' size={30} className="input_text" /></td>
-																																						<td className="conts">만기보너스<input type='text' name="bonus4_per_set" value='0' size={30} className="input_text" /></td>
+																																						{/* <td className="conts">배당보너스<input type='text' name="bonus1_per_set" value='1' size={30} className="input_text" /></td> */}
+																																						{/* <td className="conts">매칭보너스<input type='text' name="bonus2_per_set" value='100' size={30} className="input_text" /></td> */}
+																																						<td className="conts"> 대리점 보너스   <input type='text' name="bonus3_per_set" value='10' size={30} className="input_text" /></td>
+																																						{/* <td className="conts">만기보너스<input type='text' name="bonus4_per_set" value='0' size={30} className="input_text" /></td> */}
 																																				</tr>
 																																			</tbody>
 																																			</table>

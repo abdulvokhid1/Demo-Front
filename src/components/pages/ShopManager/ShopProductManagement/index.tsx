@@ -1,13 +1,51 @@
 'use client'
 import Slider  from '@/components/layouts/Slider/Shop';
+import { faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
+import ReactPaginate from 'react-paginate';
+import PAGE_ROUTES from "@/utils/constants/routes";
+import ProductManage_API from '@/services/api/productmd';
+import { ProductManageTypeProps } from '../../../../services/api/productmd/type';
+import { ProductType } from '../../users/types/type';
+import { message } from 'antd';
+import { useMutation } from '@tanstack/react-query';
+
 const ShopProductManagement = () => {
+	const [messageApi, contextHolder] = message.useMessage()
+	const [currentPage, setCurrentPage] = useState<number>(1)
+    const [totalUsers, setTotalUsers] = useState<number>(0)
+    const [perPage, setPerPage] = useState<number>(2)
     const [sliderVisible, setSliderVisible] = useState(true)
+	const [productlist, setproductlist] = useState<ProductType>()
+
+	const {isPending, mutate, isSuccess, isError} = useMutation(
+        {
+            mutationFn: ProductManage_API.getList,
+            onSuccess: async (values: any) => {
+                setproductlist(values.ProductType);
+                setTotalUsers(values.total);
+                //console.log(JSON.stringify())
+            },
+
+            onError: (error: any) => {
+                const errorType = error.response.data.errors[0]
+                messageApi.open({
+                    type: 'error',
+                    content: 't(`errorMessages.${errorType}`)',
+                })
+            },
+        }
+    )
     useEffect(() => {
     console.log('sliderVisible: ', sliderVisible)
     }, [sliderVisible]);
     const sliderToggle = () => {
     setSliderVisible(!sliderVisible);
+    }
+	const paginationHandler = (selectedItem: { selected: number }) => {
+        const page = selectedItem ? selectedItem.selected+1 : 0;
+        mutate({page: page, limit: perPage})
     }
   
     return(
@@ -466,16 +504,23 @@ const ShopProductManagement = () => {
 		</table>
 
 		{/* <!-- 페이지네이트 --> */}
-		<div className="list_paginate">
-				<span className='lineup'><span className='nextprev'>
-                    <span className='btn'><span className='no'><span className='icon ic_first'></span></span>
-                    <a href=' ?&listpg=1' className='ok' title='처음' ><span className='icon ic_first'></span></a></span>
-                    <span className='btn'><span className='no'>
-                    <span className='icon ic_prev'></span></span><a href='?&listpg=0' className='ok' title='이전' >
-                    <span className='icon ic_prev'></span></a></span></span><span className='number'><a href='#none' onClick={()=>{}} className='hit'>1</a></span>
-                    <span className='nextprev'><span className='btn'><span className='no'><span className='icon ic_next'></span></span><a href=' ?&listpg=2' className='ok' title='다음' >
-                    <span className='icon ic_next'></span></a></span><span className='btn'><span className='no'><span className='icon ic_last'></span></span><a href=' ?&listpg=1' className='ok' title='끝' ><span className='icon ic_last'></span></a></span></span></span>
-        </div>
+		<div style={{display:'flex', alignItems:'center', justifyContent:'center' ,margin:'0 auto'}}>
+                        <ReactPaginate
+                            previousLabel={<FontAwesomeIcon icon={faArrowAltCircleLeft}/>}
+                            nextLabel={<FontAwesomeIcon icon={faArrowAltCircleRight}/>}
+                            breakLabel={'...'}
+                            breakClassName={'break-me'}
+                            activeClassName={'active'}
+                            containerClassName={'pagination'}
+                            // subContainerClassName={'pages pagination'}
+
+                            initialPage={currentPage-1}
+                            pageCount={Math.ceil(totalUsers/ perPage)}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={paginationHandler}
+                        />
+                        </div>
 		{/* <!-- // 페이지네이트 --> */}
         </div>
         </form>

@@ -281,7 +281,7 @@ textarea::textarea-placeholder {color:#ff0000}
 
 
 /* 페이지 큰타이틀 ------------------------------------- */
-.content_section .title_area {background:#fff; border-bottom:1px solid #bac0c6; padding:15px 30px; overflow:hidden;}
+.content_section .title_area {background:#eaf8f5; border-bottom:1px solid #bac0c6; padding:15px 30px; overflow:hidden;}
 /* 2015-01-23 스프라이트이미지삭제 */
 .content_section .title_area .icon {background: transparent url('/images/bullet_title.png') 0 0 no-repeat; width:20px; height:26px; display:inline-block; float:left; margin:3px 10px 0 0;}
 .content_section .title_area .title {color:#000; font-size:25px; float:left;}

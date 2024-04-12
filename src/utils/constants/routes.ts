@@ -27,10 +27,11 @@ const PAGE_ROUTES = {
     CENTER_REGISTRATION: '/admin/sales_management/center_registration',
   },
   CALC:{
-    CALC_MANAGEMENT: '/admin/calc_manage/daily_calc',
-  },
+    CALC_MANAGEMENT: '/admin/calc_manage/position_calc',
+   },
  SHOP:{
   SHOP_PRODUCT_MANAGEMENT:'/admin/shop_manager/shop_product_management',
+  CATEGORY_REGISTRATION: '/admin/shop_manager/add_category'
  },
  STAT:{
   STAT_MANAGEMENT:'/admin/stats_manager/total_settlement_details',
