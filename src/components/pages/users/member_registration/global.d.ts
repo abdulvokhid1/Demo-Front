@@ -9,6 +9,7 @@ declare module globalThis {
         userLanguageType: "K" | "E";
         roadAddress: string;
         jibunAddress: string;
+        buildingName: string;
     };
 
     type DaumPostcodeSearchData = {
