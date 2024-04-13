@@ -101,7 +101,7 @@ const LevelManagement = () => {
   <input type='hidden'  value='01'/>
   <input type='hidden' value='01' checked/>
   <tr className='list0'  style={{height:'35px', textAlign: 'center'}}>
- <td className='f_listb'>"Lv.01" </td>
+ <td className='f_listb'>{"Lv.01"} </td>
   <td><input type='text' className='input_text' style={{width: '80px',textAlign:'center'}} value='준회원'/></td>
   <td className='f_list'>준회원</td>
   <td>

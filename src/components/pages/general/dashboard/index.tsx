@@ -676,7 +676,6 @@ const Dashboard = () => {
                                                     -
                                                 </td>
                                             </tr> */}
-                                            =
                                             </tbody>
                                         </table>
 
@@ -1337,7 +1336,6 @@ const Dashboard = () => {
                                                    style={{
                                                        width: '75%',
                                                        float: 'left',
-                                                       height: '20px',
                                                        border: '1px solid #999'
                                                    }}>http://thesen.moinus.kr/?owner=00000001</p>
 

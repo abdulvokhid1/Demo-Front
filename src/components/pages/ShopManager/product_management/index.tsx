@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faArrowAltCircleLeft, faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons'
 
 import ReactPaginate from 'react-paginate';
-import { CreatedAtType, ProductType, UserInfo } from "@/components/pages/users/types/type";
+import { CreatedAtType, ProductType, UserInfo } from "@/utils/types/type";
 import Link from 'next/link'
 import HeadElement from '@/components/layouts/Header'
 import FooterElement from "@/components/layouts/Footer";

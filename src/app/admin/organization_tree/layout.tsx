@@ -1,6 +1,6 @@
 'use client'
 import 'bootstrap/dist/css/bootstrap.css'
-import '../../globals.css'
+import '@/css/globals.css'
 // import MainLayout from '@/components/layouts/MainLaoyout'
 import type {AppProps} from "next/app";
 import Head from "next/head";

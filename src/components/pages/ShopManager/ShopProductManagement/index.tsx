@@ -7,7 +7,7 @@ import ReactPaginate from 'react-paginate';
 import PAGE_ROUTES from "@/utils/constants/routes";
 import ProductManage_API from '@/services/api/productmd';
 import { ProductManageTypeProps } from '../../../../services/api/productmd/type';
-import { ProductType } from '../../users/types/type';
+import { ProductType } from '@/utils/types/type';
 import { message } from 'antd';
 import { useMutation } from '@tanstack/react-query';
 
