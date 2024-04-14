@@ -40,7 +40,7 @@ return (
                     <span className="title">
 					매출등록 관리					
 					</span>
-                    <span className="location">홈 &gt; 가맹점관리 &gt; 매출등록 관리</span>
+                    <span className="location">홈 &gt; 매출관리 &gt; 매출등록 관리</span>
                   </div>
                   {/* <!-- // 페이지타이틀 --> */}
   
@@ -107,7 +107,7 @@ return (
 						<div className="btn_line_up_center">
 							<span className="shop_btn_pack btn_input_blue"><input type="submit" className="input_medium" title="검색" value="검색"></input></span>
 							<span className="shop_btn_pack"><span className="blank_3"></span></span>
-							<span className="shop_btn_pack"><a href="_entershop.entry_revenues_form.php?_loc=&_mode=add&app_mode=" className="medium red" title="매출등록하기" >매출등록하기</a></span>
+							<span className="shop_btn_pack"><a href={PAGE_ROUTES.SALES_MANAGEMENT.SALES_REGISTRATION} className="medium red" title="매출등록하기" >매출등록</a></span>
 						</div>
 					</div>
 				</div>	

@@ -23,7 +23,7 @@ const Slider = () => {
                   onClick={()=> itemClickedHandler(4)}>공지사항 게시판</Link>
             <Link key={5} href="/admin/general/dashboard" className={selectedKey==5? "menu_on": "menu"} title="댓글 통합관리" style={{display: 'block'}}
                   onClick={()=> itemClickedHandler(5)}>댓글 통합관리</Link> */}
-            <span>기본관리<span>〓</span></span>
+            <span style={{backgroundColor: '#eaf8f5 '}}>기본관리<span>〓</span></span>
             <Link key={0} href="/admin/general/dashboard" className={selectedKey==0? "menu_on": "menu"} title="관리자 메인" style={{display: 'block'}}
                 onClick={()=> itemClickedHandler(0)}>관리자 메인</Link>
             <Link key={7} href="/admin/general/mdinfo" className={selectedKey==7? "menu_on": "menu"} title="관리자 정보수정" style={{display: 'block'}}

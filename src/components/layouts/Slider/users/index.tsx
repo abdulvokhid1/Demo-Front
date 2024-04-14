@@ -4,7 +4,7 @@ import Link from 'next/link'
 const Slider = () => {
     return (
         <div className="aside_second">
-           <span>기본관리<span>〓</span></span>
+           <span style={{backgroundColor: '#eaf8f5 '}}>기본관리<span>〓</span></span>
             <a href="member_management" className="menu_on" title="회원 통합관리" style={{display: 'block'}}>회원 통합관리</a>
             <a href="registration" className="menu" title="회원등록" style={{display: 'none'}}>회원등록</a>
             <a href="StatusOfProceedsPayment" className="menu" title="수익금 지급관리" style={{display: 'block'}}>수익금 지급관리</a>

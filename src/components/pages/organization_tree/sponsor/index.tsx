@@ -52,7 +52,7 @@ const Sponsor = () => {
                     <div className="title_area">
                         <span className="icon"></span>
                         <span className="title">
-						후원조직도
+						추천 조직도
 					</span>
                         <span className="location">홈 &gt; 조직도관리 &gt; 후원조직도</span>
                     </div>

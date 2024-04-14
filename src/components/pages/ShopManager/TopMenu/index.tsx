@@ -105,7 +105,7 @@ const TopMenu = () => {
 					<div className="bottom_btn_area">
 						<div className="btn_line_up_center">
 							<span className="shop_btn_pack">
-								<input type="button" name="" className="input_large red" value="메뉴저장" onClick={()=>{}}/>
+								<input type="button" name="" className="input_large red" value="메뉴저장" onClick={()=>{}}/>&nbsp;
 								<input type="button" name="" className="input_large gray" value="새로고침" onClick={()=>{}}/>
 							</span>
 						</div>

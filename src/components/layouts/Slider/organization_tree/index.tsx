@@ -13,7 +13,7 @@ const Slider = () => {
     }
     return (
         <div className="aside_second">
-                 <span >조직도 <span>〓</span></span>
+                 <span style={{backgroundColor: '#eaf8f5 '}}>조직도 <span>〓</span></span>
             <Link key={6} href={Routes.ORGANIZATION_TREE.SPONSOR} className={selectedKey==0? "menu_on": "menu"} title="후원조직도" style={{display: 'block'}}
                   onClick={()=> itemClickedHandler(6)}>추천 조직도</Link>
             {/* <Link key={1} href={Routes.ORGANIZATION_TREE.RECOMMENDATION} className={selectedKey==1? "menu_on": "menu"} title="추천조직도" style={{display: 'block'}}
