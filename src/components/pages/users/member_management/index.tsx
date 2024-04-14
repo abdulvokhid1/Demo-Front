@@ -44,11 +44,9 @@ const UserManagement = () => {
                 console.log(JSON.stringify(levels))
             },
             onError: (error: any) => {
-                const errorType = error.response.data.errors[0]
-                messageApi.open({
-                    type: 'error',
-                    content: 't(`errorMessages.${errorType}`)',
-                })
+                if (error.response.status === 401) {
+                    router.push(PAGE_ROUTES.AUTH.LOGIN);
+                }
             }
         },
     )

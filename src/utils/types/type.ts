@@ -35,6 +35,14 @@ export type Level ={
     id?: number;
     title?: string;
     description?: string;
+    rank?: number;
+    minBuy?: number;
+    minSell?: number;
+    minSub?: number;
+    discountRate?: number;
+    rewardRate?: number;
+    bgColor?: string
+    txtColor?: string;
     createdAt?:string;
     updatedAt: string;
 }

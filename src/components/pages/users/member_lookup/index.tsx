@@ -6,8 +6,11 @@ import { useMutation } from "@tanstack/react-query";
 import USER_API from "@/services/api/users";
 import LEVEL_API from "@/services/api/levels";
 import { LevelTypeProps } from "@/services/api/levels/type";
+import { useRouter } from "next/navigation";
+import PAGE_ROUTES from "@/utils/constants/routes";
 
 const MemberLookup = () => {
+    const router = useRouter();
     const [messageApi, contextHolder] = message.useMessage()
     const [sliderVisible, setSliderVisible] = useState(true)
     const [isSelectedHover, setIsSelectedHover] = useState(false)
@@ -32,11 +35,9 @@ const MemberLookup = () => {
                 console.log(JSON.stringify(levels))
             },
             onError: (error: any) => {
-                const errorType = error.response.data.errors[0]
-                messageApi.open({
-                    type: 'error',
-                    content: 't(`errorMessages.${errorType}`)',
-                })
+                if (error.response.status === 401) {
+                    router.push(PAGE_ROUTES.AUTH.LOGIN);
+                }
             }
         },
     )
@@ -50,11 +51,9 @@ const MemberLookup = () => {
             },
 
             onError: (error: any) => {
-                const errorType = error.response.data.errors[0]
-                messageApi.open({
-                    type: 'error',
-                    content: 't(`errorMessages.${errorType}`)',
-                })
+                if (error.response.status === 401) {
+                    router.push(PAGE_ROUTES.AUTH.LOGIN);
+                }
             },
         }
     )
