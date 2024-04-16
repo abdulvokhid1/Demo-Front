@@ -2,7 +2,7 @@
 import '@/css/spectrum.css'
 // import "react-color-palette/css";
 import Slider  from '@/components/layouts/Slider/Sales';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Center } from '../SalesRegistrationManager/types/type';
 import { useMutation } from "@tanstack/react-query";
 // import {ColorPicker, useColor} from "react-color-palette";
@@ -28,6 +28,14 @@ const LevelManagement = () => {
     const [idState, setIdState] = useState<number>(1)
     const [channelState, setChannelState] = useState<number>(1)
     const [colorState, setColorState] = useState<string>('#ffffff')
+    const [titleState, setTitleState] = useState<string[]>([])
+    const [memoState, setMemoState] = useState<string[]>([])
+    const [discountState, setDiscountState] = useState<number[]>([])
+    const [rewardState, setRewardState] = useState<number[]>([])
+    const [minBuyState, setMinBuyState] = useState<number[]>([])
+    const [minSellState, setMinSellState] = useState<number[]>([])
+    const [minSubState, setMinSubState] = useState<number[]>([])
+
     useEffect(() => {
     console.log('sliderVisible: ', sliderVisible)
     }, [sliderVisible]);
@@ -40,7 +48,6 @@ const LevelManagement = () => {
         // prvList[index] = color;
         // setBgColor(prvList);
         // let level = levels.filter((item) => item.id === id)
-        let levelTemp = levels;
         levels.map((item, index) => {
             item.id == id ?
                 channel == 1 ? item.bgColor = color :item.txtColor = color
@@ -51,37 +58,13 @@ const LevelManagement = () => {
         // levelTemps.filter((item) => {item.id == id})[0].txtColor = color
     }
 
-    const {mutate: mutateLevel} = useMutation(
+    const {mutate: mutateLevelList} = useMutation(
         {mutationFn: LEVEL_API.getList,
-            onSuccess:  (values:any) =>{
+            onSuccess:  async (values:any) =>{
                 values.sort((a: any,b: any) => ((a.rank||0) - (b.rank||0)))
                 setLevels(values);
-                // setLevelTemps(values);
 
-                // const bgColorList: string[] = [];
-                // const txtColorList: string[] = [];
-                // levels.map((item:Level, index) => {
-                //     bgColorList.push(item.bgColor || '#FFF');
-                //     txtColorList.push(item.txtColor || '#000')
-                // })
-                // setBgColor(bgColorList);
-                // setTxtColor(txtColorList);
-                // setBgColor([]);
-                // setTxtColor([]);
-                // setHidden([]);
 
-                // values.map((item:Level, index: number) => {
-                //     // bgColor.push(item.bgColor || '#FFF' );
-                //     // txtColor.push(item.txtColor || '#FFF' );
-                //     xColor.push(0)
-                //     yColor.push(0);
-                //     hidden.push(true)
-                //
-                // })
-                // setXColor(Array.from({length:values.length}).map(x=>0))
-                // setYColor(Array.from({length:values.length}).map(x=>0))
-                // setHidden(Array.from({length:values.length}).map(x=>true))
-                console.log(JSON.stringify(bgColor))
             },
             onError: (error: any) => {
                 if (error.response.status === 401) {
@@ -91,8 +74,84 @@ const LevelManagement = () => {
         },
     )
 
+    const {mutate: mutateLevelUpdate} = useMutation(
+        {mutationFn: LEVEL_API.update,
+            onSuccess:  (values:any) =>{
+                values.sort((a: any,b: any) => ((a.rank||0) - (b.rank||0)))
+                setLevels(values);
+            },
+            onError: (error: any) => {
+                if (error.response.status === 401) {
+                    router.push(PAGE_ROUTES.AUTH.LOGIN);
+                }
+            }
+        },
+    )
+
+    const onSubmitHandle = () => {
+        let params: Level[] = levels.map((item) => (item));
+        params.map((item, index) => {
+            item.title = titleState[index];
+            item.description = memoState[index]
+            item.minBuy = minBuyState[index];
+            item.minSell = minSellState[index];
+            item.minSub = minSubState[index];
+            item.discountRate = discountState[index];
+            item.rewardRate = rewardState[index];
+        });
+        console.log(params);
+
+        mutateLevelUpdate({levels: params})
+
+
+    }
+
     useEffect(() => {
-        mutateLevel();
+        let titleStateTemp: string[] = (Array.from({length: levels.length}).map(x => ''))
+        levels.map((item: Level, index: number) => {
+            titleStateTemp[index] = item.title || ''}
+        )
+        setTitleState(titleStateTemp)
+
+        let discountStateTemp: number[] = (Array.from({length: levels.length}).map(x => 0))
+        levels.map((item: Level, index: number) => {
+            discountStateTemp[index] = item.discountRate || 0}
+        )
+        setDiscountState(discountStateTemp)
+
+        let rewardStateTemp: number[] = (Array.from({length: levels.length}).map(x => 0))
+        levels.map((item: Level, index: number) => {
+            rewardStateTemp[index] = item.rewardRate || 0}
+        )
+        setRewardState(rewardStateTemp)
+
+        let minBuyStateTemp: number[] = (Array.from({length: levels.length}).map(x => 0))
+        levels.map((item: Level, index: number) => {
+            minBuyStateTemp[index] = item.minBuy || 0}
+        )
+        setMinBuyState(minBuyStateTemp)
+
+        let minSellStateTemp: number[] = (Array.from({length: levels.length}).map(x => 0))
+        levels.map((item: Level, index: number) => {
+            minSellStateTemp[index] = item.minSell || 0}
+        )
+        setMinSellState(minSellStateTemp)
+
+        let minSubStateTemp: number[] = (Array.from({length: levels.length}).map(x => 0))
+        levels.map((item: Level, index: number) => {
+            minSubStateTemp[index] = item.minSub || 0}
+        )
+        setMinSubState(minSubStateTemp)
+
+        let memoStateTemp: string[] = (Array.from({length: levels.length}).map(x => ''))
+        levels.map((item: Level, index: number) => {
+            memoStateTemp[index] = item.description || ''}
+        )
+        setMemoState(memoStateTemp)
+    }, [levels]);
+
+    useEffect(() => {
+        mutateLevelList();
     }, []);
 
    
@@ -149,8 +208,8 @@ const LevelManagement = () => {
                                         <col width="120px"/>
                                         <col width="120px"/>
                                         <col width="120px"/>
-                                        <col width="120px"/>
                                         <col width="100px"/>
+                                        <col width="120px"/>
                                         <col width="120px"/>
                                         <col width="120px"/>
                                         <col width="120px"/>
@@ -169,11 +228,12 @@ const LevelManagement = () => {
                                     <th>매출 CASH</th>
                                     <th>매출단위</th>
                                     <th>매출표시</th>
-                                    <th>관리비</th>
+                                    {/*<th>관리비</th>*/}
                                     <th>할인율</th>
                                     {/* <!--	<th>등급조건 라인수</th>	<th>등급조건 라인실적</th>--> */}
                                     <th>최소구매</th>
-                                    <th>매출-등업</th>
+                                    <th>최소판매</th>
+                                    <th>최소하위회원</th>
                                     <th>지급한도</th>
                                     <th>메모</th>
                                     {/*<th>(다)</th>*/}
@@ -199,7 +259,14 @@ const LevelManagement = () => {
                                                 <td>
                                                     <input type='text' className='input_text'
                                                            style={{width: '80px', textAlign: 'center'}}
-                                                           value={item.title}/>
+                                                           value={titleState[i]}
+                                                           onChange={(e) => {
+                                                               // titleChangeHandler(e, item.id||0)
+                                                               let titleStateTemp = titleState.map((item, i) => (item))
+                                                               titleStateTemp.map((title, index) => (i == index) ? titleStateTemp[index] = e.target.value : noop)
+                                                               setTitleState(titleStateTemp);
+                                                           }}
+                                                    />
                                                 </td>
                                                 {/*<td className='f_list'>준회원</td>*/}
                                                 <td>
@@ -215,28 +282,65 @@ const LevelManagement = () => {
                                                            value='0'/>
                                                 </td>
                                                 <td>
-                                                    <input type='text' className='input_text' style={{width: '80px'}}
-                                                           value='0'/>
-                                                </td>
-                                                <td>
-                                                    <input type='text' className='input_text' style={{width: '30px', display: 'inline-block'}}
-                                                           value={item.discountRate} size={3}/>
+                                                    <input type='number' className='input_text'
+                                                           style={{width: '40px', display: 'inline-block'}}
+                                                           value={discountState[i]}
+                                                           onChange={(e) => {
+                                                               // titleChangeHandler(e, item.id||0)
+                                                               let discountStateTemp = discountState.map((item, i) => (item))
+                                                               discountStateTemp.map((title, index) => (i == index) ? discountStateTemp[index] = Number(e.target.value) : noop)
+                                                               setDiscountState(discountStateTemp);
+                                                           }}
+                                                    />
                                                     &nbsp;&nbsp;
                                                     <select>
                                                         <option value='0' selected={true}>%</option>
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input type='text' className='input_text' style={{width: '80px'}}
-                                                           value='0'/>
+                                                    <input type='number' className='input_text' style={{width: '80px'}}
+                                                           value={minBuyState[i]}
+                                                           onChange={(e) => {
+                                                               // titleChangeHandler(e, item.id||0)
+                                                               let minBuyStateTemp = minBuyState.map((item, i) => (item))
+                                                               minBuyStateTemp.map((title, index) => (i == index) ? minBuyStateTemp[index] = Number(e.target.value) : noop)
+                                                               setMinBuyState(minBuyStateTemp);
+                                                           }}
+                                                    />
                                                 </td>
                                                 <td>
-                                                    <input type='text' className='input_text' style={{width: '80px'}}
-                                                           value={0}/>
+                                                    <input type='number' className='input_text' style={{width: '80px'}}
+                                                           value={minSellState[i]}
+                                                           onChange={(e) => {
+                                                               // titleChangeHandler(e, item.id||0)
+                                                               let minSellStateTemp = minSellState.map((item, i) => (item))
+                                                               minSellStateTemp.map((title, index) => (i == index) ? minSellStateTemp[index] = Number(e.target.value) : noop)
+                                                               setMinSellState(minSellStateTemp);
+                                                           }}
+                                                    />
                                                 </td>
                                                 <td>
-                                                    <input type='text' className='input_text' style={{width: '30px', display:'inline-block'}}
-                                                           value={item.rewardRate}/>
+                                                    <input type='number' inputMode={'numeric'} min={0} step={1} className='input_text' style={{width: '80px'}}
+                                                           value={minSubState[i]}
+                                                           onChange={(e) => {
+                                                               // titleChangeHandler(e, item.id||0)
+                                                               let minSubStateTemp = minSubState.map((item, i) => (item))
+                                                               minSubStateTemp.map((title, index) => (i == index) ? minSubStateTemp[index] = Number(e.target.value) : noop)
+                                                               setMinSubState(minSubStateTemp);
+                                                           }}
+                                                    />
+                                                </td>
+                                                <td>
+                                                    <input type='number' className='input_text'
+                                                           style={{width: '40px', display: 'inline-block'}}
+                                                           value={rewardState[i]}
+                                                           onChange={(e) => {
+                                                               // titleChangeHandler(e, item.id||0)
+                                                               let rewardStateTemp = rewardState.map((item, i) => (item))
+                                                               rewardStateTemp.map((title, index) => (i == index) ? rewardStateTemp[index] = Number(e.target.value) : noop)
+                                                               setRewardState(rewardStateTemp);
+                                                           }}
+                                                    />
                                                     &nbsp;&nbsp;
                                                     <select>
                                                         <option value='0' selected={true}>%</option>
@@ -245,7 +349,14 @@ const LevelManagement = () => {
                                                 </td>
                                                 <td>
                                                     <input type='text' className='input_text' style={{width: '100%'}}
-                                                           value={item.description}/>
+                                                           value={memoState[i]}
+                                                           onChange={(e) => {
+                                                               // titleChangeHandler(e, item.id||0)
+                                                               let memoStateTemp = memoState.map((item, i) => (item))
+                                                               memoStateTemp.map((title, index) => (i == index) ? memoStateTemp[index] = e.target.value : noop)
+                                                               setMemoState(memoStateTemp);
+                                                           }}
+                                                    />
                                                 </td>
                                                 {/*<td>*/}
                                                 {/*    <label><input type="checkbox" name="rev_account[20]" value="Y"/></label>*/}
@@ -290,8 +401,8 @@ const LevelManagement = () => {
                                                                     // setHidden(tempHidden);
                                                                     // hidden[i] = !hidden[i];
                                                                     setChannelState(1);
-                                                                    setIdState(item.id? item.id : 1)
-                                                                    setColorState(item.bgColor? item.bgColor : '#ffffff');
+                                                                    setIdState(item.id ? item.id : 1)
+                                                                    setColorState(item.bgColor ? item.bgColor : '#ffffff');
                                                                     setXColor(event.clientX - 250);
                                                                     setYColor(event.clientY + 10);
                                                                     setHidden(!hidden)
@@ -328,8 +439,8 @@ const LevelManagement = () => {
                                                                     // setHidden(tempHidden);
                                                                     // hidden[i] = !hidden[i];
                                                                     setChannelState(2);
-                                                                    setIdState(item.id? item.id : 1)
-                                                                    setColorState(item.bgColor? item.bgColor : '#ffffff');
+                                                                    setIdState(item.id ? item.id : 1)
+                                                                    setColorState(item.bgColor ? item.bgColor : '#ffffff');
                                                                     setXColor(event.clientX - 250);
                                                                     setYColor(event.clientY + 10);
                                                                     setHidden(!hidden)
@@ -350,20 +461,20 @@ const LevelManagement = () => {
                                             </tr>
                                         ))
                                     )}
-
-
                                     </tbody>
                                 </table>
                             </div>
                             <div className='bottom_btn_area'>
-                                <div className='btn_line_up_center'>
-            <span className='shop_btn_pack btn_input_red'><a onClick={() => {
-            }} className='input_large_a'>저장</a></span>
-
-                                </div>
+                            <div className='btn_line_up_center'>
+                                <span className='shop_btn_pack btn_input_red'>
+                                    <a className='input_large_a'
+                                       onClick={() => {onSubmitHandle()}} >
+                                        저장
+                                    </a>
+                                </span>
+                            </div>
                             </div>
                         </div>
-
                     </form>
                 </div>
             </div>

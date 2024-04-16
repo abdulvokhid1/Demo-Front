@@ -1,5 +1,6 @@
 import exp from "node:constants";
 import centers from "@/services/api/centers";
+import { format } from "date-fns";
 
 export type UserInfo = {
     id?: number;
@@ -65,3 +66,42 @@ export type Order = {
     updatedAt?: string;
     url?: string;
 }
+
+export type DepositRegistrationType = {
+
+    id?: number;
+
+    depositDate?: string;
+
+
+    users: number[];
+
+    amount: number;
+    memo: string;
+
+    fee?: number;
+    isConfirmed: boolean;
+    isRewarded?: boolean
+
+    method?: number;
+}
+
+export type DepositType = {
+
+    id?: number;
+
+    depositDate?: string;
+
+
+    user: UserInfo;
+
+    amount: number;
+    memo: string;
+
+    fee?: number;
+    status: number;
+    isRewarded?: number
+
+    method?: number;
+}
+

@@ -1,12 +1,13 @@
 import axiosClient from '../axiosClient'
 import { API_ENDPOINTS } from '../endPoint'
-import { saleregisterProps } from './type'
+import { DepositRegistrationType } from "@/utils/types/type";
+import { QueryType } from "@/services/api/saleregister/type";
 
 const SALEREGISTER_API = {
-  list: () => axiosClient.get(API_ENDPOINTS.SALEREGISTER.LIST),
-  updateSaleRegister: (params: saleregisterProps) =>
+  getList: (params: QueryType) =>
+      axiosClient.post(API_ENDPOINTS.SALEREGISTER.LIST, params),
+  create: (params: DepositRegistrationType) =>
     axiosClient.post(API_ENDPOINTS.SALEREGISTER.REGISTRATION, params),
 }
 
 export default SALEREGISTER_API
- 

@@ -23,6 +23,7 @@ const PAGE_ROUTES = {
   SALES_MANAGEMENT: {
     SALES_REGISTRATION_MANAGER: '/admin/sales_management/sales_registration_manager',
     SALES_REGISTRATION: '/admin/sales_management/sale_registration',
+    SALES_MEMBER_LOOKUP: '/admin/sales_management/sale_registration/member_lookup',
     CENTER_MANAGEMENT: '/admin/sales_management/center_management',
     CENTER_REGISTRATION: '/admin/sales_management/center_registration',
   },
