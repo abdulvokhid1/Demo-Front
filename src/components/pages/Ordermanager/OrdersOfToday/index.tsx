@@ -1,15 +1,53 @@
 'use client'
 import Slider from '@/components/layouts/Slider/Order';
+import ProductManage_API from '@/services/api/productmd';
+import { faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useMutation } from '@tanstack/react-query';
 import { useEffect, useState } from "react";
+import ReactPaginate from 'react-paginate';
+import { OrderType } from '../../../../utils/types/type';
+import { message } from 'antd';
+import { Paginate } from '../paginate';
 
 const OrdersOfToday = () => {
-	const [sliderVisible, setSliderVisible] = useState(true)
-	useEffect(() => {
-		console.log('sliderVisible: ', sliderVisible)
-	}, [sliderVisible]);
-	const sliderToggle = () => {
-		setSliderVisible(!sliderVisible);
-	}
+ 
+ 	const [sliderVisible, setSliderVisible] = useState(true)
+  const [messageApi, contextHolder] = message.useMessage()
+	const [currentPage, setCurrentPage] = useState<number>(1)
+  const [totalUsers, setTotalUsers] = useState<number>(0)
+  const [perPage, setPerPage] = useState<number>(2)
+  const [OrderList, setOrderList] = useState<OrderType>()
+
+  const {isPending, mutate, isSuccess, isError} = useMutation(
+        {
+            mutationFn: ProductManage_API.getList,
+            onSuccess: async (values: any) => {
+              setOrderList(values.Order);
+                setTotalUsers(values.total);
+                //console.log(JSON.stringify())
+            },
+    
+            onError: (error: any) => {
+                const errorType = error.response.data.errors[0]
+                messageApi.open({
+                    type: 'error',
+                    content: 't(`errorMessages.${errorType}`)',
+                })
+            },
+        }
+    )
+    useEffect(() => {
+      console.log('sliderVisible: ', sliderVisible)
+      }, [sliderVisible]);
+      const sliderToggle = () => {
+      setSliderVisible(!sliderVisible);
+
+      }
+      const paginationHandler = (selectedItem: { selected: number }) => {
+        const page = selectedItem ? selectedItem.selected+1 : 0;
+        mutate({page: page, limit: perPage})
+    }
 
 	return (
 		<div className={sliderVisible ? "container" : "container_hide" } id="depth2_leftmenu" style={{background: "#f0f0f0"}}>
@@ -168,20 +206,8 @@ const OrdersOfToday = () => {
   </tbody>
   </table>
 
-  {/* <!-- 페이지네이트 --> */}
-  <div className="list_paginate">
-    	<span className='lineup'><span className='nextprev'><span className='btn'><span className='no'>
-        <span className='icon ic_first'></span></span><a href=' ?&odcode=today&listpg=1' className='ok' title='처음' >
-          <span className='icon ic_first'></span></a></span><span className='btn'><span className='no'>
-            <span className='icon ic_prev'></span></span><a href=' ?&odcode=today&listpg=0' className='ok' title='이전' >
-              <span className='icon ic_prev'></span></a></span></span><span className='number'><a href='#none' onClick={()=>{return false}} className='hit'>1</a></span>
-              <span className='nextprev'><span className='btn'><span className='no'>
-                <span className='icon ic_next'></span></span><a href=' ?&odcode=today&listpg=2' className='ok' title='다음' >
-                  <span className='icon ic_next'></span></a></span><span className='btn'><span className='no'>
-                    <span className='icon ic_last'></span></span><a href=' ?&odcode=today&listpg=0' className='ok' title='끝' >
-                      <span className='icon ic_last'></span></a></span></span></span>  </div>
-  {/* <!-- // 페이지네이트 --> */}
-
+  <Paginate/>
+  
 </div>
 </form>
 				<div style={{height:'30px'}}></div>

@@ -7,9 +7,10 @@ import ReactPaginate from 'react-paginate';
 import PAGE_ROUTES from "@/utils/constants/routes";
 import ProductManage_API from '@/services/api/productmd';
 import { ProductManageTypeProps } from '../../../../services/api/productmd/type';
-import { ProductType } from '../../users/types/type';
+
 import { message } from 'antd';
 import { useMutation } from '@tanstack/react-query';
+import { ProductType } from '@/utils/types/type';
 
 const ShopProductManagement = () => {
 	const [messageApi, contextHolder] = message.useMessage()
@@ -17,13 +18,13 @@ const ShopProductManagement = () => {
     const [totalUsers, setTotalUsers] = useState<number>(0)
     const [perPage, setPerPage] = useState<number>(2)
     const [sliderVisible, setSliderVisible] = useState(true)
-	const [productlist, setproductlist] = useState<ProductType>()
+	const [productList, setProductList] = useState<ProductType>()
 
 	const {isPending, mutate, isSuccess, isError} = useMutation(
         {
             mutationFn: ProductManage_API.getList,
             onSuccess: async (values: any) => {
-                setproductlist(values.ProductType);
+                setProductList(values.ProductType);
                 setTotalUsers(values.total);
                 //console.log(JSON.stringify())
             },

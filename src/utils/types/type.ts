@@ -49,11 +49,16 @@ export type ProductType = {
     to?: string;
 }
 
-export type Order = {
+export type OrderType = {
     id?: number;
-    name?: string;
-    description?: string;
-    createdAt?: string;
-    updatedAt?: string;
-    url?: string;
+    type: string;
+    date: number;
+    provider: string;
+    name: string;
+    info: string;
+    phone: number;
+    amount:number;
+    payment: string;
+    manage:string;
+    approval:string;
 }
