@@ -834,6 +834,8 @@ alert('선택된 텍스트를 복사하세요.');
 																																				</tbody>
 																																			</table>
 																																		</div>
+												
+				
 
 
 																																		<div className="sub_title"><span className="icon"></span><span className="title">기타 보너스요율 설정</span></div>
@@ -856,11 +858,20 @@ alert('선택된 텍스트를 복사하세요.');
 																																			</tbody>
 																																			</table>
 																																		</div>
+																																		<div className='bottom_btn_area'>
+						<div className='btn_line_up_center'>
+							<span className='shop_btn_pack btn_input_red'>
+								<input type='submit' name='' className='input_large' value='확인'/></span>
+							<span className='shop_btn_pack'><span className='blank_3'></span></span>
+							</div>
+						</div>
+
 																																	</form>
 																																		<div style={{height:'30px'}}></div>
 																																	</div>
 																																	</div>
-																																	</div>
-																																)
+						
+</div>
+	);
 }
 export default Mdinfo;

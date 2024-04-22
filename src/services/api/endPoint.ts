@@ -89,8 +89,8 @@ export const API_ENDPOINTS = {
   LEVELS: {
     GET_LIST: '/api/v1/level/list',
   },
-  
-  USERS: {
+
+    USERS: {
     GET_LIST: '/api/v1/user/list',
     DELETE: '/api/v1/user',
     ASSIGN_ROLE: '/api/v1/user/assign-role',

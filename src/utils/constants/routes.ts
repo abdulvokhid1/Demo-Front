@@ -14,11 +14,13 @@ const PAGE_ROUTES = {
   },
   BLOGS: '/admin/blog',
   CLASSROOMS: '/admin/classrooms',
+
   USERS: {
     INDEX: '/admin/users',
     USER_MANAGEMENT: '/admin/users/member_management',
     USER_REGISTRATION: '/admin/users/registration',
     USER_LOOKUP: '/admin/users/member_lookup_popup',
+    PAY_MANAGER:'/admin/users/pay_manager',
   },
   SALES_MANAGEMENT: {
     SALES_REGISTRATION_MANAGER: '/admin/sales_management/sales_registration_manager',
@@ -41,6 +43,8 @@ const PAGE_ROUTES = {
  },
 DESIGN:{
   DESIGN_MANAGEMENT:'/admin/design_manager/shop_banner',
+  BANNER:'/admin/design_manager/banner_register',
+  CATEGORY:'/admin/design_manager/category_register',
 },
 LOG:{
   LOG_MANAGEMENT:'/admin/log/daily_connection',

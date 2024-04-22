@@ -1,14 +1,67 @@
 'use client'
 import Slider  from '@/components/layouts/Slider/Stats';
+import { faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { message } from 'antd';
 import { useEffect, useState } from 'react';
+import ReactPaginate from 'react-paginate';
+import { RecommendationType } from '../../../../utils/types/type';
+import { useMutation } from '@tanstack/react-query';
+import USER_API from '@/services/api/users';
 const Performance_of_recomenship = () => {
-    const [sliderVisible, setSliderVisible] = useState(true)
-    useEffect(() => {
-    console.log('sliderVisible: ', sliderVisible)
-    }, [sliderVisible]);
-    const sliderToggle = () => {
-    setSliderVisible(!sliderVisible);
-    }
+	const [messageApi, contextHolder] = message.useMessage()
+	const [sliderVisible, setSliderVisible] = useState(true)
+	const [currentPage, setCurrentPage] = useState<number>(1)
+		const [totalUsers, setTotalUsers] = useState<number>(0)
+		const [perPage, setPerPage] = useState<number>(2)
+		const [recommendation, setRecommendation] = useState<RecommendationType>()
+		const {mutate: mutateLevel} = useMutation(
+			{
+				mutationFn: USER_API.getList,
+				onSuccess: async (values: any) => {
+					setRecommendation(values);
+					console.log(JSON.stringify(recommendation))
+				},
+				onError: (error: any) => {
+					const errorType = error.response.data.errors[0]
+					messageApi.open({
+						type: 'error',
+						content: 't(`errorMessages.${errorType}`)',
+					})
+				}
+			},
+		)
+		const {isPending, mutate, isSuccess, isError} = useMutation(
+			{
+				mutationFn: USER_API.getList,
+				onSuccess: async (values: any) => {
+					setRecommendation(values.PayManager);
+					setTotalUsers(values.total);
+					console.log(JSON.stringify(recommendation))
+				},
+	
+				onError: (error: any) => {
+					 const errorType = error.response.data.errors[0]
+					// if (error.response.status === 401) {
+					//     router.push(PAGE_ROUTES.AUTH.LOGIN);
+					// }
+					 messageApi.open({
+						 type: 'error',
+					 content: 't(`errorMessages.${errorType}`)',
+					 })
+				},
+			}
+		)
+	useEffect(() => {
+	console.log('sliderVisible: ', sliderVisible)
+	}, [sliderVisible]);
+	const sliderToggle = () => {
+	setSliderVisible(!sliderVisible);
+	}
+	const paginationHandler = (selectedItem: { selected: number }) => {
+		const page = selectedItem ? selectedItem.selected+1 : 0;
+		mutate({page: page, limit: perPage})
+	}
   
     return(
         <div className={sliderVisible ? "container" : "container_hide" } id="depth2_leftmenu" 
@@ -169,12 +222,12 @@ const Performance_of_recomenship = () => {
 								<th scope="col" className="colorset"><input type='checkbox' name='chkall' value={1} onClick={()=>{}}/></th>
 								<th scope="col" className="colorset">NO</th>
 								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=id&orderby=asc'><u>아이디</u></a></th>
-								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=owner_code&orderby=asc'><u>회원명(대표자)</u></a></th>
+								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=owner_code&orderby=asc'><u>회원명</u></a></th>
 								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=memgrade&orderby=asc'><u>레벨</u></a></th>
 								{/* <!--<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=mb_card_point&orderby=asc'><u>페이</u></a></th>--> */}
 								{/* <!--<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=total_price&orderby=asc'><u>매출금액</u></a></th>--> */}
 								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=total_pv&orderby=asc'><u> 금액</u></a></th>
-								<th scope="col" className="colorset"><u>배당자격 </u></th>
+								{/* <th scope="col" className="colorset"><u>배당자격 </u></th> */}
 								<th scope="col" className="colorset"><u>직추천명</u></th>
 								<th scope="col" className="colorset"><u>하위인원</u></th>
 								<th scope="col" className="colorset"><u>하위매출</u></th>
@@ -213,14 +266,26 @@ const Performance_of_recomenship = () => {
 			</table>
 
 </div>
-					{/* <!-- 페이지네이트 --> */}
-					<div className="list_paginate">			
-					<span className='lineup'><span className='nextprev'><span className='btn'><span className='no'>
-                    <span className='icon ic_first'></span></span><a href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=1' className='ok' title='처음' >
-                    <span className='icon ic_first'></span></a></span><span className='btn'><span className='no'><span className='icon ic_prev'></span>
-                    </span><a href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=0' className='ok' title='이전' >
-                        <span className='icon ic_prev'></span></a></span></span><span className='number'><a href='#none' onClick={()=>{}} className='hit'>1</a></span><span className='nextprev'><span className='btn'><span className='no'><span className='icon ic_next'></span></span><a href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=2' className='ok' title='다음' ><span className='icon ic_next'></span></a></span><span className='btn'><span className='no'><span className='icon ic_last'></span></span><a href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=0' className='ok' title='끝' ><span className='icon ic_last'></span></a></span></span></span>					</div>
-					{/* <!-- // 페이지네이트 --> */}
+<div style={{display:'flex', alignItems:'center', justifyContent:'center' ,margin:'0 auto'}}>
+<ReactPaginate
+                            previousLabel={<FontAwesomeIcon icon={faArrowAltCircleLeft}/>}
+                            nextLabel={<FontAwesomeIcon icon={faArrowAltCircleRight}/>}
+                            breakLabel={'...'}
+                            breakClassName={'break-me'}
+                            activeClassName={'active'}
+                            containerClassName={'pagination'}
+                            // subContainerClassName={'pages pagination'}
+
+                            initialPage={currentPage-1}
+                            pageCount={Math.ceil(totalUsers/ perPage)}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={paginationHandler}
+                        />
+                        </div>
+
+
+                    <div style={{height:'30px'}}></div>
 
 	</form>
 

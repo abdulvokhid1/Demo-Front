@@ -175,29 +175,21 @@ return (
 							<tr>
 								<th scope="col" className="colorset"><input type='checkbox' name='chkall' value="1" onClick={()=>{}}/></th>
 								<th scope="col" className="colorset">NO</th>
-
 								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_point.member_list.php?code=&page=&filed=id&orderby=asc'><u>아이디</u></a></th>
 								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_point.member_list.php?code=&page=&filed=id&orderby=asc'></a>
-                                    <a href='/myAdmin/_entershop.bonus_point.member_list.php?code=&page=&filed=ceoName&orderby=asc'><u>회원명(대표자)</u></a></th>
-								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_point.member_list.php?code=&page=&filed=cName&orderby=asc'><u>상호명</u></a></th>
+                                    <a href='/myAdmin/_entershop.bonus_point.member_list.php?code=&page=&filed=ceoName&orderby=asc'><u>회원명</u></a></th>
+								{/* <th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_point.member_list.php?code=&page=&filed=cName&orderby=asc'><u>상호명</u></a></th> */}
 								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_point.member_list.php?code=&page=&filed=cName&orderby=asc'/>
                                 <a href='/myAdmin/_entershop.bonus_point.member_list.php?code=&page=&filed=owner_code&orderby=asc'><u>코드번호</u></a></th>
-
 								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_point.member_list.php?code=&page=&filed=mb_card_main&orderby=asc'><u>카드번호</u></a></th>
-
-
 								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_point.member_list.php?code=&page=&filed=memgrade&orderby=asc'><u>레벨</u></a></th>
 								{/* <!--<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_point.member_list.php?code=&page=&filed=partner_code&orderby=asc'><u>추천인코드</u></a></th>--> */}
 								{/* <!--<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_point.member_list.php?code=&page=&filed=partner_code&orderby=asc'><u>후원인</u></a></th>--> */}
 								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_point.member_list.php?code=&page=&filed=htel1&orderby=asc'><u>핸드폰</u></a></th>
 								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_point.member_list.php?code=&page=&filed=mb_card_point&orderby=asc'><u>페이 잔액</u></a></th>
-
-
 								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_point.member_list.php?code=&page=&filed=signdate&orderby=asc'><u>가입일</u></a></th>
-
 								 <th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_point.member_list.php?code=&page=&filed=buymethod&orderby=asc'><u>관리</u></a></th>
-                                
-                                
+                              
 							</tr>
 						</thead> 
                         </table>

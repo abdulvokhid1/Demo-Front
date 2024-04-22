@@ -1,14 +1,68 @@
 'use client'
 import Slider  from '@/components/layouts/Slider/Sales';
+import USER_API from '@/services/api/users';
+import { PurchaseType } from '@/utils/types/type';
+import { faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useMutation } from '@tanstack/react-query';
+import { message } from 'antd';
 import { useEffect, useState } from 'react';
+import ReactPaginate from 'react-paginate';
+
 const PurchaseRequest = () => {
-    const [sliderVisible, setSliderVisible] = useState(true)
-    useEffect(() => {
-    console.log('sliderVisible: ', sliderVisible)
-    }, [sliderVisible]);
-    const sliderToggle = () => {
-    setSliderVisible(!sliderVisible);
-    }
+const [messageApi, contextHolder] = message.useMessage()
+const [sliderVisible, setSliderVisible] = useState(true)
+const [currentPage, setCurrentPage] = useState<number>(1)
+    const [totalUsers, setTotalUsers] = useState<number>(0)
+    const [perPage, setPerPage] = useState<number>(2)
+	const [purchase, setPurchase] = useState<PurchaseType>()
+    const {mutate: mutateLevel} = useMutation(
+        {
+            mutationFn: USER_API.getList,
+            onSuccess: async (values: any) => {
+                setPurchase(values);
+                console.log(JSON.stringify(purchase))
+            },
+            onError: (error: any) => {
+                const errorType = error.response.data.errors[0]
+                messageApi.open({
+                    type: 'error',
+                    content: 't(`errorMessages.${errorType}`)',
+                })
+            }
+        },
+    )
+    const {isPending, mutate, isSuccess, isError} = useMutation(
+        {
+            mutationFn: USER_API.getList,
+            onSuccess: async (values: any) => {
+                setPurchase(values.PayManager);
+                setTotalUsers(values.total);
+                console.log(JSON.stringify(purchase))
+            },
+
+            onError: (error: any) => {
+                 const errorType = error.response.data.errors[0]
+                // if (error.response.status === 401) {
+                //     router.push(PAGE_ROUTES.AUTH.LOGIN);
+                // }
+                 messageApi.open({
+                     type: 'error',
+                 content: 't(`errorMessages.${errorType}`)',
+                 })
+            },
+        }
+    )
+useEffect(() => {
+console.log('sliderVisible: ', sliderVisible)
+}, [sliderVisible]);
+const sliderToggle = () => {
+setSliderVisible(!sliderVisible);
+}
+const paginationHandler = (selectedItem: { selected: number }) => {
+	const page = selectedItem ? selectedItem.selected+1 : 0;
+	mutate({page: page, limit: perPage})
+}
   
     return(
         <div className={sliderVisible ? "container" : "container_hide" } id="depth2_leftmenu" 
@@ -25,7 +79,7 @@ const PurchaseRequest = () => {
                   <div className="title_area">
                     <span className="icon"></span>
                     <span className="title">
-											구매신청 관리					
+		      		구매신청 관리					
 					</span>
                     <span className="location">홈 &gt; 가맹점관리 &gt; 입금신청 관리</span>
                   </div>
@@ -144,8 +198,8 @@ const PurchaseRequest = () => {
 								<th scope="col" className="colorset"><a href='/myAdmin/_calcu.ad_saving.list.php?code=&page=&filed=odrkey&orderby=asc'><u>회원명</u></a></th>
 								<th scope="col" className="colorset">소속대리점</th>
 								<th scope="col" className="colorset"><a href='/myAdmin/_calcu.ad_saving.list.php?code=&page=&filed=wr_pay_method&orderby=asc'><u>결제수단</u></a></th>
-								<th scope="col" className="colorset"><a href='/myAdmin/_calcu.ad_saving.list.php?code=&page=&filed=wr_wdate&orderby=asc'><u>신청 패키지</u></a></th>
-								<th scope="col" className="colorset"><a href='/myAdmin/_calcu.ad_saving.list.php?code=&page=&filed=wr_wdate&orderby=asc'><u>수수료</u></a></th>
+								<th scope="col" className="colorset"><a href='/myAdmin/_calcu.ad_saving.list.php?code=&page=&filed=wr_wdate&orderby=asc'><u>신청 금액</u></a></th>
+								{/* <th scope="col" className="colorset"><a href='/myAdmin/_calcu.ad_saving.list.php?code=&page=&filed=wr_wdate&orderby=asc'><u>수수료</u></a></th> */}
 								<th scope="col" className="colorset"><a href='/myAdmin/_calcu.ad_saving.list.php?code=&page=&filed=wr_wdate&orderby=asc'><u>적용금액</u></a></th>
 								<th scope="col" className="colorset"><a href='/myAdmin/_calcu.ad_saving.list.php?code=&page=&filed=del_name&orderby=asc'><u>등록일</u></a></th>
 								<th scope="col" className="colorset"><a href='/myAdmin/_calcu.ad_saving.list.php?code=&page=&filed=ismember&orderby=asc'><u>내용</u></a></th>
@@ -194,11 +248,23 @@ const PurchaseRequest = () => {
 </div>
 
 
-					{/* <!-- 페이지네이트 --> */}
-					<div className="list_paginate">			
-							<span className='lineup'><span className='nextprev'><span className='btn'><span className='no'><span className='icon ic_first'></span></span><a href='/myAdmin/_calcu.ad_saving.list.php?code=&page=1' className='ok' title='처음' ><span className='icon ic_first'></span></a></span><span className='btn'><span className='no'><span className='icon ic_prev'></span></span><a href='/myAdmin/_calcu.ad_saving.list.php?code=&page=0' className='ok' title='이전' ><span className='icon ic_prev'></span></a></span></span><span className='number'><a href='#none' onClick={()=>{return false}} className='hit'>1</a></span><span className='nextprev'><span className='btn'><span className='no'><span className='icon ic_next'></span></span><a href='/myAdmin/_calcu.ad_saving.list.php?code=&papage=2' className='ok' title='다음' ><span className='icon ic_next'></span></a></span><span className='btn'><span className='no'><span className='icon ic_last'></span></span><a href='/myAdmin/_calcu.ad_saving.list.php?code=&page=0' className='ok' title='끝' ><span className='icon ic_last'></span></a></span></span></span>
-                     </div>
-					{/* <!-- // 페이지네이트 --> */}
+<div style={{display:'flex', alignItems:'center', justifyContent:'center' ,margin:'0 auto'}}>
+                        <ReactPaginate
+                            previousLabel={<FontAwesomeIcon icon={faArrowAltCircleLeft}/>}
+                            nextLabel={<FontAwesomeIcon icon={faArrowAltCircleRight}/>}
+                            breakLabel={'...'}
+                            breakClassName={'break-me'}
+                            activeClassName={'active'}
+                            containerClassName={'pagination'}
+                            // subContainerClassName={'pages pagination'}
+
+                            initialPage={currentPage-1}
+                            pageCount={Math.ceil(totalUsers/ perPage)}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={paginationHandler}
+                        />
+                        </div>
 
 
                     <div style={{height:'30px'}}></div>

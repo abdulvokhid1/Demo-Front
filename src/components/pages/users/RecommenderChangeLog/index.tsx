@@ -1,14 +1,67 @@
 'use client'
 import Slider from '@/components/layouts/Slider/users';
 import { useEffect, useState } from 'react';
+import { ChangelogType } from '../../../../utils/types/type';
+import { message } from 'antd';
+import { useMutation } from '@tanstack/react-query';
+import USER_API from '@/services/api/users';
+import ReactPaginate from 'react-paginate';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
 
 const RecommenderChangeLog = () => {
-    const [sliderVisible, setSliderVisible] = useState(true)
+	const [messageApi, contextHolder] = message.useMessage()
+	const [sliderVisible, setSliderVisible] = useState(true)
+	const [currentPage, setCurrentPage] = useState<number>(1)
+		const [totalUsers, setTotalUsers] = useState<number>(0)
+		const [perPage, setPerPage] = useState<number>(2)
+		const [log, setLogs] = useState<ChangelogType>()
+		const {mutate: mutateLevel} = useMutation(
+			{
+				mutationFn: USER_API.getList,
+				onSuccess: async (values: any) => {
+					setLogs(values);
+					console.log(JSON.stringify(log))
+				},
+				onError: (error: any) => {
+					const errorType = error.response.data.errors[0]
+					messageApi.open({
+						type: 'error',
+						content: 't(`errorMessages.${errorType}`)',
+					})
+				}
+			},
+		)
+		const {isPending, mutate, isSuccess, isError} = useMutation(
+			{
+				mutationFn: USER_API.getList,
+				onSuccess: async (values: any) => {
+					setLogs(values.PayManager);
+					setTotalUsers(values.total);
+					console.log(JSON.stringify(log))
+				},
+	
+				onError: (error: any) => {
+					 const errorType = error.response.data.errors[0]
+					// if (error.response.status === 401) {
+					//     router.push(PAGE_ROUTES.AUTH.LOGIN);
+					// }
+					 messageApi.open({
+						 type: 'error',
+					 content: 't(`errorMessages.${errorType}`)',
+					 })
+				},
+			}
+		)
 	useEffect(() => {
-		console.log('sliderVisible: ', sliderVisible)
+	console.log('sliderVisible: ', sliderVisible)
 	}, [sliderVisible]);
 	const sliderToggle = () => {
-		setSliderVisible(!sliderVisible);
+	setSliderVisible(!sliderVisible);
+	}
+	const paginationHandler = (selectedItem: { selected: number }) => {
+		const page = selectedItem ? selectedItem.selected+1 : 0;
+		mutate({page: page, limit: perPage})
 	}
 return (
     <div className={sliderVisible ? "container" : "container_hide" } id="depth2_leftmenu" style={{background: "#f0f0f0"}}>
@@ -91,20 +144,23 @@ return (
 			</table>
 </div>
 
-{/* <!-- 페이지네이트 --> */}
-					<div className="list_paginate">			
-							<span className='lineup'><span className='nextprev'><span className='btn'><span className='no'><span className='icon ic_first'></span>
-                            </span><a href='/myAdmin/_cardsys.recommend_log.php?code=&page=1' className='ok' title='처음' >
-                                <span className='icon ic_first'></span></a></span><span className='btn'><span className='no'>
-                                    <span className='icon ic_prev'></span></span><a href='/myAdmin/_cardsys.recommend_log.php?code=&page=0' className='ok' title='이전' >
-                                        <span className='icon ic_prev'></span></a></span></span><span className='number'><a href='#none' onClick={()=>{return false}} className='hit'>1</a></span>
-                                        <span className='nextprev'><span className='btn'><span className='no'><span className='icon ic_next'></span></span>
-                                        <a href='/myAdmin/_cardsys.recommend_log.php?code=&page=2' className='ok' title='다음' ><span className='icon ic_next'></span></a></span>
-                                        <span className='btn'><span className='no'><span className='icon ic_last'></span></span>
-                                        <a href='/myAdmin/_cardsys.recommend_log.php?code=&page=0' className='ok' title='끝' >
-                                            <span className='icon ic_last'></span></a></span></span></span>					</div>
-					{/* <!-- // 페이지네이트 --> */}
+<div style={{display:'flex', alignItems:'center', justifyContent:'center' ,margin:'0 auto'}}>
+                        <ReactPaginate
+                            previousLabel={<FontAwesomeIcon icon={faArrowAltCircleLeft}/>}
+                            nextLabel={<FontAwesomeIcon icon={faArrowAltCircleRight}/>}
+                            breakLabel={'...'}
+                            breakClassName={'break-me'}
+                            activeClassName={'active'}
+                            containerClassName={'pagination'}
+                            // subContainerClassName={'pages pagination'}
 
+                            initialPage={currentPage-1}
+                            pageCount={Math.ceil(totalUsers/ perPage)}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={paginationHandler}
+                        />
+                        </div>
 	</form>
 
 {/* <script>createLayer('Calendar');</script> */}

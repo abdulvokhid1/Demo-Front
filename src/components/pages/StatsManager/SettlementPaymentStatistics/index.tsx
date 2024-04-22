@@ -142,8 +142,8 @@ const SettlementPaymentStatistics = () => {
 								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_rebate_list.php?code=&page=&filed=id&orderby=asc'><u>아이디</u></a></th>
 								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_rebate_list.php?code=&page=&filed=owner_code&orderby=asc'><u>회원명</u></a></th>
 								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_rebate_list.php?code=&page=&filed=memgrade&orderby=asc'><u>레벨</u></a></th>
-								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_rebate_list.php?code=&page=&filed=mb_card_point&orderby=asc'><u>현재 페이</u></a></th>
-								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_rebate_list.php?code=&page=&filed=mb_card_point&orderby=asc'><u>매출PV합산</u></a></th>
+								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_rebate_list.php?code=&page=&filed=mb_card_point&orderby=asc'><u>현재 캐시</u></a></th>
+								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_rebate_list.php?code=&page=&filed=mb_card_point&orderby=asc'><u>매출합산</u></a></th>
 								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_rebate_list.php?code=&page=&filed=total_acc&orderby=asc'><u>지급금액</u></a></th>
 								{/* <!--<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_rebate_list.php?code=&page=&filed=total_acc&orderby=asc'><u>보유잔액</u></a></th>--> */}
 								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_rebate_list.php?code=&page=&filed=total_acc&orderby=asc'><u>배당누적금액</u></a></th>
