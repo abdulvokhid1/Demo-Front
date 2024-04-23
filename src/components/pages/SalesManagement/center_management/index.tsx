@@ -12,6 +12,7 @@ import ReactPaginate from "react-paginate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleLeft, faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
 import { getFullTime } from "@/utils/helper";
+import { useRouter } from "next/navigation";
 
 const CenterRegistration = () => {
     const [sliderVisible, setSliderVisible] = useState(true)
@@ -20,7 +21,7 @@ const CenterRegistration = () => {
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [totalCenters, setTotalCenters] = useState<number>(0)
     const [perPage, setPerPage] = useState<number>(2)
-
+    const router = useRouter()
     useEffect(() => {
         console.log('sliderVisible: ', sliderVisible)
     }, [sliderVisible]);
@@ -38,11 +39,9 @@ const CenterRegistration = () => {
             },
 
             onError: (error: any) => {
-                const errorType = error.response.data.errors[0]
-                messageApi.open({
-                    type: 'error',
-                    content: 't(`errorMessages.${errorType}`)',
-                })
+                if (error.response.status === 401) {
+                    router.push(PAGE_ROUTES.AUTH.LOGIN);
+                }
             },
         }
     )

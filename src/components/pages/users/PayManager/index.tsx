@@ -153,7 +153,6 @@ const PayManager = () => {
                       &nbsp;&nbsp;&nbsp;
                     </td>
                   </tr>
-
                   <tr>
                     <td className="article">
                       지급유저<span className="ic_ess" title="필수"></span>

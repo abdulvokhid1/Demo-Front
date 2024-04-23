@@ -12,3 +12,7 @@ export const getFullDate = (isoTime: string) => {
     const m = moment(isoTime).tz('Asia/Seoul');
     return m.format('YYYY-MM-DD');
 }
+
+export const numberWithCommas = (x: number) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

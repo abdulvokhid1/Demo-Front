@@ -6,13 +6,14 @@ import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import PAGE_ROUTES from "@/utils/constants/routes";
 import ProductManage_API from '@/services/api/productmd';
-import { ProductManageTypeProps } from '../../../../services/api/productmd/type';
 
+import { ProductType } from '@/utils/types/type';
 import { message } from 'antd';
 import { useMutation } from '@tanstack/react-query';
-import { ProductType } from '@/utils/types/type';
+import { useRouter } from "next/navigation";
 
 const ShopProductManagement = () => {
+	const router = useRouter();
 	const [messageApi, contextHolder] = message.useMessage()
 	const [currentPage, setCurrentPage] = useState<number>(1)
     const [totalUsers, setTotalUsers] = useState<number>(0)
@@ -30,11 +31,9 @@ const ShopProductManagement = () => {
             },
 
             onError: (error: any) => {
-                const errorType = error.response.data.errors[0]
-                messageApi.open({
-                    type: 'error',
-                    content: 't(`errorMessages.${errorType}`)',
-                })
+                if (error.response.status === 401) {
+                    router.push(PAGE_ROUTES.AUTH.LOGIN);
+                }
             },
         }
     )

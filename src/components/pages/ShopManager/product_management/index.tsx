@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faArrowAltCircleLeft, faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons'
 
 import ReactPaginate from 'react-paginate';
-import { CreatedAtType, ProductType, UserInfo } from "@/components/pages/users/types/type";
+import { CreatedAtType, ProductType, UserInfo } from "@/utils/types/type";
 import Link from 'next/link'
 import HeadElement from '@/components/layouts/Header'
 import FooterElement from "@/components/layouts/Footer";
@@ -16,8 +16,10 @@ import {useEffect, useState} from "react";
 import { useMutation } from '@tanstack/react-query';
 import ProductManage_API from '@/services/api/productmd';
 import { userState } from '@/services/recoil/user';
+import { useRouter } from "next/navigation";
 
 const Dashboard = () => {
+    const router = useRouter();
     const [messageApi, contextHolder] = message.useMessage()
     const [sliderVisible, setSliderVisible] = useState(true)
     const [isSelectedHover, setIsSelectedHover] = useState(false)
@@ -41,11 +43,9 @@ const Dashboard = () => {
                 console.log(JSON.stringify(product))
             },
             onError: (error: any) => {
-                const errorType = error.response.data.errors[0]
-                messageApi.open({
-                    type: 'error',
-                    content: 't(`errorMessages.${errorType}`)',
-                })
+                if (error.response.status === 401) {
+                    router.push(PAGE_ROUTES.AUTH.LOGIN);
+                }
             }
         },
     )
@@ -59,11 +59,9 @@ const Dashboard = () => {
             },
 
             onError: (error: any) => {
-                const errorType = error.response.data.errors[0]
-                messageApi.open({
-                    type: 'error',
-                    content: 't(`errorMessages.${errorType}`)',
-                })
+                if (error.response.status === 401) {
+                    router.push(PAGE_ROUTES.AUTH.LOGIN);
+                }
             },
         }
     )

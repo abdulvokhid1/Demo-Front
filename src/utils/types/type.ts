@@ -1,8 +1,4 @@
-import { Level } from '../../components/pages/SalesManagement/SalesRegistrationManager/types/type';
-import exp from "node:constants";
-import centers from "@/services/api/centers";
-import PayManager from '../../components/pages/users/PayManager/index';
-import PurchaseRequest from '../../components/pages/SalesManagement/PurchaseRequest/index';
+import { format } from "date-fns";
 
 export type UserInfo = {
     id?: number;
@@ -38,6 +34,14 @@ export type Level ={
     id?: number;
     title?: string;
     description?: string;
+    rank?: number;
+    minBuy?: number;
+    minSell?: number;
+    minSub?: number;
+    discountRate?: number;
+    rewardRate?: number;
+    bgColor?: string
+    txtColor?: string;
     createdAt?:string;
     updatedAt: string;
 }
@@ -120,14 +124,47 @@ export type WithdrawalType = {
 }
 
 export type RecommendationType={
-    di?:number;
-    name: string;
-    Level: string;
-    amount: number;
-    recommended: string;
-    peoples: number;
-    peoples_amount: number;
-    tree_chart:"";
-    manage: string;
+    name?: string;
+    description?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    url?: string;
+}
 
+export type DepositRegistrationType = {
+
+    id?: number;
+
+    depositDate?: string;
+
+
+    users: number[];
+
+    amount: number;
+    memo: string;
+
+    fee?: number;
+    isConfirmed: boolean;
+    isRewarded?: boolean
+
+    method?: number;
+}
+
+export type DepositType = {
+
+    id?: number;
+
+    depositDate?: string;
+
+
+    user: UserInfo;
+
+    amount: number;
+    memo: string;
+
+    fee?: number;
+    status: number;
+    isRewarded?: number
+
+    method?: number;
 }
