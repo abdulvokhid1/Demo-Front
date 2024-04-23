@@ -26,7 +26,9 @@ export const API_ENDPOINTS = {
 
   SALEREGISTER: {
     LIST: '/api/v1/deposit/list',
-    REGISTRATION: '/api/v1/deposit/create'
+    REGISTRATION: '/api/v1/deposit/create',
+    CONFIRM: '/api/v1/deposit/confirm',
+    CALCULATIONLIST: '/api/v1/deposit/calculation_list',
   },
   PRODUCTMANAGE: {
     GET_LIST: '/api/v1/product_manage/list',

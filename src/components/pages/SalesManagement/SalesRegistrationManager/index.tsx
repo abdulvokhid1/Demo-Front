@@ -3,7 +3,7 @@ import Slider from '@/components/layouts/Slider/Sales';
 import PAGE_ROUTES from "@/utils/constants/routes";
 import { faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { useMutation } from "@tanstack/react-query";
 import USER_API from "@/services/api/users";
@@ -16,12 +16,13 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
 import noop from "noop-ts";
-import button from "antd/es/button";
 
 const SalesRegistrationManager = () => {
 	const router = useRouter();
+	const ckboxRef = useRef<any[]>([]);
+	const pageUnit = process.env.NEXT_PUBLIC_PER_PAGE || '10' ;
 	const [currentPage, setCurrentPage] = useState<number>(1)
-	const [perPage, setPerPage] = useState<number>(2)
+	const [perPage, setPerPage] = useState<number>(Number(pageUnit))
     const [totalSales, setTotalSales] = useState<number>(0)
     const [sliderVisible, setSliderVisible] = useState(true)
 	const [saleListState, setSaleListState] = useState<DepositType[]>([])
@@ -37,6 +38,7 @@ const SalesRegistrationManager = () => {
 	const [memoState, setMemoState] = useState<string>('')
 	const [userNameState, setUserNameState] = useState<string>('')
 	const [idState, setIdState] = useState<number>(0)
+	const [selectedListState, setSelectedListState] = useState<number[]>([])
 
 	const {isPending, mutate, isSuccess, isError} = useMutation(
 		{
@@ -44,6 +46,7 @@ const SalesRegistrationManager = () => {
 			onSuccess: async (values: any) => {
 				setSaleListState(values.deposits);
 				setTotalSales(values.total);
+				setSelectedListState([])
 				console.log(JSON.stringify(saleListState))
 			},
 
@@ -51,6 +54,35 @@ const SalesRegistrationManager = () => {
 				// const errorType = error.response.data.errors[0]
 				if (error.response.status === 401) {
 					router.push(PAGE_ROUTES.AUTH.LOGIN);
+				}
+				// messageApi.open({
+				//     type: 'error',
+				//     content: 't(`errorMessages.${errorType}`)',
+				// })
+			},
+		}
+	)
+
+	const {mutate: mutateConfirm} = useMutation(
+		{
+			mutationFn: SALEREGISTER_API.confirm,
+			onSuccess: async (values: any) => {
+				setSaleListState(values.deposits);
+				setTotalSales(values.total);
+				setSelectedListState([])
+				ckboxRef.current.map((item, index) => {
+					item.checked = false;
+				})
+				console.log(JSON.stringify(saleListState))
+			},
+
+			onError: (error: any) => {
+				// const errorType = error.response.data.errors[0]
+				if (error.response.status === 401) {
+					router.push(PAGE_ROUTES.AUTH.LOGIN);
+				}
+				else {
+					console.log(error.toString())
 				}
 				// messageApi.open({
 				//     type: 'error',
@@ -117,6 +149,24 @@ const SalesRegistrationManager = () => {
 			page: currentPage,
 			limit: perPage})
 
+	}
+
+	const onConfirmSubmitHandler = (type: number) => {
+		const confirmParams = {
+			type: type,
+			list: selectedListState,
+			query: {
+				startDate: startDate,
+				endDate: endDate,
+				orderId: orderIdState,
+				memo: memoState,
+				id: idState,
+				userName: userNameState,
+				page: currentPage,
+				limit: perPage,
+			}
+		}
+		mutateConfirm(confirmParams);
 	}
 return (
 	<div className={sliderVisible ? "container" : "container_hide"} id="depth2_leftmenu"
@@ -258,27 +308,56 @@ return (
 					{/* <!-- 리스트영역 --> */}
 					<div className="content_section_inner">
 						<div className="ctl_btn_area">
-								<span className="shop_btn_pack">
-									<a href="javascript:select_send('excel');" className="small white"
-									   title="선택엑셀저장">선택엑셀저장</a>
-								</span>
 							<span className="shop_btn_pack">
-									<span className="blank_3"></span>
-								</span>
+								<a className="small white" title="선택엑셀저장">
+									선택엑셀저장
+								</a>
+							</span>
 							<span className="shop_btn_pack">
-									<a href="javascript:search_send('excel');" className="small white" title="검색엑셀저장">검색엑셀저장 (0)</a>
-								</span>
+								<span className="blank_3"></span>
+							</span>
 							<span className="shop_btn_pack">
-									<span className="blank_3"></span>
-								</span>
+								<a href="javascript:search_send('excel');" className="small white" title="검색엑셀저장">
+									검색엑셀저장 (0)
+								</a>
+							</span>
 							<span className="shop_btn_pack">
-									<a href="javascript:select_send('delete');" className="small white"
-									   title="선택삭제">선택삭제</a>
-								</span>
+								<span className="blank_3"></span>
+							</span>
+							<span className="shop_btn_pack" style={{background: 'green'}}>
+								<a className="small" style={{color: 'white'}}
+								   title="선택삭제"
+								   onClick={() => {onConfirmSubmitHandler(1)}}
+								>
+									승인하기
+								</a>
+							</span>
+							<span className="shop_btn_pack">
+								<span className="blank_3"></span>
+							</span>
+							<span className="shop_btn_pack" style={{background: 'orange'}}>
+								<a className="small" style={{color: 'white'}}
+								   title="선택삭제"
+								   onClick={() => {onConfirmSubmitHandler(0)}}
+								>
+									대기하기
+								</a>
+							</span>
+							<span className="shop_btn_pack">
+								<span className="blank_3"></span>
+							</span>
+							<span className="shop_btn_pack" style={{background: 'gray'}}>
+								<a className="small" style={{color: 'white'}}
+								   title="선택삭제"
+								   onClick={() => {onConfirmSubmitHandler(2)}}
+								>
+									거절하기
+								</a>
+							</span>
 						</div>
 						{/* <!-- // 리스트 제어버튼영역 --> */}
 						<table className="list_TB" summary="리스트기본">
-							{/* <!-- <colgroup>
+						{/* <!-- <colgroup>
 								<col width="120px"/><col width="200px"/><col width="120px"/><col width="*"/>
 								</colgroup> --> */}
 							<thead>
@@ -313,8 +392,26 @@ return (
 									return (
 										<tr key={index}>
 											<td>
-												<input type="checkbox" name="chk_id[]" value="17889"
-													   className="class_id"/>
+												<input type="checkbox" className="class_id"
+													   ref={el => ckboxRef.current.push(el)}
+													   onChange={(e) => {
+														   if (e.target.checked) {
+															   const newUser = item.id || 0;
+															   setSelectedListState([...selectedListState, newUser])
+														   }
+														   else {
+															   const indices: number[] = []
+															   selectedListState.map((user: number, i: number) => {user == item.id? indices.push(i) : noop})
+															   if (indices?.length) {
+																   indices.map((index1: any, index: number) => {
+																	   selectedListState.splice(index1, 1)
+																	   setSelectedListState([...selectedListState])
+																   })
+															   }
+															   // console.log(userState);
+														   }
+													   }}
+												/>
 											</td>
 											<td>{index + 1}</td>
 											<td>619D3A033491</td>
@@ -333,9 +430,33 @@ return (
 											<td>PV 583,000</td>
 											<td>
 											<span className="shop_state_pack">
-												<span className="orange">
-													{item.status ? '승인' : '대기중'}
-												</span>
+												{/*<span className="orange">*/}
+													<select style={item.status == 0? {background: 'orange', color: 'white'} : item.status == 1? {background: 'green', color: 'white'} : {background: 'gray', color: 'white'}}
+															onChange={(e) => {
+																const color = e.target.value == "0" ? 'orange' : e.target.value == "1" ? 'green' : 'gray'
+																e.target.style.background = color;
+																const confirmParams = {
+																	type: Number(e.target.value) == 0? 0 : Number(e.target.value) == 1? 1 : 2,
+																	list: [item.id || 0],
+																	query: {
+																		startDate: startDate,
+																		endDate: endDate,
+																		orderId: orderIdState,
+																		memo: memoState,
+																		id: idState,
+																		userName: userNameState,
+																		page: currentPage,
+																		limit: perPage,
+																	}
+																}
+																mutateConfirm(confirmParams);
+															}}
+													>
+														<option value={0} selected={item.status == 0} >대기</option>
+														<option value={1}  selected={item.status == 1}>승인</option>
+														<option value={2} selected={item.status != 1 && item.status != 0}>거절</option>
+													</select>
+												{/*</span>*/}
 											</span>
 											</td>
 											<td>{moment(item.depositDate).format('YYYY-MM-DD')}</td>

@@ -8,3 +8,9 @@ export type QueryType = {
   page?: number
   limit?: number
 }
+
+export type ConfirmType = {
+  type: number
+  list: number[]
+  query?: QueryType;
+}

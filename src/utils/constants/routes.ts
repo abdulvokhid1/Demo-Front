@@ -29,6 +29,10 @@ const PAGE_ROUTES = {
   },
   CALC:{
     CALC_MANAGEMENT: '/admin/calc_manage/position_calc',
+    CALC_RECOMMEND_INCENTIVES: '/admin/calc_manage/recommend_incentives',
+    CALC_POSITION_INCENTIVES_LIST: '/admin/calc_manage/position_incentive_list',
+    CALC_SALES_INCENTIVES: '/admin/calc_manage/sales_incentives',
+    CALC_RECOMMEND_INCENTIVES_LIST: '/admin/calc_manage/recomend_incen_list',
    },
  SHOP:{
   SHOP_PRODUCT_MANAGEMENT:'/admin/shop_manager/shop_product_management',

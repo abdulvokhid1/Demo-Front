@@ -81,7 +81,7 @@ const PayManager = () => {
 					{/* <!-- 리스트 제어버튼영역 //--> */}
 					
 					<div className="ctl_btn_area">
-						<span className="shop_btn_pack"><a href="javascript:select_send('delete');" className="small white" title="선택포인트삭제" >선택포인트삭제</a></span>
+						<span className="shop_btn_pack"><a onClick={()=>{}} className="small white" title="선택포인트삭제" >선택포인트삭제</a></span>
 					</div>
 					{/* <!-- // 리스트 제어버튼영역 --> */}
 
@@ -105,21 +105,9 @@ const PayManager = () => {
 								<th scope="col" className="colorset">관리</th>
 							</tr>
 						</thead> 
-						<tbody> 
-<tr><td colSpan={15} height='40'>내용이 없습니다.</td></tr></tbody> 
+						<tbody>
+						<tr><td colSpan={15} height='40'>내용이 없습니다.</td></tr></tbody>
 					</table>
-
-
-					{/* <!-- 페이지네이트 --> */}
-					<div className="list_paginate">			
-							<span className='lineup'><span className='nextprev'><span className='btn'>
-                                <span className='no'><span className='icon ic_first'></span></span><a href=' ?&listpg=1' className='ok' title='처음' >
-                                    <span className='icon ic_first'></span></a></span><span className='btn'><span className='no'><span className='icon ic_prev'>
-                                        </span></span><a href=' ?&listpg=0' className='ok' title='이전' ><span className='icon ic_prev'></span></a>
-                                        </span>
-                                        </span><span className='number'><a href='#none' onClick={()=>{'return false'}} className='hit'>1</a></span>
-                                        <span className='nextprev'><span className='btn'><span className='no'><span className='icon ic_next'></span></span><a href=' ?&listpg=2' className='ok' title='다음' ><span className='icon ic_next'></span></a></span><span className='btn'><span className='no'><span className='icon ic_last'></span></span><a href=' ?&listpg=0' className='ok' title='끝' ><span className='icon ic_last'></span></a></span></span></span>					</div>
-					{/* <!-- // 페이지네이트 --> */}
 
 			</div>
 </form>
