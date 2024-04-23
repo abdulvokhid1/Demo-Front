@@ -29,7 +29,7 @@ const PositionCalc = () => {
 		{
 			mutationFn: SALEREGISTER_API.getCalculationList,
 			onSuccess: async (values: any) => {
-				setCalcListState(values.deposits);
+				setCalcListState(values);
 				setTotalSales(values.total);
 				setSelectedListState([])
 				console.log(JSON.stringify(calcListState))
@@ -67,7 +67,13 @@ const PositionCalc = () => {
 		setEndDate(e);
 	}
 
-	const onSearchSubmitHandler = (formData: FormData) => {}
+	const onSearchSubmitHandler = (formData: FormData) => {
+		startDate && endDate &&
+		mutate({
+			startDate: startDate,
+			endDate: endDate,
+		})
+	}
   
     return(
 		<div className={sliderVisible ? "container" : "container_hide"} id="depth2_leftmenu"

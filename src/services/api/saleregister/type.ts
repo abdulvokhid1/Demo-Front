@@ -14,3 +14,10 @@ export type ConfirmType = {
   list: number[]
   query?: QueryType;
 }
+
+export type CalculationType = {
+  startDate?: Date;
+  endDate?: Date;
+  page?: number;
+  limit?: number;
+}

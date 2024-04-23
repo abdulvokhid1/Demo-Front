@@ -1,9 +1,14 @@
 // import './styles.css'
 import Link from 'next/link'
-import {useState} from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { generalSelectedKey } from "@/services/recoil/selectedKey";
+
 
 const Slider = () => {
-    const [selectedKey, setSelectedKey] = useState(0)
+    // const [selectedKey, setSelectedKey] = useState(0)
+    // const selectedKey = useRef(0)
+    const selectedKey = useRecoilValue(generalSelectedKey)
+    const setSelectedKey = useSetRecoilState(generalSelectedKey)
     const itemClickedHandler = (item: number) => {
         setSelectedKey(item);
     }
@@ -36,7 +41,7 @@ const Slider = () => {
                   onClick={()=> itemClickedHandler(11)}>약관 및 정책설정</Link>
             <Link key={12} href="/admin/general/page_manager" className={selectedKey==12? "menu_on": "menu"} title="일반페이지 관리" style={{display: 'block'}}
                   onClick={()=> itemClickedHandler(12)}>일반페이지 관리</Link>
-            <Link href="/admin/general/dashboard" className={selectedKey==13? "menu_on": "menu"} title="서브관리자 관리" style={{display: 'none'}}
+            <Link key={13} href="/admin/general/dashboard" className={selectedKey==13? "menu_on": "menu"} title="서브관리자 관리" style={{display: 'none'}}
                   onClick={()=> itemClickedHandler(13)}>서브관리자 관리</Link>
             <div className="favorite_menu">
                 <Link className="title" title="즐겨찾는메뉴설정" href="_favmenu.form.php"></Link>

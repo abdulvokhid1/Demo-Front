@@ -1344,7 +1344,7 @@ const Dashboard = () => {
                                                     <a href="#none" className="copy copy_btn_owner"
                                                        data-clipboard-action="copy"
                                                        data-clipboard-target="#en_url_owner" style={{}}>
-                                                        <img src="/pages_unique03/images/main/menu_icon_copy_blue.jpg"
+                                                        <img src="/images/main/menu_icon_copy_blue.jpg"
                                                              style={{border: 0}} alt=""/>추천가입 복사</a>
                                                 </div>
                                             </div>
