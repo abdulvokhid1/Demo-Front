@@ -11,7 +11,6 @@ import {
 } from "@/utils/colorpicker";
 import "./ColorPicker.css";
 import { FreeSelector, PredefinedSelector } from "./Options";
-import index from "@/components/pages/shop/dashboard";
 
 export enum ColorPickerVariant {
   Predefined = "predefined",

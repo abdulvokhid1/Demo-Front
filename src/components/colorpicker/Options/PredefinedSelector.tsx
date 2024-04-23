@@ -1,7 +1,6 @@
 import React from "react";
 import { Color } from "@/components/colorpicker/Interfaces/Color";
 import "./PredefinedSelector.css";
-import index from "@/components/pages/shop/dashboard";
 
 const predefinedRows = 3;
 
