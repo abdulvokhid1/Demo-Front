@@ -23,6 +23,7 @@ export default function UserLayout({
 }) {
     useEffect(() => {
         import('bootstrap');
+        // require("bootstrap/dist/js/bootstrap.bundle.min.js");
     }, []);
     return (
         <html lang="en">

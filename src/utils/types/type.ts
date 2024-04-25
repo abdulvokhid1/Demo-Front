@@ -168,3 +168,28 @@ export type DepositType = {
 
     method?: number;
 }
+
+export type CalculationType1 = {
+    id?: number;
+    name?: string;
+    levelTitle?: string;
+    levelId?: number;
+    sub1Name?: string;
+    sub1Id?:number;
+    sub2Name?: string;
+    sub2Id?:number;
+    saleAmount?: number;
+    saleDate?: Date;
+}
+
+export type CalculationType = {
+    id?: number;
+    name?: string;
+    levelTitle?: string;
+    levelId?: number;
+    sub1?: UserInfo;
+    sub2?: UserInfo;
+    saleAmount?: number;
+    selfAmount?: number;
+    saleDate?: Date;
+}

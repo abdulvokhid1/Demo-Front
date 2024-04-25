@@ -46,13 +46,13 @@ const OrderProcessingStatus = () => {
           </div>
           {/* <!-- // 페이지타이틀 --> */}
 
-          <iframe
-            src="inc.bonus_auto.php"
-            width={0}
-            height={0}
-            frameBorder={0}
-            style={{ display: "none" }}
-          ></iframe>
+          {/*<iframe*/}
+          {/*  src="inc.bonus_auto.php"*/}
+          {/*  width={0}*/}
+          {/*  height={0}*/}
+          {/*  frameBorder={0}*/}
+          {/*  style={{ display: "none" }}*/}
+          {/*></iframe>*/}
           <div className="common_ajax_proc"></div>
 
           {/* <!-- 검색영역 --> */}

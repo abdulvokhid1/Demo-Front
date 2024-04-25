@@ -65,7 +65,7 @@ const ShopBanner = () => {
                     <span className="location">홈 &gt; 디자인관리 &gt; 쇼핑몰 배너 관리</span>
                   </div>
                   {/* <!-- // 페이지타이틀 --> */}
-				  <iframe src="inc.bonus_auto.php" width={0} height={0} frameBorder={0} style={{display:'none'}}></iframe>
+				  {/*<iframe src="inc.bonus_auto.php" width={0} height={0} frameBorder={0} style={{display:'none'}}></iframe>*/}
  					<div className="common_ajax_proc"></div>
 
 

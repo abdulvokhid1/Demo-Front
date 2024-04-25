@@ -39,15 +39,15 @@ const Dashboard = () => {
                         </div>
 
 
-                        <iframe src="inc.bonus_auto.php" width="0" height="0" frameBorder="0"
-                                style={{display: 'none'}}></iframe>
+                        {/*<iframe src="inc.bonus_auto.php" width="0" height="0" frameBorder="0"*/}
+                        {/*        style={{display: 'none'}}></iframe>*/}
 
 
                         <div className="common_ajax_proc"></div>
 
 
-                        <link href="css/dash/bootstrap.css?v=1709515099" id="bootstrap-style" rel="stylesheet"
-                              type="text/css"/>
+                        {/*<link href="css/dash/bootstrap.css?v=1709515099" id="bootstrap-style" rel="stylesheet"*/}
+                        {/*      type="text/css"/>*/}
 
 
                         <div className="bar_num" style={{left: '1317px', top: '236px'}}>0</div>

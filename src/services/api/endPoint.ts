@@ -28,7 +28,8 @@ export const API_ENDPOINTS = {
     LIST: '/api/v1/deposit/list',
     REGISTRATION: '/api/v1/deposit/create',
     CONFIRM: '/api/v1/deposit/confirm',
-    CALCULATIONLIST: '/api/v1/deposit/calculation_list',
+    CALCULATION_LIST: '/api/v1/deposit/calculation_list',
+    CALCULATION_DETAIL_LIST: '/api/v1/deposit/calculation_detail_list',
   },
   PRODUCTMANAGE: {
     GET_LIST: '/api/v1/product_manage/list',

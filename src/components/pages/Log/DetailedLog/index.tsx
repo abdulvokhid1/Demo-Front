@@ -29,7 +29,7 @@ const DetailedLog = () => {
                     <span className="location">홈 &gt; 로그분석 &gt; 상세로그</span>
                   </div>
                   {/* <!-- // 페이지타이틀 --> */}
-				  <iframe src="inc.bonus_auto.php" width={0} height={0} frameBorder={0} style={{display:'none'}}></iframe>
+				  {/*<iframe src="inc.bonus_auto.php" width={0} height={0} frameBorder={0} style={{display:'none'}}></iframe>*/}
            <div className="common_ajax_proc"></div>
 
 				{/* <!-- 검색영역 --> */}

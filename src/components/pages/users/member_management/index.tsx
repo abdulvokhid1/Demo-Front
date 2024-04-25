@@ -35,7 +35,7 @@ const UserManagement = () => {
     const [mobilephone, setMobilePhone] = useState<string>()
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [totalUsers, setTotalUsers] = useState<number>(0)
-    const [perPage, setPerPage] = useState<number>(2)
+    const [perPage, setPerPage] = useState<number>(10)
     const {mutate: mutateLevel} = useMutation(
         {
             mutationFn: LEVEL_API.getList,

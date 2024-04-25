@@ -68,7 +68,7 @@ const OrdersOfToday = () => {
                     <span className="location">홈 &gt; 주문관리 &gt; 오늘 접수된주문</span>
                   </div>
                   {/* <!-- // 페이지타이틀 --> */}
-				  <iframe src="inc.bonus_auto.php" width={0} height={0} frameBorder={0} style={{display:'none'}}></iframe>
+				  {/*<iframe src="inc.bonus_auto.php" width={0} height={0} frameBorder={0} style={{display:'none'}}></iframe>*/}
  <div className="common_ajax_proc"></div>
 
 

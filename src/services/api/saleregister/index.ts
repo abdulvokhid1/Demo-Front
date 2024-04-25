@@ -11,7 +11,9 @@ const SALEREGISTER_API = {
   confirm: (params: ConfirmType) =>
       axiosClient.post(API_ENDPOINTS.SALEREGISTER.CONFIRM, params),
   getCalculationList: (params: CalculationType) =>
-      axiosClient.post(API_ENDPOINTS.SALEREGISTER.CALCULATIONLIST, params),
+      axiosClient.post(API_ENDPOINTS.SALEREGISTER.CALCULATION_LIST, params),
+  getCalculationDetailList: (params: CalculationType) =>
+      axiosClient.post(API_ENDPOINTS.SALEREGISTER.CALCULATION_DETAIL_LIST, params),
 }
 
 export default SALEREGISTER_API

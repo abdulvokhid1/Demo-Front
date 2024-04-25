@@ -1,14 +1,20 @@
 'use client'
 import Slider  from '@/components/layouts/Slider/Calc';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { format } from "date-fns";
 import PAGE_ROUTES from "@/utils/constants/routes";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useMutation } from "@tanstack/react-query";
 import SALEREGISTER_API from "@/services/api/saleregister";
-import { DepositType } from "@/utils/types/type";
+import noop from "noop-ts";
+
 import { useRouter } from "next/navigation";
+import { top } from "@popperjs/core";
+import { it } from "date-fns/locale";
+import ReactPaginate from "react-paginate";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowAltCircleLeft, faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
 const PositionCalc = () => {
 	const router = useRouter();
     const [sliderVisible, setSliderVisible] = useState(true)
@@ -20,17 +26,96 @@ const PositionCalc = () => {
 	const [isDatePickerOpen2, setIsDatePickerOpen2] = useState(false);
 	const [xColor2, setXColor2] = useState<number>(0)
 	const [yColor2, setYColor2] = useState<number>(0)
-	const [ calcListState, setCalcListState ] = useState<DepositType[]>([])
+	const [ calcListState, setCalcListState ] = useState<any>()
+	const [totalUserListState, setTotalUserListState] = useState<string[]>([])
 	const [totalSales, setTotalSales] = useState<number>(0)
+	const [totalSaleAmountState, setTotalSaleAmountState] = useState<number>(0)
+
 	const [selectedListState, setSelectedListState] = useState<number[]>([])
+	const [currentPage, setCurrentPage] = useState<number>(1)
+	const [perPage, setPerPage] = useState<number>(10)
 
 
 	const {isPending, mutate, isSuccess, isError} = useMutation(
 		{
 			mutationFn: SALEREGISTER_API.getCalculationList,
 			onSuccess: async (values: any) => {
-				setCalcListState(values);
-				setTotalSales(values.total);
+				let calList:any  = {};
+				let selfBalance: any = {}
+				let totalSaleAmount = 0;
+				setTotalSales(values.selfBalanceList.length)
+				values.list.map((value: any) => {
+					const userId = value.id;
+					const sub1Id = value.sub1Id;
+					const sub2Id = value.sub2Id;
+
+					if (userId in calList) {
+						// userId available in calList
+						// Need update subs, depositAmount, sub1Id, sub2Id
+						sub1Id && !calList[userId].sub1Id ?  calList[userId].sub1Id =  {id: sub1Id, name: value.sub1Name} : noop;
+						sub2Id && !calList[userId].sub2Id ?  calList[userId].sub2Id =  {id: sub2Id, name: value.sub2Name} : noop;
+						value.subId
+							? calList[userId].subs[value.subId] != undefined
+								? (calList[userId].subs[value.subId] += value.saleAmount) && (totalSaleAmount += value.saleAmount)
+								: calList[userId].subs[value.subId] = value.saleAmount
+							: noop;
+						if (value.subId &&
+						value.subId != value.sub1Id &&
+						value.subId != value.sub2Id &&
+						calList[userId].sub1Id &&
+						calList[userId].sub2Id &&
+						value.subId != value.sub1Id.id &&
+						value.subId != value.sub2Id.id) {
+							calList[userId].saleAmount += value.saleAmount;
+							totalSaleAmount += value.saleAmount;
+						}
+					}
+					else {
+						calList[userId] = {
+							name: value.name,
+							level: value.levelId,
+							levelTitle: value.levelTitle,
+							// sub1Id: {id: value.sub1Id, name: value.sub1Name},
+							// sub2Id: {id: value.sub2Id, name: value.sub2Name},
+							selfBalance: 0,
+							saleAmount: 0,
+							subs: {}
+						}
+						value.sub1Id ? calList[userId].sub1Id =  {id: value.sub1Id, name: value.sub1Name} : noop;
+						value.sub2Id ? calList[userId].sub2Id =  {id: value.sub2Id, name: value.sub2Name} : noop;
+						value.subId ? calList[userId].subs[value.subId] = value.saleAmount : noop;
+						if (
+						value.subId &&
+						value.subId != value.sub1Id &&
+						value.subId != value.sub2Id &&
+						calList[userId].sub1Id &&
+						calList[userId].sub2Id &&
+						value.subId != value.sub1Id.id &&
+						value.subId != value.sub2Id.id
+						) {
+							calList[userId].saleAmount += value.saleAmount;
+							totalSaleAmount += value.saleAmount
+						}
+					}
+				})
+				// const keys = Object.keys(calList);
+				// let index = -1;
+				// index = keys.indexOf('name');
+				// index != -1 ? keys.splice(index, 1) : noop;
+				// index = keys.indexOf('level');
+				// index != -1 ? keys.splice(index, 1) : noop;
+				// index = keys.indexOf('levelTitle');
+				// index != -1 ? keys.splice(index, 1) : noop;
+				// const keyStart = perPage* (currentPage - 1);
+				// const keyEnd = keyStart + perPage;
+				// setTotalUserListState(keys.slice(keyStart, keyEnd));
+				paginationCalculation(currentPage, calList);
+				values.selfBalanceList.map((value: any) => {
+					calList[value.id] ? calList[value.id].selfBalance += value.selfBalance : noop;
+				})
+				setCalcListState(calList);
+				setTotalSales(values.selfBalanceList.length);
+				setTotalSaleAmountState(totalSaleAmount);
 				setSelectedListState([])
 				console.log(JSON.stringify(calcListState))
 			},
@@ -40,18 +125,29 @@ const PositionCalc = () => {
 				if (error.response.status === 401) {
 					router.push(PAGE_ROUTES.AUTH.LOGIN);
 				}
-				// messageApi.open({
-				//     type: 'error',
-				//     content: 't(`errorMessages.${errorType}`)',
-				// })
 			},
 		}
 	)
+
+	const paginationCalculation = (page: number = currentPage, calList:any) =>{
+		const keys = Object.keys(calList);
+		let index = -1;
+		index = keys.indexOf('name');
+		index != -1 ? keys.splice(index, 1) : noop;
+		index = keys.indexOf('level');
+		index != -1 ? keys.splice(index, 1) : noop;
+		index = keys.indexOf('levelTitle');
+		index != -1 ? keys.splice(index, 1) : noop;
+		const keyStart = perPage* (page - 1);
+		const keyEnd = keyStart + perPage;
+		setTotalUserListState(keys.slice(keyStart, keyEnd));
+	}
 
 
     useEffect(() => {
     console.log('sliderVisible: ', sliderVisible)
     }, [sliderVisible]);
+
     const sliderToggle = () => {
     setSliderVisible(!sliderVisible);
     }
@@ -72,7 +168,22 @@ const PositionCalc = () => {
 		mutate({
 			startDate: startDate,
 			endDate: endDate,
+			page: currentPage,
+			limit: perPage,
 		})
+	}
+
+	const paginationHandler = (selectedItem: { selected: number }) => {
+		const page = selectedItem ? selectedItem.selected+1 : 0;
+		startDate && endDate &&
+		// mutate({
+		// 	startDate: startDate,
+		// 	endDate: endDate,
+		// 	page: currentPage,
+		// 	limit: perPage,
+		// })
+		paginationCalculation(page, calcListState)
+
 	}
   
     return(
@@ -138,49 +249,13 @@ const PositionCalc = () => {
 											   }}
 										/>
 									</td>
-									{/*<td className="article">주문번호</td>*/}
-									{/*<td className="conts">*/}
-									{/*   <input type='text' name='pass_ordernum' className='input_text'/>*/}
-									{/*</td>*/}
-									{/*<td className="article">내용</td>*/}
-									{/*<td className="conts">*/}
-									{/*   <input type='text' name='pass_pointTitle' className='input_text'/>*/}
-									{/*</td>*/}
 									<td className="article">구분</td>
 									<td className="conts" colSpan={20}>
-										{/*<input type="radio" name='chk_buy' id="" value="" />*/}
-										{/*<label  style={{height:'18px'}}>전체</label>*/}
-										{/*&nbsp;*/}
 										<input type="radio" name='chk_buy' id="" checked/>
 										<label style={{height: '18px'}}>신규</label>
 										&nbsp;
-										{/*<input type="radio" name='chk_buy' id="" value="02" />*/}
-										{/*<label  style={{height:'18px'}}>재구매</label>*/}
-										{/*&nbsp;*/}
-										{/*<input type="radio" name='chk_buy' id="" value="03" />*/}
-										{/*<label  style={{height:'18px'}}>전환매출</label>*/}
-										{/*&nbsp;*/}
 									</td>
 								</tr>
-								{/*<tr>*/}
-								{/*   <td className="article">아이디</td>*/}
-								{/*   <td className="conts">*/}
-								{/*	   <input type='number' name='pass_pointID' className='input_text'/>*/}
-								{/*   </td>*/}
-								{/*   <td className="article">성명</td>*/}
-								{/*   <td className="conts">*/}
-								{/*	   <input type='text' name='pass_name' className='input_text'/>*/}
-								{/*   </td>*/}
-								{/*   /!*<td className="article">소속대리점</td>*!/*/}
-								{/*   /!*<td className="conts">*!/*/}
-								{/*   /!*	<select name='assign_center' id="assign_center" className='add_option add_option_chk' style={{width:'200px'}}>*!/*/}
-								{/*   /!*		<option value="">선택</option>*!/*/}
-								{/*   /!*		<option value="1" >본사</option>*!/*/}
-								{/*   /!*		<option value="2" >봉천센타</option>*!/*/}
-								{/*   /!*		<option value="3" >강남센타</option>*!/*/}
-								{/*   /!*	</select>*!/*/}
-								{/*   /!*</td>*!/*/}
-								{/*</tr>*/}
 								</tbody>
 							</table>
 							{/* <!-- 버튼영역 --> */}
@@ -189,15 +264,6 @@ const PositionCalc = () => {
 									   <span className="shop_btn_pack btn_input_blue">
 										   <input type="submit" className="input_medium" title="검색" value="검색"></input>
 									   </span>
-									{/*<span className="shop_btn_pack">*/}
-									{/*   <span className="blank_3"></span>*/}
-									{/*</span>*/}
-									{/*<span className="shop_btn_pack">*/}
-									{/*   <a href={PAGE_ROUTES.SALES_MANAGEMENT.SALES_REGISTRATION} className="medium red"*/}
-									{/*   title="매출등록하기">*/}
-									{/*	   매출등록*/}
-									{/*   </a>*/}
-									{/*</span>*/}
 								</div>
 							</div>
 						</div>
@@ -329,22 +395,10 @@ const PositionCalc = () => {
 
 									<div className="inner_sum_box">
 										<ul>
-											<li className="txt">2024-03-11 전체매출( BV)<span className="value">0</span>
+											<li className="txt">{startDate ? format(startDate, "yyyy-MM-dd") : ''} ~ {endDate ? format(endDate, "yyyy-MM-dd") : ''}<span className="value">{totalSaleAmountState}</span>
 											</li>
-
-
 										</ul>
 									</div>
-
-									{/* <!--
-상품테이블 에서 매출 가져옴	<div style="clear:both"></div>
-					<div className="inner_sum_box">
-						<ul>
-							<li className="txt">2024-03-11 전체매출 PV<span className="value">0 PV</span></li>
-							<li className="txt">2024-03-11 전체매출(원)<span className="value">0 원</span></li>
-						</ul>
-					</div>
---> */}
 								</td>
 							</tr>
 							</thead>
@@ -364,120 +418,163 @@ const PositionCalc = () => {
 
 								<tr style={{height: '50px align: center'}}>
 									<th scope="col" className="colorset">번호</th>
-									<th scope="col" className="colorset">(일마감)</th>
+									{/*<th scope="col" className="colorset">(일마감)</th>*/}
 									<th scope="col" className="colorset">취득자</th>
 									<th scope="col" className="colorset">아이디</th>
-									<th scope="col" className="colorset">레벨(변경 전)</th>
-									<th scope="col" className="colorset">레벨(변경 후)</th>
+									{/*<th scope="col" className="colorset">레벨(변경 전)</th>*/}
+									<th scope="col" className="colorset">레벨</th>
 									<th scope="col" className="colorset">본인매출</th>
 									<th scope="col" className="colorset">산하매출</th>
 									<th scope="col" className="colorset">직추천</th>
-									<th scope="col" className="colorset">달성조건</th>
-									<th scope="col" className="colorset">내용</th>
+									{/*<th scope="col" className="colorset">달성조건</th>*/}
+									{/*<th scope="col" className="colorset">내용</th>*/}
 									<th scope="col" className="colorset">조직도</th>
 								</tr>
 								</thead>
 								<tbody>
-
-								<tr>
-									<td height={50} colSpan={21} align='center' color='#ffffff'>마감할 자료가 없습니다.</td>
-								</tr>
-
+								{!totalUserListState.length ? (
+									<tr>
+										<td height={50} colSpan={21} align='center' color='#ffffff'>마감할 자료가 없습니다.</td>
+									</tr>
+								) : (
+									totalUserListState.map((item, index) => {
+										return (
+											<tr key={index}>
+												<td>{index + 1}</td>
+												<td>{calcListState[item].name}</td>
+												<td>{calcListState[item].memberId}</td>
+												<td>{calcListState[item].levelTitle}</td>
+												<td>{calcListState[item].selfBalance}</td>
+												<td>{calcListState[item].saleAmount}</td>
+												<td>{calcListState[item].sub1Id?.name || ''}<br/>{calcListState[item].sub2Id?.name || ''}</td>
+												<td>
+													<input type="button" value="조직도" className="input_small white"
+														   onClick={() => {
+														   }}/>
+												</td>
+											</tr>
+										)
+									})
+								)
+								}
 								</tbody>
 							</table>
 						</div>
-					</form>
+						<div
+							style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto'}}>
+							<ReactPaginate
+								previousLabel={<FontAwesomeIcon icon={faArrowAltCircleLeft}/>}
+								nextLabel={<FontAwesomeIcon icon={faArrowAltCircleRight}/>}
+								breakLabel={'...'}
+								breakClassName={'break-me'}
+								activeClassName={'active'}
+								containerClassName={'pagination'}
+								// subContainerClassName={'pages pagination'}
 
-					<table width='100%' cellPadding={0} cellSpacing={0} className='MG-T10'>
-						<form name='share_form' method='post' onSubmit={() => {
-						}}>
-							<input type='hidden' name='q1' value="code="/>
-							<input type='hidden' name='year_month' value="2024-03"/>
-							<input type='hidden' name='year_weekday' value=""/>
-							<input type='hidden' name='year_day' value="2024-03-11"/>
-							<tr>
-								<td width="100%" height="50" align="center">
-									<input className="pay_drapt" type='image' src='./images/sub/btn_pay_drapt.gif'/>
-
-									<div style={{display: 'none'}}><span><label><input type="checkbox" name="agree"
-																					   className="bonus_hidden_chkbox hidde_pay_drapt"/></label></span>
-									</div>
-								</td>
-							</tr>
-						</form>
-					</table>
-
-					<form name='fboardlist' method='post'>
-						<input type='hidden' name='q1' value="code="/>
-						<input type='hidden' name='page' value="1"/>
-
-						{/* <!-- 리스트영역 --> */}
-						<div className="content_section_inner">
-							<table className="list_TB" summary="리스트기본">
-								<thead>
-								<tr style={{height: '50 align: center'}}>
-									<th scope="col" className="colorset"><input type='checkbox' name='chkall'
-																				value="1" onClick={() => {
-									}}/></th>
-									<th scope="col" className="colorset">No</th>
-									<th scope="col" className="colorset"><a
-										href='/myAdmin/_entershop.bonus_no_grade_entry.php?code=&page=&filed=b.name&orderby=asc'><u>회원명</u></a>
-									</th>
-									<th scope="col" className="colorset"><a
-										href='/myAdmin/_entershop.bonus_no_grade_entry.php?code=&page=&filed=member_id&orderby=asc'><u>아이디</u></a>
-									</th>
-									<th scope="col" className="colorset"><a
-										href='/myAdmin/_entershop.bonus_no_grade_entry.php?code=&page=&filed=b.memgrade&orderby=asc'><u>레벨(변경
-										전)</u></a></th>
-									<th scope="col" className="colorset"><a
-										href='/myAdmin/_entershop.bonus_no_grade_entry.php?code=&page=&filed=total&orderby=asc'><u>레벨(변경
-										후)</u></a></th>
-									<th scope="col" className="colorset"><a
-										href='/myAdmin/_entershop.bonus_no_grade_entry.php?code=&page=&filed=total&orderby=asc'><u>전체매출</u></a>
-									</th>
-									<th scope="col" className="colorset"><a
-										href='/myAdmin/_entershop.bonus_no_grade_entry.php?code=&page=&filed=total&orderby=asc'><u>당일매출</u></a>
-									</th>
-									<th scope="col" className="colorset"><a
-										href='/myAdmin/_entershop.bonus_no_grade_entry.php?code=&page=&filed=total&orderby=asc'><u>확정매출</u></a>
-									</th>
-									<th scope="col" className="colorset"><a
-										href='/myAdmin/_entershop.bonus_no_grade_entry.php?code=&page=&filed=total&orderby=asc'><u>배당자격
-										금액</u></a></th>
-									<th scope="col" className="colorset"><a
-										href='/myAdmin/_entershop.bonus_no_grade_entry.php?code=&page=&filed=total&orderby=asc'><u>비고</u></a>
-									</th>
-									<th scope="col" className="colorset"><a
-										href='/myAdmin/_entershop.bonus_no_grade_entry.php?code=&page=&filed=ragi&orderby=asc'><u>기간</u></a>
-									</th>
-								</tr>
-								</thead>
-								<tr>
-									<td height={50} colSpan={20} align='center'>내역이 없습니다.</td>
-								</tr>
-
-								<div className="top_btn_area">
-									{/* <!--<span className="shop_btn_pack"><a href="./calcu/calcu_bonus1_xls.php?code=" className="small white" />엑셀다운로드</a></span>--> */}
-									{/* <!--<span className="shop_btn_pack"><a onclick="btn_check('update')" className="small white" />정산완료</a></span>--> */}
-								</div>
-								<tfoot>
-								<tr>
-									<td colSpan={20} style={{height: '20px'}}>
-									</td>
-								</tr>
-								</tfoot>
-							</table>
+								initialPage={currentPage - 1}
+								pageCount={Math.ceil(totalSales / perPage)}
+								marginPagesDisplayed={2}
+								pageRangeDisplayed={5}
+								onPageChange={paginationHandler}
+							/>
 						</div>
-
-						<table width='100%' cellPadding={0} cellSpacing={0} style={{marginTop: '10px'}}>
-							<tr>
-								<td width='50%' align='left'></td>
-
-								<td width='50%' align="right"></td>
-							</tr>
-						</table>
-
 					</form>
+
+					{/*<table width='100%' cellPadding={0} cellSpacing={0} className='MG-T10'>*/}
+					{/*	<form name='share_form' method='post' onSubmit={() => {*/}
+					{/*	}}>*/}
+					{/*		/!*<input type='hidden' name='q1' value="code="/>*!/*/}
+					{/*		/!*<input type='hidden' name='year_month' value="2024-03"/>*!/*/}
+					{/*		/!*<input type='hidden' name='year_weekday' value=""/>*!/*/}
+					{/*		/!*<input type='hidden' name='year_day' value="2024-03-11"/>*!/*/}
+					{/*		<tr>*/}
+					{/*			<td width="100%" height="50" align="center">*/}
+					{/*				<input className="pay_drapt" type='image' src='./images/sub/btn_pay_drapt.gif'/>*/}
+
+					{/*				<div style={{display: 'none'}}>*/}
+					{/*					<span>*/}
+					{/*						<label>*/}
+					{/*							<input type="checkbox" name="agree"*/}
+					{/*								   className="bonus_hidden_chkbox hidde_pay_drapt"/>*/}
+					{/*						</label>*/}
+					{/*					</span>*/}
+					{/*				</div>*/}
+					{/*			</td>*/}
+					{/*		</tr>*/}
+					{/*	</form>*/}
+					{/*</table>*/}
+
+					{/*<form name='fboardlist' method='post'>*/}
+					{/*	/!*<input type='hidden' name='q1' value="code="/>*!/*/}
+					{/*	/!*<input type='hidden' name='page' value="1"/>*!/*/}
+
+					{/*	/!* <!-- 리스트영역 --> *!/*/}
+					{/*	<div className="content_section_inner">*/}
+					{/*		<table className="list_TB" summary="리스트기본">*/}
+					{/*			<thead>*/}
+					{/*			<tr style={{height: '50 align: center'}}>*/}
+					{/*				<th scope="col" className="colorset">*/}
+					{/*					<input type='checkbox' name='chkall' value="1" onClick={() => {}}/>*/}
+					{/*				</th>*/}
+					{/*				<th scope="col" className="colorset">No</th>*/}
+					{/*				<th scope="col" className="colorset"><a*/}
+					{/*					href='/myAdmin/_entershop.bonus_no_grade_entry.php?code=&page=&filed=b.name&orderby=asc'><u>회원명</u></a>*/}
+					{/*				</th>*/}
+					{/*				<th scope="col" className="colorset"><a*/}
+					{/*					href='/myAdmin/_entershop.bonus_no_grade_entry.php?code=&page=&filed=member_id&orderby=asc'><u>아이디</u></a>*/}
+					{/*				</th>*/}
+					{/*				<th scope="col" className="colorset"><a*/}
+					{/*					href='/myAdmin/_entershop.bonus_no_grade_entry.php?code=&page=&filed=b.memgrade&orderby=asc'><u>레벨(변경*/}
+					{/*					전)</u></a></th>*/}
+					{/*				<th scope="col" className="colorset"><a*/}
+					{/*					href='/myAdmin/_entershop.bonus_no_grade_entry.php?code=&page=&filed=total&orderby=asc'><u>레벨(변경*/}
+					{/*					후)</u></a></th>*/}
+					{/*				<th scope="col" className="colorset"><a*/}
+					{/*					href='/myAdmin/_entershop.bonus_no_grade_entry.php?code=&page=&filed=total&orderby=asc'><u>전체매출</u></a>*/}
+					{/*				</th>*/}
+					{/*				<th scope="col" className="colorset"><a*/}
+					{/*					href='/myAdmin/_entershop.bonus_no_grade_entry.php?code=&page=&filed=total&orderby=asc'><u>당일매출</u></a>*/}
+					{/*				</th>*/}
+					{/*				<th scope="col" className="colorset"><a*/}
+					{/*					href='/myAdmin/_entershop.bonus_no_grade_entry.php?code=&page=&filed=total&orderby=asc'><u>확정매출</u></a>*/}
+					{/*				</th>*/}
+					{/*				<th scope="col" className="colorset"><a*/}
+					{/*					href='/myAdmin/_entershop.bonus_no_grade_entry.php?code=&page=&filed=total&orderby=asc'><u>배당자격*/}
+					{/*					금액</u></a></th>*/}
+					{/*				<th scope="col" className="colorset"><a*/}
+					{/*					href='/myAdmin/_entershop.bonus_no_grade_entry.php?code=&page=&filed=total&orderby=asc'><u>비고</u></a>*/}
+					{/*				</th>*/}
+					{/*				<th scope="col" className="colorset"><a*/}
+					{/*					href='/myAdmin/_entershop.bonus_no_grade_entry.php?code=&page=&filed=ragi&orderby=asc'><u>기간</u></a>*/}
+					{/*				</th>*/}
+					{/*			</tr>*/}
+					{/*			</thead>*/}
+					{/*			<tr>*/}
+					{/*				<td height={50} colSpan={20} align='center'>내역이 없습니다.</td>*/}
+					{/*			</tr>*/}
+
+					{/*			<div className="top_btn_area">*/}
+					{/*				/!* <!--<span className="shop_btn_pack"><a href="./calcu/calcu_bonus1_xls.php?code=" className="small white" />엑셀다운로드</a></span>--> *!/*/}
+					{/*				/!* <!--<span className="shop_btn_pack"><a onclick="btn_check('update')" className="small white" />정산완료</a></span>--> *!/*/}
+					{/*			</div>*/}
+					{/*			<tfoot>*/}
+					{/*			<tr>*/}
+					{/*				<td colSpan={20} style={{height: '20px'}}>*/}
+					{/*				</td>*/}
+					{/*			</tr>*/}
+					{/*			</tfoot>*/}
+					{/*		</table>*/}
+					{/*	</div>*/}
+
+					{/*	<table width='100%' cellPadding={0} cellSpacing={0} style={{marginTop: '10px'}}>*/}
+					{/*		<tr>*/}
+					{/*			<td width='50%' align='left'></td>*/}
+
+					{/*			<td width='50%' align="right"></td>*/}
+					{/*		</tr>*/}
+					{/*	</table>*/}
+
+					{/*</form>*/}
 				</div>
 			</div>
 			<div style={{
