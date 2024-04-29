@@ -9,6 +9,8 @@ import { useMutation } from '@tanstack/react-query';
 import { message } from 'antd';
 import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
+import { useSetRecoilState } from "recoil";
+import { userSelectedKey } from "@/services/recoil/selectedKey";
 
 const ProceedsOfChanges = () => {
 const [messageApi, contextHolder] = message.useMessage()
@@ -17,6 +19,7 @@ const [currentPage, setCurrentPage] = useState<number>(1)
     const [totalUsers, setTotalUsers] = useState<number>(0)
     const [perPage, setPerPage] = useState<number>(2)
 	const [payment, setPayments] = useState<PayManagerType>()
+	const setSelectedKey = useSetRecoilState(userSelectedKey)
     const {mutate: mutateLevel} = useMutation(
         {
             mutationFn: USER_API.getList,
@@ -55,8 +58,8 @@ const [currentPage, setCurrentPage] = useState<number>(1)
         }
     )
 useEffect(() => {
-console.log('sliderVisible: ', sliderVisible)
-}, [sliderVisible]);
+	setSelectedKey(3)
+}, []);
 const sliderToggle = () => {
 setSliderVisible(!sliderVisible);
 }

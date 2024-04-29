@@ -15,6 +15,8 @@ import { it } from "date-fns/locale";
 import ReactPaginate from "react-paginate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleLeft, faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
+import { useSetRecoilState } from "recoil";
+import { calcSelectedKey } from "@/services/recoil/selectedKey";
 const PositionCalc = () => {
 	const router = useRouter();
     const [sliderVisible, setSliderVisible] = useState(true)
@@ -34,6 +36,7 @@ const PositionCalc = () => {
 	const [selectedListState, setSelectedListState] = useState<number[]>([])
 	const [currentPage, setCurrentPage] = useState<number>(1)
 	const [perPage, setPerPage] = useState<number>(10)
+	const setSelectedKey = useSetRecoilState(calcSelectedKey)
 
 
 	const {isPending, mutate, isSuccess, isError} = useMutation(
@@ -145,8 +148,8 @@ const PositionCalc = () => {
 
 
     useEffect(() => {
-    console.log('sliderVisible: ', sliderVisible)
-    }, [sliderVisible]);
+		setSelectedKey(0)
+    }, []);
 
     const sliderToggle = () => {
     setSliderVisible(!sliderVisible);

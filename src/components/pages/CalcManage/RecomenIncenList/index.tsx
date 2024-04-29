@@ -1,11 +1,14 @@
 'use client'
 import Slider  from '@/components/layouts/Slider/Calc';
 import { useEffect, useState } from 'react';
+import { useSetRecoilState } from "recoil";
+import { calcSelectedKey } from "@/services/recoil/selectedKey";
 const RecomenIncenList = () => {
-    const [sliderVisible, setSliderVisible] = useState(true)
+	const setSelectedKey = useSetRecoilState(calcSelectedKey)
+	const [sliderVisible, setSliderVisible] = useState(true)
     useEffect(() => {
-    console.log('sliderVisible: ', sliderVisible)
-    }, [sliderVisible]);
+		setSelectedKey(3)
+    }, []);
     const sliderToggle = () => {
     setSliderVisible(!sliderVisible);
     }

@@ -5,12 +5,15 @@ import PAGE_ROUTES from '@/utils/constants/routes';
 import { useMutation } from '@tanstack/react-query';
 import { message } from 'antd';
 import { useEffect, useState } from 'react';
+import { useSetRecoilState } from "recoil";
+import { saleSelectedKey } from "@/services/recoil/selectedKey";
 const OtherPreferences = () => {
     const [sliderVisible, setSliderVisible] = useState(true)
     const [messageApi, contextHolder] = message.useMessage()
+    const setSelectedKey = useSetRecoilState(saleSelectedKey)
     useEffect(() => {
-    console.log('sliderVisible: ', sliderVisible)
-    }, [sliderVisible]);
+    setSelectedKey(5)
+    }, []);
     const sliderToggle = () => {
     setSliderVisible(!sliderVisible);
     }

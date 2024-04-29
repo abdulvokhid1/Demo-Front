@@ -16,6 +16,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
 import noop from "noop-ts";
+import { useSetRecoilState } from "recoil";
+import { saleSelectedKey } from "@/services/recoil/selectedKey";
 
 const SalesRegistrationManager = () => {
 	const router = useRouter();
@@ -39,6 +41,7 @@ const SalesRegistrationManager = () => {
 	const [userNameState, setUserNameState] = useState<string>('')
 	const [idState, setIdState] = useState<number>(0)
 	const [selectedListState, setSelectedListState] = useState<number[]>([])
+	const setSelectedKey = useSetRecoilState(saleSelectedKey)
 
 	const {isPending, mutate, isSuccess, isError} = useMutation(
 		{
@@ -93,6 +96,7 @@ const SalesRegistrationManager = () => {
 	)
 
 	useEffect(() => {
+		setSelectedKey(0)
 		mutate({
 			page: currentPage,
 			limit: perPage

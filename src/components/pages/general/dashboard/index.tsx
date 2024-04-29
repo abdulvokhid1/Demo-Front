@@ -9,12 +9,14 @@ import Head from 'next/head'
 import {Layout} from 'antd'
 import Navbar from "@/components/layouts/Navbar";
 import {useEffect, useState} from "react";
-
+import { useSetRecoilState } from "recoil";
+import { generalSelectedKey } from "@/services/recoil/selectedKey";
 const Dashboard = () => {
     const [sliderVisible, setSliderVisible] = useState(true)
+    const setSelectedKey = useSetRecoilState(generalSelectedKey)
     useEffect(() => {
-        console.log('sliderVisible: ', sliderVisible)
-    }, [sliderVisible]);
+       setSelectedKey(0)
+    }, []);
     const sliderToggle = () => {
         setSliderVisible(!sliderVisible);
     }
@@ -24,6 +26,7 @@ const Dashboard = () => {
             <div className={sliderVisible ? "container" : "container_hide"} id="depth2_leftmenu"
                  style={{background: "#f0f0f0"}}>
                 <Slider/>
+                {/*<Navigation onClose={()=>{}} />*/}
                 <div className="content_section">
                     <div className="content_section_fix" style={{background: '#fff'}}>
 

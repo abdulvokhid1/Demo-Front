@@ -13,14 +13,17 @@ import Image from "next/image";
 import { Tree, TreeNode } from "@/components/pages/organization_tree/tree";
 import { getNodes, StyledNode } from "@/components/pages/organization_tree/tree/stories/Tree.stories";
 import { NodeContent } from "@/components/pages/organization_tree/tree/components/nodeContent";
+import { useSetRecoilState } from "recoil";
+import { generalSelectedKey, orgSelectedKey } from "@/services/recoil/selectedKey";
 
 const Sponsor = () => {
     const [sliderVisible, setSliderVisible] = useState(true)
     const [isSelectedHover, setIsSelectedHover] = useState(false)
     const [isSelectedClicked, setIsSelectedClicked] = useState(false)
+    const setSelectedKey = useSetRecoilState(orgSelectedKey)
     useEffect(() => {
-        console.log('sliderVisible: ', sliderVisible)
-    }, [sliderVisible]);
+        setSelectedKey(0)
+    }, []);
     const sliderToggleHandler = () => {
         setSliderVisible(!sliderVisible);
     }

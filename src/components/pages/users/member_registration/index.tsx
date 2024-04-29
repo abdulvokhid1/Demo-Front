@@ -24,6 +24,8 @@ import moment from "moment-timezone";
 import USER_API from "@/services/api/users";
 import { userListState } from "@/services/recoil/user";
 import DaumPostcodeData = globalThis.DaumPostcodeData;
+import { useSetRecoilState } from "recoil";
+import { userSelectedKey } from "@/services/recoil/selectedKey";
 
 const id = "daum-postcode"; // script가 이미 rending 되어 있는지 확인하기 위한 ID
 const src = "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
@@ -41,6 +43,7 @@ const UserManagement = () => {
     const [centers, setCenters] = useState<CenterTypeProps[]>([])
     const [levels, setLevels] = useState<LevelTypeProps[]>([])
     const [addressDetail, setAddressDetail] = useState<DaumPostcodeData>()
+    const setSelectedKey = useSetRecoilState(userSelectedKey)
 
 
     /*** Daum Address Popup search ***/
@@ -71,8 +74,9 @@ const UserManagement = () => {
 
 
     const {mutate: mutateLevel} = useMutation(
-        {mutationFn: LEVEL_API.getList,
-            onSuccess: async (values:any) =>{
+        {
+            mutationFn: LEVEL_API.getList,
+            onSuccess: async (values: any) => {
                 setLevels(values);
                 console.log(JSON.stringify(levels))
             },
@@ -85,7 +89,7 @@ const UserManagement = () => {
     )
     const {mutate: mutateCenter} = useMutation({
         mutationFn: CENTER_API.getList,
-        onSuccess: async (values: any)=> {
+        onSuccess: async (values: any) => {
             setCenters(values.centers);
         },
         onError: async (error: any) => {
@@ -96,7 +100,7 @@ const UserManagement = () => {
             })
         }
     })
-    const {isPending, mutate:mutateRegister, isSuccess, isError} = useMutation(
+    const {isPending, mutate: mutateRegister, isSuccess, isError} = useMutation(
         {
             mutationFn: AUTH_API.register,
             onSuccess: async (values: any) => {
@@ -112,8 +116,8 @@ const UserManagement = () => {
         }
     )
     useEffect(() => {
-        console.log('sliderVisible: ', sliderVisible)
-    }, [sliderVisible]);
+        setSelectedKey(0)
+    }, []);
     useEffect(() => {
         mutateCenter({page: 0, limit: 0});
     }, []);
@@ -165,12 +169,12 @@ const UserManagement = () => {
 
 
         const params = {
-            name: name? name.toString() : '',
+            name: name ? name.toString() : '',
             email: email ? email.toString() : '',
             password: password ? password.toString() : '',
-            role: role? role.toString(): 'user',
-            income_option:income_option === 'Y'? 1 : 0,
-            level:level,
+            role: role ? role.toString() : 'user',
+            income_option: income_option === 'Y' ? 1 : 0,
+            level: level,
             income_option_select: Number(income_option_select) || 0,
             mobilephone_number: mobilephone_number?.toString() || '',
             phone_number: phone_number?.toString() || '',
@@ -232,15 +236,15 @@ const UserManagement = () => {
 
 
                     <form name="frm" method="post" action={onSubmit} encType='multipart/form-data'>
-                    {/*<form onSubmit={onSubmit}>*/}
+                        {/*<form onSubmit={onSubmit}>*/}
                         <input type="hidden" name="_mode" value='add'/>
-                        <input type="hidden" name="serialnum" />
-                        <input type="hidden" name="_PVSC" />
+                        <input type="hidden" name="serialnum"/>
+                        <input type="hidden" name="_PVSC"/>
 
                         <input type="hidden" name="csrf_token" value="af61f42c0ece9ea42ed3f6bbec3b9d28"/>
 
 
-                        <input type="hidden" name="app_mode" />
+                        <input type="hidden" name="app_mode"/>
 
                         <div className="sub_title"><span className="icon"></span><span
                             className="title">회원정보 상세내역</span></div>
@@ -285,12 +289,12 @@ const UserManagement = () => {
 
                                         <span id="avatar_id" style={{display: 'none'}}>
                                             &nbsp;&nbsp;&nbsp;&nbsp;
-                                            [연결 아이디] : <input type="text" name="avatar_id" 
+                                            [연결 아이디] : <input type="text" name="avatar_id"
                                                               size={15} className="input_text"
                                                               style={{color: '#808080', backgroundColor: '#f0f0f0'}}
                                                               onFocus={() => {
                                                               }} tabIndex={-1} readOnly/>
-	[성명] : <input type="text" name="avatar_name"  size={15} className="input_text"
+	[성명] : <input type="text" name="avatar_name" size={15} className="input_text"
                   style={{color: '#808080', backgroundColor: '#f0f0f0'}} onFocus={() => {
                                         }} tabIndex={-1} readOnly/>
                                         </span>
@@ -355,7 +359,7 @@ const UserManagement = () => {
                                     <td className="article">휴대폰번호<span className='ic_ess'
                                                                        title='필수'></span></td>
                                     <td className="conts">
-                                        <input type="text" name='htel'  size={20} maxLength={11}
+                                        <input type="text" name='htel' size={20} maxLength={11}
                                                className='input_text' onBlur={() => {
                                         }}/>
                                         <span id='searchphoneidHTML'></span>
@@ -373,7 +377,7 @@ const UserManagement = () => {
                                     <td className="conts">
 
 
-                                        <input type="password" name="passwd"  size={20}
+                                        <input type="password" name="passwd" size={20}
                                                className="input_text"/>
 
 
@@ -390,7 +394,7 @@ const UserManagement = () => {
                                         <input
                                             type="text"
                                             name="name"
-                                             size={30} className="input_text"
+                                            size={30} className="input_text"
                                         />
                                         &nbsp;<span id='searchnameHTML'></span>
                                         <span id="msg_name" className="msg_name"></span>
@@ -413,7 +417,7 @@ const UserManagement = () => {
                                 <tr>
                                     <td className="article">전화번호</td>
                                     <td className="conts">
-                                        <input type="text" name="tel"  size={20} className="input_text"/>
+                                        <input type="text" name="tel" size={20} className="input_text"/>
                                         <div className='guide_text'>
                                             <span className='ic_blue'></span>
                                             <span className='blue'>하이푼(-)을 포함하시기 바랍니다.</span>
@@ -424,8 +428,10 @@ const UserManagement = () => {
                                 <tr>
                                     <td className="article">우편번호</td>
                                     <td className="conts">
-                                        <input type="text" name="zip1" id="_post1" size={5} className="input_text" value={addressDetail?.zonecode.toString().substring(0,2)}/>-
-                                        <input type="text" name="zip2" id="_post2" size={5} className="input_text" value={addressDetail?.zonecode.toString().substring(2)}/>
+                                        <input type="text" name="zip1" id="_post1" size={5} className="input_text"
+                                               value={addressDetail?.zonecode.toString().substring(0, 2)}/>-
+                                        <input type="text" name="zip2" id="_post2" size={5} className="input_text"
+                                               value={addressDetail?.zonecode.toString().substring(2)}/>
 
                                         <span className="shop_btn_pack" style={{float: 'none'}}>&nbsp;
                                             <a href="#none"
@@ -440,10 +446,13 @@ const UserManagement = () => {
                                 <tr>
                                     <td className="article">주소</td>
                                     <td className="conts">
-                                        기본주소 : <input type="text" name="address" id="_addr1" 
-                                                      size={50} className="input_text" value={addressDetail?.address}/><br/>
-                                        상세주소 : <input type="text" name="address1" id="_addr2" size={50} className="input_text" value={addressDetail?.buildingName}/><br/>
-                                        도로명주소 : <input type="text" name="address_doro" id="_addr_doro" size={70} className="input_text" value={addressDetail?.roadAddress}/>
+                                        기본주소 : <input type="text" name="address" id="_addr1"
+                                                      size={50} className="input_text"
+                                                      value={addressDetail?.address}/><br/>
+                                        상세주소 : <input type="text" name="address1" id="_addr2" size={50}
+                                                      className="input_text" value={addressDetail?.buildingName}/><br/>
+                                        도로명주소 : <input type="text" name="address_doro" id="_addr_doro" size={70}
+                                                       className="input_text" value={addressDetail?.roadAddress}/>
                                         {/*<br/>새 우편번호 : <input type="text" name="zonecode" id="_zonecode" size={10} className="input_text"/>*/}
                                     </td>
                                 </tr>
@@ -455,7 +464,7 @@ const UserManagement = () => {
                                                 style={{width: '200px'}}>
                                             <option key={0} value={0}>선택</option>
                                             {centers.length && (centers.map((item, index) => {
-                                                return (<option key={item.id} value={item.id}>{item.name}</option>)
+                                                    return (<option key={item.id} value={item.id}>{item.name}</option>)
                                                 })
                                             )}
                                         </select>
@@ -478,7 +487,7 @@ const UserManagement = () => {
                                         <input type="text" id='recomid_display' name="recomid_display" size={30}
                                                className="input_text"
                                                style={{color: '#808080', backgroundColor: '#f0f0f0'}}
-                                               // value={recomId}
+                                            // value={recomId}
                                                tabIndex={-1} readOnly/>
 
                                         <span className='shop_btn_pack' style={{float: 'none'}}>&nbsp;
@@ -491,23 +500,23 @@ const UserManagement = () => {
                                 </tr>
 
 
-                                <tr>
-                                    <td className="article">후원인 아이디</td>
-                                    <td className="conts">
-                                        <input type="text" name="sponid" value='superadmin' size={30}
-                                               className="input_text"
-                                               style={{color: '#808080', backgroundColor: '#f0f0f0'}}
-                                               onFocus={() => {
-                                               }} tabIndex={-1} readOnly/>
+                                {/*<tr>*/}
+                                {/*    <td className="article">후원인 아이디</td>*/}
+                                {/*    <td className="conts">*/}
+                                {/*        <input type="text" name="sponid" value='superadmin' size={30}*/}
+                                {/*               className="input_text"*/}
+                                {/*               style={{color: '#808080', backgroundColor: '#f0f0f0'}}*/}
+                                {/*               onFocus={() => {*/}
+                                {/*               }} tabIndex={-1} readOnly/>*/}
 
-                                        <span className='shop_btn_pack' style={{float: 'none'}}>&nbsp;<a
-                                            onClick={() => {
-                                            }}
-                                            className='small blue'>후원인 검색</a>
-                                        </span>
+                                {/*        <span className='shop_btn_pack' style={{float: 'none'}}>&nbsp;<a*/}
+                                {/*            onClick={() => {*/}
+                                {/*            }}*/}
+                                {/*            className='small blue'>후원인 검색</a>*/}
+                                {/*        </span>*/}
 
-                                    </td>
-                                </tr>
+                                {/*    </td>*/}
+                                {/*</tr>*/}
 
                                 </tbody>
                             </table>
@@ -525,19 +534,19 @@ const UserManagement = () => {
                                 <tr>
                                     <td className="article">은행명</td>
                                     <td className="conts"><input type="text" name="return_bank"
-                                                                  size={20}
+                                                                 size={20}
                                                                  className="input_text"/></td>
                                 </tr>
                                 <tr>
                                     <td className="article">계좌번호</td>
                                     <td className="conts"><input type="text" name="return_account"
-                                                                  size={40}
+                                                                 size={40}
                                                                  className="input_text"/></td>
                                 </tr>
                                 <tr>
                                     <td className="article">예금주</td>
                                     <td className="conts"><input type="text" name="return_name"
-                                                                  size={20}
+                                                                 size={20}
                                                                  className="input_text"/></td>
                                 </tr>
                                 </tbody>

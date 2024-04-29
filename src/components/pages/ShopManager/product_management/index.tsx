@@ -17,6 +17,8 @@ import { useMutation } from '@tanstack/react-query';
 import ProductManage_API from '@/services/api/productmd';
 import { userState } from '@/services/recoil/user';
 import { useRouter } from "next/navigation";
+import { useSetRecoilState } from "recoil";
+import { prodSelectedKey } from "@/services/recoil/selectedKey";
 
 const Dashboard = () => {
     const router = useRouter();
@@ -35,6 +37,7 @@ const Dashboard = () => {
     const [totalUsers, setTotalUsers] = useState<number>(0)
     const [perPage, setPerPage] = useState<number>(2)
     const [product, setproduct] = useState<ProductType>()
+    const setSelectedKey = useSetRecoilState(prodSelectedKey)
     const {mutate: mutateProduct} = useMutation(
         {
             mutationFn: ProductManage_API.getList,
@@ -70,8 +73,8 @@ const Dashboard = () => {
     }, []);
   
     useEffect(() => {
-        console.log('sliderVisible: ', sliderVisible)
-    }, [sliderVisible]);
+        setSelectedKey(1)
+    }, []);
     const sliderToggleHandler = () => {
         setSliderVisible(!sliderVisible);
     }

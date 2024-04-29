@@ -22,3 +22,52 @@ export const userSelectedKey = atom<number>({
     default: 0,
     effects_UNSTABLE: [persistAtom],
 })
+
+export const saleSelectedKey = atom<number>({
+    key: 'sale-key',
+    default: 0,
+    effects_UNSTABLE: [persistAtom],
+})
+
+export const calcSelectedKey = atom<number>({
+    key: 'calc-key',
+    default: 0,
+    effects_UNSTABLE: [persistAtom],
+})
+
+export const orgSelectedKey = atom<number>({
+    key: 'org-key',
+    default: 0,
+    effects_UNSTABLE: [persistAtom],
+})
+
+export const prodSelectedKey = atom<number>({
+    key: 'prod-key',
+    default: 0,
+    effects_UNSTABLE: [persistAtom],
+})
+
+export const statSelectedKey = atom<number>({
+    key: 'stat-key',
+    default: 0,
+    effects_UNSTABLE: [persistAtom],
+})
+
+export const orderSelectedKey = atom<number>({
+    key: 'order-key',
+    default: 0,
+    effects_UNSTABLE: [persistAtom],
+})
+
+export const designSelectedKey = atom<number>({
+    key: 'design-key',
+    default: 0,
+    effects_UNSTABLE: [persistAtom],
+})
+
+export const logSelectedKey = atom<number>({
+    key: 'log-key',
+    default: 0,
+    effects_UNSTABLE: [persistAtom],
+})
+

@@ -12,6 +12,8 @@ import { getFullTime } from "@/utils/helper";
 import USER_API from "@/services/api/users";
 import noop  from "noop-ts";
 import { useRouter } from "next/navigation";
+import { useSetRecoilState } from "recoil";
+import { saleSelectedKey } from "@/services/recoil/selectedKey";
 
 const CenterRegistration = () => {
     const router = useRouter();
@@ -27,6 +29,7 @@ const CenterRegistration = () => {
     const [subUser1State, setSubUser1State] = useState<string>('')
     const [subUser2State, setSubUser2State] = useState<string>('')
     const [totalUsers, setTotalUsers] = useState<number>(0)
+    const setSelectedKey = useSetRecoilState(saleSelectedKey)
 
 
     const {isPending, mutate, isSuccess, isError} = useMutation(
@@ -73,12 +76,10 @@ const CenterRegistration = () => {
     )
 
     useEffect(() => {
+        setSelectedKey(1)
         mutate({page: 0, limit: 0});
     }, []);
 
-    useEffect(() => {
-        console.log('sliderVisible: ', sliderVisible)
-    }, [sliderVisible]);
     const sliderToggle = () => {
         setSliderVisible(!sliderVisible);
     }

@@ -3,6 +3,8 @@ import '../../../pages/users/member_registration/global.d'
 import Slider from '@/components/layouts/Slider/general';
 import { useEffect, useRef, useState } from "react";
 import DaumPostcodeData = globalThis.DaumPostcodeData;
+import { useSetRecoilState } from "recoil";
+import { generalSelectedKey } from "@/services/recoil/selectedKey";
 
 
 const id = "daum-postcode"; // script가 이미 rending 되어 있는지 확인하기 위한 ID
@@ -11,9 +13,9 @@ const src = "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
 const Mdinfo = () => {
 	const [sliderVisible, setSliderVisible] = useState(true)
 	const [addressDetail, setAddressDetail] = useState<DaumPostcodeData>()
+	const setSelectedKey = useSetRecoilState(generalSelectedKey)
 
-
-	 /*** Daum Address Popup search ***/
+	/*** Daum Address Popup search ***/
 	 const postcodeRef = useRef<HTMLDivElement | null>(null);
 
 	 const loadLayout = () => {
@@ -40,8 +42,9 @@ const Mdinfo = () => {
     }, []);
 
 	useEffect(() => {
-		console.log('sliderVisible: ', sliderVisible)
-	}, [sliderVisible]);
+		// console.log('sliderVisible: ', sliderVisible)
+		setSelectedKey(1)
+	}, []);
 	const sliderToggle = () => {
 		setSliderVisible(!sliderVisible);
 	}

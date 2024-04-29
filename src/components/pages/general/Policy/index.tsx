@@ -2,11 +2,14 @@
 import Slider from "@/components/layouts/Slider/general";
 import button from "antd/es/button";
 import { useEffect, useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { generalSelectedKey } from "@/services/recoil/selectedKey";
 const Policy = () => {
   const [sliderVisible, setSliderVisible] = useState(true);
+  const setSelectedKey = useSetRecoilState(generalSelectedKey)
   useEffect(() => {
-    console.log("sliderVisible: ", sliderVisible);
-  }, [sliderVisible]);
+    setSelectedKey(3)
+  }, []);
   const sliderToggle = () => {
     setSliderVisible(!sliderVisible);
   };

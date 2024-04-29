@@ -18,6 +18,8 @@ import { getFullTime } from "@/utils/helper";
 import LEVEL_API from "@/services/api/levels";
 import { LevelTypeProps } from "@/services/api/levels/type";
 import { useRouter } from "next/navigation";
+import { useSetRecoilState } from "recoil";
+import { userSelectedKey } from "@/services/recoil/selectedKey";
 
 const UserManagement = () => {
     const router = useRouter()
@@ -36,6 +38,7 @@ const UserManagement = () => {
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [totalUsers, setTotalUsers] = useState<number>(0)
     const [perPage, setPerPage] = useState<number>(10)
+    const setSelectedKey = useSetRecoilState(userSelectedKey)
     const {mutate: mutateLevel} = useMutation(
         {
             mutationFn: LEVEL_API.getList,
@@ -79,8 +82,8 @@ const UserManagement = () => {
     }, []);
 
     useEffect(() => {
-        console.log('sliderVisible: ', sliderVisible)
-    }, [sliderVisible]);
+        setSelectedKey(0)
+    }, []);
     const sliderToggleHandler = () => {
         setSliderVisible(!sliderVisible);
     }

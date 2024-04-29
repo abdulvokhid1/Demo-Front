@@ -10,6 +10,8 @@ import PAGE_ROUTES from "@/utils/constants/routes";
 import { useRouter } from "next/navigation";
 import SALEREGISTER_API from "@/services/api/saleregister";
 import noop from "noop-ts";
+import { useSetRecoilState } from "recoil";
+import { saleSelectedKey } from "@/services/recoil/selectedKey";
 
 type IdNameStateType = {
     id: number;
@@ -26,6 +28,7 @@ const SaleRegisteration = () => {
     const [isConfirmed, setIsConfirmed] = useState<boolean>(false)
     const [isRewarded, setIsRewarded] = useState<boolean>(false)
     const [userListState, setUserListState] = useState<number[]>([])
+    const setSelectedKey = useSetRecoilState(saleSelectedKey)
 
     const {mutate: mutateSaleRegistration} = useMutation(
         {
@@ -43,8 +46,8 @@ const SaleRegisteration = () => {
     )
 
     useEffect(() => {
-        console.log('sliderVisible: ', sliderVisible)
-    }, [sliderVisible]);
+        setSelectedKey(0)
+    }, []);
     const sliderToggle = () => {
         setSliderVisible(!sliderVisible);
     }

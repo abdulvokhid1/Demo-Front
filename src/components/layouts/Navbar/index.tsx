@@ -4,14 +4,47 @@ import Link from 'next/link'
 import { navSelectedKey } from '@/services/recoil/nav'
 import PAGE_ROUTES from "@/utils/constants/routes";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import { it } from "date-fns/locale";
+import {
+    calcSelectedKey, designSelectedKey,
+    generalSelectedKey, logSelectedKey, orderSelectedKey,
+    orgSelectedKey, prodSelectedKey,
+    saleSelectedKey, statSelectedKey,
+    userSelectedKey
+} from "@/services/recoil/selectedKey";
+import { setUseStrictShallowCopy } from "immer";
 
 const NavElement = () => {
     const selectedKey = useRecoilValue(navSelectedKey)
     const setSelectedKey = useSetRecoilState(navSelectedKey)
+    const setGeneralSelectedKey = useSetRecoilState(generalSelectedKey)
+    const setUserSelectedKey = useSetRecoilState(userSelectedKey)
+    const setSaleSelectedKey = useSetRecoilState(saleSelectedKey)
+    const setCalcSelectedKey = useSetRecoilState(calcSelectedKey)
+    const setOrgSelectedKey = useSetRecoilState(orgSelectedKey)
+    const setProdSelectedKey = useSetRecoilState(prodSelectedKey)
+    const setStatSelectedKey = useSetRecoilState(statSelectedKey)
+    const setOrderSelectedKey = useSetRecoilState(orderSelectedKey)
+    const setDesignSelectedKey = useSetRecoilState(designSelectedKey)
+    const setLogSelectedKey = useSetRecoilState(logSelectedKey)
+
     // const [selectedKey, setSelectedKey] = useState(0)
     const itemClickedHandler = (item: number) => {
         setSelectedKey(item);
-        console.log('item:' + item)
+        switch (item) {
+            case 0: setGeneralSelectedKey(0);
+            case 1: setUserSelectedKey(0);
+            case 2: setSaleSelectedKey(0);
+            case 3: setCalcSelectedKey(0);
+            case 4: setOrgSelectedKey(0);
+            case 5: setProdSelectedKey(1);
+            case 6: setStatSelectedKey(0);
+            case 7: setOrderSelectedKey(0);
+            case 8: setDesignSelectedKey(0);
+            case 9: setLogSelectedKey(0);
+
+        }
+        // console.log('item:' + item)
     }
     return (
         <div className="nav_admin">
@@ -69,7 +102,7 @@ const NavElement = () => {
                         </li>
                         <li className={selectedKey == 9 ? "hit" : ""}>
                             <Link href={PAGE_ROUTES.LOG.LOG_MANAGEMENT} className="btn"
-                                  onClick={() => itemClickedHandler(8)}>로그분석
+                                  onClick={() => itemClickedHandler(9)}>로그분석
                             </Link>
                         </li>
                     </ul>

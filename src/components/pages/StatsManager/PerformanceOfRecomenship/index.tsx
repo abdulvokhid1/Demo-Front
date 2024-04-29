@@ -1,5 +1,5 @@
 'use client'
-import Slider  from '@/components/layouts/Slider/Stats';
+import Slider from '@/components/layouts/Slider/Stats';
 import { faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { message } from 'antd';
@@ -8,289 +8,344 @@ import ReactPaginate from 'react-paginate';
 import { RecommendationType } from '../../../../utils/types/type';
 import { useMutation } from '@tanstack/react-query';
 import USER_API from '@/services/api/users';
-const Performance_of_recomenship = () => {
-	const [messageApi, contextHolder] = message.useMessage()
-	const [sliderVisible, setSliderVisible] = useState(true)
-	const [currentPage, setCurrentPage] = useState<number>(1)
-		const [totalUsers, setTotalUsers] = useState<number>(0)
-		const [perPage, setPerPage] = useState<number>(2)
-		const [recommendation, setRecommendation] = useState<RecommendationType>()
-		const {mutate: mutateLevel} = useMutation(
-			{
-				mutationFn: USER_API.getList,
-				onSuccess: async (values: any) => {
-					setRecommendation(values);
-					console.log(JSON.stringify(recommendation))
-				},
-				onError: (error: any) => {
-					const errorType = error.response.data.errors[0]
-					messageApi.open({
-						type: 'error',
-						content: 't(`errorMessages.${errorType}`)',
-					})
-				}
-			},
-		)
-		const {isPending, mutate, isSuccess, isError} = useMutation(
-			{
-				mutationFn: USER_API.getList,
-				onSuccess: async (values: any) => {
-					setRecommendation(values.PayManager);
-					setTotalUsers(values.total);
-					console.log(JSON.stringify(recommendation))
-				},
-	
-				onError: (error: any) => {
-					 const errorType = error.response.data.errors[0]
-					// if (error.response.status === 401) {
-					//     router.push(PAGE_ROUTES.AUTH.LOGIN);
-					// }
-					 messageApi.open({
-						 type: 'error',
-					 content: 't(`errorMessages.${errorType}`)',
-					 })
-				},
-			}
-		)
-	useEffect(() => {
-	console.log('sliderVisible: ', sliderVisible)
-	}, [sliderVisible]);
-	const sliderToggle = () => {
-	setSliderVisible(!sliderVisible);
-	}
-	const paginationHandler = (selectedItem: { selected: number }) => {
-		const page = selectedItem ? selectedItem.selected+1 : 0;
-		mutate({page: page, limit: perPage})
-	}
-  
-    return(
-        <div className={sliderVisible ? "container" : "container_hide" } id="depth2_leftmenu" 
-        style={{background: "#f0f0f0"}}>
-			   <Slider />
+import { useSetRecoilState } from "recoil";
+import { statSelectedKey } from "@/services/recoil/selectedKey";
 
-               <div className="content_section">
-                <div className="content_section_fix" style={{background:'#fff'}}>
-                 
-                  <div className="open_close"><span className="btn_close" id="open_close_btn_close" title="메뉴닫기"style={{display: sliderVisible ? "block" : "none"}} onClick={sliderToggle}></span>
-                  <span className="btn_open" id="open_close_btn_open" title="메뉴열기"style={{display: !sliderVisible ? "block" : "none"}} onClick={sliderToggle}></span></div>
-       
-                  {/* <!-- 페이지타이틀 --> */}
-                  <div className="title_area">
-                    <span className="icon"></span>
-                    <span className="title">
+const Performance_of_recomenship = () => {
+    const [messageApi, contextHolder] = message.useMessage()
+    const [sliderVisible, setSliderVisible] = useState(true)
+    const [currentPage, setCurrentPage] = useState<number>(1)
+    const [totalUsers, setTotalUsers] = useState<number>(0)
+    const [perPage, setPerPage] = useState<number>(2)
+    const [recommendation, setRecommendation] = useState<RecommendationType>()
+    const setSelectedKey = useSetRecoilState(statSelectedKey)
+    const {mutate: mutateLevel} = useMutation(
+        {
+            mutationFn: USER_API.getList,
+            onSuccess: async (values: any) => {
+                setRecommendation(values);
+                console.log(JSON.stringify(recommendation))
+            },
+            onError: (error: any) => {
+                const errorType = error.response.data.errors[0]
+                messageApi.open({
+                    type: 'error',
+                    content: 't(`errorMessages.${errorType}`)',
+                })
+            }
+        },
+    )
+    const {isPending, mutate, isSuccess, isError} = useMutation(
+        {
+            mutationFn: USER_API.getList,
+            onSuccess: async (values: any) => {
+                setRecommendation(values.PayManager);
+                setTotalUsers(values.total);
+                console.log(JSON.stringify(recommendation))
+            },
+
+            onError: (error: any) => {
+                const errorType = error.response.data.errors[0]
+                // if (error.response.status === 401) {
+                //     router.push(PAGE_ROUTES.AUTH.LOGIN);
+                // }
+                messageApi.open({
+                    type: 'error',
+                    content: 't(`errorMessages.${errorType}`)',
+                })
+            },
+        }
+    )
+    useEffect(() => {
+        setSelectedKey(1)
+    }, []);
+    const sliderToggle = () => {
+        setSliderVisible(!sliderVisible);
+    }
+    const paginationHandler = (selectedItem: { selected: number }) => {
+        const page = selectedItem ? selectedItem.selected + 1 : 0;
+        mutate({page: page, limit: perPage})
+    }
+
+    return (
+        <div className={sliderVisible ? "container" : "container_hide"} id="depth2_leftmenu"
+             style={{background: "#f0f0f0"}}>
+            <Slider/>
+
+            <div className="content_section">
+                <div className="content_section_fix" style={{background: '#fff'}}>
+
+                    <div className="open_close"><span className="btn_close" id="open_close_btn_close" title="메뉴닫기"
+                                                      style={{display: sliderVisible ? "block" : "none"}}
+                                                      onClick={sliderToggle}></span>
+                        <span className="btn_open" id="open_close_btn_open" title="메뉴열기"
+                              style={{display: !sliderVisible ? "block" : "none"}} onClick={sliderToggle}></span></div>
+
+                    {/* <!-- 페이지타이틀 --> */}
+                    <div className="title_area">
+                        <span className="icon"></span>
+                        <span className="title">
 					회원실적 추천					
 					</span>
-                    <span className="location">홈 &gt; 통계관리 &gt; 회원실적 추천</span>
-                  </div>
-                  {/* <!-- // 페이지타이틀 --> */}
- 
-{/*<iframe src="inc.bonus_auto.php" width={0} height={0} frameBorder={0} style={{display:'none'}}></iframe>*/}
+                        <span className="location">홈 &gt; 통계관리 &gt; 회원실적 추천</span>
+                    </div>
+                    {/* <!-- // 페이지타이틀 --> */}
 
-{/* <!--<iframe src="inc.bonus_auto_test.php" width=100% height=100px frameborder=0></iframe>--> */}
+                    {/*<iframe src="inc.bonus_auto.php" width={0} height={0} frameBorder={0} style={{display:'none'}}></iframe>*/}
 
-<div className="common_ajax_proc"></div>
+                    {/* <!--<iframe src="inc.bonus_auto_test.php" width=100% height=100px frameborder=0></iframe>--> */}
 
-	<form name='fsearch' method="post">
-	<input type='hidden' name='code' value=""/>
-	<input type='hidden' name='mode' value="search"/>
+                    <div className="common_ajax_proc"></div>
 
-				<div className="form_box_area">
-					<table className="form_TB" summary="검색항목">
-						<colgroup>
-							<col width="100px"/><col width="200px"/><col width="100px"/><col width="200px"/><col width="100px"/><col width="*"/>
-						</colgroup>
-						<tbody>
-							<tr>
-								<td className="article">페이</td>
-								<td className="conts">
-									<input type='text' name='p_schsh' style={{width:'70px'}} value=""  className='input_text'/>
-									~
-									<input type='text' name='p_dchsh' style={{width:'69px'}} value=""  className='input_text'/>
-								</td>
+                    <form name='fsearch' method="post">
+                        <input type='hidden' name='code' value=""/>
+                        <input type='hidden' name='mode' value="search"/>
 
-								<td className="article">매출금액</td>
-								<td className="conts">
-									<input type='text' name='s_total_price' style={{width:'70px'}} value=""  className='input_text'/>
-									~
-									<input type='text' name='d_total_price 'style={{width:'69px'}} value=""  className='input_text'/>
-								</td>
+                        <div className="form_box_area">
+                            <table className="form_TB" summary="검색항목">
+                                <colgroup>
+                                    <col width="100px"/>
+                                    <col width="200px"/>
+                                    <col width="100px"/>
+                                    <col width="200px"/>
+                                    <col width="100px"/>
+                                    <col width="*"/>
+                                </colgroup>
+                                <tbody>
+                                <tr>
+                                    <td className="article">페이</td>
+                                    <td className="conts">
+                                        <input type='text' name='p_schsh' style={{width: '70px'}} value=""
+                                               className='input_text'/>
+                                        ~
+                                        <input type='text' name='p_dchsh' style={{width: '69px'}} value=""
+                                               className='input_text'/>
+                                    </td>
 
-								<td className="article">금액</td>
-								<td className="conts">
-									<input type='text' name='s_total_pv' style={{width:'70px'}} value=""  className='input_text'/>
-									~
-									<input type='text' name='d_total_pv' style={{width:'69px'}} value=""  className='input_text'/>
-								</td>
-							    <td className="article">기간</td>
-								<td className="conts" colSpan={3}>
+                                    <td className="article">매출금액</td>
+                                    <td className="conts">
+                                        <input type='text' name='s_total_price' style={{width: '70px'}} value=""
+                                               className='input_text'/>
+                                        ~
+                                        <input type='text' name='d_total_price ' style={{width: '69px'}} value=""
+                                               className='input_text'/>
+                                    </td>
 
-						<select name="sh_year" id="sh_year" onChange={()=>{}}>
-							<option  value='2021'>2021년</option><option  value='2022'>2022년</option><option  value='2023'>2023년</option>
-                            <option  selected={true} value='2024'>2024년</option></select>
+                                    <td className="article">금액</td>
+                                    <td className="conts">
+                                        <input type='text' name='s_total_pv' style={{width: '70px'}} value=""
+                                               className='input_text'/>
+                                        ~
+                                        <input type='text' name='d_total_pv' style={{width: '69px'}} value=""
+                                               className='input_text'/>
+                                    </td>
+                                    <td className="article">기간</td>
+                                    <td className="conts" colSpan={3}>
 
-						<select name="sh_month" id="sh_month" onChange={()=>{}}>
-							<option  value='01'>01월</option><option  value='02'>02월</option><option  selected={true} value='03'>03월</option><option  value='04'>04월</option>
-                            <option  value='05'>05월</option><option  value='06'>06월</option><option  value='07'>07월</option><option  value='08'>08월</option><option  value='09'>09월</option><option  value='10'>10월</option><option  value='11'>11월</option><option  value='12'>12월</option>						</select>
-								</td>
-							</tr>
-							<tr>
-								<td className="article">레벨</td>
-								<td className="conts">
+                                        <select name="sh_year" id="sh_year" onChange={() => {
+                                        }}>
+                                            <option value='2021'>2021년</option>
+                                            <option value='2022'>2022년</option>
+                                            <option value='2023'>2023년</option>
+                                            <option selected={true} value='2024'>2024년</option>
+                                        </select>
 
-			<select name='sst' style={{width:'48%'}}>
-				<option value=''>레벨</option>
-				<option  value='20'>일반회원</option>
-                <option  value='19'>정회원</option>
-                <option  value='18'>정회원</option>
-                <option  value='17'>정회원</option>
-                <option  value='16'>정회원</option>
-                <option  value='11'>팀장</option>
-                <option  value='10'>1스타</option>
-                <option  value='9'>2스타</option>
-                <option  value='8'>3스타</option>
-                <option  value='7'>4스타</option>
-                <option  value='6'>5스타</option>
-                </select>
-				</td>
-				<td className="article">직접선택</td>
-				<td className="conts">
-			<select name='sfl' style={{width:'100%'}}>
-				<option  value='id'>아이디</option>
-				<option  value='owner_code'>회원코드번호</option>
+                                        <select name="sh_month" id="sh_month" onChange={() => {
+                                        }}>
+                                            <option value='01'>01월</option>
+                                            <option value='02'>02월</option>
+                                            <option selected={true} value='03'>03월</option>
+                                            <option value='04'>04월</option>
+                                            <option value='05'>05월</option>
+                                            <option value='06'>06월</option>
+                                            <option value='07'>07월</option>
+                                            <option value='08'>08월</option>
+                                            <option value='09'>09월</option>
+                                            <option value='10'>10월</option>
+                                            <option value='11'>11월</option>
+                                            <option value='12'>12월</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="article">레벨</td>
+                                    <td className="conts">
 
-				{/* <!--<option  value='tel'>전화번호</option>--> */}
-			</select>
-					</td>
-								<td className="article">검색</td>
-								<td className="conts">
-									<input type='text' name='stx' style={{width:'100%'}} value="" className='input_text'/>
-								</td>
-							</tr>
-							<tr>
-								<td className="conts" colSpan={8}>
-																																												</td>
-							</tr>
-						</tbody> 
-					</table>
-					
-					{/* <!-- 버튼영역 --> */}
-					<div className="top_btn_area">
-						<div className="btn_line_up_center">
-							<span className="shop_btn_pack btn_input_blue"><input type="submit" className="input_medium" title="검색" value="검색"/></span>
-				
-		
-{/* <!--
+                                        <select name='sst' style={{width: '48%'}}>
+                                            <option value=''>레벨</option>
+                                            <option value='20'>일반회원</option>
+                                            <option value='19'>정회원</option>
+                                            <option value='18'>정회원</option>
+                                            <option value='17'>정회원</option>
+                                            <option value='16'>정회원</option>
+                                            <option value='11'>팀장</option>
+                                            <option value='10'>1스타</option>
+                                            <option value='9'>2스타</option>
+                                            <option value='8'>3스타</option>
+                                            <option value='7'>4스타</option>
+                                            <option value='6'>5스타</option>
+                                        </select>
+                                    </td>
+                                    <td className="article">직접선택</td>
+                                    <td className="conts">
+                                        <select name='sfl' style={{width: '100%'}}>
+                                            <option value='id'>아이디</option>
+                                            <option value='owner_code'>회원코드번호</option>
+
+                                            {/* <!--<option  value='tel'>전화번호</option>--> */}
+                                        </select>
+                                    </td>
+                                    <td className="article">검색</td>
+                                    <td className="conts">
+                                        <input type='text' name='stx' style={{width: '100%'}} value=""
+                                               className='input_text'/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="conts" colSpan={8}>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            {/* <!-- 버튼영역 --> */}
+                            <div className="top_btn_area">
+                                <div className="btn_line_up_center">
+                                    <span className="shop_btn_pack btn_input_blue"><input type="submit"
+                                                                                          className="input_medium"
+                                                                                          title="검색" value="검색"/></span>
+
+
+                                    {/* <!--
 								<span className="shop_btn_pack"><span className="blank_3"></span></span>
 								<span className="shop_btn_pack"><a href="_cardsys.company.form.php?_mode=add" className="medium red" title="업체등록" >업체등록</a></span>
 --> */}
 
-						</div>
-					</div>
-				</div>
-	</form>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
 
-	<div className="form_box_area">
+                    <div className="form_box_area">
 
-	<table border={0} cellPadding={0} cellSpacing={0} width='100%'style={{borderCollapse:'collapse'}}>
-	<tr> 
-		<td style={{padding:'5px', color:'#e16007',height:'40',textAlign:'left'}}>
-			※ 페이 합계 :  <b>원</b>&nbsp;&nbsp;|&nbsp;&nbsp;
-			{/* <!-- 수정 및 추가 by mview
+                        <table border={0} cellPadding={0} cellSpacing={0} width='100%'
+                               style={{borderCollapse: 'collapse'}}>
+                            <tr>
+                                <td style={{padding: '5px', color: '#e16007', height: '40', textAlign: 'left'}}>
+                                    ※ 페이 합계 : <b>원</b>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                    {/* <!-- 수정 및 추가 by mview
 			쿠폰할인 : <b><font color="4c64ab">0</font></b>원&nbsp;&nbsp;<font color='999999'>|</font>&nbsp;&nbsp;
 			적립금결제 : <b><font color="4c64ab">0</font></b>원&nbsp;&nbsp;<font color='999999'>|</font>&nbsp;&nbsp;
 			예치금결제 : <b><font color="4c64ab">0</font></b>원&nbsp;&nbsp;<font color='999999'>|</font>&nbsp;&nbsp;
 			포인트결제 : <b><font color="4c64ab">0</font></b>원&nbsp;&nbsp;<font color='999999'>|</font>&nbsp;&nbsp;
 			배송비결제 : <b><font color="4c64ab">0</font></b>원
 			--> */}
-전체 :  건  조회
-		</td>
-	</tr>
+                                    전체 : 건 조회
+                                </td>
+                            </tr>
 
 
-	</table>
-	</div>
+                        </table>
+                    </div>
 
-	<form name='fboardlist' method='post'>
-	<input type='hidden' name='q1'	value="code="/>
-	<input type='hidden' name='page'	value="1"/>
+                    <form name='fboardlist' method='post'>
+                        <input type='hidden' name='q1' value="code="/>
+                        <input type='hidden' name='page' value="1"/>
 
-				{/* <!-- 리스트영역 --> */}
-				<div className="content_section_inner">
-					<table className="list_TB" summary="리스트기본">
-						<thead>
-							<tr>
-								<th scope="col" className="colorset"><input type='checkbox' name='chkall' value={1} onClick={()=>{}}/></th>
-								<th scope="col" className="colorset">NO</th>
-								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=id&orderby=asc'><u>아이디</u></a></th>
-								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=owner_code&orderby=asc'><u>회원명</u></a></th>
-								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=memgrade&orderby=asc'><u>레벨</u></a></th>
-								{/* <!--<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=mb_card_point&orderby=asc'><u>페이</u></a></th>--> */}
-								{/* <!--<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=total_price&orderby=asc'><u>매출금액</u></a></th>--> */}
-								<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=total_pv&orderby=asc'><u> 금액</u></a></th>
-								{/* <th scope="col" className="colorset"><u>배당자격 </u></th> */}
-								<th scope="col" className="colorset"><u>직추천명</u></th>
-								<th scope="col" className="colorset"><u>하위인원</u></th>
-								<th scope="col" className="colorset"><u>하위매출</u></th>
-								<th scope="col" className="colorset"><u>조직도</u></th>
-							{/* <!--<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=signdate&orderby=asc'><u>최근날짜</u></a></th>--> */}
-							<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=buymethod&orderby=asc'><u>관리</u></a></th>
-							</tr>
-						</thead> 
-						<tbody>
+                        {/* <!-- 리스트영역 --> */}
+                        <div className="content_section_inner">
+                            <table className="list_TB" summary="리스트기본">
+                                <thead>
+                                <tr>
+                                    <th scope="col" className="colorset"><input type='checkbox' name='chkall' value={1}
+                                                                                onClick={() => {
+                                                                                }}/></th>
+                                    <th scope="col" className="colorset">NO</th>
+                                    <th scope="col" className="colorset"><a
+                                        href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=id&orderby=asc'><u>아이디</u></a>
+                                    </th>
+                                    <th scope="col" className="colorset"><a
+                                        href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=owner_code&orderby=asc'><u>회원명</u></a>
+                                    </th>
+                                    <th scope="col" className="colorset"><a
+                                        href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=memgrade&orderby=asc'><u>레벨</u></a>
+                                    </th>
+                                    {/* <!--<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=mb_card_point&orderby=asc'><u>페이</u></a></th>--> */}
+                                    {/* <!--<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=total_price&orderby=asc'><u>매출금액</u></a></th>--> */}
+                                    <th scope="col" className="colorset"><a
+                                        href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=total_pv&orderby=asc'><u> 금액</u></a>
+                                    </th>
+                                    {/* <th scope="col" className="colorset"><u>배당자격 </u></th> */}
+                                    <th scope="col" className="colorset"><u>직추천명</u></th>
+                                    <th scope="col" className="colorset"><u>하위인원</u></th>
+                                    <th scope="col" className="colorset"><u>하위매출</u></th>
+                                    <th scope="col" className="colorset"><u>조직도</u></th>
+                                    {/* <!--<th scope="col" className="colorset"><a href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=signdate&orderby=asc'><u>최근날짜</u></a></th>--> */}
+                                    <th scope="col" className="colorset"><a
+                                        href='/myAdmin/_entershop.bonus_no_assets_sponid.php?code=&page=&filed=buymethod&orderby=asc'><u>관리</u></a>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
 
-                 <tr><td height={50} colSpan={20} align='center' >내역이 없습니다.</td></tr>
-	 				</tbody> 
-					</table>
-			</div>
+                                <tr>
+                                    <td height={50} colSpan={20} align='center'>내역이 없습니다.</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-	<div className="form_box_area">
-			<table width="100%" border={0} cellSpacing="0" cellPadding="0">
-			<tr>
-				<td align='left' style={{paddingTop:'3px'}}>
-					<table border={0} cellSpacing="0" cellPadding="0">
-					<tr>
-						<td style={{paddingTop:'2px'}}>&nbsp;
-					<div className="top_btn_area">
-					
-						<span className="shop_btn_pack"><a onClick={()=>{}} className="small white" title="선택삭제" >선택삭제</a></span>
-						<span className="shop_btn_pack"><span className="blank_3"></span></span>
+                        <div className="form_box_area">
+                            <table width="100%" border={0} cellSpacing="0" cellPadding="0">
+                                <tr>
+                                    <td align='left' style={{paddingTop: '3px'}}>
+                                        <table border={0} cellSpacing="0" cellPadding="0">
+                                            <tr>
+                                                <td style={{paddingTop: '2px'}}>&nbsp;
+                                                    <div className="top_btn_area">
 
-{/* <!--<span className="shop_btn_pack"><a href="./_calcu.ad_rech_xls.php?code=" className="small white" title="엑셀저장" >엑셀저장</a></span>--> */}
+                                                        <span className="shop_btn_pack"><a onClick={() => {
+                                                        }} className="small white" title="선택삭제">선택삭제</a></span>
+                                                        <span className="shop_btn_pack"><span
+                                                            className="blank_3"></span></span>
 
-					</div>
-					</td>
-					</tr>
-					</table>
-				</td>
-			</tr>
-			</table>
+                                                        {/* <!--<span className="shop_btn_pack"><a href="./_calcu.ad_rech_xls.php?code=" className="small white" title="엑셀저장" >엑셀저장</a></span>--> */}
 
-</div>
-<div style={{display:'flex', alignItems:'center', justifyContent:'center' ,margin:'0 auto'}}>
-<ReactPaginate
-                            previousLabel={<FontAwesomeIcon icon={faArrowAltCircleLeft}/>}
-                            nextLabel={<FontAwesomeIcon icon={faArrowAltCircleRight}/>}
-                            breakLabel={'...'}
-                            breakClassName={'break-me'}
-                            activeClassName={'active'}
-                            containerClassName={'pagination'}
-                            // subContainerClassName={'pages pagination'}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
 
-                            initialPage={currentPage-1}
-                            pageCount={Math.ceil(totalUsers/ perPage)}
-                            marginPagesDisplayed={2}
-                            pageRangeDisplayed={5}
-                            onPageChange={paginationHandler}
-                        />
+                        </div>
+                        <div
+                            style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto'}}>
+                            <ReactPaginate
+                                previousLabel={<FontAwesomeIcon icon={faArrowAltCircleLeft}/>}
+                                nextLabel={<FontAwesomeIcon icon={faArrowAltCircleRight}/>}
+                                breakLabel={'...'}
+                                breakClassName={'break-me'}
+                                activeClassName={'active'}
+                                containerClassName={'pagination'}
+                                // subContainerClassName={'pages pagination'}
+
+                                initialPage={currentPage - 1}
+                                pageCount={Math.ceil(totalUsers / perPage)}
+                                marginPagesDisplayed={2}
+                                pageRangeDisplayed={5}
+                                onPageChange={paginationHandler}
+                            />
                         </div>
 
 
-                    <div style={{height:'30px'}}></div>
+                        <div style={{height: '30px'}}></div>
 
-	</form>
+                    </form>
 
-{/* <script>createLayer('Calendar');</script> */}
-{/* <script>
+                    {/* <script>createLayer('Calendar');</script> */}
+                    {/* <script>
 function check_all(f)
 {
     var chk = document.getElementsByName("chk[]");
@@ -379,11 +434,12 @@ function chk_gonumber(val) {
 }
 </script> */}
 
-				<div style={{height:'30px'}}></div>
+                    <div style={{height: '30px'}}></div>
 
-			</div>
-		</div>
-</div>	
-          
- )}
-    export default Performance_of_recomenship;
+                </div>
+            </div>
+        </div>
+
+    )
+}
+export default Performance_of_recomenship;

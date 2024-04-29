@@ -1,11 +1,14 @@
 'use client'
 import Slider  from '@/components/layouts/Slider/Shop';
 import { useEffect, useState } from 'react';
+import { useSetRecoilState } from "recoil";
+import { prodSelectedKey } from "@/services/recoil/selectedKey";
 const NewItem = () => {
     const [sliderVisible, setSliderVisible] = useState(true)
+	const setSelectedKey = useSetRecoilState(prodSelectedKey)
     useEffect(() => {
-    console.log('sliderVisible: ', sliderVisible)
-    }, [sliderVisible]);
+    setSelectedKey(6)
+    }, []);
     const sliderToggle = () => {
     setSliderVisible(!sliderVisible);
     }

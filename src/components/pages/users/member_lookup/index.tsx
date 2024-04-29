@@ -8,6 +8,8 @@ import LEVEL_API from "@/services/api/levels";
 import { LevelTypeProps } from "@/services/api/levels/type";
 import { useRouter } from "next/navigation";
 import PAGE_ROUTES from "@/utils/constants/routes";
+import { useSetRecoilState } from "recoil";
+import { userSelectedKey } from "@/services/recoil/selectedKey";
 
 const MemberLookup = () => {
     const router = useRouter();
@@ -27,6 +29,7 @@ const MemberLookup = () => {
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [totalUsers, setTotalUsers] = useState<number>(0)
     const [perPage, setPerPage] = useState<number>(2)
+    const setSelectedKey = useSetRecoilState(userSelectedKey)
     const {mutate: mutateLevel} = useMutation(
         {
             mutationFn: LEVEL_API.getList,
@@ -58,6 +61,7 @@ const MemberLookup = () => {
         }
     )
     useEffect(() => {
+        setSelectedKey(0)
         mutateLevel();
     }, []);
 

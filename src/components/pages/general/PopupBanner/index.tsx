@@ -1,12 +1,15 @@
 'use client'
 import Slider from '@/components/layouts/Slider/Design';
 import { useEffect, useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { generalSelectedKey } from "@/services/recoil/selectedKey";
 
 const PopupBanner = () => {
 	const [sliderVisible, setSliderVisible] = useState(true)
+	const setSelectedKey = useSetRecoilState(generalSelectedKey)
 	useEffect(() => {
-		console.log('sliderVisible: ', sliderVisible)
-	}, [sliderVisible]);
+		setSelectedKey(10)
+	}, []);
 	const sliderToggle = () => {
 		setSliderVisible(!sliderVisible);
 	}

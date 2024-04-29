@@ -12,6 +12,8 @@ import noop from "noop-ts";
 import { useRouter } from "next/navigation";
 import { it } from "date-fns/locale";
 import { CalculationCompletionQueryType, CalculationCompletionType } from "@/services/api/saleregister/type";
+import { useSetRecoilState } from "recoil";
+import { calcSelectedKey } from "@/services/recoil/selectedKey";
 
 const RecommenIncentives = () => {
     const router = useRouter();
@@ -38,6 +40,7 @@ const RecommenIncentives = () => {
     const [editedAmountListState, setEditedAmountListState] = useState<string[]>([])
     const [isReadonlyListState, setIsReadonlyListState] = useState<boolean[]>([])
     const [confirmedUserIdListState, setConfirmedUserIdListState] = useState<number[]>([])
+    const setSelectedKey = useSetRecoilState(calcSelectedKey)
 
     const {mutate: mutateConfirmCalculation} = useMutation(
         {
@@ -119,8 +122,8 @@ const RecommenIncentives = () => {
 
 
     useEffect(() => {
-        console.log('sliderVisible: ', sliderVisible)
-    }, [sliderVisible]);
+        setSelectedKey(1)
+    }, []);
     const sliderToggle = () => {
         setSliderVisible(!sliderVisible);
     }

@@ -8,163 +8,192 @@ import USER_API from '@/services/api/users';
 import ReactPaginate from 'react-paginate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { useSetRecoilState } from "recoil";
+import { userSelectedKey } from "@/services/recoil/selectedKey";
 
 const RecommenderChangeLog = () => {
-	const [messageApi, contextHolder] = message.useMessage()
-	const [sliderVisible, setSliderVisible] = useState(true)
-	const [currentPage, setCurrentPage] = useState<number>(1)
-		const [totalUsers, setTotalUsers] = useState<number>(0)
-		const [perPage, setPerPage] = useState<number>(2)
-		const [log, setLogs] = useState<ChangelogType>()
-		const {mutate: mutateLevel} = useMutation(
-			{
-				mutationFn: USER_API.getList,
-				onSuccess: async (values: any) => {
-					setLogs(values);
-					console.log(JSON.stringify(log))
-				},
-				onError: (error: any) => {
-					const errorType = error.response.data.errors[0]
-					messageApi.open({
-						type: 'error',
-						content: 't(`errorMessages.${errorType}`)',
-					})
-				}
-			},
-		)
-		const {isPending, mutate, isSuccess, isError} = useMutation(
-			{
-				mutationFn: USER_API.getList,
-				onSuccess: async (values: any) => {
-					setLogs(values.PayManager);
-					setTotalUsers(values.total);
-					console.log(JSON.stringify(log))
-				},
-	
-				onError: (error: any) => {
-					 const errorType = error.response.data.errors[0]
-					// if (error.response.status === 401) {
-					//     router.push(PAGE_ROUTES.AUTH.LOGIN);
-					// }
-					 messageApi.open({
-						 type: 'error',
-					 content: 't(`errorMessages.${errorType}`)',
-					 })
-				},
-			}
-		)
-	useEffect(() => {
-	console.log('sliderVisible: ', sliderVisible)
-	}, [sliderVisible]);
-	const sliderToggle = () => {
-	setSliderVisible(!sliderVisible);
-	}
-	const paginationHandler = (selectedItem: { selected: number }) => {
-		const page = selectedItem ? selectedItem.selected+1 : 0;
-		mutate({page: page, limit: perPage})
-	}
-return (
-    <div className={sliderVisible ? "container" : "container_hide" } id="depth2_leftmenu" style={{background: "#f0f0f0"}}>
-		<Slider />
+    const [messageApi, contextHolder] = message.useMessage()
+    const [sliderVisible, setSliderVisible] = useState(true)
+    const [currentPage, setCurrentPage] = useState<number>(1)
+    const [totalUsers, setTotalUsers] = useState<number>(0)
+    const [perPage, setPerPage] = useState<number>(2)
+    const [log, setLogs] = useState<ChangelogType>()
+    const setSelectedKey = useSetRecoilState(userSelectedKey)
+    const {mutate: mutateLevel} = useMutation(
+        {
+            mutationFn: USER_API.getList,
+            onSuccess: async (values: any) => {
+                setLogs(values);
+                console.log(JSON.stringify(log))
+            },
+            onError: (error: any) => {
+                const errorType = error.response.data.errors[0]
+                messageApi.open({
+                    type: 'error',
+                    content: 't(`errorMessages.${errorType}`)',
+                })
+            }
+        },
+    )
+    const {isPending, mutate, isSuccess, isError} = useMutation(
+        {
+            mutationFn: USER_API.getList,
+            onSuccess: async (values: any) => {
+                setLogs(values.PayManager);
+                setTotalUsers(values.total);
+                console.log(JSON.stringify(log))
+            },
 
-        <div className="content_section">
-                <div className="content_section_fix" style={{background:'#fff'}}>
+            onError: (error: any) => {
+                const errorType = error.response.data.errors[0]
+                // if (error.response.status === 401) {
+                //     router.push(PAGE_ROUTES.AUTH.LOGIN);
+                // }
+                messageApi.open({
+                    type: 'error',
+                    content: 't(`errorMessages.${errorType}`)',
+                })
+            },
+        }
+    )
+    useEffect(() => {
+        setSelectedKey(4)
+    }, []);
+    const sliderToggle = () => {
+        setSliderVisible(!sliderVisible);
+    }
+    const paginationHandler = (selectedItem: { selected: number }) => {
+        const page = selectedItem ? selectedItem.selected + 1 : 0;
+        mutate({page: page, limit: perPage})
+    }
+    return (
+        <div className={sliderVisible ? "container" : "container_hide"} id="depth2_leftmenu"
+             style={{background: "#f0f0f0"}}>
+            <Slider/>
 
-                  <div className="open_close"><span className="btn_close" id="open_close_btn_close" title="메뉴닫기"></span><span className="btn_open" id="open_close_btn_open" title="메뉴열기"></span></div>
-             {/* <!-- 페이지타이틀 --> */}
-                  <div className="title_area">
-                    <span className="icon"></span>
-                    <span className="title">
+            <div className="content_section">
+                <div className="content_section_fix" style={{background: '#fff'}}>
+
+                    <div className="open_close"><span className="btn_close" id="open_close_btn_close"
+                                                      title="메뉴닫기"></span><span className="btn_open"
+                                                                                id="open_close_btn_open"
+                                                                                title="메뉴열기"></span></div>
+                    {/* <!-- 페이지타이틀 --> */}
+                    <div className="title_area">
+                        <span className="icon"></span>
+                        <span className="title">
 						추천인 변경로그					
 					</span>
-                    <span className="location">홈 &gt; 회원관리 &gt; 추천인 변경로그</span>
-                  </div>
-                  {/* <!-- // 페이지타이틀 --> */}
-  
-{/*<iframe src="inc.bonus_auto.php" width={0} height={0} frameBorder={0} style={{display:'none'}}></iframe>*/}
+                        <span className="location">홈 &gt; 회원관리 &gt; 추천인 변경로그</span>
+                    </div>
+                    {/* <!-- // 페이지타이틀 --> */}
 
-{/* <!--<iframe src="inc.bonus_auto_test.php" width=100% height=100px frameborder=0></iframe>--> */}
+                    {/*<iframe src="inc.bonus_auto.php" width={0} height={0} frameBorder={0} style={{display:'none'}}></iframe>*/}
 
-<div className="common_ajax_proc"></div>
+                    {/* <!--<iframe src="inc.bonus_auto_test.php" width=100% height=100px frameborder=0></iframe>--> */}
 
-<form name='fboardlist' method='post' >
+                    <div className="common_ajax_proc"></div>
 
-{/* <!-- 엑셀검색추가 --> */}
+                    <form name='fboardlist' method='post'>
 
-<input type='hidden' name='_mode' value=''/>
-<input type='hidden' name='_seachcnt' value=''/>
-<input type='hidden' name='_PVSC' value=""/>
-<input type='hidden' name='_search_que' value="IHdoZXJlIHJlX2NvbHVtbiA9ICdyZWNvbWlkJyAg"/>
+                        {/* <!-- 엑셀검색추가 --> */}
 
-{/* <!-- 엑셀검색추가 --> */}
-<input type='hidden' name='q1'	value="code="/>
-<input type='hidden' name='page'	value="1"/>
-				{/* <!-- 리스트영역 --> */}
-				<div className="content_section_inner">
-					{/* <!-- // 리스트 제어버튼영역 --> */}
-					<table className="list_TB" summary="리스트기본">
-						<thead>
-							<tr>
-								<th scope="col" className="colorset"><input type='checkbox' name='chkall' value="1" onClick={()=>{"check_all(this.form)"}}/></th>
-								<th scope="col" className="colorset">NO</th>
-								<th scope="col" className="colorset"><a href='/myAdmin/_cardsys.recommend_log.php?code=&page=&filed=b.name&orderby=asc'><u>회원명</u></a></th>
-								<th scope="col" className="colorset"><a href='/myAdmin/_cardsys.recommend_log.php?code=&page=&filed=a.re_check_id&orderby=asc'><u>아이디</u></a></th>
-								<th scope="col" className="colorset"><a href='/myAdmin/_cardsys.recommend_log.php?code=&page=&filed=b.memgrade&orderby=asc'><u>레벨</u></a></th>
-								<th scope="col" className="colorset"><a href='/myAdmin/_cardsys.recommend_log.php?code=&page=&filed=a.re_wdate&orderby=asc'><u>적용일</u></a></th>
-								<th scope="col" className="colorset"><a href='/myAdmin/_cardsys.recommend_log.php?code=&page=&filed=a.re_old_id&orderby=asc'><u>변경 전</u></a> (대상자 → 추천인)</th>
-								<th scope="col" className="colorset"><a href='/myAdmin/_cardsys.recommend_log.php?code=&page=&filed=a.re_new_id&orderby=asc'><u>변경 후</u></a> (대상자 → 추천인)</th>
+                        <input type='hidden' name='_mode' value=''/>
+                        <input type='hidden' name='_seachcnt' value=''/>
+                        <input type='hidden' name='_PVSC' value=""/>
+                        <input type='hidden' name='_search_que' value="IHdoZXJlIHJlX2NvbHVtbiA9ICdyZWNvbWlkJyAg"/>
 
-{/* <!--<th scope="col" className="colorset"><a href='/myAdmin/_cardsys.recommend_log.php?code=&page=&filed=mb_card_point&orderby=asc'><u>영업상태</u></a></th>--> */}
+                        {/* <!-- 엑셀검색추가 --> */}
+                        <input type='hidden' name='q1' value="code="/>
+                        <input type='hidden' name='page' value="1"/>
+                        {/* <!-- 리스트영역 --> */}
+                        <div className="content_section_inner">
+                            {/* <!-- // 리스트 제어버튼영역 --> */}
+                            <table className="list_TB" summary="리스트기본">
+                                <thead>
+                                <tr>
+                                    <th scope="col" className="colorset"><input type='checkbox' name='chkall' value="1"
+                                                                                onClick={() => {
+                                                                                    "check_all(this.form)"
+                                                                                }}/></th>
+                                    <th scope="col" className="colorset">NO</th>
+                                    <th scope="col" className="colorset"><a
+                                        href='/myAdmin/_cardsys.recommend_log.php?code=&page=&filed=b.name&orderby=asc'><u>회원명</u></a>
+                                    </th>
+                                    <th scope="col" className="colorset"><a
+                                        href='/myAdmin/_cardsys.recommend_log.php?code=&page=&filed=a.re_check_id&orderby=asc'><u>아이디</u></a>
+                                    </th>
+                                    <th scope="col" className="colorset"><a
+                                        href='/myAdmin/_cardsys.recommend_log.php?code=&page=&filed=b.memgrade&orderby=asc'><u>레벨</u></a>
+                                    </th>
+                                    <th scope="col" className="colorset"><a
+                                        href='/myAdmin/_cardsys.recommend_log.php?code=&page=&filed=a.re_wdate&orderby=asc'><u>적용일</u></a>
+                                    </th>
+                                    <th scope="col" className="colorset"><a
+                                        href='/myAdmin/_cardsys.recommend_log.php?code=&page=&filed=a.re_old_id&orderby=asc'><u>변경
+                                        전</u></a> (대상자 → 추천인)
+                                    </th>
+                                    <th scope="col" className="colorset"><a
+                                        href='/myAdmin/_cardsys.recommend_log.php?code=&page=&filed=a.re_new_id&orderby=asc'><u>변경
+                                        후</u></a> (대상자 → 추천인)
+                                    </th>
 
-								<th scope="col" className="colorset"><a href='/myAdmin/_cardsys.recommend_log.php?code=&page=&filed=buymethod&orderby=asc'><u>관리</u></a></th>
-							</tr>
-						</thead> 
-						<tbody>
+                                    {/* <!--<th scope="col" className="colorset"><a href='/myAdmin/_cardsys.recommend_log.php?code=&page=&filed=mb_card_point&orderby=asc'><u>영업상태</u></a></th>--> */}
 
-		<tr><td height={50} colSpan={18} align='center' >내역이 없습니다.</td></tr>
-	 					</tbody> 
-					</table>
-			</div>
-	<div className="form_box_area">
-			<table width="100%" border={0} cellSpacing="0" cellPadding="0">
-			<tr>
-				<td align='left' style={{paddingTop:'3px'}}>
-					<table border={0} cellSpacing="0" cellPadding="0">
-				<tr>
-					<td style={{paddingTop:'2px'}}>&nbsp;
-					<div className="top_btn_area"> 
-				
-{/* <!--<span className="shop_btn_pack"><a href="./_entershop.company_xls.php?code=" className="small white" title="엑셀저장" >엑셀저장</a></span>--> */}
-					</div>
-						</td>
-					</tr>
-					</table>
-				</td>
-			</tr>
-			</table>
-</div>
+                                    <th scope="col" className="colorset"><a
+                                        href='/myAdmin/_cardsys.recommend_log.php?code=&page=&filed=buymethod&orderby=asc'><u>관리</u></a>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
 
-<div style={{display:'flex', alignItems:'center', justifyContent:'center' ,margin:'0 auto'}}>
-                        <ReactPaginate
-                            previousLabel={<FontAwesomeIcon icon={faArrowAltCircleLeft}/>}
-                            nextLabel={<FontAwesomeIcon icon={faArrowAltCircleRight}/>}
-                            breakLabel={'...'}
-                            breakClassName={'break-me'}
-                            activeClassName={'active'}
-                            containerClassName={'pagination'}
-                            // subContainerClassName={'pages pagination'}
-
-                            initialPage={currentPage-1}
-                            pageCount={Math.ceil(totalUsers/ perPage)}
-                            marginPagesDisplayed={2}
-                            pageRangeDisplayed={5}
-                            onPageChange={paginationHandler}
-                        />
+                                <tr>
+                                    <td height={50} colSpan={18} align='center'>내역이 없습니다.</td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
-	</form>
+                        <div className="form_box_area">
+                            <table width="100%" border={0} cellSpacing="0" cellPadding="0">
+                                <tr>
+                                    <td align='left' style={{paddingTop: '3px'}}>
+                                        <table border={0} cellSpacing="0" cellPadding="0">
+                                            <tr>
+                                                <td style={{paddingTop: '2px'}}>&nbsp;
+                                                    <div className="top_btn_area">
 
-{/* <script>createLayer('Calendar');</script> */}
-{/* <script>
+                                                        {/* <!--<span className="shop_btn_pack"><a href="./_entershop.company_xls.php?code=" className="small white" title="엑셀저장" >엑셀저장</a></span>--> */}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div
+                            style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto'}}>
+                            <ReactPaginate
+                                previousLabel={<FontAwesomeIcon icon={faArrowAltCircleLeft}/>}
+                                nextLabel={<FontAwesomeIcon icon={faArrowAltCircleRight}/>}
+                                breakLabel={'...'}
+                                breakClassName={'break-me'}
+                                activeClassName={'active'}
+                                containerClassName={'pagination'}
+                                // subContainerClassName={'pages pagination'}
+
+                                initialPage={currentPage - 1}
+                                pageCount={Math.ceil(totalUsers / perPage)}
+                                marginPagesDisplayed={2}
+                                pageRangeDisplayed={5}
+                                onPageChange={paginationHandler}
+                            />
+                        </div>
+                    </form>
+
+                    {/* <script>createLayer('Calendar');</script> */}
+                    {/* <script>
 function check_all(f)
 {
     var chk = document.getElementsByName("chk[]");
@@ -326,11 +355,12 @@ function chk_gonumber(val) {
 
 </script> */}
 
-				<div style={{height:'30px'}}></div>
+                    <div style={{height: '30px'}}></div>
 
-			</div>
-		</div>
-</div>
+                </div>
+            </div>
+        </div>
 
- )}
-        export default RecommenderChangeLog;
+    )
+}
+export default RecommenderChangeLog;
