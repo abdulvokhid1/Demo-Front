@@ -10,11 +10,23 @@ import PayManager from '../PayManager/index';
 import ReactPaginate from 'react-paginate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { format } from 'date-fns';
 import { message } from 'antd';
+
+type IdNameStateType = {
+    id: number;
+    name: string;
+}
 
 const StatusOfProceedsPayment = () => {
 const [messageApi, contextHolder] = message.useMessage()
 const [sliderVisible, setSliderVisible] = useState(true)
+const [startDate, setStartDate] = useState(new Date());
+const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
+const [xColor, setXColor] = useState<number>(0)
+const [yColor, setYColor] = useState<number>(0)
 const [currentPage, setCurrentPage] = useState<number>(1)
     const [totalUsers, setTotalUsers] = useState<number>(0)
     const [perPage, setPerPage] = useState<number>(2)
@@ -66,6 +78,33 @@ const paginationHandler = (selectedItem: { selected: number }) => {
 	const page = selectedItem ? selectedItem.selected+1 : 0;
 	mutate({page: page, limit: perPage})
 }
+
+const getSelectedUser = (users: IdNameStateType[]) => {
+    console.log('good')
+}
+const onDateChangeHandle = (e: any) => {
+    setIsDatePickerOpen(!isDatePickerOpen);
+    setStartDate(e);
+}
+const onSubmit= async(formData: FormData)=>{
+    const redRegidate = formData.get('redRegidate');
+    const id = formData.get('pass_mb_id');
+    const reason = formData.get('pass_wr_content');
+    const page = formData.get('page');
+    const limit = formData.get('limit');
+    
+    const params ={
+        di: id? Number(id.toString()):0,
+        reason: reason?.toString(),
+        date: Date,
+        page: currentPage,
+        limit: perPage,
+    }
+    console.log(params)
+    mutate(params);
+}
+
+
 return(
     <div className={sliderVisible ? "container" : "container_hide" } id="depth2_leftmenu" style={{background: "#f0f0f0"}}>
 		<Slider />
@@ -75,25 +114,24 @@ return(
                   <div className="open_close"><span className="btn_close" id="open_close_btn_close" title="메뉴닫기"
                   style={{display: sliderVisible ? "block" : "none"}} onClick={sliderToggle}></span><span className="btn_open" id="open_close_btn_open" title="메뉴열기"
                   style={{display: !sliderVisible ? "block" : "none"}} onClick={sliderToggle}></span></div>
-                  
+
                   {/* <!-- 페이지타이틀 --> */}
                   <div className="title_area">
                     <span className="icon"></span>
                     <span className="title">
-				수익금 지급관리					
-					</span>
+				수익금 지급관리
+ 	 	</span>
                     <span className="location">홈 &gt; 회원관리 &gt; 수익금 지급관리</span>
                   </div>
                   {/* <!-- // 페이지타이틀 --> */}
-                  
-{/*<iframe src="inc.bonus_auto.php" width={0} height={0} frameBorder={0} style={{display:'none'}}></iframe>*/}
+
+<iframe src="inc.bonus_auto.php" width={0} height={0} frameBorder={0} style={{display:'none'}}></iframe>
 
 {/* <!--<iframe src="inc.bonus_auto_test.php" width=100% height=100px frameborder=0></iframe>--> */}
 
 <div className="common_ajax_proc"></div>
 
-
-<form name='searchfrm' method='post' action='/myAdmin/_entershop.point.list.php'>
+<form name='searchfrm' method='post' action={onSubmit}>
 <input type='hidden' name='mode' value='search'/>
 				{/* <!-- 검색영역 --> */}
 				<div className="form_box_area">
@@ -101,11 +139,19 @@ return(
 						<tbody> 
 							<tr>
 								<td className="article">아이디</td>
-								<td className="conts"><input type='text' name='pass_mb_id' className='input_text' value=""/></td>
-								<td className="article">적립/변경 사유</td>
-								<td className="conts"><input type='text' name='pass_wr_content' className='input_text' value=""/></td>
-								<td className="article">지급일</td>
-								<td className="conts"><input type='text' name='pass_wr_datetime' className='input_text' value=""/></td>
+								<td className="conts"><input type='text' name='pass_mb_id' className='input_text' /></td>
+								<td className="article">적립 사유</td>
+								<td className="conts"><input type='text' name='pass_wr_content' className='input_text' /></td>
+                             	<td className="article">지급일</td>
+								<td className="conts">
+                                            <input type='text' readOnly name='redRegidate' className='input_text'
+                                                value={format(startDate, "yyyy-MM-dd")} onMouseDown={(e) => {
+                                                e.preventDefault();
+                                                setXColor(e.clientX);
+                                                setYColor(e.clientY + 15);
+                                                setIsDatePickerOpen(!isDatePickerOpen);
+                                            }}/>
+                                        </td>
 							</tr>
 						</tbody> 
 					</table>
@@ -116,21 +162,17 @@ return(
 							<span className="shop_btn_pack btn_input_blue"><input type="submit" className="input_medium" title="검색" value="검색"/></span>
 							<span className="shop_btn_pack"><span className="blank_3"></span></span>
 							<span className="shop_btn_pack"><a href={PAGE_ROUTES.USERS.PAY_MANAGER} className="medium red" title="관리자 적립" >관리자 적립</a></span>
-
-
 						</div>
 					</div>
-									</div>
+				</div>
 </form>
 				{/* <!-- // 검색영역 --> */}
 
-
-
-<form name='frm' method='post'>
-<input type='hidden' name='mode' value=''/>
-<input type='hidden' name='seachcnt' value='0'/>
-<input type='hidden' name='PVSC' value=""/>
-<input type='hidden' name='search_que' value="IHdoZXJlIHdyX3N0ZXAgPSAnc3lzdGVtJyA="/>
+<form name='frm' method='post'action={onSubmit}>
+<input type='hidden' name='mode' />
+<input type='hidden' name='seachcnt' />
+<input type='hidden' name='PVSC' />
+<input type='hidden' name='search_que' />
 
 
 				{/* <!-- 리스트영역 --> */}
@@ -168,7 +210,6 @@ return(
 <tr><td colSpan={15} height='40'>내용이 없습니다.</td></tr>						</tbody> 
 					</table>
 
-
 					<div style={{display:'flex', alignItems:'center', justifyContent:'center' ,margin:'0 auto'}}>
                         <ReactPaginate
                             previousLabel={<FontAwesomeIcon icon={faArrowAltCircleLeft}/>}
@@ -194,7 +235,14 @@ return(
 
 			</div>
 		</div>
-		{/* <!-- //내용 --> */}
+        <div style={{
+                position: 'absolute',
+                left: xColor.toString() + 'px',
+                top: yColor.toString() + 'px',
+                display: isDatePickerOpen ? 'block ' : 'none',
+            }}>
+                <DatePicker onChange={onDateChangeHandle} selected={startDate} inline/>
+            </div>
         </div>
 )
 }
