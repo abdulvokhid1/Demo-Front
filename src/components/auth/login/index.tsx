@@ -105,7 +105,7 @@ const Login = () => {
                     }}>
                 <span style={{fontSize: '20px', paddingTop: '10px'}}>
                     환영합니다!<br/>
-                    더센2 에 로그인하기
+                    쇼핑머니 로그인하기
                 </span>
                     </div>
 
