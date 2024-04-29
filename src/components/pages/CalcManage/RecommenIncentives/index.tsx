@@ -1,4 +1,5 @@
 'use client'
+// import './styles.css'
 import Slider from '@/components/layouts/Slider/Calc';
 import React, { useEffect, useState } from 'react';
 import PAGE_ROUTES from "@/utils/constants/routes";
@@ -9,6 +10,8 @@ import { format } from "date-fns";
 import SALEREGISTER_API from "@/services/api/saleregister";
 import noop from "noop-ts";
 import { useRouter } from "next/navigation";
+import { it } from "date-fns/locale";
+import { CalculationCompletionQueryType, CalculationCompletionType } from "@/services/api/saleregister/type";
 
 const RecommenIncentives = () => {
     const router = useRouter();
@@ -26,9 +29,40 @@ const RecommenIncentives = () => {
     const [totalUserListState, setTotalUserListState] = useState<string[]>([])
     const [totalSales, setTotalSales] = useState<number>(0)
     const [totalSaleAmountState, setTotalSaleAmountState] = useState<number>(0)
+    const [totalRewardAmountState, setTotalRewardAmountState] = useState<number>(0)
     const [calcListState, setCalcListState] = useState<any>()
-    const [selectedListState, setSelectedListState] = useState<number[]>([])
+    const [selectedListState, setSelectedListState] = useState<boolean[]>([])
+    const [selectedPayListState, setSelectedPayListState] = useState<boolean[]>([])
+    const [calculationChecked, setCalculationChecked] = useState<boolean>(false)
+    const [calculationConfirmListState, setCalculationConfirmListState] = useState<any>()
+    const [editedAmountListState, setEditedAmountListState] = useState<string[]>([])
+    const [isReadonlyListState, setIsReadonlyListState] = useState<boolean[]>([])
+    const [confirmedUserIdListState, setConfirmedUserIdListState] = useState<number[]>([])
 
+    const {mutate: mutateConfirmCalculation} = useMutation(
+        {
+            mutationFn: SALEREGISTER_API.confirmCalculation,
+            onSuccess: async (values: any) => {
+                // console.log('success')
+                setCalcListState([])
+                setCalculationConfirmListState(null)
+                setConfirmedUserIdListState([])
+                setCalculationChecked(false)
+                startDate && endDate &&
+                mutate({
+                    startDate: startDate,
+                    endDate: endDate,
+                    page: currentPage,
+                    limit: perPage,
+                })
+            },
+            onError: async (error: any, variables, context) => {
+                if (error.response.status === 401) {
+                    router.push(PAGE_ROUTES.AUTH.LOGIN);
+                }
+            },
+        }
+    )
     const {isPending, mutate, isSuccess, isError} = useMutation(
         {
             mutationFn: SALEREGISTER_API.getCalculationDetailList,
@@ -36,87 +70,16 @@ const RecommenIncentives = () => {
                 let calList: any = {};
                 let selfBalance: any = {}
                 let totalSaleAmount = 0;
-                // setTotalSales(values.selfBalanceList.length)
-                // values.list.map((value: any) => {
-                //     const userId = value.id;
-                //     const sub1Id = value.sub1Id;
-                //     const sub2Id = value.sub2Id;
-                //
-                //     if (userId in calList) {
-                //         // userId available in calList
-                //         // Need update subs, depositAmount, sub1Id, sub2Id
-                //         sub1Id && !calList[userId].sub1Id ? calList[userId].sub1Id = {
-                //             id: sub1Id,
-                //             name: value.sub1Name
-                //         } : noop;
-                //         sub2Id && !calList[userId].sub2Id ? calList[userId].sub2Id = {
-                //             id: sub2Id,
-                //             name: value.sub2Name
-                //         } : noop;
-                //         value.subId
-                //             ? calList[userId].subs[value.subId] != undefined
-                //                 ? (calList[userId].subs[value.subId] += value.saleAmount) && (totalSaleAmount += value.saleAmount)
-                //                 : calList[userId].subs[value.subId] = value.saleAmount
-                //             : noop;
-                //         if (value.subId &&
-                //             value.subId != value.sub1Id &&
-                //             value.subId != value.sub2Id &&
-                //             calList[userId].sub1Id &&
-                //             calList[userId].sub2Id &&
-                //             value.subId != value.sub1Id.id &&
-                //             value.subId != value.sub2Id.id) {
-                //             calList[userId].saleAmount += value.saleAmount;
-                //             totalSaleAmount += value.saleAmount;
-                //         }
-                //     } else {
-                //         calList[userId] = {
-                //             name: value.name,
-                //             level: value.level,
-                //             levelTitle: value.levelTitle,
-                //             // sub1Id: {id: value.sub1Id, name: value.sub1Name},
-                //             // sub2Id: {id: value.sub2Id, name: value.sub2Name},
-                //             rewardAmount: value.rewardAmount,
-                //             selfBalance: 0,
-                //             saleAmount: 0,
-                //             subs: {}
-                //         }
-                //         value.sub1Id ? calList[userId].sub1Id = {id: value.sub1Id, name: value.sub1Name} : noop;
-                //         value.sub2Id ? calList[userId].sub2Id = {id: value.sub2Id, name: value.sub2Name} : noop;
-                //         value.subId ? calList[userId].subs[value.subId] = value.saleAmount : noop;
-                //         if (
-                //             value.subId &&
-                //             value.subId != value.sub1Id &&
-                //             value.subId != value.sub2Id &&
-                //             calList[userId].sub1Id &&
-                //             calList[userId].sub2Id &&
-                //             value.subId != value.sub1Id.id &&
-                //             value.subId != value.sub2Id.id
-                //         ) {
-                //             calList[userId].saleAmount += value.saleAmount;
-                //             totalSaleAmount += value.saleAmount
-                //         }
-                //     }
-                // })
-                // const keys = Object.keys(calList);
-                // let index = -1;
-                // index = keys.indexOf('name');
-                // index != -1 ? keys.splice(index, 1) : noop;
-                // index = keys.indexOf('level');
-                // index != -1 ? keys.splice(index, 1) : noop;
-                // index = keys.indexOf('levelTitle');
-                // index != -1 ? keys.splice(index, 1) : noop;
-                // const keyStart = perPage* (currentPage - 1);
-                // const keyEnd = keyStart + perPage;
-                // setTotalUserListState(keys.slice(keyStart, keyEnd));
-                // paginationCalculation(currentPage, calList);
-                // values.selfBalanceList.map((value: any) => {
-                //     calList[value.id] ? calList[value.id].selfBalance += value.selfBalance : noop;
-                // })
-                // setCalcListState(calList);
+                let totalRewardAmount = 0;
+                values.list.map((item: any) => {
+                    totalRewardAmount += item.rewardAmount
+                    totalSaleAmount += item.saleAmount
+                })
+                setTotalRewardAmountState(totalRewardAmount);
                 setCalcListState(values.list)
                 setTotalSales(values.selfBalanceList.length);
                 setTotalSaleAmountState(totalSaleAmount);
-                setSelectedListState([])
+
                 console.log(JSON.stringify(calcListState))
             },
 
@@ -170,6 +133,123 @@ const RecommenIncentives = () => {
             page: currentPage,
             limit: perPage,
         })
+    }
+
+    const confirmCalculationHandler = () => {
+        // startDate && endDate &&
+        // mutateConfirmCalculation({
+        //     startDate: startDate,
+        //     endDate: endDate,
+        //     page: currentPage,
+        //     limit: perPage,
+        // })
+        // console.log('calculationHandler');
+        const confirmList:any = {}
+        const userList: any = []
+        calcListState && calcListState.map((item: any) => {
+            const userId = item.id;
+            const name = item.name;
+            const memberId = item.memberId;
+            const levelId = item.levelId;
+            const levelTitle = item.levelTitle;
+            const rewardAmount = item.rewardAmount;
+            const bankAccount = item.bankAccount;
+            const saleId = item.saleId;
+            if (userId in confirmList) {
+                confirmList[userId].rewardAmount += rewardAmount;
+                confirmList[userId].saleIds.push(saleId);
+            }
+            else {
+                confirmList[userId] = {
+                    userId: userId,
+                    name: name,
+                    memberId: memberId,
+                    levelId: levelId,
+                    levelTitle:levelTitle,
+                    rewardAmount:rewardAmount,
+                    bankAccount: bankAccount,
+                    saleIds: [saleId],
+                }
+                userList.push(userId)
+            }
+        })
+        setCalculationConfirmListState(confirmList);
+        setConfirmedUserIdListState(userList);
+        setSelectedPayListState(new Array(Object.keys(confirmList).length).fill(false))
+        setSelectedListState(new Array(Object.keys(confirmList).length).fill(false))
+        setIsReadonlyListState(new Array(Object.keys(confirmList).length).fill(true))
+        const amountList: string[] = []
+        Object.keys(confirmList).map((userId: any) => {
+            amountList.push(confirmList[userId].rewardAmount)
+        })
+        setEditedAmountListState(amountList);
+        // router.refresh()
+    }
+
+    const handleSelectPayAll = (event:any) => {
+        //filled all checkboxes' states with `Check All` value
+        const list = new Array(calculationConfirmListState.length).fill(
+            event.target.checked
+        );
+        setSelectedPayListState(list);
+
+    };
+    const handleSelectAll = (event:any) => {
+        //filled all checkboxes' states with `Check All` value
+        const list = new Array(confirmedUserIdListState.length).fill(
+            event.target.checked
+        );
+        setSelectedListState(list);
+
+    };
+
+    const handleOnChange = (position:number) => {
+        const updatedCheckedState = selectedListState.map((item, index) =>
+            index === position ? !item : item
+        );
+
+        setSelectedListState(updatedCheckedState);
+    };
+
+    const handlePayOnChange = (position:number) => {
+        const updatedCheckedState = selectedPayListState.map((item, index) =>
+            index === position ? !item : item
+        );
+
+        setSelectedPayListState(updatedCheckedState);
+    };
+
+    const editButtonHandler = (position:number) => {
+        const updateList = calculationConfirmListState;
+        // updateList.map((item:any, index:number) =>{
+        //     index == position ? item.rewardAmount = editedAmountListState[index] : noop;
+        // })
+        // updateList[position].rewardAmount =editedAmountListState[position];
+        // setCalculationConfirmListState(updateList);
+    }
+
+    const completeCalculation = () => {
+        // const idList
+        if (!startDate || !endDate) return;
+        const params: CalculationCompletionType = {item: []};
+        confirmedUserIdListState.map((item: any, index: number) => {
+            if (!selectedListState[index]) return;
+            const param = {
+                startDate: startDate,
+                endDate: endDate,
+                userId: calculationConfirmListState[item].userId,
+                name: calculationConfirmListState[item].name,
+                memberId: calculationConfirmListState[item].memberId,
+                levelId: calculationConfirmListState[item].levelId,
+                levelTitle: calculationConfirmListState[item].levelTitle,
+                rewardAmount: calculationConfirmListState[item].rewardAmount,
+                bankAccount: calculationConfirmListState[item].bankAccount,
+                deposits: calculationConfirmListState[item].saleIds,
+            }
+            params.item.push(param);
+        })
+        console.log(params);
+        mutateConfirmCalculation(params)
     }
 
     return (
@@ -285,10 +365,6 @@ const RecommenIncentives = () => {
 
 
                     <form name='flist' method='post'>
-                        <input type='hidden' name='q1' value="code="/>
-                        <input type='hidden' name='page' value="1"/>
-
-
                         {/* <!-- 리스트영역 --> */}
                         <div className="content_section_inner">
                             <table className="list_TB" summary="리스트기본">
@@ -311,30 +387,30 @@ const RecommenIncentives = () => {
                                         <td height={50} colSpan={21} align='center' color='#ffffff'>내역이 없습니다.</td>
                                     </tr>
                                 ) : (
-                                        calcListState.map((item:any, index:number) => {
-                                            return (
-                                                <tr key={index}>
-                                                    <td>{index + 1}</td>
-                                                    <td>{endDate ? format(endDate, "yyyy-MM-dd") : ''}</td>
-                                                    <td>{item.name}</td>
-                                                    <td>{item.memberId}</td>
-                                                    <td>{item.levelTitle}</td>
-                                                    <td>{item.rewardAmount}</td>
-                                                    <td>{item.memo}</td>
-                                                    <td>{item.subMemberId}</td>
-                                                    <td>
-                                                        <input type="button" value="조직도" className="input_small white"
-                                                               onClick={() => {
-                                                               }}/>
-                                                    </td>
-                                                </tr>
-                                            )
-                                        })
-                                    )}
-                                    </tbody>
-                                    </table>
+                                    calcListState.map((item: any, index: number) => {
+                                        return (
+                                            <tr key={index}>
+                                                <td>{index + 1}</td>
+                                                <td>{endDate ? format(endDate, "yyyy-MM-dd") : ''}</td>
+                                                <td>{item.name}</td>
+                                                <td>{item.memberId}</td>
+                                                <td>{item.levelTitle}</td>
+                                                <td>{item.rewardAmount}</td>
+                                                <td>{item.memo}</td>
+                                                <td>{item.subMemberId}</td>
+                                                <td>
+                                                    <input type="button" value="조직도" className="input_small white"
+                                                           onClick={() => {
+                                                           }}/>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                )}
+                                </tbody>
+                            </table>
 
-                                    <div className="content_section_inner"
+                            <div className="content_section_inner"
                                  style={{border: '0px', background: '#6ab9eef', margin: '0px', padding: '0px'}}>
 
                                 <table className="list_TB" summary="리스트기본"
@@ -344,7 +420,9 @@ const RecommenIncentives = () => {
                                         <td className="new_order_data_foot" style={{background: '#6ab9eef'}}>
                                             <div className="inner_sum_box">
                                                 <ul>
-                                                    <li className="txt">전체 합계 <span className="value">0&nbsp;원 </span>
+                                                    <li className="txt">전체 합계 <span className="value">
+                                                        {totalRewardAmountState}
+                                                        &nbsp;원 </span>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -354,30 +432,75 @@ const RecommenIncentives = () => {
                             </div>
                         </div>
                     </form>
+                    <div className="content_section_inner">
 
-                    <table width='100%' cellPadding={0} cellSpacing={0} className='MG-T10'>
+                        <table className="list_TB" summary="리스트기본" style={{borderTop:'none'}}>
+                            <thead>
+                            {!calcListState?.length ? (
+                                    <tr>
+                                        <td width="100%" height="50" align="center">
 
+                                            <div style={{height: '40px', margin: '0 auto', textAlign: 'center'}}><span
+                                                style={{
+                                                    color: 'red',
+                                                    fontSize: '18px',
+                                                    fontWeight: 'bold',
+                                                    padding: '5px'
+                                                }}>{endDate ? format(endDate, "yyyy-MM-dd") + ' 매출 일마감이 되지 않았습니다': ''}</span>
+                                            </div>
 
-                        <form name='share_form' method='post' onSubmit={() => {
-                        }}>
-                            <input type='hidden' name='q1' value="code="/>
+                                        </td>
+                                    </tr>
+                                )
+                                : (
+                                    <tr>
+                                        <td width="100%" height="50" align="center">
+                                            <div style={{marginBottom: '10px'}}>
+                                                <span style={{
+                                                    color: 'red',
+                                                    fontSize: '18px',
+                                                    fontWeight: 'bold',
+                                                    border: '1px solid red',
+                                                    padding: '5px'
+                                                }}>
+                                                    {calcListState.length} 건 마감할 데이터가 있습니다. 마감 정산해주세요
+                                                </span>
+                                            </div>
+                                            <input className="pay_drapt" type="image"
+                                                   src="/images/btn_pay_drapt.gif"
+                                                   style={{display:calculationChecked? 'inline':'none'}}
+                                                   onClick={()=>{confirmCalculationHandler()}}
+                                            />
+                                            <div style={{margin: '20px'}}>
+                                                {/*<div style={{height: '40px'}}>*/}
+                                                {/*        <span style={{*/}
+                                                {/*            color: 'blue',*/}
+                                                {/*            fontSize: '18px',*/}
+                                                {/*            fontWeight: 'bold',*/}
+                                                {/*            border: '1px solid blue',*/}
+                                                {/*            padding: '5px'*/}
+                                                {/*        }}>*/}
+                                                {/*            정산완료 {calcListState.length} 건*/}
+                                                {/*        </span>*/}
+                                                {/*</div>*/}
+                                                <div style={{margin: '10px'}}>
+                                                        <span>
+                                                            <label>
+                                                                <input type="checkbox" name="agree"
+                                                                       className="bonus_hidden_chkbox hidde_pay_drapt"
+                                                                       onClick={() => {setCalculationChecked(!calculationChecked)}}
+                                                                />
+                                                            </label>
+                                                        </span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
 
-                            <input type='hidden' name='year_month' value="2024-03"/>
-                            <input type='hidden' name='year_weekday' value=""/>
-                            <input type='hidden' name='year_day' value="2024-03-11"/>
-                            <tr>
-                                <td width="100%" height="50" align="center">
-
-                                    <div style={{height: '40px', margin: '0 auto', textAlign: 'center'}}><span
-                                        style={{color: 'red', fontSize: '18px', fontWeight: 'bold', padding: '5px'}}>2024-03-10 매출 일마감이 되지 않았습니다</span>
-                                    </div>
-
-                                </td>
-                            </tr>
-
-                        </form>
-                    </table>
-
+                                )}
+                            </thead>
+                        </table>
+                    </div>
                     <form name='fboardlist' method='post'>
                         <input type='hidden' name='q1' value="code="/>
                         <input type='hidden' name='page' value="1"/>
@@ -392,77 +515,149 @@ const RecommenIncentives = () => {
                         <div className="content_section_inner">
                             <div className="top_btn_area">
                                 {/* <!--<span className ="shop_btn_pack"><a href="./calcu/calcu_bonus2_xls.php?code=" className ="small white" />엑셀다운로드</a></span>--> */}
-                                <span className="shop_btn_pack pay_drapt"><a onClick={() => {
-                                }} className="large red">정산완료</a></span>
+                                <span className="shop_btn_pack pay_drapt">
+                                    <a className="large red"
+                                       onClick={() => {completeCalculation()}}
+                                    >정산완료</a></span>
                                 <span className="shop_btn_pack pay_drapt"><span className="blank_3"></span></span>
                                 <span className="shop_btn_pack pay_drapt"><span className="blank_3"></span></span>
-                                <span className="shop_btn_pack"><a href="javascript:select_send('excel_center');"
+                                <span className="shop_btn_pack"><a onClick={()=> {}}
                                                                    className="large white"
                                                                    title="선택엑셀저장">선택엑셀저장</a></span>
-                                {/* <!--
-			<span className ="shop_btn_pack"><span className ="blank_3"></span></span>
-			<span className ="shop_btn_pack"><span className ="blank_3"></span></span>
-			<span className ="shop_btn_pack"><a onclick="btn_check('cancel_select')" className ="small white" />선택 마감취소</a></span>
---> */}
                             </div>
                             <table className="list_TB" summary="리스트기본">
                                 <thead>
                                 <tr style={{height: '50px align: center'}}>
-                                    <th scope="col" className="colorset"><input type='checkbox' name='chkall' value="1"
-                                                                                onClick={() => {
-                                                                                }}/></th>
-                                    <th scope="col" className="colorset"
-                                        style={{fontSize: '11px', color: 'red'}}>(지급X체크)<br/><input type='checkbox'
-                                                                                                    name='pointlockall'
-                                                                                                    value="Y"
-                                                                                                    onClick={() => {
-                                                                                                    }}/></th>
+                                    <th scope="col" className="colorset">
+                                        <input type='checkbox' name='chkall'
+                                               checked={selectedListState.every((value) => value)}
+                                               onChange={handleSelectAll}
+                                        />
+                                    </th>
+                                    {/*<th scope="col" className="colorset" style={{fontSize: '11px', color: 'red'}}>*/}
+                                    {/*    (지급X체크)<br/>*/}
+                                    {/*    <input type='checkbox' name='pointlockall'*/}
+                                    {/*           checked={selectedPayListState.every((value) => value)}*/}
+                                    {/*           onChange={handleSelectPayAll}*/}
+                                    {/*    />*/}
+                                    {/*</th>*/}
                                     <th scope="col" className="colorset">No</th>
-                                    <th scope="col" className="colorset"><a
-                                        href='/myAdmin/_entershop.bonus_no_b2.php?code=&page=&filed=b.name&orderby=asc'><u>회원명</u></a>
+                                    <th scope="col" className="colorset"><a><u>회원명</u></a>
                                     </th>
-                                    <th scope="col" className="colorset"><a
-                                        href='/myAdmin/_entershop.bonus_no_b2.php?code=&page=&filed=member_id&orderby=asc'><u>아이디</u></a>
+                                    <th scope="col" className="colorset"><a><u>아이디</u></a>
                                     </th>
-                                    <th scope="col" className="colorset"><a
-                                        href='/myAdmin/_entershop.bonus_no_b2.php?code=&page=&filed=b.memgrade&orderby=asc'><u>레벨</u></a>
+                                    <th scope="col" className="colorset"><a><u>레벨</u></a>
                                     </th>
-                                    <th scope="col" className="colorset"><a
-                                        href='/myAdmin/_entershop.bonus_no_b2.php?code=&page=&filed=total&orderby=asc'><u>발생금액</u></a>
+                                    <th scope="col" className="colorset"><a><u>발생금액</u></a>
                                     </th>
-                                    <th scope="col" className="colorset"><a
-                                        href='/myAdmin/_entershop.bonus_no_b2.php?code=&page=&filed=total&orderby=asc'><u>세금공제</u></a>
+                                    <th scope="col" className="colorset"><a><u>세금공제</u></a>
                                     </th>
-                                    <th scope="col" className="colorset"><a
-                                        href='/myAdmin/_entershop.bonus_no_b2.php?code=&page=&filed=total&orderby=asc'><u>적립공제</u></a>
+                                    {/*<th scope="col" className="colorset"><a><u>적립공제</u></a>*/}
+                                    {/*</th>*/}
+                                    <th scope="col" className="colorset"><a><u>실수령액</u></a>
                                     </th>
-                                    <th scope="col" className="colorset"><a
-                                        href='/myAdmin/_entershop.bonus_no_b2.php?code=&page=&filed=total&orderby=asc'><u>실수령액</u></a>
+                                    <th scope="col" className="colorset"><a><u>메모</u></a>
                                     </th>
-                                    <th scope="col" className="colorset"><a
-                                        href='/myAdmin/_entershop.bonus_no_b2.php?code=&page=&filed=total&orderby=asc'><u>메모</u></a>
+                                    <th scope="col" className="colorset"><a><u>계좌번호</u></a>
                                     </th>
-                                    <th scope="col" className="colorset"><a
-                                        href='/myAdmin/_entershop.bonus_no_b2.php?code=&page=&filed=total&orderby=asc'><u>계좌번호</u></a>
+                                    <th scope="col" className="colorset"><a><u>기간</u></a>
                                     </th>
-                                    <th scope="col" className="colorset"><a
-                                        href='/myAdmin/_entershop.bonus_no_b2.php?code=&page=&filed=reg_date&orderby=asc'><u>기간</u></a>
+                                    <th scope="col" className="colorset"><a><u>상태</u></a>
                                     </th>
-                                    <th scope="col" className="colorset"><a
-                                        href='/myAdmin/_entershop.bonus_no_b2.php?code=&page=&filed=ragi&orderby=asc'><u>상태</u></a>
-                                    </th>
-                                    <th scope="col" className="colorset"><a
-                                        href='/myAdmin/_entershop.bonus_no_b2.php?code=&page=&filed=total&orderby=asc'><u
-                                        style={{color: 'red'}}>발생금액-수정</u></a></th>
-                                    <th scope="col" className="colorset"><a
-                                        href='/myAdmin/_entershop.bonus_no_b2.php?code=&page=&filed=ragi&orderby=asc'><u>조직도</u></a>
+                                    {/*<th scope="col" className="colorset"><a><u*/}
+                                    {/*    style={{color: 'red'}}>발생금액-수정</u></a></th>*/}
+                                    <th scope="col" className="colorset"><a><u>조직도</u></a>
                                     </th>
                                 </tr>
                                 </thead>
+                                {!confirmedUserIdListState?.length ? (
+                                        <tr>
+                                            <td height={50} colSpan={20} align='center'>내역이 없습니다.</td>
+                                        </tr>
 
-                                <tr>
-                                    <td height={50} colSpan={20} align='center'>내역이 없습니다.</td>
-                                </tr>
+                                    )
+                                : (
+                                    confirmedUserIdListState.map((item:any, index: number) => {
+                                        return (
+                                            <tr key={index} className="list0" style={{height:"30px",alignItems:"center"}}>
+                                                <td>
+                                                    <input type="checkbox" name="chk[]" className="chk"
+                                                           checked={selectedListState[index]}
+                                                           onChange={() => handleOnChange(index)}
+                                                    />
+                                                </td>
+                                                {/*<td style={{width:'50px'}}>*/}
+                                                {/*    <input type="checkbox" name="pointlock[1374]" className="pointlock"*/}
+                                                {/*           checked={selectedPayListState[index]}*/}
+                                                {/*           onChange={() => handlePayOnChange(index)}*/}
+                                                {/*    />*/}
+                                                {/*</td>*/}
+                                                <td className="f_list1">{index+1}</td>
+                                                <td className="f_listb">{calculationConfirmListState[item].name}</td>
+
+
+                                                <td className="f_list1"><a onClick={()=>{}}><b>{calculationConfirmListState[item].memberId}</b></a></td>
+
+                                                <td className="f_list1">{calculationConfirmListState[item].levelTitle}</td>
+                                                <td className="f_lists">{calculationConfirmListState[item].rewardAmount}</td>
+                                                <td className="f_lists">{calculationConfirmListState[item].rewardAmount * 3.3/100}</td>
+
+
+
+                                                <td className="f_listr">{calculationConfirmListState[item].rewardAmount * (1-3.3/100)}</td>
+
+
+
+
+                                                <td className="f_listl" style={{fontSize:'11px',letterSpacing:'-0.3px',wordSpacing:'-2px'}}>
+                                                    <br/>
+                                                </td>
+
+                                                <td className="f_listl">{item.bankAccount}</td>
+                                                <td className="f_list0">{endDate ? format(endDate, "yyyy-MM-dd") : ''}</td>
+
+                                                <td className="f_list0"><span style={{color:'blue'}}>정상</span></td>
+
+                                                {/*<td className="f_list" style={{width:'90px'}}>*/}
+                                                {/*    <div style={{position:'absolute',marginTop:'-9px'}}>*/}
+                                                {/*        <input type="number" name="total[]" defaultValue={editedAmountListState[index]} style={{width:'80px',float:'left'}}*/}
+                                                {/*               onChange={(e) => {*/}
+                                                {/*                   const updatedList = editedAmountListState;*/}
+                                                {/*                   updatedList[index] = e.target.value*/}
+                                                {/*                   setEditedAmountListState(updatedList)*/}
+                                                {/*                   console.log(editedAmountListState)*/}
+                                                {/*               }}*/}
+                                                {/*               // readOnly={isReadonlyListState[index]}*/}
+                                                {/*        />*/}
+                                                {/*        <span className="shop_btn_pack">*/}
+                                                {/*            &nbsp;*/}
+                                                {/*            <input type="button" className="input_small gray ex_modify" data-uid="1374" value="수정"*/}
+                                                {/*                   style={{fontSize:'11px',padding:'0px',borderRadius:0,height:'19px',marginLeft:'-20px'}}*/}
+                                                {/*                   onClick={()=>{*/}
+                                                {/*                       editButtonHandler(index)*/}
+                                                {/*                   }}*/}
+                                                {/*            />*/}
+                                                {/*        </span>*/}
+                                                {/*    </div>*/}
+                                                {/*</td>*/}
+
+                                                <td className="f_list0">
+                                                    {/*<a href="_cardsys.sub_tree_chart.php?_mode=modify&amp;app_mode=popup&amp;tree_memid=hjh6209" onClick={()=>{}}>*/}
+                                                    {/*    <img src="./images/icon/recomid_icon.png" style={{verticalAlign:'bottom'}}/>*/}
+                                                    {/*</a>*/}
+
+                                                    {/*<a href="_cardsys.sub_tree_sponid.php?_mode=modify&amp;app_mode=popup&amp;tree_memid=hjh6209" onClick={()=>{}}>*/}
+                                                    {/*    <img src="./images/icon/sponid_icon.png" style={{verticalAlign:'bottom'}}/>*/}
+                                                    {/*</a>*/}
+                                                    <input type="button" value="조직도" className="input_small white"
+                                                           onClick={() => {
+                                                           }}/>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+
+                                    )}
 
                                 <tfoot>
                                 <tr>
@@ -493,8 +688,8 @@ const RecommenIncentives = () => {
                             <tr>
                                 <td width='50%' align='left'>
 
-                                    {/* <!--<img src='./image/btn_mmpoint_02.gif' onclick="btn_check('defer')" style='cursor:hand' alt='정산유보'>
-		<img src='./image/btn_mmpoint_03.gif' onclick="btn_check('refusal')" style='cursor:hand' alt='정산거절'>--> */}
+                                    {/* <!--<img src='./image/btn_mmpoint_02.gif' onClick="btn_check('defer')" style='cursor:hand' alt='정산유보'>
+		<img src='./image/btn_mmpoint_03.gif' onClick="btn_check('refusal')" style='cursor:hand' alt='정산거절'>--> */}
                                 </td>
 
                                 <td width='50%' align="right"></td>
@@ -531,6 +726,6 @@ const RecommenIncentives = () => {
                     inline/>
             </div>
         </div>
-    );
+);
 }
 export default RecommenIncentives;

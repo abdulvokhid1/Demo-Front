@@ -21,3 +21,21 @@ export type CalculationType = {
   page?: number;
   limit?: number;
 }
+
+export type CalculationCompletionType = {
+  item: CalculationCompletionQueryType[];
+}
+
+export type CalculationCompletionQueryType = {
+  id?: number;
+  startDate: Date;
+  endDate: Date;
+  userId: number;
+  name: string;
+  memberId: string;
+  levelId?: number;
+  levelTitle?:string;
+  rewardAmount:number;
+  bankAccount?: string;
+  deposits: number[];
+}

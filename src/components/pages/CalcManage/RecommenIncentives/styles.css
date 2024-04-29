@@ -1,0 +1,12 @@
+/*.bonus_hidden_chkbox {background: transparent url('/images/m_coup_pack.png') no-repeat; background-size:320px; background-position:0 -330px; width:25px; height:25px; margin:5px;*/
+/*    -webkit-border-radius:0; -webkit-appearance:none; -webkit-gradient:none; border:none;}*/
+/*!*.bonus_hidden_chkbox:checked {position:-40px -330px;}*!*/
+
+table {
+    color: #666;
+    font-family: 'Plus Jakarta Sans',맑은고딕, sans-serif;
+    letter-spacing: -0.3px;
+    font-size: 13px;
+    font-weight: 400;
+    color: #606070;
+}

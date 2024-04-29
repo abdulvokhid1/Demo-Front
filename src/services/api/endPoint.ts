@@ -30,6 +30,7 @@ export const API_ENDPOINTS = {
     CONFIRM: '/api/v1/deposit/confirm',
     CALCULATION_LIST: '/api/v1/deposit/calculation_list',
     CALCULATION_DETAIL_LIST: '/api/v1/deposit/calculation_detail_list',
+    CONFIRM_CALCULATION: '/api/v1/deposit/confirm_calculation',
   },
   PRODUCTMANAGE: {
     GET_LIST: '/api/v1/product_manage/list',
