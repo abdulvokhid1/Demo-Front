@@ -181,7 +181,7 @@ const UserManagement = () => {
             zip1: zip1?.toString() || '',
             zip2: zip2?.toString() || '',
             address: address?.toString() || '',
-            address1: address?.toString() || '',
+            address1: address1?.toString() || '',
             addressdoro: address_doro?.toString() || '',
             zonecode: (zip1?.toString() || '') + (zip2?.toString() || ''),
             centerId: Number(option_center) || 0,
