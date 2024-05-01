@@ -34,7 +34,9 @@ export const API_ENDPOINTS = {
   },
   PRODUCTMANAGE: {
     GET_LIST: '/api/v1/product_manage/list',
-    REGISTRATION: '/api/v1/product_manage/update'
+    REGISTRATION: '/api/v1/product_manage/update',
+    SET_MAIN_PRODUCT:'/api/v1/settingmainproduct/list',
+    SET_MAIN_PRODUCT_REG:'/api/v1/settingmainproduct/create',
   },
 
   AddCategory: {

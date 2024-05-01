@@ -1,7 +1,9 @@
 'use client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faArrowAltCircleLeft, faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons'
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { format } from "date-fns";
 import ReactPaginate from 'react-paginate';
 import { CreatedAtType, UserInfo } from "@/utils/types/type";
 import Slider from '@/components/layouts/Slider/users'
@@ -37,8 +39,24 @@ const UserManagement = () => {
     const [mobilephone, setMobilePhone] = useState<string>()
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [totalUsers, setTotalUsers] = useState<number>(0)
+<<<<<<< HEAD
     const [perPage, setPerPage] = useState<number>(10)
     const setSelectedKey = useSetRecoilState(userSelectedKey)
+=======
+    const [perPage, setPerPage] = useState<number>(2)
+
+    const [startDate, setStartDate] = useState<Date>()
+	const [endDate, setEndDate] = useState<Date>()
+	const [isDatePickerOpen1, setIsDatePickerOpen1] = useState(false);
+	const [xColor1, setXColor1] = useState<number>(0)
+	const [yColor1, setYColor1] = useState<number>(0)
+	const [isDatePickerOpen2, setIsDatePickerOpen2] = useState(false);
+	const [xColor2, setXColor2] = useState<number>(0)
+	const [yColor2, setYColor2] = useState<number>(0)
+
+    const [searchSelected, setSearchSelected] = useState<number>(0)
+
+>>>>>>> 03f65b851d427fd1ff5045b938eea8e793a6f0cb
     const {mutate: mutateLevel} = useMutation(
         {
             mutationFn: LEVEL_API.getList,
@@ -64,6 +82,7 @@ const UserManagement = () => {
 
             onError: (error: any) => {
                 // const errorType = error.response.data.errors[0]
+                console.log(error);
                 if (error.response.status === 401) {
                     router.push(PAGE_ROUTES.AUTH.LOGIN);
                 }
@@ -80,6 +99,56 @@ const UserManagement = () => {
     useEffect(() => {
         mutateLevel();
     }, []);
+
+
+    const onDateChangeHandle1 = (e: any) => {
+		setIsDatePickerOpen1(!isDatePickerOpen1);
+		setIsDatePickerOpen2(false)
+		setStartDate(e);
+	}
+	const onDateChangeHandle2 = (e: any) => {
+		setIsDatePickerOpen2(!isDatePickerOpen2);
+		setIsDatePickerOpen1(false)
+		setEndDate(e);
+	}
+
+
+    const onSubmit = async (formData: FormData) => {
+        const memberId = formData.get('pass_id');
+        const name = formData.get('pass_name');
+        const level = formData.get('sst');
+        const minCash = formData.get('minCash');
+        const maxCash = formData.get('maxCash');
+        const id = formData.get('id');
+        // const email = formData.get('email');
+        // const account = formData.get('pass_account');
+        // const phone = formData.get('pass_htel');
+        const directInput = formData.get('stx')?.toString() || '';
+        const page = formData.get('page');
+        const limit = formData.get('limit');
+        
+        const params = {
+            memberId: memberId?.toString() || '',
+            name: name?.toString(),
+            level:level? Number(level.toString()) : 0,
+            minCash: minCash? Number(minCash.toString()) : 0,
+            maxCash: maxCash? Number(maxCash.toString()) : 0,
+            id: id? Number(id.toString()) : 0,
+            startDate: startDate,
+            endDate: endDate,
+            email: searchSelected == 1? directInput : '',
+            phone: searchSelected == 2? directInput : '',
+            account: searchSelected == 3? directInput : '',
+            page: currentPage,
+            limit: perPage,
+        }
+        console.log(params)
+        mutate(params);
+
+        // Handle response if necessary
+        // const data = await response.json()
+        // ...
+    }
 
     useEffect(() => {
         setSelectedKey(0)
@@ -127,7 +196,7 @@ const UserManagement = () => {
 
                     <div className="common_ajax_proc"></div>
 
-                    <form name='fsearch' method="post">
+                    <form name='fsearch' method="post" action={onSubmit}>
                         <input type='hidden' name='code' value=""/>
                         <input type="hidden" name="app_mode" value=""/>
                         <input type="hidden" name="pass_recomid" value=""/>
@@ -146,29 +215,46 @@ const UserManagement = () => {
                                 </colgroup>
                                 <tbody>
                                 <tr>
-                                    <td className="article">페이</td>
+                                    {/* <td className="article">캐시</td>
                                     <td className="conts">
 
-                                        <input type="text" name='p_schsh' style={{width: '70px'}} value=""
+                                        <input type="number" name='p_schsh' style={{width: '70px'}}
                                                className="input_text"/>
                                         ~
-                                        <input type="text" name="p_dchsh" style={{width: '69px'}}
-                                               value="" className="input_text"/>
+                                        <input type="number" name="p_dchsh" style={{width: '69px'}}
+                                                className="input_text"/>
 
-                                    </td>
+                                    </td> */}
                                     <td className="article">가입날짜</td> 
                                     <td className="conts" colSpan={3}>
                                         <div className="btn_line_up_left">
-                                            <input type="text" name="j_sdate"
-                                                   style={{width: '75px', textAlign: 'center'}} value=""
-                                                   className="input_text" id="time_start"/>
+                                            <input type="text" name="j_sdate" style={{width: '100px', textAlign: 'center'}}
+                                                   className="input_text" id="time_start" 
+                                                   value={startDate ? format(startDate, "yyyy-MM-dd") : ''}
+                                                   onMouseDown={(e) => {
+                                                    e.preventDefault();
+                                                    setXColor1(e.clientX);
+                                                    setYColor1(e.clientY + 15);
+                                                    setIsDatePickerOpen1(!isDatePickerOpen1);
+                                                    setIsDatePickerOpen2(false);
+                                                }}
+
+                                                   />
                                             ~
                                             <input type="text" name="j_ddate"
-                                                   style={{width: '75px', textAlign: 'center'}} value=""
-                                                   className="input_text"
-                                                   id="time_end"/>
+                                                   style={{width: '100px', textAlign: 'center'}} 
+                                                   className="input_text" id="time_end"
+                                                   value={endDate ? format(endDate, "yyyy-MM-dd") : ''}
+                                                   onMouseDown={(e) => {
+                                                    e.preventDefault();
+                                                    setXColor2(e.clientX);
+                                                    setYColor2(e.clientY + 15);
+                                                    setIsDatePickerOpen2(!isDatePickerOpen2);
+                                                    setIsDatePickerOpen1(false);
+                                                }}
+                                                   />
                                         </div>
-                                        <div className="btn_line_up_left">
+                                        {/* <div className="btn_line_up_left">
                                                 <span className="shop_btn_pack"> &nbsp; <button type="button"
                                                                                         className='input_small gray'
                                                                                         onClick={() => {
@@ -216,7 +302,7 @@ const UserManagement = () => {
                                                                                     onClick={() => {
                                                                                     }}
                                                                                     style={{cursor: 'pointer'}}>90일간</button></span>
-                                        </div>
+                                        </div> */}
                                     </td>
                                     {/* <td className="article">구좌보기선택</td>
                                     <td className="conts">
@@ -229,7 +315,7 @@ const UserManagement = () => {
                                     </td> */}
                                 </tr>
                                 <tr>
-                                    <td className="article">업체레벨</td>
+                                    <td className="article">레벨</td>
                                     <td className="conts">
                                         <select name="sst" style={{width: '48%'}}>
                                             <option value=''>레벨</option>
@@ -253,7 +339,15 @@ const UserManagement = () => {
                                     </td>
                                     <td className="article">직접선택</td>
                                     <td className="conts">
-                                        <select name="sfl" style={{width: '100%'}}>
+                                        <select name="sfl" style={{width: '100%'}}
+                                        onChange={(e) => {
+                                            setSearchSelected(
+                                                e.target.value == 'email'? 1 : 
+                                                e.target.value == 'pass_htel'? 2 :
+                                                e.target.value == 'pass_account'? 3 : 0
+                                            )
+                                        }}
+                                        >
                                             <option value=''>선택</option>
                                             <option value='email'>이메일</option>
                                             <option value='pass_htel'>휴대폰번호</option>
@@ -262,7 +356,7 @@ const UserManagement = () => {
                                     </td>
                                     <td className="article">검색</td>
                                     <td className="conts">
-                                        <input type="text" name="stx" style={{width: '100%'}} value=""
+                                        <input type="text" name="stx" style={{width: '100%'}}
                                                className="input_text"/>
                                     </td>
                                     <td className=""></td>
@@ -271,14 +365,14 @@ const UserManagement = () => {
                                 <tr>
                                     <td className="article">아이디</td>
                                     <td className="conts">
-                                        <input type="text" name="pass_id" style={{width: '90%'}} value=""
+                                        <input type="text" name="pass_id" style={{width: '90%'}}
                                                className="input_text"/>
                                     </td>
 
 
                                     <td className="article">회원명</td>
                                     <td className="conts">
-                                        <input type="text" name="pass_name" style={{width: '90%'}} value=""
+                                        <input type="text" name="pass_name" style={{width: '90%'}}
                                                className="input_text"/>
                                     </td>
 
@@ -726,6 +820,31 @@ const UserManagement = () => {
                     <div style={{height: '30px'}}></div>
 
                 </div>
+                <div style={{
+			position: 'absolute',
+			left: xColor1.toString() + 'px',
+			top: yColor1.toString() + 'px',
+			display: isDatePickerOpen1 ? 'block ' : 'none',
+		}}>
+			<DatePicker
+				onChange={onDateChangeHandle1}
+				selected={startDate}
+				maxDate={endDate}
+				isClearable={true}
+				inline/>
+		</div>
+		<div style={{
+			position: 'absolute',
+			left: xColor2.toString() + 'px',
+			top: yColor2.toString() + 'px',
+			display: isDatePickerOpen2 ? 'block ' : 'none',
+		}}>
+			<DatePicker
+				onChange={onDateChangeHandle2}
+				selected={endDate}
+				minDate={startDate}
+				inline/>
+		</div>
             </div>
             {/*<!-- //내용 -->*/}
 

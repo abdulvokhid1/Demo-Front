@@ -1340,7 +1340,7 @@ const Dashboard = () => {
                                                        width: '75%',
                                                        float: 'left',
                                                        border: '1px solid #999'
-                                                   }}>http://thesen.moinus.kr/?owner=00000001</p>
+                                                   }}>http://</p>
 
                                                 <div className="btn_wrap_tid" style={{float: 'right'}}>
                                                     {/*<!--<a href="mypage.token_url_manage.html" className="add"><img src="/pages_unique03/images/main/menu_icon_add_blue.png" border="0" alt="" />추가</a>-->*/}
