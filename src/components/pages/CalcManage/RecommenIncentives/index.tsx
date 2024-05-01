@@ -270,7 +270,7 @@ const RecommenIncentives = () => {
                     <div className="title_area">
                         <span className="icon"></span>
                         <span className="title">
-						추천수당					
+						대리점 수당		
 					</span>
                         <span className="location">홈 &gt; 전산관리 &gt; 수당2</span>
                     </div>

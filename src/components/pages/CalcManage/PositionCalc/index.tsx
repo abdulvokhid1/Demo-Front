@@ -203,7 +203,7 @@ const PositionCalc = () => {
 					<div className="title_area">
 						<span className="icon"></span>
 						<span className="title">
-					직급 일마감 관리					
+					 매출 정산하기		
 					</span>
 						<span className="location">홈 &gt; 전산관리 &gt; 직급 일마감 관리</span>
 					</div>

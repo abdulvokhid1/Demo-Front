@@ -15,7 +15,7 @@ const Slider = () => {
             <a href="PurchaseRequest" className="menu" title="입금신청" style={{display: 'block'}}>구매신청</a>
             <a href="ApplicationOfWithdrawal" className="menu" title="공지사항 게시판" style={{display: 'block'}}>출금신청</a>
               <span style={{backgroundColor: '#eaf8f5'}}>레벨 관리<span>〓</span></span>
-            <a href="LevelManagement" className="menu_on" title="관리자 메인" style={{display: 'block'}}>회원레벨 설정</a>
+            <a href="LevelManagement" className="menu" title="관리자 메인" style={{display: 'block'}}>회원레벨 설정</a>
           
             <a href="OtherPreferences" className="menu" title="일반페이지 관리" style={{display: 'block'}}>기타환경 설정</a>
           

@@ -373,8 +373,8 @@ return (
 								<th scope="col" className="colorset">상품코드</th>
 								<th scope="col" className="colorset">상품명</th>
 								<th scope="col" className="colorset">매출금액</th>
-								<th scope="col" className="colorset">매출단위</th>
-								<th scope="col" className="colorset">확정매출</th>
+								{/* <th scope="col" className="colorset">매출단위</th>
+								<th scope="col" className="colorset">확정매출</th> */}
 								<th scope="col" className="colorset">상태</th>
 								<th scope="col" className="colorset">등록일</th>
 								{/* <th scope="col" className="colorset">만기일</th> */}
@@ -426,8 +426,7 @@ return (
 											<td></td>
 											<td></td>
 											<td>{numberWithCommas(item.amount)}원</td>
-											<td>PV 583,000</td>
-											<td>PV 583,000</td>
+											
 											<td>
 											<span className="shop_state_pack">
 												{/*<span className="orange">*/}
