@@ -4,6 +4,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { prodSelectedKey } from "@/services/recoil/selectedKey";
 import { useEffect } from "react";
 import { navSelectedKey } from "@/services/recoil/nav";
+import PAGE_ROUTES from "@/utils/constants/routes";
 
 const Slider = () => {
     const selectedKey = useRecoilValue(prodSelectedKey)
@@ -18,7 +19,8 @@ const Slider = () => {
     return (
         <div className="aside_second">
                  <span style={{backgroundColor: '#eaf8f5 '}}>상품등록 관리<span>〓</span></span>
-            <Link key={0} href="ProductRegister" className={selectedKey==0? "menu_on": "menu"} title="상품등록" style={{display: 'block'}}
+
+            <Link key={0} href={PAGE_ROUTES.SHOP.PRODUCT_REGISTER} className={selectedKey==0? "menu_on": "menu"} title="상품등록" style={{display: 'block'}}
                   onClick={()=> itemClickedHandler(0)}>상품 등록</Link>
             <Link key={1} href="shop_product_management" className={selectedKey==1? "menu_on": "menu"} title="상품관리" style={{display: 'block'}}
                   onClick={()=> itemClickedHandler(1)}>상품관리</Link>

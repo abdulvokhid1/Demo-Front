@@ -6,7 +6,7 @@ const { persistAtom } = recoilPersist()
 
 
 export const navSelectedKey = atom<number>({
-    key: 'nav-key',
+    key: 'nav-key-selected',
     default: 0,
     effects_UNSTABLE: [persistAtom],
 })

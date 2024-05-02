@@ -39,12 +39,8 @@ const UserManagement = () => {
     const [mobilephone, setMobilePhone] = useState<string>()
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [totalUsers, setTotalUsers] = useState<number>(0)
-<<<<<<< HEAD
     const [perPage, setPerPage] = useState<number>(10)
     const setSelectedKey = useSetRecoilState(userSelectedKey)
-=======
-    const [perPage, setPerPage] = useState<number>(2)
-
     const [startDate, setStartDate] = useState<Date>()
 	const [endDate, setEndDate] = useState<Date>()
 	const [isDatePickerOpen1, setIsDatePickerOpen1] = useState(false);
@@ -56,7 +52,6 @@ const UserManagement = () => {
 
     const [searchSelected, setSearchSelected] = useState<number>(0)
 
->>>>>>> 03f65b851d427fd1ff5045b938eea8e793a6f0cb
     const {mutate: mutateLevel} = useMutation(
         {
             mutationFn: LEVEL_API.getList,
@@ -820,6 +815,7 @@ const UserManagement = () => {
                     <div style={{height: '30px'}}></div>
 
                 </div>
+                
                 <div style={{
 			position: 'absolute',
 			left: xColor1.toString() + 'px',

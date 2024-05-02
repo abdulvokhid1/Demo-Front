@@ -6,7 +6,7 @@ import {RecoilRoot} from 'recoil'
 import 'bootstrap/dist/css/bootstrap.css'
 import "../globals.css";
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
-import {useState} from "react";
+import { Suspense, useState } from "react";
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -23,7 +23,9 @@ export default function RootLayout({children,}: Readonly<{
 
         <QueryClientProvider client={queryClient}>
             <RecoilRoot>
+                <Suspense>
                 {children}
+                </Suspense>
             </RecoilRoot>
         </QueryClientProvider>
 

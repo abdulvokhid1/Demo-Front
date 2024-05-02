@@ -31,13 +31,8 @@ const Slider = () => {
             <Link key={3} href="ApplicationOfWithdrawal" className={selectedKey==3? "menu_on": "menu"} title="공지사항 게시판" style={{display: 'block'}}
                   onClick={()=> itemClickedHandler(3)}>출금신청</Link>
               <span style={{backgroundColor: '#eaf8f5'}}>레벨 관리<span>〓</span></span>
-<<<<<<< HEAD
             <Link key={4} href="LevelManagement" className={selectedKey==4? "menu_on": "menu"} title="관리자 메인" style={{display: 'block'}}
                   onClick={()=> itemClickedHandler(4)}>회원레벨 설정</Link>
-=======
-            <a href="LevelManagement" className="menu" title="관리자 메인" style={{display: 'block'}}>회원레벨 설정</a>
->>>>>>> 03f65b851d427fd1ff5045b938eea8e793a6f0cb
-          
             <Link key={5} href="OtherPreferences" className={selectedKey==5? "menu_on": "menu"} title="일반페이지 관리" style={{display: 'block'}}
                   onClick={()=> itemClickedHandler(5)}>기타환경 설정</Link>
           

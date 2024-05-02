@@ -88,7 +88,7 @@ const PayManager = () => {
                   </tr>
                   <tr>
                     <td className="article">
-                      페이<span className="ic_ess" title="필수"></span>
+                      캐시<span className="ic_ess" title="필수"></span>
                     </td>
                     <td className="conts">
                       <input
@@ -113,10 +113,10 @@ const PayManager = () => {
                       <select name="po_type" style={{ fontSize: "9.4pt" }}>
                         <option value="">선택</option>
 
-                        <option value="배당보너스">배당보너스</option>
-                        <option value="매칭보너스">매칭보너스</option>
-                        <option value="직급보너스">직급보너스</option>
-                        <option value="만기보너스">만기보너스</option>
+                        <option value="배당보너스">대리점 보너스</option>
+                        {/* <option value="매칭보너스">매칭보너스</option> */}
+                        {/* <option value="직급보너스">직급보너스</option> */}
+                        {/* <option value="만기보너스">만기보너스</option> */}
                       </select>
                     </td>
                   </tr>
@@ -234,11 +234,7 @@ const PayManager = () => {
 	});
 </SCRIPT> */}
 
-          <link
-            rel="stylesheet"
-            href="/include/js/jquery/jqueryui/jquery-ui.min.css"
-            type="text"
-          />
+        
 
           <div style={{ height: "30px" }}></div>
         </div>
