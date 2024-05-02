@@ -1,7 +1,10 @@
 'use client'
 import Slider  from '@/components/layouts/Slider/Shop';
 import { useEffect, useState } from 'react';
+import { useRouter } from "next/navigation";
+import PAGE_ROUTES from '@/utils/constants/routes';
 const RecommendedProduct = () => {
+	const router = useRouter();
     const [sliderVisible, setSliderVisible] = useState(true)
     useEffect(() => {
     console.log('sliderVisible: ', sliderVisible)
@@ -25,9 +28,9 @@ const RecommendedProduct = () => {
                   <div className="title_area">
                     <span className="icon"></span>
                     <span className="title">
-				메인상품설정 - 추천 상품					
+				 추천 상품 설정					
 					</span>
-                    <span className="location">홈 &gt; 상품관리 &gt; 메인상품설정 - 베스트상품</span>
+                    <span className="location">홈 &gt; 상품관리 &gt; 메인상품설정 - 추천상품</span>
                   </div>
                   {/* <!-- // 페이지타이틀 --> */}
   
@@ -121,10 +124,10 @@ function handleStateChange() {
 
     <div className="btn_line_up_center">
 							<span className="shop_btn_pack btn_input_blue">
-                                <input type="button" className="input_medium" title="메인상품 추가하기" value="메인상품 추가하기" onClick={()=>{}}/></span>
+                                <input type="button" className="input_medium" title="추천상품 추가하기" value="추천상품 추가하기" onClick={()=>{router.push(PAGE_ROUTES.SHOP.ADD_TYPE)}}/></span>
 						</div>
 					</div>
-				</div>
+				</div>ㄴ
 				{/* <!-- 버튼영역 --> */}
 
 <form name='frm' method='post' action="_product_main_setup.pro.php">

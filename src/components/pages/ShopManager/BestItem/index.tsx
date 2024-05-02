@@ -1,7 +1,11 @@
 'use client'
 import Slider  from '@/components/layouts/Slider/Shop';
+import PAGE_ROUTES from '@/utils/constants/routes';
 import { useEffect, useState } from 'react';
+import { useRouter } from "next/navigation";
+
 const BestItem = () => {
+	const router = useRouter();
     const [sliderVisible, setSliderVisible] = useState(true)
     useEffect(() => {
     console.log('sliderVisible: ', sliderVisible)
@@ -25,9 +29,9 @@ const BestItem = () => {
                   <div className="title_area">
                     <span className="icon"></span>
                     <span className="title">
-				메인상품설정 - 베스트상품					
+				   베스트상품 설정					
 					</span>
-                    <span className="location">홈 &gt; 상품관리 &gt; 메인상품설정 - 베스트상품</span>
+                    <span className="location">홈 &gt; 상품관리 &gt; 메인진열관리 - 베스트상품</span>
                   </div>
                   {/* <!-- // 페이지타이틀 --> */}
   
@@ -44,7 +48,7 @@ const BestItem = () => {
 
 				<div style={{width:'300px', float:'left'}}>
 
-					<span style={{fontWeight:'bold',fontSize:'30px',textAlign:'left'}}>타입 : best</span>
+					<span style={{fontWeight:'bold',fontSize:'30px',textAlign:'left'}}>타입 : 베스트 </span>
 				</div>
 
 	<form name='fsearch' method="post">
@@ -120,11 +124,11 @@ function handleStateChange() {
 
 						<div className="btn_line_up_center">
 							<span className="shop_btn_pack btn_input_blue">
-                                <input type="button" className="input_medium" title="메인상품 추가하기" value="메인상품 추가하기" onClick={()=>{}}/></span>
+                                <input type="button" className="input_medium" title="메인상품 추가하기" value="베스트상품 추가하기" onClick={()=>{router.push(PAGE_ROUTES.SHOP.ADD_TYPE)}}/></span>
 						</div>
 					</div>
 				</div>
-				{/* <!-- 버튼영역 --> */}
+				{/* <!-- 버튼영역 --> */}ㄴ
 
 <form name='frm' method='post' action="_product_main_setup.pro.php">
 <input type='hidden' name='_mode' value=''/>
