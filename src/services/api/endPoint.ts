@@ -1,7 +1,7 @@
 export const API_ENDPOINTS = {
   AUTH: {
-    REGISTRATION:'/api/v1/auth/register_by_admin',
-    LOGIN: '/api/v1/auth/login_admin_page',
+    REGISTRATION:'/api/v1/auth/register',
+    LOGIN: '/api/v1/auth/login',
     SIGNUP_BY_USERNAME: '/api/v1/user/username',
     ME: '/api/v1/auth/me',
     UPDATE_PROFILE: '/api/v1/auth/update-profile',
@@ -28,20 +28,20 @@ export const API_ENDPOINTS = {
     LIST: '/api/v1/deposit/list',
     REGISTRATION: '/api/v1/deposit/create',
     CONFIRM: '/api/v1/deposit/confirm',
-    CALCULATION_LIST: '/api/v1/deposit/calculation_list',
-    CALCULATION_DETAIL_LIST: '/api/v1/deposit/calculation_detail_list',
-    CONFIRM_CALCULATION: '/api/v1/deposit/confirm_calculation',
+    CALCULATIONLIST: '/api/v1/deposit/calculation_list',
   },
+
   PRODUCTMANAGE: {
     GET_LIST: '/api/v1/product_manage/list',
     REGISTRATION: '/api/v1/product_manage/update',
     SET_MAIN_PRODUCT:'/api/v1/settingmainproduct/list',
     SET_MAIN_PRODUCT_REG:'/api/v1/settingmainproduct/create',
+  
   },
 
   AddCategory: {
     GET_LIST: '/api/v1/addcategory/list',
-    REGISTRATION: '/api/v1/addcategory/update'
+    REGISTRATION: '/api/v1/category/create'
   },
 
   Order: {

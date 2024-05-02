@@ -39,28 +39,27 @@ const PAGE_ROUTES = {
  SHOP:{
   SHOP_PRODUCT_MANAGEMENT:'/admin/shop_manager/shop_product_management',
   CATEGORY_REGISTRATION: '/admin/shop_manager/add_category',
-  PRODUCT_REGISTER:'/admin/shop_manager/productr_register',
+  PRODUCT_REGISTER:'/admin/shop_manager/product_register',
   UPLOAD:'/admin/shop_manager/upload_popup',
-
+  ADD_TYPE:'/admin/shop_manager/add_type',
  },
- STAT:{
+
+  STAT:{
   STAT_MANAGEMENT:'/admin/stats_manager/total_settlement_details',
  },
  ORDER:{
   ORDER_MANAGEMENT:'/admin/order_manager/orders_of_today',
  },
-DESIGN:{
+ DESIGN:{
   DESIGN_MANAGEMENT:'/admin/design_manager/shop_banner',
-  BANNER:'/admin/design_manager/banner_register',
-  CATEGORY:'/admin/design_manager/category_register',
+  BANNER:'/admin/design_manager/shop_banner',
+  CATEGORY:'/admin/design_manager/categorybanner',
   REGISTER:'/admin/design_manager/banner_register',
   CATE_REGISTER:'/admin/design_manager/category_register',
 },
-
-LOG:{
+ LOG:{
   LOG_MANAGEMENT:'/admin/log/daily_connection',
 },
-
   COURSES: '/admin/courses',
   LESSONS: '/admin/lessons',
   CATEGORY: '/admin/categories',

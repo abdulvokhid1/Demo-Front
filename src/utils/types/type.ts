@@ -52,8 +52,15 @@ export type CreatedAtType = {
 }
 
 export type ProductType = {
-    from?: string;
-    to?: string;
+  ranking?:string;
+  NO?: number;
+  privider?:string;
+  image?: string;
+  info?: string;
+  price?: number;
+  enddate?:string;
+  status?: string;
+  manage?: string;
 }
 
 export type OrderType = {
@@ -134,62 +141,24 @@ export type RecommendationType={
 export type DepositRegistrationType = {
 
     id?: number;
-
     depositDate?: string;
-
-
     users: number[];
-
     amount: number;
     memo: string;
-
     fee?: number;
     isConfirmed: boolean;
     isRewarded?: boolean
-
     method?: number;
 }
 
 export type DepositType = {
-
     id?: number;
-
     depositDate?: string;
-
-
     user: UserInfo;
-
     amount: number;
     memo: string;
-
     fee?: number;
     status: number;
     isRewarded?: number
-
     method?: number;
-}
-
-export type CalculationType1 = {
-    id?: number;
-    name?: string;
-    levelTitle?: string;
-    levelId?: number;
-    sub1Name?: string;
-    sub1Id?:number;
-    sub2Name?: string;
-    sub2Id?:number;
-    saleAmount?: number;
-    saleDate?: Date;
-}
-
-export type CalculationType = {
-    id?: number;
-    name?: string;
-    levelTitle?: string;
-    levelId?: number;
-    sub1?: UserInfo;
-    sub2?: UserInfo;
-    saleAmount?: number;
-    selfAmount?: number;
-    saleDate?: Date;
 }
