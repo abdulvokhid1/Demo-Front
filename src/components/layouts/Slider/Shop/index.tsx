@@ -1,11 +1,11 @@
 // import './styles.css'
 import Link from 'next/link'
-
+import PAGE_ROUTES from "@/utils/constants/routes";
 const Slider = () => {
     return (
         <div className="aside_second">
                  <span style={{backgroundColor: '#eaf8f5 '}}>상품등록 관리<span>〓</span></span>
-            <a href="ProductRegister" className="menu" title="상품등록" style={{display: 'block'}}>상품 등록</a>
+            <a href={PAGE_ROUTES.SHOP.PRODUCT_REGISTER} className="menu" title="상품등록" style={{display: 'block'}}>상품 등록</a>
             <a href="shop_product_management" className="menu" title="상품관리" style={{display: 'block'}}>상품관리</a>
 
             <span style={{backgroundColor: '#eaf8f5 '}}>상품카테고리 관리<span>〓</span></span>

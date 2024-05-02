@@ -234,11 +234,7 @@ const PayManager = () => {
 	});
 </SCRIPT> */}
 
-          <link
-            rel="stylesheet"
-            href="/include/js/jquery/jqueryui/jquery-ui.min.css"
-            type="text"
-          />
+        
 
           <div style={{ height: "30px" }}></div>
         </div>
