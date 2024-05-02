@@ -128,7 +128,7 @@ function handleStateChange() {
 							</div>
 						</div>
 					</div>
-					{/* <!-- 버튼영역 --> */}ㄴㄴㄴ
+					{/* <!-- 버튼영역 --> */}
 
 					<form name='frm' method='post' action="_product_main_setup.pro.php">
 						<input type='hidden' name='_mode' value='' />
