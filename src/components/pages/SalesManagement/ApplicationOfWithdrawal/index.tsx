@@ -8,10 +8,22 @@ import USER_API from '@/services/api/users';
 import ReactPaginate from 'react-paginate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { format } from 'date-fns';
+
 const ApplicationOfWithdrawal = () => {
 	const [messageApi, contextHolder] = message.useMessage()
 	const [sliderVisible, setSliderVisible] = useState(true)
 	const [currentPage, setCurrentPage] = useState<number>(1)
+	const [startDate, setStartDate] = useState<Date>()
+	const [endDate, setEndDate] = useState<Date>()
+	const [isDatePickerOpen1, setIsDatePickerOpen1] = useState(false);
+	const [xColor1, setXColor1] = useState<number>(0)
+	const [yColor1, setYColor1] = useState<number>(0)
+	const [isDatePickerOpen2, setIsDatePickerOpen2] = useState(false);
+	const [xColor2, setXColor2] = useState<number>(0)
+	const [yColor2, setYColor2] = useState<number>(0)
 		const [totalUsers, setTotalUsers] = useState<number>(0)
 		const [perPage, setPerPage] = useState<number>(2)
 		const [withdrawal, setWithdrawal] = useState<WithdrawalType>()
@@ -62,6 +74,37 @@ const ApplicationOfWithdrawal = () => {
 		const page = selectedItem ? selectedItem.selected+1 : 0;
 		mutate({page: page, limit: perPage})
 	}
+
+	const onDateChangeHandle1 = (e: any) => {
+		setIsDatePickerOpen1(!isDatePickerOpen1);
+		setIsDatePickerOpen2(false)
+		setStartDate(e);
+	}
+	const onDateChangeHandle2 = (e: any) => {
+		setIsDatePickerOpen2(!isDatePickerOpen2);
+		setIsDatePickerOpen1(false)
+		setEndDate(e);
+	}
+	
+	const onSubmit= async(formData: FormData)=>{
+		const redRegidate = formData.get('redRegidate');
+		const memberId = formData.get('pass_id');
+		const name = formData.get('pass_name');
+		const page = formData.get('page');
+		const limit = formData.get('limit');
+	
+		
+		const params ={
+			depositDate: redRegidate?.toString() || format((new Date()), 'yyyy-MM-dd'),
+			memberId: memberId?.toString() || '',
+			name: name?.toString(),
+			page: currentPage,
+			limit: perPage,
+		}
+		console.log(params)
+		mutate(params);
+	}
+	
 return(
     <div className={sliderVisible ? "container" : "container_hide" } id="depth2_leftmenu" style={{background: "#f0f0f0"}}>
 		<Slider />
@@ -87,7 +130,7 @@ return(
 {/* <!--<iframe src="inc.bonus_auto_test.php" width=100% height=100px frameborder=0></iframe>--> */}
 <div className="common_ajax_proc"></div>
 
-<form name='searchfrm' method='post' action='/myAdmin/_entershop.bonus_return.list.php'>
+<form name='searchfrm' method='post' action={onSubmit}>
 <input type='hidden' name='mode' value='search'/>
 				{/* <!-- 검색영역 --> */}
 				<div className="form_box_area">
@@ -97,11 +140,33 @@ return(
 								<td className="article">기간</td>
 								<td className="conts" colSpan={3}>
 									<div className='btn_line_up_left'>
-									 <input type='text' name='time_start' style={{width:'75px',textAlign:'center'}} value="" className='input_text' id="time_start"/>
-												~
-									<input type='text' name='time_end' style={{width:'75px',textAlign:'center'}} value="" className='input_text' id="time_end"/>&nbsp;&nbsp;&nbsp;
+									<input type="text" name="j_sdate" style={{width: '100px', textAlign: 'center'}}
+                                                   className="input_text" id="time_start" 
+                                                   value={startDate ? format(startDate, "yyyy-MM-dd") : ''}
+                                                   onMouseDown={(e) => {
+                                                    e.preventDefault();
+                                                    setXColor1(e.clientX);
+                                                    setYColor1(e.clientY + 15);
+                                                    setIsDatePickerOpen1(!isDatePickerOpen1);
+                                                    setIsDatePickerOpen2(false);
+                                                }}
+
+                                                   />
+                                            ~
+                                            <input type="text" name="j_ddate"
+                                                   style={{width: '100px', textAlign: 'center'}} 
+                                                   className="input_text" id="time_end"
+                                                   value={endDate ? format(endDate, "yyyy-MM-dd") : ''}
+                                                   onMouseDown={(e) => {
+                                                    e.preventDefault();
+                                                    setXColor2(e.clientX);
+                                                    setYColor2(e.clientY + 15);
+                                                    setIsDatePickerOpen2(!isDatePickerOpen2);
+                                                    setIsDatePickerOpen1(false);
+                                                }}
+                                                   />
 									</div>
-									<div className='btn_line_up_left'>
+									{/* <div className='btn_line_up_left'>
 									<span className='shop_btn_pack'><button type='button' className='input_small gray' onClick={()=>{}} style={{cursor:'pointer'}}>어제</button>&nbsp;&nbsp;</span>
 									<span className='shop_btn_pack'><button type='button' className='input_small gray' onClick={()=>{}} style={{cursor:'pointer'}}>이번주</button>&nbsp;&nbsp;</span>
 									<span className='shop_btn_pack'><button type='button' className='input_small gray' onClick={()=>{}} style={{cursor:'pointer'}}>7일간</button>&nbsp;&nbsp;</span>
@@ -110,7 +175,7 @@ return(
 									<span className='shop_btn_pack'><button type='button' className='input_small gray' onClick={()=>{}} style={{cursor:'pointer'}}>30일간</button>&nbsp;&nbsp;</span>
 									<span className='shop_btn_pack'><button type='button' className='input_small gray' onClick={()=>{}} style={{cursor:'pointer'}}>60일간</button>&nbsp;&nbsp;</span>
 									<span className='shop_btn_pack'><button type='button' className='input_small gray' onClick={()=>{}} style={{cursor:'pointer'}}>90일간</button></span>
-									</div>
+									</div> */}
 								</td>
 								<td className="article">구분</td>
 								<td className="conts" colSpan={20}>
@@ -119,29 +184,29 @@ return(
 								  <label  style={{height:'18px'}}>전체</label>
 								  &nbsp;
 										
-								  <input type="radio" name='chk_buy' id="" value="01" />
+								  {/* <input type="radio" name='chk_buy' id="" value="01" />
 								  <label style={{height:'18px'}}>신규</label>
 								  &nbsp;
 								  <input type="radio" name='chk_buy' id="" value="02" />
 								  <label style={{height:'18px'}}>재구매</label>
 								  &nbsp;
 								  <input type="radio" name='chk_buy' id="" value="03" />
-								  <label style={{height:'18px'}}>전환매출</label>
+								  <label style={{height:'18px'}}>전환매출</label> */}
 								  &nbsp;
 								</td>
 							</tr>
 							<tr>
 								<td className="article">아이디</td>
-								<td className="conts"><input type='text' name='pass_pointID' className='input_text' value=""/></td>
+								<td className="conts"><input type='text' name='pass_pointID' className='input_text' /></td>
 								<td className="article">성명</td>
-								<td className="conts"><input type='text' name='pass_name' className='input_text' value=""/></td>
+								<td className="conts"><input type='text' name='pass_name' className='input_text'/></td>
 								<td className="article">소속대리점</td>
 								<td className="conts">
     <select name='assign_center' id="assign_center" className='add_option add_option_chk' style={{width:'200px'}}>
     <option value="">선택</option>
         <option value="1" >본사</option>
-        <option value="2" >봉천센타</option>
-        <option value="3" >강남센타</option>
+        {/* <option value="2" >봉천센타</option>
+        <option value="3" >강남센타</option> */}
         </select>
 							</td>
 							</tr>
@@ -236,6 +301,32 @@ return(
                         </div>
 			</div>
             <div style={{height:'30px'}}></div>
+
+			<div style={{
+			position: 'absolute',
+			left: xColor1.toString() + 'px',
+			top: yColor1.toString() + 'px',
+			display: isDatePickerOpen1 ? 'block ' : 'none',
+		}}>
+			<DatePicker
+				onChange={onDateChangeHandle1}
+				selected={startDate}
+				maxDate={endDate}
+				isClearable={true}
+				inline/>
+		</div>
+		<div style={{
+			position: 'absolute',
+			left: xColor2.toString() + 'px',
+			top: yColor2.toString() + 'px',
+			display: isDatePickerOpen2 ? 'block ' : 'none',
+		}}>
+			<DatePicker
+				onChange={onDateChangeHandle2}
+				selected={endDate}
+				minDate={startDate}
+				inline/>
+		</div>
 </form>
 	</div>
 	</div>

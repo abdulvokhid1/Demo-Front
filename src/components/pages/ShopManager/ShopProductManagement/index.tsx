@@ -11,6 +11,7 @@ import { ProductType } from '@/utils/types/type';
 import { message } from 'antd';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from "next/navigation";
+import PAGE_ROUTES from "@/utils/constants/routes";
 
 const ShopProductManagement = () => {
 	const router = useRouter();
@@ -82,9 +83,9 @@ const ShopProductManagement = () => {
 			<tbody> 
 				<tr>
 					<td className="article">상품명</td>
-					<td className="conts"><input type="text" name="pass_name" className="input_text" value=""/></td>
+					<td className="conts"><input type="text" name="pass_name" className="input_text" /></td>
 					<td className="article">상품코드</td>
-					<td className="conts"><input type="text" name="pass_code" className="input_text" value=""/></td>
+					<td className="conts"><input type="text" name="pass_code" className="input_text" /></td>
 					<td className="article">판매여부</td>
 					<td className="conts" ><select name='sale_enddate' >
                     <option value=''>-선택-</option>
@@ -92,9 +93,9 @@ const ShopProductManagement = () => {
                     <option value='Y' >종료상품</option></select></td>
 					<td className="article">공급업체</td>
 					<td className="conts"><select name='pass_customerCode' ><option value=''>-공급업체-</option>
-                    <option value='superadmin' >더센2(아이디 : superadmin)</option></select></td>
-				</tr>
-				<tr>
+                    <option value='superadmin' >쇼핑머니</option></select></td>
+				</tr>&nbsp;
+				{/* <tr>
 					<td className="article">상품타입</td>
 					<td className="conts">
 						<select name='pass_delivery' ><option value=''>-선택-</option><option value='N' >쿠폰상품</option><option value='Y' >배송상품</option></select>	
@@ -103,20 +104,20 @@ const ShopProductManagement = () => {
 					<td className="conts"><select name='pass_p_view' ><option value=''>-선택-</option><option value='N' >숨김</option><option value='Y' >노출</option></select></td>
 					<td className="article">상품추천인MD</td>
 					<td className="conts"><input type="text" name="md_name" className="input_text" value=""/></td>
-        		</tr>
-				<tr>
+        		</tr> */}
+				{/* <tr>
 					<td className="article">상품분류</td>
 					<td className="conts" colSpan={7}>
 						1차분류 : <select name='pass_parent01'  id="pass_parent01" onChange={()=>{}} >
                             <option value=''>-1차분류-</option><option value='4' >Food</option><option value='3' >Hair Care</option><option value='1' >Skin Care & Body</option> </select>		
                         2차분류 : <select name='pass_parent02'  id="pass_parent02" onChange={()=>{}} ><option value=''>-2차분류-</option></select>	
                         3차분류 : <select name='cateCode'  id="pass_parent03" ><option value=''>-3차분류-</option></select></td>
-				</tr>
-				<tr>
+				</tr> */}
+				{/* <tr>
 					<td className="article">상품아이콘</td>
 					<td className="conts" colSpan={7}>
 				</td>
-				</tr>
+				</tr> */}
 			</tbody>
 		</table>
 		
@@ -125,11 +126,15 @@ const ShopProductManagement = () => {
 			<div className="btn_line_up_center">
 				<span className="shop_btn_pack btn_input_blue"><input type="submit" className="input_medium" title="검색" value="검색"/></span>
 				<span className="shop_btn_pack"><span className="blank_3"></span></span>
-				<span className="shop_btn_pack"><a href="_product_main.form.php?_mode=add" className="medium red" title="상품등록" >상품등록</a></span>
+				<span className="shop_btn_pack"><a href={PAGE_ROUTES.SHOP.PRODUCT_REGISTER}title="상품등록" >상품등록</a></span>
 				<span className="shop_btn_pack"><span className="blank_3"></span></span>
 				<span className="shop_btn_pack"><a href="javascript:$('.excel_upload_field').toggle();" className="medium white" title="일괄업로드">일괄업로드</a></span>
 				<span className="shop_btn_pack"><span className="blank_3"></span></span>
-				<span className="shop_btn_pack"><a href="#none" onClick={()=>{}} className="medium white" title="상품옵션 일괄업로드">상품옵션 일괄업로드</a></span>
+				<span className="shop_btn_pack"><a href="#none" onClick={()=>{window.open(
+                          PAGE_ROUTES.SHOP.UPLOAD,
+                          "추천인 검색 페이지",
+                          "height=600px, width=900px"
+                        );}} className="medium white" title="상품옵션 일괄업로드">상품옵션 일괄업로드</a></span>
 			</div>
 		</div>
 	</div>
@@ -163,7 +168,7 @@ const ShopProductManagement = () => {
                     <div className='guide_text'><span className='ic_blue'></span><span className='blue'>상품이미지가 <b>외부이미지</b>일 경우 <b>http://</b>부터 시작하도록 입력 바랍니다.</span></div>	
                     <div className='guide_text'><span className='ic_blue'></span><span className='blue'>상품이미지가 <b>내부이미지</b>일 경우 <b>./upfiles/product/ 폴더에 사전 업로드</b>를 하시고 엑셀에는 <b>파일명과 확장자만 입력</b> 바랍니다.</span></div>
                     <div className='guide_text'><span className='ic_blue'></span><span className='blue'>엑셀내용중 금액 또는 수수료의 <b>%</b>, <b>콤마(,)</b>, <b>원</b> 등을 <b>기호를 생략</b> 하세요.</span></div>						
-                    <div className='guide_text'><span className='ic_blue'></span><span className='blue'>일괄업로드는 <b>파일업로드</b> - <b>업로드 수정/확인</b> - <b>등록처리</b> 단계를 거쳐 처리됩니다.</span></div>						<div className='guide_text'><span className='ic_orange'></span><span className='orange'><b>엑셀97~2003 버전 파일만 업로드가 가능합니다. 엑셀 2007이상 버전은(xlsx) 다른 이름저장을 통해 97~2003버전으로 저장하여 등록하세요.</b></span></div>					</td>
+                    <div className='guide_text'><span className='ic_blue'></span><span className='blue'>일괄업로드는 <b>파일업로드</b> - <b>업로드 수정/확인</b> - <b>등록처리</b> 단계를 거쳐 처리됩니다.</span></div>						<div className='guide_text'><span className='ic_orange'></span><span className='orange'><b>엑셀97~2003 버전 파일만 업로드가 가능합니다. 엑셀 2007이상 버전은(xlsx) 다른 이름저장을 통해 97~2003버전으로 저장하여 등록하세요.</b></span></div></td>
 				</tr>
 			</tbody>
 		</table>
@@ -210,7 +215,7 @@ const ShopProductManagement = () => {
 					<th scope="col" className="colorset">상품정보</th>
 					<th scope="col" className="colorset">정상가<br/>판매가</th>
 					<th scope="col" className="colorset">판매일<br/>종료일</th>								
-					<th scope="col" className="colorset">상품추천인MD</th>								
+					{/* <th scope="col" className="colorset">상품추천인MD</th> */}
 					<th scope="col" className="colorset">상태</th>								
 					<th scope="col" className="colorset">관리</th>
 				</tr>

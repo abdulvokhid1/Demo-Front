@@ -813,6 +813,7 @@ const UserManagement = () => {
                     <div style={{height: '30px'}}></div>
 
                 </div>
+                
                 <div style={{
 			position: 'absolute',
 			left: xColor1.toString() + 'px',
