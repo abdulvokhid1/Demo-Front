@@ -37,8 +37,10 @@ const PAGE_ROUTES = {
     CALC_RECOMMEND_INCENTIVES_LIST: '/admin/calc_manage/recomend_incen_list',
    },
  SHOP:{
-  SHOP_PRODUCT_MANAGEMENT:'/admin/shop_manager/shop_product_management',
-  CATEGORY_REGISTRATION: '/admin/shop_manager/add_category'
+    SHOP_PRODUCT_MANAGEMENT:'/admin/shop_manager/shop_product_management',
+   CATEGORY_REGISTRATION: '/admin/shop_manager/add_category',
+   CATEGORY_UPDATE: '/admin/shop_manager/update_category',
+   SHOP_CATEGORY_LIST:'/admin/shop_manager/category_list',
  },
  STAT:{
   STAT_MANAGEMENT:'/admin/stats_manager/total_settlement_details',

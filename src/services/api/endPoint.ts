@@ -39,52 +39,10 @@ export const API_ENDPOINTS = {
     SET_MAIN_PRODUCT_REG:'/api/v1/settingmainproduct/create',
   },
 
-  AddCategory: {
-    GET_LIST: '/api/v1/addcategory/list',
-    REGISTRATION: '/api/v1/addcategory/update'
-  },
-
-  Order: {
-    GET_LIST: '/api/v1/order_manager/list',
-    REGISTRATION: '/api/v1/order_manager/update'
-  },
-  
-  BLOG: {
-    CREATE_BLOG: '/api/v1/blog',
-    GET_LIST: '/api/v1/blog/list',
-    DELETE: '/api/v1/blog',
-    UPDATE: '/api/v1/blog',
-  },
-
-  FEEDBACK: {
-    GET_LIST: '/api/v1/user/feedback-list',
-  },
-
-  DOCUMENTS: {
-    CREATE: '/api/v1/document',
-    GET_LIST: '/api/v1/document/list',
-    DELETE: '/api/v1/document',
-    UPDATE: '/api/v1/document',
-  },
-
-  COURSES: {
-    GET_LIST: '/api/v1/course',
-    CREATE: '/api/v1/course',
-    DELETE: '/api/v1/course',
-    UPDATE: '/api/v1/course/update',
-    ENROLL_LIST: '/api/v1/course/enroll/list',
-    ENROLL_STUDENT: '/api/v1/course/enroll-student',
-    DETAIL: '/api/v1/course',
-    COURSES_ENROLLED: '/api/v1/course/picked-courses',
-    PUBLIC_COURSE_SLUG: '/api/v1/public-course',
-    END_COURSE_PICKED: '/api/v1/course/end-picked-courses',
-    ADMIN_PICK_COURSE: '/api/v1/public-course/admin-pick-course',
-  },
-
   CATEGORY: {
     GET_LIST: '/api/v1/category/list',
-    CREATE: '/api/v1/category',
-    UPDATE: '/api/v1/category/edit',
+    CREATE: '/api/v1/category/create',
+    UPDATE: '/api/v1/category/update',
     DELETE: '/api/v1/category',
   },
 
@@ -154,7 +112,7 @@ export const API_ENDPOINTS = {
   },
 
   UPLOAD: {
-    UPLOAD_FILE: '/api/v1/upload',
+    UPLOAD_CATEGORY_FILE: '/api/v1/upload/upload_category',
   },
 
   RECORD: {

@@ -14,14 +14,17 @@ import { de } from "date-fns/locale";
 interface Props {
     depth: string;
     parent: string;
+    id: string;
+    name: string;
+    active: string
 }
-const AddCategory = ({depth, parent}: Props) => {
+const UpdateCategory = ({depth, parent, id, name, active}: Props) => {
     const router = useRouter();
-    const [imageId, setImageId] = useState()
+    const [imageId, setImageId] = useState(0)
 
-    const {isPending, mutate:mutateAdd, isSuccess, isError} = useMutation(
+    const {isPending, mutate:mutateUpdate, isSuccess, isError} = useMutation(
         {
-            mutationFn: CategoryAPI.create,
+            mutationFn: CategoryAPI.update,
             onSuccess: async (values: any) => {
                 console.log('success')
                 // router.replace(PAGE_ROUTES.USERS.USER_MANAGEMENT)
@@ -57,7 +60,8 @@ const AddCategory = ({depth, parent}: Props) => {
     const handleSubmit = (formData: FormData) => {
         const catName = formData.get('catename');
         const isActive = formData.get('cHidden');
-        imageId && mutateAdd({
+        mutateUpdate({
+            id: Number(id || '0'),
             name: catName?.toString() || '',
             isActive: Number(isActive?.toString()) == 1,
             imgId: imageId,
@@ -88,7 +92,7 @@ const AddCategory = ({depth, parent}: Props) => {
                         <tr>
                             <td className='article'>카테고리명</td>
                             <td className='conts'>
-                                <input type='text' name='catename' className='input_text' style={{width: '150px'}}/>
+                                <input type='text' name='catename' className='input_text' style={{width: '150px'}} defaultValue={name}/>
                             </td>
                         </tr>
 
@@ -97,8 +101,8 @@ const AddCategory = ({depth, parent}: Props) => {
                             <td className='conts'>
                                 <select name='cHidden'>
                                     <option value=''>-선택-</option>
-                                    <option value={1}>노출</option>
-                                    <option value={0}>숨김</option>
+                                    <option value={1} selected={active == 'true'}>노출</option>
+                                    <option value={0} selected={active == 'false'}>숨김</option>
                                 </select>
                             </td>
                         </tr>
@@ -149,4 +153,4 @@ const AddCategory = ({depth, parent}: Props) => {
 }
 
 
-export default AddCategory
+export default UpdateCategory
