@@ -193,3 +193,19 @@ export type CalculationType = {
     selfAmount?: number;
     saleDate?: Date;
 }
+
+export type CategoryType = {
+    id?: number;
+    name?: string;
+    imgId?: number;
+    isActive?: boolean;
+    order?: number;
+    parentId?: number;
+    depth?: number;
+}
+
+export type CategoryListType = {
+    depth?: number;
+    parent?: number;
+    asc?: boolean;
+}

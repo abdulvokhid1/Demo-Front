@@ -1,7 +1,9 @@
+import axios from 'axios'
 import dayjs from 'dayjs'
 import moment from 'moment-timezone'
-import PAGE_ROUTES from "@/utils/constants/routes";
 import { jwtDecode } from "jwt-decode";
+let domain = process.env.NEXT_PUBLIC_API_URL_DEV
+
 
 export const LOCAL_TIME_ZONE = dayjs().utcOffset() / 60
 
@@ -17,6 +19,24 @@ export const getFullDate = (isoTime: string) => {
 
 export const numberWithCommas = (x: number) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+export const uploadImageFile = async (fileImage: File, url: string) => {
+    const formData = await new FormData()
+    await formData.append('image', fileImage)
+    try {
+        if (!isLoggedIn()) throw new Error('Invalid logged in')
+        const result = await axios.post(`${domain}${url}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': 'Bearer ' +localStorage.getItem('accessToken')
+            },
+        })
+
+        return result.data
+    } catch (error) {
+        Promise.reject(error)
+    }
 }
 
 export const isLoggedIn = () => {
