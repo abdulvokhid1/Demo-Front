@@ -16,6 +16,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 const ShopProductManagement = () => {
+
   const router = useRouter();
   const [messageApi, contextHolder] = message.useMessage();
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -48,6 +49,38 @@ const ShopProductManagement = () => {
     const page = selectedItem ? selectedItem.selected + 1 : 0;
     mutate({ page: page, limit: perPage });
   };
+
+  const onSubmit= async(formData: FormData)=>{
+    const ranking = formData.get('ranking');
+    const no = formData.get('pass_name');
+    const provider = formData.get('provider');
+    const image = formData.get('image');
+    const info = formData.get('info');
+    const price = formData.get('price');
+    const enddate = formData.get('enddate');
+    const status = formData.get('status');
+    const manage = formData.get('manage');
+    const page = formData.get('page');
+    const limit = formData.get('limit');
+
+
+    const params ={
+      ranking: ranking?.toString(),
+      no: no? Number(no.toString()):0,
+      provider: provider?.toString(),
+      image: image?.toString(),
+      info: info?.toString(),
+      price: price? Number(price.toString()):0,
+      enddate: enddate?.toString(),
+      status: status?.toString(),
+      manage: manage?.toString(),
+      page: currentPage,
+      limit: perPage,
+  }
+  console.log(params)
+  mutate(params);
+
+  }
 
   return (
     <div
@@ -97,7 +130,7 @@ const ShopProductManagement = () => {
           <form
             name="searchfrm"
             method="post"
-            action="/myAdmin/_product_main.list.php"
+            action={onSubmit}
           >
             <input type="hidden" name="mode" value="search" />
             <div className="form_box_area">
@@ -118,7 +151,6 @@ const ShopProductManagement = () => {
                         type="text"
                         name="pass_name"
                         className="input_text"
-                        value=""
                       />
                     </td>
                     <td className="article">상품코드</td>
@@ -127,8 +159,7 @@ const ShopProductManagement = () => {
                         type="text"
                         name="pass_code"
                         className="input_text"
-                        value=""
-                      />
+                        />
                     </td>
                     <td className="article">판매여부</td>
                     <td className="conts">
@@ -147,13 +178,13 @@ const ShopProductManagement = () => {
                         </option>
                       </select>
                     </td>
-                  </tr>
-                  <tr>
+                  </tr>&nbsp;
+                  {/* <tr>
                     <td className="article">상품타입</td>
                     <td className="conts">
                       <select name="pass_delivery">
                         <option value="">-선택-</option>
-                        <option value="N">쿠폰상품</option>
+                        <option value="N">캐시상품</option>
                         <option value="Y">배송상품</option>
                       </select>
                     </td>
@@ -165,8 +196,7 @@ const ShopProductManagement = () => {
                         <option value="Y">노출</option>
                       </select>
                     </td>
-                    {/* <td className="article">상품추천인MD</td> */}
-                    {/* <td className="conts"><input type="text" name="md_name" className="input_text" value=""/></td> */}
+                   
 
                     <td className="article">상품분류</td>
                     <td className="conts" colSpan={10}>
@@ -196,7 +226,7 @@ const ShopProductManagement = () => {
                         <option value="">-선택-</option>
                       </select>
                     </td>
-                  </tr>
+                  </tr> */}
                   {/* <tr>
 					<td className="article">상품아이콘</td>
 					<td className="conts" colSpan={7}>
@@ -206,7 +236,7 @@ const ShopProductManagement = () => {
               </table>
 
               {/* <!-- 버튼영역 --> */}
-              <div className="top_btn_area">
+              <div className="top_btn_area" >
                 <div className="btn_line_up_center">
                   <span className="shop_btn_pack btn_input_blue">
                     <input
@@ -231,7 +261,7 @@ const ShopProductManagement = () => {
                   <span className="shop_btn_pack">
                     <span className="blank_3"></span>
                   </span>
-                  <span className="shop_btn_pack">
+                  {/* <span className="shop_btn_pack">
                     <a
                       href="javascript:$('.excel_upload_field').toggle();"
                       className="medium white"
@@ -256,7 +286,7 @@ const ShopProductManagement = () => {
                     >
                       상품옵션 일괄업로드
                     </a>
-                  </span>
+                  </span> */}
                 </div>
               </div>
             </div>
@@ -511,9 +541,9 @@ const ShopProductManagement = () => {
                       <br />
                       종료일
                     </th>
-                    <th scope="col" className="colorset">
+                    {/* <th scope="col" className="colorset">
                       상품추천인MD
-                    </th>
+                    </th> */}
                     <th scope="col" className="colorset">
                       상태
                     </th>
