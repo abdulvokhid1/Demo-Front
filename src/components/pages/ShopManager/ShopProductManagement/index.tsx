@@ -71,11 +71,6 @@ const ShopProductManagement = () => {
 					</span>
                         <span className="location">홈 &gt; 상품관리 &gt; 상품관리</span>
                     </div>
-                    {/* <!-- // 페이지타이틀 --> */}
-
-                    {/*<iframe src="inc.bonus_auto.php" width={0} height={0} frameBorder={0} style={{display:'none'}}></iframe>*/}
-                    {/* <!--<iframe src="inc.bonus_auto_test.php" width=100% height=100px frameborder=0></iframe>--> */}
-                    <div className="common_ajax_proc"></div>
 
                     {/* <!-- 검색영역 --> */}
                     <form name="searchfrm" method="post" action="/myAdmin/_product_main.list.php">
@@ -158,20 +153,33 @@ const ShopProductManagement = () => {
                             {/* <!-- 버튼영역 --> */}
                             <div className="top_btn_area">
                                 <div className="btn_line_up_center">
-                                    <span className="shop_btn_pack btn_input_blue"><input type="submit"
-                                                                                          className="input_medium"
-                                                                                          title="검색" value="검색"/></span>
-                                    <span className="shop_btn_pack"><span className="blank_3"></span></span>
-                                    <span className="shop_btn_pack"><a href="_product_main.form.php?_mode=add"
-                                                                       className="medium red"
-                                                                       title="상품등록">상품등록</a></span>
-                                    <span className="shop_btn_pack"><span className="blank_3"></span></span>
-                                    <span className="shop_btn_pack"><a
-                                        href="javascript:$('.excel_upload_field').toggle();" className="medium white"
-                                        title="일괄업로드">일괄업로드</a></span>
-                                    <span className="shop_btn_pack"><span className="blank_3"></span></span>
-                                    <span className="shop_btn_pack"><a href="#none" onClick={() => {
-                                    }} className="medium white" title="상품옵션 일괄업로드">상품옵션 일괄업로드</a></span>
+                                    <span className="shop_btn_pack btn_input_blue">
+                                        <input type="submit" className="input_medium" title="검색" value="검색"/>
+                                    </span>
+                                    <span className="shop_btn_pack">
+                                        <span className="blank_3"></span>
+                                    </span>
+                                    <span className="shop_btn_pack">
+                                        <a href={PAGE_ROUTES.SHOP.PRODUCT_REGISTER} className="medium red"title="상품등록">
+                                            상품등록
+                                        </a>
+                                    </span>
+                                    <span className="shop_btn_pack">
+                                        <span className="blank_3"></span>
+                                    </span>
+                                    <span className="shop_btn_pack">
+                                        <a href="javascript:$('.excel_upload_field').toggle();" className="medium white"
+                                        title="일괄업로드">일괄업로드
+                                        </a>
+                                    </span>
+                                    <span className="shop_btn_pack">
+                                        <span className="blank_3"></span>
+                                    </span>
+                                    <span className="shop_btn_pack">
+                                        <a href="#none" onClick={() => {}} className="medium white"
+                                           title="상품옵션 일괄업로드">상품옵션 일괄업로드
+                                        </a>
+                                    </span>
                                 </div>
                             </div>
                         </div>
