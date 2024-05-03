@@ -23,7 +23,7 @@ export const numberWithCommas = (x: number) => {
 
 export const uploadImageFile = async (fileImage: File, url: string) => {
     const formData = await new FormData()
-    await formData.append('image', fileImage)
+    formData.append('image', fileImage)
     try {
         if (!isLoggedIn()) throw new Error('Invalid logged in')
         const result = await axios.post(`${domain}${url}`, formData, {
@@ -56,4 +56,10 @@ export const isLoggedIn = () => {
         }
     }
     return isLoggedIn;
+}
+
+export const hasSpecialCharacters = (str: string) => {
+    const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
+    return format.test(str);
 }

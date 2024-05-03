@@ -1,14 +1,14 @@
 'use client'
 import Slider  from '@/components/layouts/Slider/Shop';
 import { useEffect, useState } from 'react';
-import { useSetRecoilState } from "recoil";
-import { prodSelectedKey } from "@/services/recoil/selectedKey";
+import { useRouter } from "next/navigation";
+import PAGE_ROUTES from '@/utils/constants/routes';
 const NewItem = () => {
+	const router = useRouter();
     const [sliderVisible, setSliderVisible] = useState(true)
-	const setSelectedKey = useSetRecoilState(prodSelectedKey)
     useEffect(() => {
-    setSelectedKey(6)
-    }, []);
+    console.log('sliderVisible: ', sliderVisible)
+    }, [sliderVisible]);
     const sliderToggle = () => {
     setSliderVisible(!sliderVisible);
     }
@@ -26,13 +26,13 @@ const NewItem = () => {
                   <div className="title_area">
                     <span className="icon"></span>
                     <span className="title">
-				메인상품설정 - 신상품					
+				신상품 설정			
 					</span>
-                    <span className="location">홈 &gt; 상품관리 &gt; 메인상품설정 - 베스트상품</span>
+                    <span className="location">홈 &gt; 상품관리 &gt; 메인진열관리 - 신상품</span>
                   </div>
                   {/* <!-- // 페이지타이틀 --> */}
   
-{/*<iframe src="inc.bonus_auto.php" width={0} height={0} frameBorder={0} style={{display:'none'}}></iframe>*/}
+<iframe src="inc.bonus_auto.php" width={0} height={0} frameBorder={0} style={{display:'none'}}></iframe>
 
 {/* <!--<iframe src="inc.bonus_auto_test.php" width=100% height=100px frameborder=0></iframe>--> */}
 
@@ -45,7 +45,7 @@ const NewItem = () => {
 
 				<div style={{width:'300px', float:'left'}}>
 
-					<span style={{fontWeight:'bold',fontSize:'30px',textAlign:'left'}}>타입 : best</span>
+					<span style={{fontWeight:'bold',fontSize:'30px',textAlign:'left'}}>타입 : 신상품</span>
 				</div>
 
 	<form name='fsearch' method="post">
@@ -122,7 +122,7 @@ function handleStateChange() {
 
     <div className="btn_line_up_center">
 							<span className="shop_btn_pack btn_input_blue">
-                                <input type="button" className="input_medium" title="메인상품 추가하기" value="메인상품 추가하기" onClick={()=>{}}/></span>
+                                <input type="button" className="input_medium" title="신상품 추가하기" value="신상품 추가하기" onClick={()=>{router.push(PAGE_ROUTES.SHOP.ADD_TYPE)}}/></span>
 						</div>
 					</div>
 				</div>
@@ -191,141 +191,8 @@ function handleStateChange() {
 				<td>상시판매</td>
 			</tr>
 
-            <tr>
-			<td><input type='checkbox' name='chk_pcode[]' value='177' className='className_pcode'/></td>
-				 {/* <!--<td><input type=checkbox name='chk_pcode[]' value='S4986872' className=className_pcode></td>--> */}
-				<td><input type='text' name='chk_idx[S4986872]' value='1' className='input_text' style={{width:'30px'}} /></td>
-				<td>8</td>
-				<td style={{textAlign:'left', paddingLeft:'5px'}}><img src='http://thesen.moinus.kr/upfiles/product_t31/2311675546.jpg' style={{width:'150px'}}/></td>
-				<td style={{textAlign:'left', paddingLeft:'5px'}}>
-					[카테고리]<br/> &gt;  &gt; <br/><br/>
-					[상품코드] <b>S4986872</b><br/><br/>
-					[상품명] <b>코오롱프리미엄유산균</b>
-				</td>
-				<td>
-                    {/* <strike>58,000원</strike> */}
-                35,000원</td>
-				<td>상시판매</td>
-			</tr>
-            <tr>
-			<td><input type='checkbox' name='chk_pcode[]' value='177' className='className_pcode'/></td>
-				 {/* <!--<td><input type=checkbox name='chk_pcode[]' value='S4986872' className=className_pcode></td>--> */}
-				<td><input type='text' name='chk_idx[S4986872]' value='1' className='input_text' style={{width:'30px'}} /></td>
-				<td>8</td>
-				<td style={{textAlign:'left', paddingLeft:'5px'}}><img src='http://thesen.moinus.kr/upfiles/product_t31/2311675546.jpg' style={{width:'150px'}}/></td>
-				<td style={{textAlign:'left', paddingLeft:'5px'}}>
-					[카테고리]<br/> &gt;  &gt; <br/><br/>
-					[상품코드] <b>S4986872</b><br/><br/>
-					[상품명] <b>코오롱프리미엄유산균</b>
-				</td>
-				<td>
-                    {/* <strike>58,000원</strike> */}
-                35,000원</td>
-				<td>상시판매</td>
-			</tr>
 
-            <tr>
-			<td><input type='checkbox' name='chk_pcode[]' value='177' className='className_pcode'/></td>
-				 {/* <!--<td><input type=checkbox name='chk_pcode[]' value='S4986872' className=className_pcode></td>--> */}
-				<td><input type='text' name='chk_idx[S4986872]' value='1' className='input_text' style={{width:'30px'}} /></td>
-				<td>8</td>
-				<td style={{textAlign:'left', paddingLeft:'5px'}}><img src='http://thesen.moinus.kr/upfiles/product_t31/2311675546.jpg' style={{width:'150px'}}/></td>
-				<td style={{textAlign:'left', paddingLeft:'5px'}}>
-					[카테고리]<br/> &gt;  &gt; <br/><br/>
-					[상품코드] <b>S4986872</b><br/><br/>
-					[상품명] <b>코오롱프리미엄유산균</b>
-				</td>
-				<td>
-                    {/* <strike>58,000원</strike> */}
-                35,000원</td>
-				<td>상시판매</td>
-			</tr>
 
-            <tr>
-			<td><input type='checkbox' name='chk_pcode[]' value='177' className='className_pcode'/></td>
-				 {/* <!--<td><input type=checkbox name='chk_pcode[]' value='S4986872' className=className_pcode></td>--> */}
-				<td><input type='text' name='chk_idx[S4986872]' value='1' className='input_text' style={{width:'30px'}} /></td>
-				<td>8</td>
-				<td style={{textAlign:'left', paddingLeft:'5px'}}><img src='http://thesen.moinus.kr/upfiles/product_t31/2311675546.jpg' style={{width:'150px'}}/></td>
-				<td style={{textAlign:'left', paddingLeft:'5px'}}>
-					[카테고리]<br/> &gt;  &gt; <br/><br/>
-					[상품코드] <b>S4986872</b><br/><br/>
-					[상품명] <b>코오롱프리미엄유산균</b>
-				</td>
-				<td>
-                    {/* <strike>58,000원</strike> */}
-                35,000원</td>
-				<td>상시판매</td>
-			</tr>
-
-            <tr>
-			<td><input type='checkbox' name='chk_pcode[]' value='177' className='className_pcode'/></td>
-				 {/* <!--<td><input type=checkbox name='chk_pcode[]' value='S4986872' className=className_pcode></td>--> */}
-				<td><input type='text' name='chk_idx[S4986872]' value='1' className='input_text' style={{width:'30px'}} /></td>
-				<td>8</td>
-				<td style={{textAlign:'left', paddingLeft:'5px'}}><img src='http://thesen.moinus.kr/upfiles/product_t31/2311675546.jpg' style={{width:'150px'}}/></td>
-				<td style={{textAlign:'left', paddingLeft:'5px'}}>
-					[카테고리]<br/> &gt;  &gt; <br/><br/>
-					[상품코드] <b>S4986872</b><br/><br/>
-					[상품명] <b>코오롱프리미엄유산균</b>
-				</td>
-				<td>
-                    {/* <strike>58,000원</strike> */}
-                35,000원</td>
-				<td>상시판매</td>
-			</tr>
-
-            <tr>
-			<td><input type='checkbox' name='chk_pcode[]' value='177' className='className_pcode'/></td>
-				 {/* <!--<td><input type=checkbox name='chk_pcode[]' value='S4986872' className=className_pcode></td>--> */}
-				<td><input type='text' name='chk_idx[S4986872]' value='1' className='input_text' style={{width:'30px'}} /></td>
-				<td>8</td>
-				<td style={{textAlign:'left', paddingLeft:'5px'}}><img src='http://thesen.moinus.kr/upfiles/product_t31/2311675546.jpg' style={{width:'150px'}}/></td>
-				<td style={{textAlign:'left', paddingLeft:'5px'}}>
-					[카테고리]<br/> &gt;  &gt; <br/><br/>
-					[상품코드] <b>S4986872</b><br/><br/>
-					[상품명] <b>코오롱프리미엄유산균</b>
-				</td>
-				<td>
-                    {/* <strike>58,000원</strike> */}
-                35,000원</td>
-				<td>상시판매</td>
-			</tr>
-
-            <tr>
-			<td><input type='checkbox' name='chk_pcode[]' value='177' className='className_pcode'/></td>
-				 {/* <!--<td><input type=checkbox name='chk_pcode[]' value='S4986872' className=className_pcode></td>--> */}
-				<td><input type='text' name='chk_idx[S4986872]' value='1' className='input_text' style={{width:'30px'}} /></td>
-				<td>8</td>
-				<td style={{textAlign:'left', paddingLeft:'5px'}}><img src='http://thesen.moinus.kr/upfiles/product_t31/2311675546.jpg' style={{width:'150px'}}/></td>
-				<td style={{textAlign:'left', paddingLeft:'5px'}}>
-					[카테고리]<br/> &gt;  &gt; <br/><br/>
-					[상품코드] <b>S4986872</b><br/><br/>
-					[상품명] <b>코오롱프리미엄유산균</b>
-				</td>
-				<td>
-                    {/* <strike>58,000원</strike> */}
-                35,000원</td>
-				<td>상시판매</td>
-			</tr>
-
-            <tr>
-			<td><input type='checkbox' name='chk_pcode[]' value='177' className='className_pcode'/></td>
-				 {/* <!--<td><input type=checkbox name='chk_pcode[]' value='S4986872' className=className_pcode></td>--> */}
-				<td><input type='text' name='chk_idx[S4986872]' value='1' className='input_text' style={{width:'30px'}} /></td>
-				<td>8</td>
-				<td style={{textAlign:'left', paddingLeft:'5px'}}><img src='http://thesen.moinus.kr/upfiles/product_t31/2311675546.jpg' style={{width:'150px'}}/></td>
-				<td style={{textAlign:'left', paddingLeft:'5px'}}>
-					[카테고리]<br/> &gt;  &gt; <br/><br/>
-					[상품코드] <b>S4986872</b><br/><br/>
-					[상품명] <b>코오롱프리미엄유산균</b>
-				</td>
-				<td>
-                    {/* <strike>58,000원</strike> */}
-                35,000원</td>
-				<td>상시판매</td>
-			</tr>
- 
 								</tbody> 
 					</table>
 			</div>

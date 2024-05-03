@@ -51,11 +51,6 @@ export type CreatedAtType = {
     to?: string;
 }
 
-export type ProductType = {
-    from?: string;
-    to?: string;
-}
-
 export type OrderType = {
     id?: number;
     type: string;
@@ -208,4 +203,46 @@ export type CategoryListType = {
     depth?: number;
     parent?: number;
     asc?: boolean;
+}
+
+
+export type ProductType = {
+    id?: number;
+    name?: string;
+    isActive?: boolean;
+    sellType?: number;
+    startSellDate?: Date;
+    endSellDate?: Date;
+    code?: string;
+    customercode?: string;
+    isDeliveriable?: boolean;
+    price_origin?: number;
+    price_sell?: number;
+    price_provider?: number;
+    cardFee?: number;
+    vat?: number;
+    amountPV?: number;
+    pricePV?: number;
+    isDuplicatable?: boolean;
+    mileage?: number;
+    quantity?: number;
+    maxPerSell?: number;
+    soldQuantity?: number;
+    producer?: string;
+    origin?: string;
+    branch?: string;
+    shortDescription?: string;
+    useGuideInfo?: string;
+    prodGuideInfo?: string;
+    description?: string;
+    description_m?: string;
+    mainImg?: number;
+    listImg?: number;
+    thumbnailImg?: number;
+    extraImg1?: number;
+    extraImg2?: number;
+    extraImg3?: number;
+    extraImg4?: number;
+    extraImg5?: number;
+    catIds?: number[];
 }

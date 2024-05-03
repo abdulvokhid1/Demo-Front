@@ -6,14 +6,14 @@ import { Tree, TreeNode, TreeProps } from '../index';
 import exp from "node:constants";
 import { NodeContent } from "../components/nodeContent";
 
-export default {
-    title: 'Example/Tree',
-    component: Tree,
-    argTypes: {
-        label: {control: 'string'},
-        lineColor: {control: 'color'},
-    },
-} as Meta;
+// export default {
+//     title: 'Example/Tree',
+//     component: Tree,
+//     argTypes: {
+//         label: {control: 'string'},
+//         lineColor: {control: 'color'},
+//     },
+// } as Meta;
 
 export const Basic: StoryFn<TreeProps> = (args) => (
     // eslint-disable-next-line react/no-children-prop

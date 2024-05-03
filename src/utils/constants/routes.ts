@@ -42,6 +42,7 @@ const PAGE_ROUTES = {
    CATEGORY_UPDATE: '/admin/shop_manager/update_category',
    SHOP_CATEGORY_LIST:'/admin/shop_manager/category_list',
    PRODUCT_REGISTER: '/admin/shop_manager/product_register',
+   ADD_TYPE:'/admin/shop_manager/add_type',
  },
  STAT:{
   STAT_MANAGEMENT:'/admin/stats_manager/total_settlement_details',

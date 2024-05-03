@@ -32,11 +32,9 @@ export const API_ENDPOINTS = {
     CALCULATION_DETAIL_LIST: '/api/v1/deposit/calculation_detail_list',
     CONFIRM_CALCULATION: '/api/v1/deposit/confirm_calculation',
   },
-  PRODUCTMANAGE: {
-    GET_LIST: '/api/v1/product_manage/list',
-    REGISTRATION: '/api/v1/product_manage/update',
-    SET_MAIN_PRODUCT:'/api/v1/settingmainproduct/list',
-    SET_MAIN_PRODUCT_REG:'/api/v1/settingmainproduct/create',
+  PRODUCT: {
+    GET_LIST: '/api/v1/product/list',
+    CREATE: '/api/v1/product/create',
   },
 
   CATEGORY: {
@@ -113,6 +111,7 @@ export const API_ENDPOINTS = {
 
   UPLOAD: {
     UPLOAD_CATEGORY_FILE: '/api/v1/upload/upload_category',
+    UPLOAD_PRODUCT_FILE: '/api/v1/upload/upload_product',
   },
 
   RECORD: {

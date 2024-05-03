@@ -397,7 +397,7 @@ return (
 										<tr key={index}>
 											<td>
 												<input type="checkbox" className="class_id"
-													   ref={el => ckboxRef.current.push(el)}
+													   // ref={el => ckboxRef.current.push(el)}
 													   onChange={(e) => {
 														   if (e.target.checked) {
 															   const newUser = item.id || 0;
