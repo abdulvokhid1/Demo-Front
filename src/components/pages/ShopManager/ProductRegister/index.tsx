@@ -363,7 +363,7 @@ const ProductRegister = () => {
             description : description,
             catIds: catIdsState,
             mainImg: imageMainId,
-            listImgId: imageListId,
+            listImg: imageListId,
             extraImg1: imageExtraId1,
             extraImg2: imageExtraId2,
             extraImg3: imageExtraId3,

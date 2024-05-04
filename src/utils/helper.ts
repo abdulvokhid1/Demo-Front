@@ -3,6 +3,11 @@ import dayjs from 'dayjs'
 import moment from 'moment-timezone'
 import { jwtDecode } from "jwt-decode";
 let domain = process.env.NEXT_PUBLIC_API_URL_DEV
+if (typeof window !== 'undefined') {
+    if (process.env.NODE_ENV == 'production' && window.location.origin !== 'http://localhost:3001') {
+        domain = process.env.NEXT_PUBLIC_API_URL
+    }
+}
 
 
 export const LOCAL_TIME_ZONE = dayjs().utcOffset() / 60
