@@ -8,11 +8,11 @@ import { jwtDecode } from 'jwt-decode';
 // Please have a look at here `https://github.com/axios/axios#request-
 let domain = process.env.NEXT_PUBLIC_API_URL_DEV
 
-// if (typeof window !== 'undefined') {
-//   if (process.env.NODE_ENV == 'production' && window.location.origin !== 'https://cms_dev.rudemy.org') {
-//     domain = process.env.NEXT_PUBLIC_API_URL
-//   }
-// }
+if (typeof window !== 'undefined') {
+  if (process.env.NODE_ENV == 'production' && window.location.origin !== 'http://localhost:3001') {
+    domain = process.env.NEXT_PUBLIC_API_URL
+  }
+}
 const axiosClient = axios.create({
   baseURL: domain,
   timeout: 3000,
