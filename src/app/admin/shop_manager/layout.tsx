@@ -25,21 +25,17 @@ export default function UserLayout({
         import('bootstrap');
     }, []);
     return (
-        <html lang="en">
-        <Head>
-            <title>Rudemy</title>
-            {/*<link*/}
-            {/*    rel="stylesheet"*/}
-            {/*    href="/css/jquery-ui.min.css"*/}
-            {/*/>*/}
-        </Head>
-        <body style={{minWidth: '1260px'}}>
-        <div className="adm_loading_wrap">
-            <div className="adm_loading_box">
-                <div className="loading"></div>
-                <div className="iconimg"></div>
-            </div>
-        </div>
+        // <html lang="en">
+        // <Head>
+        //     <title>쇼핑머니 관리자</title>
+        // </Head>
+        // <body style={{minWidth: '1260px'}}>
+        // <div className="adm_loading_wrap">
+        //     <div className="adm_loading_box">
+        //         <div className="loading"></div>
+        //         <div className="iconimg"></div>
+        //     </div>
+        // </div>
         <div className="wrap" style={{background: '#fff'}}>
             <HeadElement/>
             <Navbar/>
@@ -53,7 +49,7 @@ export default function UserLayout({
                 <FooterElement/>
             </div>
         </div>
-        </body>
-        </html>
+        // </body>
+        // </html>
     )
 }

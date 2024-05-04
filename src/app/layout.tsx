@@ -7,7 +7,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "관리자 페이지",
+  title: "쇼핑머니 관리자",
   description: "관리자 페이지",
 };
 

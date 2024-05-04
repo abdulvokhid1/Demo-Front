@@ -8,6 +8,9 @@ export type ProductManageTypeProps = {
 }
 
 export type QueryType = {
+  id?: number
+  name?: string
+  code?: string
   page?: number
   limit?: number
 }

@@ -9,6 +9,8 @@ const ProductAPI = {
     // axiosClient.post(API_ENDPOINTS.USERS.GET_LIST, params),
   create: (params:  ProductType) =>
       axiosClient.post(API_ENDPOINTS.PRODUCT.CREATE, params),
+  update: (params:  ProductType) =>
+      axiosClient.post(API_ENDPOINTS.PRODUCT.UPDATE, params),
   getList: (params: QueryType) =>
     axiosClient.post(API_ENDPOINTS.PRODUCT.GET_LIST, params),
 }

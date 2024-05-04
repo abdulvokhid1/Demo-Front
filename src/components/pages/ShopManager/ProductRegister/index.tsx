@@ -362,6 +362,13 @@ const ProductRegister = () => {
             description_img_id: imageDescriptionId,
             description : description,
             catIds: catIdsState,
+            mainImg: imageMainId,
+            listImgId: imageListId,
+            extraImg1: imageExtraId1,
+            extraImg2: imageExtraId2,
+            extraImg3: imageExtraId3,
+            extraImg4: imageExtraId4,
+            extraImg5: imageExtraId5,
         }
 
         mutateProductCreate(params)
@@ -488,75 +495,79 @@ const ProductRegister = () => {
                                 </tr>
                                 <tr>
                                     <td className="article">상품분류<span className="ic_ess" title="필수"></span></td>
-                                    <div style={{float: 'left'}}>
-                                        1차분류 :
-                                        <select name='pass_cate01' id='pass_cate01'
-                                                onChange={(e) => {
-                                                    setDepth1State(Number(e.target.value))
-                                                    setDepth2State(0)
-                                                    setDepth3State(0)
-                                                    mutateCategoryList2({
-                                                        depth: 2,
-                                                        parent: Number(e.target.value),
-                                                    })
-                                                    setCategoryList3([])
-                                                }}>
-                                            <option value={0}>-선택-</option>
-                                            {categoryList1?.length && categoryList1.map((item, index) => (
-                                                <option key={index} value={item.id}>{item.name}</option>
-                                            ))}
-                                            {/*<option value='4'>Food</option>*/}
-                                            {/*<option value='3'>Hair Care</option>*/}
-                                            {/*<option value='1'>Skin Care & Body</option>*/}
-                                        </select>&nbsp;&nbsp;&nbsp;
-                                        2차분류 :
-                                        <select name='pass_cate02' id='pass_cate02' onChange={(e) => {
-                                            setDepth2State(Number(e.target.value))
-                                            setDepth3State(0)
-                                            mutateCategoryList3({
-                                                depth: 3,
-                                                parent: Number(e.target.value),
-                                            })
-                                        }}>
-                                            <option value={0}>-선택-</option>
-                                            {categoryList2?.length && categoryList2.map((item, index) => (
-                                                <option key={index} value={item.id}>{item.name}</option>
-                                            ))}
-                                        </select>&nbsp;&nbsp;&nbsp;
-                                        3차분류 :
-                                        <select name='pass_cate03'
-                                                onChange={(e) => {
-                                                    setDepth3State(Number(e.target.value))
-                                                }}
-                                        >
-                                            <option value={0}>-선택-</option>
-                                            {categoryList3?.length && categoryList3.map((item, index) => (
-                                                <option key={index} value={item.id}>{item.name}</option>
-                                            ))}
-                                        </select>
-                                    </div>
-                                    <div style={{float: 'left', paddingLeft: '10px'}}>
+                                    <td className="conts">
+                                        <div style={{float: 'left'}}>
+                                            1차분류 :
+                                            <select name='pass_cate01' id='pass_cate01'
+                                                    onChange={(e) => {
+                                                        setDepth1State(Number(e.target.value))
+                                                        setDepth2State(0)
+                                                        setDepth3State(0)
+                                                        mutateCategoryList2({
+                                                            depth: 2,
+                                                            parent: Number(e.target.value),
+                                                        })
+                                                        setCategoryList3([])
+                                                    }}>
+                                                <option value={0}>-선택-</option>
+                                                {categoryList1?.length && categoryList1.map((item, index) => (
+                                                    <option key={index} value={item.id}>{item.name}</option>
+                                                ))}
+                                                {/*<option value='4'>Food</option>*/}
+                                                {/*<option value='3'>Hair Care</option>*/}
+                                                {/*<option value='1'>Skin Care & Body</option>*/}
+                                            </select>&nbsp;&nbsp;&nbsp;
+                                            2차분류 :
+                                            <select name='pass_cate02' id='pass_cate02' onChange={(e) => {
+                                                setDepth2State(Number(e.target.value))
+                                                setDepth3State(0)
+                                                mutateCategoryList3({
+                                                    depth: 3,
+                                                    parent: Number(e.target.value),
+                                                })
+                                            }}>
+                                                <option value={0}>-선택-</option>
+                                                {categoryList2?.length && categoryList2.map((item, index) => (
+                                                    <option key={index} value={item.id}>{item.name}</option>
+                                                ))}
+                                            </select>&nbsp;&nbsp;&nbsp;
+                                            3차분류 :
+                                            <select name='pass_cate03'
+                                                    onChange={(e) => {
+                                                        setDepth3State(Number(e.target.value))
+                                                    }}
+                                            >
+                                                <option value={0}>-선택-</option>
+                                                {categoryList3?.length && categoryList3.map((item, index) => (
+                                                    <option key={index} value={item.id}>{item.name}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div style={{float: 'left', paddingLeft: '10px'}}>
                                         <span className="shop_btn_pack" style={{marginRight: '10px'}}>
-                                            <a href="#none" className="small blue" onClick={handleAddCat}>선택 카테고리추가</a>
+                                            <a href="#" className="small blue" onClick={handleAddCat}>선택 카테고리추가</a>
                                         </span>
-                                    </div>
+                                        </div>
 
-                                    <div style={{clear: 'both', paddingTop: '10px'}}></div>
-                                    <div id="_product_cateogry_list">
-                                        {catIdNameState && catIdNameState.map((item, index) => (
-                                            <div key={index} style={{clear:'both', width:'428px'}}>
-                                                <div style={{float:'left', padding:'6px'}}>
-                                                    <b>{item.name}</b>
+                                        <div style={{clear: 'both', paddingTop: '10px'}}></div>
+                                        <div id="_product_cateogry_list">
+                                            {catIdNameState && catIdNameState.map((item, index) => (
+                                                <div key={index} style={{clear: 'both', width: '428px'}}>
+                                                    <div style={{float: 'left', padding: '6px'}}>
+                                                        <b>{item.name}</b>
+                                                    </div>
+                                                    <div style={{float: 'right'}}>
+                                                    <span className="shop_btn_pack" style={{marginRight: '10px'}}><a
+                                                        href="#" className="small blue"
+                                                        onClick={() => {
+                                                            handleDelCat(item.id)
+                                                        }}>삭제</a></span>
+                                                    </div>
                                                 </div>
-                                                <div style={{float:'right'}}>
-                                                    <span className="shop_btn_pack" style={{marginRight:'10px'}}><a
-                                                        href="#none" className="small blue"
-                                                        onClick={()=>{handleDelCat(item.id)}}>삭제</a></span>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <div style={{clear: 'both', paddingBottom: '5px'}}></div>
+                                            ))}
+                                        </div>
+                                        <div style={{clear: 'both', paddingBottom: '5px'}}></div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td className="article">
@@ -701,7 +712,9 @@ const ProductRegister = () => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td className="article">판매가격<span className="ic_ess" title="필수"></span></td>
+                                    <td className="article">
+                                        판매가격<span className="ic_ess" title="필수"></span>
+                                    </td>
                                     <td className="conts">
                                         <input type="text" name="price" className="input_text number_style zex"
                                                size={10} style={{textAlign: 'right'}} /> 원
@@ -736,26 +749,26 @@ const ProductRegister = () => {
                                 {/*    </td>*/}
                                 {/*</tr>*/}
 
-                                <tr>
-                                    <td className="article">부가세<span className="ic_ess" title="필수"></span></td>
-                                    <td className="conts">
-                                        <input type="text" name="charge_vat_per" className="input_text" size={3}
-                                               style={{textAlign: 'right'}} value={"10"}/> %
-                                        <span className='shop_btn_pack' style={{float: 'none'}}>
-                                            <input type="button"
-                                                   id="charge_vat_per_calc"
-                                                   className="input_small gray"
-                                                   style={{cursor: 'pointer'}}
-                                                   value="자동계산"/>
-                                        </span>&nbsp;
-                                        <input type="text" name="charge_vat_cur"
-                                               className="input_text number_style zex_charge_vat" size={10}
-                                               style={{textAlign: 'right'}} value={"2000"}/> 원 (판매가격 * 10%)
-                                        <span id='cur_text_charge_vat'></span>
-                                        <input type="hidden" name="charge_vat" />
-                                        <input type="hidden" name="charge_vat_exchange_pv"/>
-                                    </td>
-                                </tr>
+                                {/*<tr>*/}
+                                {/*    <td className="article">부가세<span className="ic_ess" title="필수"></span></td>*/}
+                                {/*    <td className="conts">*/}
+                                {/*        <input type="text" name="charge_vat_per" className="input_text" size={3}*/}
+                                {/*               style={{textAlign: 'right'}} value={"10"}/> %*/}
+                                {/*        <span className='shop_btn_pack' style={{float: 'none'}}>*/}
+                                {/*            <input type="button"*/}
+                                {/*                   id="charge_vat_per_calc"*/}
+                                {/*                   className="input_small gray"*/}
+                                {/*                   style={{cursor: 'pointer'}}*/}
+                                {/*                   value="자동계산"/>*/}
+                                {/*        </span>&nbsp;*/}
+                                {/*        <input type="text" name="charge_vat_cur"*/}
+                                {/*               className="input_text number_style zex_charge_vat" size={10}*/}
+                                {/*               style={{textAlign: 'right'}} value={"2000"}/> 원 (판매가격 * 10%)*/}
+                                {/*        <span id='cur_text_charge_vat'></span>*/}
+                                {/*        <input type="hidden" name="charge_vat" />*/}
+                                {/*        <input type="hidden" name="charge_vat_exchange_pv"/>*/}
+                                {/*    </td>*/}
+                                {/*</tr>*/}
                                 {/*<tr>*/}
                                 {/*    <td className="article">PV공제금액</td>*/}
                                 {/*    <td className="conts">*/}
@@ -789,20 +802,20 @@ const ProductRegister = () => {
                                 {/*        </script>*/}
                                 {/*    </td>*/}
                                 {/*</tr>*/}
-                                <tr>
-                                    <td className="article">할인율<span className="ic_ess" title="필수"></span></td>
-                                    <td className="conts">
-                                        <input type="text" name="price_per" className="input_text number_style" size={3}
-                                               style={{textAlign: 'right'}} /> %
-                                        <span className='shop_btn_pack' style={{float: 'none'}}>
-                                            <input type="button"
-                                                   id="price_per_calc"
-                                                   className="input_small gray"
-                                                   style={{cursor: 'pointer'}}
-                                                   value="자동계산"/>
-                                        </span>
-                                    </td>
-                                </tr>
+                                {/*<tr>*/}
+                                {/*    <td className="article">할인율<span className="ic_ess" title="필수"></span></td>*/}
+                                {/*    <td className="conts">*/}
+                                {/*        <input type="text" name="price_per" className="input_text number_style" size={3}*/}
+                                {/*               style={{textAlign: 'right'}} /> %*/}
+                                {/*        <span className='shop_btn_pack' style={{float: 'none'}}>*/}
+                                {/*            <input type="button"*/}
+                                {/*                   id="price_per_calc"*/}
+                                {/*                   className="input_small gray"*/}
+                                {/*                   style={{cursor: 'pointer'}}*/}
+                                {/*                   value="자동계산"/>*/}
+                                {/*        </span>*/}
+                                {/*    </td>*/}
+                                {/*</tr>*/}
 
                                 {/*<tr>*/}
                                 {/*    <td className="article">옵션타이틀</td>*/}
@@ -1046,7 +1059,7 @@ const ProductRegister = () => {
                                             </label>
                                         </span>&nbsp;&nbsp;&nbsp;<br/><br/>
                                         {isMethodImageUpload? (
-                                            <td className="conts" style={{paddingBottom:'10px'}} >
+                                            <div className="conts" style={{paddingBottom:'10px'}} >
                                                 <div><img src='' id='img_main_img' style={{
                                                     maxWidth: '300px',
                                                     marginBottom: '5px',
@@ -1058,7 +1071,7 @@ const ProductRegister = () => {
                                                            onChange={handleImageUserGuide}
                                                     />
                                                 </div>
-                                            </td>
+                                            </div>
                                         )
                                             :
                                             (
@@ -1104,7 +1117,7 @@ const ProductRegister = () => {
                                         {/*<textarea name="comment_useinfo" className="input_text"*/}
                                         {/*          style={{width: '100%', height: '150px'}}></textarea>*/}
                                         {isProdImageUpload? (
-                                                <td className="conts" style={{paddingBottom:'10px'}} >
+                                                <div className="conts" style={{paddingBottom:'10px'}} >
                                                     <div><img src='' id='img_main_img' style={{
                                                         maxWidth: '300px',
                                                         marginBottom: '5px',
@@ -1116,7 +1129,7 @@ const ProductRegister = () => {
                                                                onChange={handleImageProdGuide}
                                                         />
                                                     </div>
-                                                </td>
+                                                </div>
                                             )
                                             :
                                             (
@@ -1165,7 +1178,7 @@ const ProductRegister = () => {
                                         {/*<textarea name="comment_useinfo" className="input_text"*/}
                                         {/*          style={{width: '100%', height: '150px'}}></textarea>*/}
                                         {isDetailImageUpload? (
-                                                <td className="conts" style={{paddingBottom:'10px'}} >
+                                                <div className="conts" style={{paddingBottom:'10px'}} >
                                                     <div><img src='' id='img_main_img' style={{
                                                         maxWidth: '300px',
                                                         marginBottom: '5px',
@@ -1177,7 +1190,7 @@ const ProductRegister = () => {
                                                                onChange={handleImageDescription}
                                                         />
                                                     </div>
-                                                </td>
+                                                </div>
                                             )
                                             :
                                             (
@@ -1235,7 +1248,7 @@ const ProductRegister = () => {
                                             className='blue'>크기 : 500 x 500</span></div>
                                     </td>
                                     <td className="conts">
-                                        <div style={{}}><img src='' id='img_main_img' style={{
+                                        <div><img src='' id='img_main_img' style={{
                                             maxWidth: '300px',
                                             marginBottom: '5px',
                                             display: 'none'
@@ -1243,6 +1256,7 @@ const ProductRegister = () => {
                                         <div>
                                             <input type='file' name='main_img' size={20}
                                                    className='input_text'
+                                                   style={{height:'30px'}}
                                                    onChange={handleImageMain}
                                             />
                                         </div>
@@ -1275,6 +1289,7 @@ const ProductRegister = () => {
                                         <div>
                                             <input type='file' name='prolist_img' size={20}
                                                    className='input_text'
+                                                   style={{height:'30px'}}
                                                    onChange={handleImageList}
                                             />
                                         </div>
@@ -1356,6 +1371,7 @@ const ProductRegister = () => {
                                         <div>
                                             <input type='file' name='main_img_sub1' size={20}
                                                    className='input_text file'
+                                                   style={{height:'30px'}}
                                                    onChange={handleImageExtra1}
                                             />
                                         </div>
@@ -1377,6 +1393,7 @@ const ProductRegister = () => {
                                         <div>
                                             <input type='file' name='main_img_sub2' size={20}
                                                    className='input_text file'
+                                                   style={{height:'30px'}}
                                                    onChange={handleImageExtra2}
                                             />
                                         </div>
@@ -1398,6 +1415,7 @@ const ProductRegister = () => {
                                         <div>
                                             <input type='file' name='main_img_sub3' size={20}
                                                    className='input_text file'
+                                                   style={{height:'30px'}}
                                                    onChange={handleImageExtra3}
                                             />
                                         </div>
@@ -1419,6 +1437,7 @@ const ProductRegister = () => {
                                         <div>
                                             <input type='file' name='main_img_sub4' size={20}
                                                    className='input_text file'
+                                                   style={{height:'30px'}}
                                                    onChange={handleImageExtra4}
                                             />
                                         </div>
@@ -1439,6 +1458,7 @@ const ProductRegister = () => {
                                         <div>
                                             <input type='file' name='main_img_sub5' size={20}
                                                    className='input_text file'
+                                                   style={{height:'30px'}}
                                                    onChange={handleImageExtra5}
                                             />
                                         </div>
@@ -1462,8 +1482,7 @@ const ProductRegister = () => {
                                 <span className="shop_btn_pack">
                                     <input type="submit" name="" className="input_large red" value="등록하기"/>  &nbsp;
                                     <input type="button" name="" className="input_large gray"
-                                           value="목록보기" onClick={() => {
-                                    }}/>
+                                           value="목록보기" onClick={() => {router.push(PAGE_ROUTES.SHOP.SHOP_PRODUCT_MANAGEMENT)}}/>
                                 </span>
                             </div>
                         </div>
