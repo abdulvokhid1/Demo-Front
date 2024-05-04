@@ -21,7 +21,7 @@ const ShopProductManagement = () => {
     const router = useRouter();
     let domain = process.env.NEXT_PUBLIC_API_URL_DEV
     if (typeof window !== 'undefined') {
-        if (process.env.NODE_ENV == 'production' && window.location.origin !== 'https://쇼핑머니.com') {
+        if (process.env.NODE_ENV == 'production') {
             domain = process.env.NEXT_PUBLIC_API_URL
         }
     }
