@@ -22,9 +22,9 @@ const Slider = () => {
                   onClick={()=> itemClickedHandler(0)}>정산완료 전체내역</Link>
             <Link key={1} href="PerformanceOfRecomenship" className={selectedKey==1? "menu_on": "menu"} title="판매 인센티브" style={{display: 'block'}}
                   onClick={()=> itemClickedHandler(1)}>회원실적 추천</Link>
-            {/* <Link href="PerformanceOfSponsorship" className="menu" title="판매 인센티브" style={{display: 'block'}}>회원실적 후원</Link> */}
-            {/* <Link href="DistributionLimitProcessingStatistics" className="menu" title="판매 인센티브" style={{display: 'block'}}>배당한도 처리통계</Link> */}
-            {/* <Link href="SettlementPaymentStatistics" className="menu" title="판매 인센티브" style={{display: 'block'}}>정산지급 통계</Link> */}
+            <Link href="PerformanceOfSponsorship" className="menu" title="판매 인센티브" style={{display: 'block'}}>회원실적 후원</Link>
+            <Link href="DistributionLimitProcessingStatistics" className="menu" title="판매 인센티브" style={{display: 'block'}}>배당한도 처리통계</Link>
+            <Link href="SettlementPaymentStatistics" className="menu" title="판매 인센티브" style={{display: 'block'}}>정산지급 통계</Link>
            
             {/*<div className="favorite_menu">*/}
             {/*    <Link className="title" title="즐겨찾는메뉴설정" href="_favmenu.form.php"></Link>*/}

@@ -25,7 +25,7 @@ const SalesIncentives = () => {
                   <div className ="title_area">
                     <span className ="icon"></span>
                     <span className ="title">
-						판매수당					
+						일 매출 체크!					
 					</span>
                     <span className ="location">홈 &gt; 전산관리 &gt; 수당2</span>
                   </div>
@@ -58,7 +58,7 @@ const SalesIncentives = () => {
 					<td className ="conts" colSpan={10}>
 
 			<select name="sh_year" id="sh_year" onChange={()=>{}} >
-				<option  value='2021'>2021년</option><option  value='2022'>2022년</option><option  value='2023'>2023년</option><option  selected={true} value='2024'>2024년</option>			</select>
+				<option  selected={true} value='2024'>2024년</option></select>
 
 			<select name="sh_month" id="sh_month" onChange={()=>{}} >
 				<option  value='01'>01월</option><option  value='02'>02월</option><option  selected={true} value='03'>03월</option><option  value='04'>04월</option><option  value='05'>05월</option><option  value='06'>06월</option><option  value='07'>07월</option><option  value='08'>08월</option><option  value='09'>09월</option><option  value='10'>10월</option><option  value='11'>11월</option><option  value='12'>12월</option>			</select>
@@ -164,13 +164,10 @@ const SalesIncentives = () => {
 
 						<tr style={{height:'50px align: center'}}>
 							<th scope="col" className ="colorset">번호</th>
-							<th scope="col" className ="colorset">(일마감)</th>
 							<th scope="col" className ="colorset">매출ID</th>
 							<th scope="col" className ="colorset">레벨</th>
 							<th scope="col" className ="colorset">구매금액</th>
-							<th scope="col" className ="colorset">비고</th>
-							<th scope="col" className ="colorset">적용ID</th>
-							<th scope="col" className ="colorset">추천(전/후)</th>
+							{/* <th scope="col" className ="colorset">추천(전/후)</th> */}
 							<th scope="col" className ="colorset">적용%</th>
 							<th scope="col" className ="colorset">적용금액</th>
 							<th scope="col" className ="colorset">조직도</th>
@@ -185,8 +182,7 @@ const SalesIncentives = () => {
 	<div className ="content_section_inner" style={{border:'0px',background:'#6ab9eef',margin:'0px',padding:'0px'}}>
 
 		<table className ="list_TB" summary="리스트기본" style={{border:'0px',background:'#6ab9eef'}}>
-			<tr>
-
+			{/* <tr>
 				<td className ="new_order_data_foot" style={{background:'#6ab9eef'}}>
 					<div className ="inner_sum_box">
 						<ul>
@@ -194,7 +190,20 @@ const SalesIncentives = () => {
 						</ul>
 					</div>				
 				</td>
-			</tr>
+			</tr> */}
+
+			<tr>
+				<td width="100%" height="50" align="center">
+					<input className="pay_drapt" type="image" src="/images/btn_pay_drapt.gif"/>
+					<div style={{display:'none'}}>
+						<span>
+							<label>
+								<input type="checkbox" name="agree" className="bonus_hidden_chkbox hidde_pay_drapt"/>
+								</label>
+								</span>
+								</div>
+						</td>
+	</tr>
 		</table>
 	</div>
 	</div>
@@ -234,19 +243,15 @@ const SalesIncentives = () => {
 
 		<div className ="content_section_inner">
 
-				<div className ="top_btn_area">
-			{/* <!--<span className ="shop_btn_pack"><a href="./calcu/calcu_bonus2_xls.php?code=" className ="small white" />엑셀다운로드</a></span>--> */}
+		{/* <div className ="top_btn_area">
+		
 			<span className ="shop_btn_pack pay_drapt" ><a onClick={()=>{}} className ="large red" >정산완료</a></span>
 			<span className ="shop_btn_pack pay_drapt" ><span className ="blank_3"></span></span>
 			<span className ="shop_btn_pack pay_drapt" ><span className ="blank_3"></span></span>
 			<span className ="shop_btn_pack"><a href="javascript:select_send('excel_center');" className ="large white" title="선택엑셀저장" >선택엑셀저장</a></span>
-{/* <!--
-			<span className ="shop_btn_pack"><span className ="blank_3"></span></span>
-			<span className ="shop_btn_pack"><span className ="blank_3"></span></span>
-			<span className ="shop_btn_pack"><a onclick="btn_check('cancel_select')" className ="small white" />선택 마감취소</a></span>
---> */}
-		</div>
-					<table className ="list_TB" summary="리스트기본">
+
+		</div> */}
+					{/* <table className ="list_TB" summary="리스트기본">
 						<thead>
 							<tr  style={{height:'50px align: center'}}>
 								<th scope="col" className ="colorset"><input type='checkbox' name='chkall' value="1" onClick={()=>{}}/></th>
@@ -271,9 +276,7 @@ const SalesIncentives = () => {
 		<tr><td height={50} colSpan={20} align='center' >내역이 없습니다.</td></tr>
 	 	</tbody>
 	
-
-
-					
+		
 						<tfoot>
 							<tr>
 								<td colSpan={20} style={{height:'20px'}}>
@@ -294,9 +297,8 @@ const SalesIncentives = () => {
 								</td>
 							</tr>
 						</tfoot>
-                        </table>
-							</div>
-
+                        </table> */}
+					</div>
 
 	<table width='100%' cellPadding={0} cellSpacing={0} style={{marginTop:'10px'}}>
 	<tr>
@@ -309,9 +311,7 @@ const SalesIncentives = () => {
 		<td width='50%' align="right"></td>
 	</tr>
 	</table>
-
 	</form>
-
 </div>
 </div>
 </div>

@@ -8,7 +8,7 @@ const HeaderElement = () => {
          <div className="header" style={{background: '#eaeaea'}}>
             
             <a href={'/admin'} className="logo" style={{color: '#353c43'}}>
-                <span className="name" style={{color: '#353c43'}}>Shopping Money</span>
+                <span className="name" style={{color: '#353c43'}}> (주) *** 회사 </span>
                 <span className="en" style={{color: '#353c43'}}>Admin</span>
             </a>
             {/* <div className="today">

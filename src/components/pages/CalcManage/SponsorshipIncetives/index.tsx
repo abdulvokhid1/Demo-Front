@@ -117,6 +117,7 @@ const SponsorshipIncetives = () => {
 				</td>
 			</tr>
 		</thead> 
+		
 	</table>
 </div>
 			

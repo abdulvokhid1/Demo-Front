@@ -1,15 +1,16 @@
-import * as React from 'react';
-import { css } from '@emotion/css';
+import * as React from "react";
+import { css } from "@emotion/css";
 
-import TreeNode, { TreeNodeProps } from './TreeNode';
+import TreeNode, { TreeNodeProps } from "./TreeNode";
+import { SponsorResponseType } from "@/services/api/users/type";
 
-type LineStyle = 'dashed' | 'dotted' | 'double' | 'solid' | string;
+type LineStyle = "dashed" | "dotted" | "double" | "solid" | string;
 
 export interface TreeProps {
   /**
    * The root label
    * */
-  label: TreeNodeProps['label'];
+  label: TreeNodeProps["label"];
   /**
    * The height of the line
    */
@@ -25,7 +26,7 @@ export interface TreeProps {
   /**
    * The line style for the tree
    */
-  lineStyle?: 'dashed' | 'dotted' | 'double' | 'solid' | string;
+  lineStyle?: "dashed" | "dotted" | "double" | "solid" | string;
   /**
    * The border radius of the line
    */
@@ -34,7 +35,8 @@ export interface TreeProps {
    * The padding between siblings
    */
   nodePadding?: string;
-  children: TreeNodeProps['children'];
+  children: TreeNodeProps["children"];
+  data?: SponsorResponseType[];
 }
 
 /**
@@ -43,12 +45,12 @@ export interface TreeProps {
 export const Tree = ({
   children,
   label,
-  lineHeight = '20px',
-  lineWidth = '1px',
-  lineColor = 'white',
-  nodePadding = '5px',
-  lineStyle = 'solid',
-  lineBorderRadius = '5px',
+  lineHeight = "20px",
+  lineWidth = "1px",
+  lineColor = "white",
+  nodePadding = "5px",
+  lineStyle = "solid",
+  lineBorderRadius = "5px",
 }: TreeProps) => {
   return (
     <ul
@@ -71,11 +73,11 @@ export const Tree = ({
       //   --tree-node-line-style: solid;
       //   --tree-node-padding: 5px;
       // `}
-        className='treeNode'
+      className="treeNode"
     >
       <TreeNode label={label}>{children}</TreeNode>
     </ul>
   );
-}
+};
 
 export default Tree;

@@ -1,5 +1,7 @@
 'use client'
 import dynamic from 'next/dynamic'
+import { ToastContent, toast, ToastContainer, Bounce, Slide } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
 
 const ReactQuill = dynamic(() => import("react-quill"), {ssr: false});
 import 'react-quill/dist/quill.snow.css';
@@ -19,6 +21,7 @@ import { hasSpecialCharacters, uploadImageFile } from "@/utils/helper";
 import { API_ENDPOINTS } from "@/services/api/endPoint";
 import Product_API from "@/services/api/productmd";
 import ProductAPI from "@/services/api/productmd";
+import routes from "@/utils/constants/routes";
 
 const ProductRegister = () => {
     const router = useRouter();
@@ -101,7 +104,19 @@ const ProductRegister = () => {
         {
             mutationFn: ProductAPI.create,
             onSuccess: async (values: any) => {
-                console.log('success')
+                // console.log('success')
+                toast.success('상품등록성공', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    // transition: {Bounce},
+                });
+                router.refresh()
             },
 
             onError: (error: any) => {
@@ -375,6 +390,7 @@ const ProductRegister = () => {
 
 
     }
+    // @ts-ignore
     return (
         <div className={sliderVisible ? "container" : "container_hide"} id="depth2_leftmenu"
              style={{background: "#f0f0f0"}}>
@@ -1490,6 +1506,7 @@ const ProductRegister = () => {
                     </form>
                 </div>
             </div>
+            <ToastContainer/>
         </div>
     )
 }

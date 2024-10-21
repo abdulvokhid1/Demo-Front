@@ -19,6 +19,7 @@ const Performance_of_recomenship = () => {
     const [perPage, setPerPage] = useState<number>(2)
     const [recommendation, setRecommendation] = useState<RecommendationType>()
     const setSelectedKey = useSetRecoilState(statSelectedKey)
+    
     const {mutate: mutateLevel} = useMutation(
         {
             mutationFn: USER_API.getList,
@@ -131,14 +132,7 @@ const Performance_of_recomenship = () => {
                                                className='input_text'/>
                                     </td>
 
-                                    <td className="article">금액</td>
-                                    <td className="conts">
-                                        <input type='text' name='s_total_pv' style={{width: '70px'}} value=""
-                                               className='input_text'/>
-                                        ~
-                                        <input type='text' name='d_total_pv' style={{width: '69px'}} value=""
-                                               className='input_text'/>
-                                    </td>
+                                 
                                     <td className="article">기간</td>
                                     <td className="conts" colSpan={3}>
 

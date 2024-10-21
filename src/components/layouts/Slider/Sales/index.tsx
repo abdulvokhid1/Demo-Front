@@ -24,7 +24,7 @@ const Slider = () => {
                   onClick={()=> itemClickedHandler(0)}>매출등록</Link>
             <Link key={1} href={PAGE_ROUTES.SALES_MANAGEMENT.CENTER_MANAGEMENT}
                className={selectedKey==1? "menu_on": "menu"} title="센터등록 관리" style={{display: 'block'}}
-                  onClick={()=> itemClickedHandler(1)}>대리점등록</Link>
+                  onClick={()=> itemClickedHandler(1)}>지점등록</Link>
                   <span style={{backgroundColor: '#eaf8f5'}}>신청업무 관리<span>〓</span></span>
             <Link key={2} href="PurchaseRequest" className={selectedKey==2? "menu_on": "menu"} title="입금신청" style={{display: 'block'}}
                   onClick={()=> itemClickedHandler(2)}>구매신청</Link>

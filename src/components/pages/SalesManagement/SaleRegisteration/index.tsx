@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useMutation } from "@tanstack/react-query";
 import LEVEL_API from "@/services/api/levels";
 import PAGE_ROUTES from "@/utils/constants/routes";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import SALEREGISTER_API from "@/services/api/saleregister";
 import noop from "noop-ts";
 import { useSetRecoilState } from "recoil";
@@ -18,8 +18,9 @@ type IdNameStateType = {
     name: string;
 }
 
-const SaleRegisteration = () => {
+const SaleRegistration = () => {
     const router = useRouter();
+    const searchParams = useSearchParams()
     const [sliderVisible, setSliderVisible] = useState(true)
     const [startDate, setStartDate] = useState(new Date());
     const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
@@ -28,6 +29,8 @@ const SaleRegisteration = () => {
     const [isConfirmed, setIsConfirmed] = useState<boolean>(false)
     const [isRewarded, setIsRewarded] = useState<boolean>(false)
     const [userListState, setUserListState] = useState<number[]>([])
+    const [hiddenIdState, setHiddenIdState] = useState<string>()
+    const [nameState, setNameState] = useState<string>()
     const setSelectedKey = useSetRecoilState(saleSelectedKey)
 
     const {mutate: mutateSaleRegistration} = useMutation(
@@ -47,6 +50,19 @@ const SaleRegisteration = () => {
 
     useEffect(() => {
         setSelectedKey(0)
+    }, []);
+    useEffect(() => {
+        const id = searchParams.get("id") || undefined;
+        const name = searchParams.get("name") || undefined;
+        setUserListState([Number(id)])
+        setHiddenIdState(id)
+        setNameState(name)
+        // window.onload((e) =>{
+        //     const userid_hidden = window.document.getElementById('userid_hidden')
+        //     // @ts-ignore
+        //     userid_hidden.value = id;
+        // })
+        // mutate({ id:Number(id), page: currentPage, limit: perPage });
     }, []);
     const sliderToggle = () => {
         setSliderVisible(!sliderVisible);
@@ -359,9 +375,12 @@ const SaleRegisteration = () => {
                                             </span><br/>
                                             <input type="hidden" id='userid_hidden' name="userid_hidden" size={30}
                                                    className="input_text"
+                                                   defaultValue={hiddenIdState}
                                             />
                                             <textarea name="pointIDArray" id="pointIDArray" className="input_text"
-                                                      style={{width: '100%', height: '100px'}} readOnly>
+                                                      style={{width: '100%', height: '100px'}}
+                                                      defaultValue={nameState}
+                                                      readOnly>
                                             </textarea>
                                             <div className='guide_text'><span className='ic_blue'></span><span
                                                 className='blue'>유저검색 버튼을 눌러서 매출등록 아이디를 추가해주세요.</span></div>
@@ -407,4 +426,4 @@ const SaleRegisteration = () => {
     )
 }
 
-export default SaleRegisteration;
+export default SaleRegistration;

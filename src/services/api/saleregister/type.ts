@@ -9,6 +9,12 @@ export type QueryType = {
   limit?: number
 }
 
+export type QueryGetListByUserIdType = {
+  id?: number
+  page?: number
+  limit?: number
+}
+
 export type ConfirmType = {
   type: number
   list: number[]

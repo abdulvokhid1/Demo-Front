@@ -273,7 +273,7 @@ const RecommenIncentives = () => {
                     <div className="title_area">
                         <span className="icon"></span>
                         <span className="title">
-						대리점 수당		
+						추천 수당		
 					</span>
                         <span className="location">홈 &gt; 전산관리 &gt; 수당2</span>
                     </div>
@@ -374,7 +374,7 @@ const RecommenIncentives = () => {
                                 <thead>
                                 <tr style={{height: '50px align: center'}}>
                                     <th scope="col" className="colorset">번호</th>
-                                    <th scope="col" className="colorset">(일마감)</th>
+                                    {/* <th scope="col" className="colorset">(일마감)</th> */}
                                     <th scope="col" className="colorset">취득자</th>
                                     <th scope="col" className="colorset">아이디</th>
                                     <th scope="col" className="colorset">레벨</th>
@@ -418,23 +418,24 @@ const RecommenIncentives = () => {
 
                                 <table className="list_TB" summary="리스트기본"
                                        style={{border: '0px', background: '#6ab9eef'}}>
-                                    <tr>
-
-                                        <td className="new_order_data_foot" style={{background: '#6ab9eef'}}>
-                                            <div className="inner_sum_box">
-                                                <ul>
-                                                    <li className="txt">전체 합계 <span className="value">
-                                                        {totalRewardAmountState}
-                                                        &nbsp;원 </span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                        <td width="100%" height="50" align="center">
+					<input className="pay_drapt" type="image" src="/images/btn_pay_drapt.gif"/>
+					
+                    <div style={{display:'none'}}>
+						<span>
+							<label>
+								<input type="checkbox" name="agree" className="bonus_hidden_chkbox hidde_pay_drapt"/>
+								</label>
+								</span>
+								</div>
+						</td>
+                   
                                 </table>
                             </div>
                         </div>
                     </form>
+
+
                     <div className="content_section_inner">
 
                         <table className="list_TB" summary="리스트기본" style={{borderTop:'none'}}>
@@ -597,21 +598,11 @@ const RecommenIncentives = () => {
                                                 {/*</td>*/}
                                                 <td className="f_list1">{index+1}</td>
                                                 <td className="f_listb">{calculationConfirmListState[item].name}</td>
-
-
                                                 <td className="f_list1"><a onClick={()=>{}}><b>{calculationConfirmListState[item].memberId}</b></a></td>
-
                                                 <td className="f_list1">{calculationConfirmListState[item].levelTitle}</td>
                                                 <td className="f_lists">{calculationConfirmListState[item].rewardAmount}</td>
                                                 <td className="f_lists">{calculationConfirmListState[item].rewardAmount * 3.3/100}</td>
-
-
-
                                                 <td className="f_listr">{calculationConfirmListState[item].rewardAmount * (1-3.3/100)}</td>
-
-
-
-
                                                 <td className="f_listl" style={{fontSize:'11px',letterSpacing:'-0.3px',wordSpacing:'-2px'}}>
                                                     <br/>
                                                 </td>

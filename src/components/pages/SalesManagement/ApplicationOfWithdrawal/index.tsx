@@ -231,11 +231,11 @@ const ApplicationOfWithdrawal = () => {
 
                             {/* <!-- 리스트 제어버튼영역 //--> */}
 
-                            <div className="ctl_btn_area">
+                            {/* <div className="ctl_btn_area">
                                 <span className="shop_btn_pack"><a href="javascript:select_send('delete');"
                                                                    className="small white"
                                                                    title="선택포인트삭제">선택포인트삭제</a></span>
-                            </div>
+                            </div> */}
                             {/* <!-- // 리스트 제어버튼영역 --> */}
                             {/* <!-- 리스트 제어버튼영역 //--> */}
 

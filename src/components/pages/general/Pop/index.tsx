@@ -3,15 +3,23 @@ import Slider  from '@/components/layouts/Slider/general';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from "recoil";
 import { generalSelectedKey } from "@/services/recoil/selectedKey";
+import ReactPaginate from 'react-paginate';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
+
 const Pop = () => {
     const [sliderVisible, setSliderVisible] = useState(true)
+	const [currentPage, setCurrentPage] = useState<number>(1);
+const [totalUsers, setTotalUsers] = useState<number>(0)
+const [perPage, setPerPage] = useState<number>(10)
 	const setSelectedKey = useSetRecoilState(generalSelectedKey)
 	useEffect(() => {
 		setSelectedKey(2)
     }, []);
-    const sliderToggle = () => {
+	const sliderToggle = () => {
     setSliderVisible(!sliderVisible);
-    }
+	}
+	
   
     return(
         <div className={sliderVisible ? "container" : "container_hide" } id="depth2_leftmenu" 
@@ -102,25 +110,30 @@ const Pop = () => {
 							</tr>
 						</thead> 
 						<tbody> 
-
-
             <tr>
                 <td colSpan={10} height="40">내용이 없습니다.</td></tr>
 						</tbody> 
 					</table>
+{/* 
+					<div style={{display:'flex', alignItems:'center', justifyContent:'center' ,margin:'0 auto'}}>
+                        <ReactPaginate
+                            previousLabel={<FontAwesomeIcon icon={faArrowAltCircleLeft}/>}
+                            nextLabel={<FontAwesomeIcon icon={faArrowAltCircleRight}/>}
+                            breakLabel={'...'}
+                            breakClassName={'break-me'}
+                            activeClassName={'active'}
+                            containerClassName={'pagination'}
+                            // subContainerClassName={'pages pagination'}
 
-					{/* <!-- 페이지네이트 --> */}
-					<div className="list_paginate">			
-							<span className="lineup"><span className="nextprev"><span className="btn">
-                            <span className="no"><span className="icon ic_first"></span>
-                            </span><a href=" ?pass_menu=&amp;&amp;listpg=1" className="ok" title="처음">
-                            <span className="icon ic_first"></span></a></span><span className="btn"><span className="no"><span className="icon ic_prev"></span></span><a href=" ?pass_menu=&amp;&amp;listpg=0" className="ok" title="이전"><span className="icon ic_prev"></span></a></span></span><span className="number"><a href="#none" onClick={()=>{}} className="hit">1</a></span><span className="nextprev"><span className="btn"><span className="no"><span className="icon ic_next"></span></span><a href=" ?pass_menu=&amp;&amp;listpg=2" className="ok" title="다음"><span className="icon ic_next"></span></a></span><span className="btn"><span className="no"><span className="icon ic_last"></span></span><a href=" ?pass_menu=&amp;&amp;listpg=0" className="ok" title="끝"><span className="icon ic_last"></span></a></span></span></span>					</div>
-					{/* <!-- // 페이지네이트 --> */}
-
+                            initialPage={currentPage-1}
+                            pageCount={Math.ceil(totalUsers/ perPage)}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={paginationHandler}
+                        />
+                        </div> */}
 			</div>
-
 			<div style={{height:'30px'}}></div>
-
 			</div>
 		</div>
        </div>

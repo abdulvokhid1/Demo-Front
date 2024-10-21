@@ -54,20 +54,20 @@ const PopupRegister = () => {
 					<input type='file' name='_img' size={20} className='input_text'/></td>
 				</tr>
 
-				<tr>
+				{/* <tr>
 					<td className="article">링크 형식</td>
 					<td className="conts"><span className='multi' ><label htmlFor='_target_self'>
 						<input type='radio' id='_target_self' name='_target' value='_self'/> 같은창</label></span>&nbsp;&nbsp;&nbsp;<span className='multi' >
 						<label htmlFor='_target_blank'><input type='radio' id='_target_blank' name='_target' value='_blank'/> 새창</label></span>&nbsp;&nbsp;&nbsp;</td>
-				</tr>
-				<tr>
+				</tr> */}
+				{/* <tr>
 					<td className="article">링크 정보(url)</td>
 					<td className="conts">
 						<input type="text" name="_link" value="" className="input_text" style={{width:'300px'}}/>&nbsp;
 						<span className="shop_btn_pack" style={{float:'none'}}><a onClick={()=>{'productWin()'}} className='small blue'>상품연결</a></span>
 						<br/><div className='guide_text'><span className='ic_blue'></span>
 						<span className='blue'> 팝업클릭시 바로갈 수 있는 링크주소를 입력하시기 바랍니다.</span></div></td>
-				</tr>
+				</tr> */}
 				<tr>
 					<td className="article">타이틀</td>
 					<td className="conts">
@@ -81,11 +81,11 @@ const PopupRegister = () => {
 						<span className='multi' ><label htmlFor='_viewN'>
 						<input type='radio' id='_viewN' name='_view' value='N' /> 숨김</label></span>&nbsp;&nbsp;&nbsp;	</td>
 				</tr>
-				<tr>
+				{/* <tr>
 					<td className="article">노출순위</td>
 					<td className="conts"><input type="text" name="_idx" className="input_text" style={{width:'20px'}} value="0"  />순위&nbsp;&nbsp;
 					<div className='guide_text'><span className='ic_blue'></span><span className='blue'>낮은 순위가 먼저 나오며, 순위가 같을 경우 먼저 최근 등록한 순으로 나옵니다.</span></div></td>
-				</tr>
+				</tr> */}
 				<tr>
 					<td className="article">노출위치<span className="ic_ess" title="필수"></span></td>
 					<td className="conts">
